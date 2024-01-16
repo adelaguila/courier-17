@@ -21,7 +21,7 @@
     .layout-topbar-start {
         display: flex;
         align-items: center;
-        justify-content: start;
+        justify-content: flex-start;
         padding: 1rem;
         position: relative;
         width: 18rem;
@@ -29,7 +29,7 @@
         .layout-topbar-logo {
             display: flex;
             align-items: center;
-            justify-content: start;
+            justify-content: flex-start;
 
             img {
                 height: 2.25rem;
