@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardBankingRoutingModule } from './dashboardbanking-routing.module';
-import { DashboardBankingComponent } from './dashboardbanking.component';
+import { DashboardRoutingModule } from './dashboard-routing.module';
+import { DashboardComponent } from './dashboard.component';
 import { ButtonModule } from 'primeng/button';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
@@ -13,10 +13,11 @@ import { FormsModule } from '@angular/forms';
 import { TagModule } from 'primeng/tag';
 import { RatingModule } from 'primeng/rating';
 import { MenuModule } from 'primeng/menu';
+
 @NgModule({
     imports: [
         CommonModule,
-        DashboardBankingRoutingModule,
+        DashboardRoutingModule,
         ButtonModule,
         ProgressBarModule,
         TableModule,
@@ -27,11 +28,8 @@ import { MenuModule } from 'primeng/menu';
         FormsModule,
         TagModule,
         RatingModule,
-        MenuModule
-
+        MenuModule,
     ],
-    declarations: [
-        DashboardBankingComponent
-    ]
+    declarations: [DashboardComponent],
 })
-export class DashboardBankingModule { }
+export class DashboardModule {}
