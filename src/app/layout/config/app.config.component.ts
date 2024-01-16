@@ -57,20 +57,6 @@ export class AppConfigComponent implements OnInit {
         }
     }
 
-    get menuProfilePosition(): string {
-        return this.layoutService.config().menuProfilePosition;
-    }
-
-    set menuProfilePosition(_val: string) {
-        this.layoutService.config.update((config) => ({
-            ...config,
-            menuProfilePosition: _val,
-        }));
-        if (this.layoutService.isHorizontal()) {
-            this.menuService.reset();
-        }
-    }
-
     get colorScheme(): ColorScheme {
         return this.layoutService.config().colorScheme;
     }

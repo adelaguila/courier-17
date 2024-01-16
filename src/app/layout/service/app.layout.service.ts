@@ -14,7 +14,6 @@ export interface AppConfig {
     scale: number;
     menuTheme: ColorScheme;
     topbarTheme: string;
-    menuProfilePosition: string;
 }
 
 interface LayoutState {
@@ -25,9 +24,7 @@ interface LayoutState {
     menuHoverActive: boolean;
     rightMenuActive: boolean;
     topbarMenuActive: boolean;
-    menuProfileActive: boolean;
     sidebarActive: boolean;
-    anchored: boolean;
 }
 
 @Injectable({
@@ -43,7 +40,6 @@ export class LayoutService {
         scale: 14,
         menuTheme: 'dark',
         topbarTheme: 'light',
-        menuProfilePosition: 'start',
     };
 
     state: LayoutState = {
@@ -54,9 +50,7 @@ export class LayoutService {
         menuHoverActive: false,
         rightMenuActive: false,
         topbarMenuActive: false,
-        menuProfileActive: false,
         sidebarActive: false,
-        anchored: false,
     };
 
     config = signal<AppConfig>(this._config);
@@ -153,6 +147,7 @@ export class LayoutService {
         const themeLink = <HTMLLinkElement>(
             document.getElementById('theme-link')
         );
+
         const themeLinkHref = themeLink.getAttribute('href')!;
         const newHref = themeLinkHref
             .split('/')

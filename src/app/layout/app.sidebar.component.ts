@@ -24,20 +24,6 @@ export class AppSidebarComponent implements OnDestroy {
         }
     }
 
-    get menuProfilePosition(): string {
-        return this.layoutService.config().menuProfilePosition;
-    }
-
-    onMouseEnter() {
-        if (!this.layoutService.state.anchored) {
-            if (this.timeout) {
-                clearTimeout(this.timeout);
-                this.timeout = null;
-            }
-            this.layoutService.state.sidebarActive = true;
-        }
-    }
-
     ngOnDestroy() {
         this.resetOverlay();
     }
