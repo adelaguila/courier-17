@@ -1,6 +1,6 @@
 <div class="layout-topbar" [ngClass]="{'border-bottom-none': layoutService.config().topbarTheme !== 'light'}">
     <div  class="layout-topbar-start">
-        <a *ngIf="!layoutService.isHorizontal()" #mobileMenuButton class="layout-menu-button lg:hidden" (click)="onMenuButtonClick()" pRipple>
+        <a #mobileMenuButton class="layout-menu-button lg:hidden" (click)="onMenuButtonClick()" pRipple>
             <i class="pi pi-bars"></i>
         </a>
         <a class="layout-topbar-logo" routerLink="/">

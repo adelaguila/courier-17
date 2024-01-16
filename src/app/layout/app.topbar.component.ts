@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { LayoutService } from './service/app.layout.service';
+import { AppConfig, LayoutService } from './service/app.layout.service';
 
 @Component({
     selector: 'app-topbar',
@@ -10,7 +10,17 @@ export class AppTopbarComponent {
 
     @ViewChild('mobileMenuButton') mobileMenuButton!: ElementRef;
 
-    constructor(public layoutService: LayoutService, public el: ElementRef) {}
+    config!: AppConfig;
+
+    subscription: any;
+
+    constructor(public layoutService: LayoutService, public el: ElementRef) {
+        this.subscription = this.layoutService.configUpdate$.subscribe(
+            (config) => {
+                this.config = config;
+            }
+        );
+    }
 
     onMenuButtonClick() {
         this.layoutService.onMenuToggle();

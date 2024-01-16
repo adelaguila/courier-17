@@ -35,22 +35,18 @@
 
         <ng-container *ngIf="!minimal">
             <h5>Menu Themes</h5>
-            <p *ngIf="colorScheme === 'dark';else menu_theme_selector">Menu themes are only available in light mode by
-                design as large surfaces can emit too much brightness in dark mode.</p>
-            <ng-template #menu_theme_selector>
-                <div class="flex gap-4">
-                    <div class="field-radiobutton flex-1" *ngFor="let theme of menuThemes">
-                        <p-radioButton name="colorScheme" [value]="theme.name" [(ngModel)]="menuTheme"
-                            [inputId]="theme.name"></p-radioButton>
-                        <label [for]="theme.name">{{theme.name}}</label>
-                    </div>
+            <div class="flex gap-4">
+                <div class="field-radiobutton flex-1" *ngFor="let theme of menuThemes">
+                    <p-radioButton name="colorScheme" [value]="theme.name" [disabled]="colorScheme !== 'light'" [(ngModel)]="menuTheme"
+                        [inputId]="theme.name"></p-radioButton>
+                    <label [for]="theme.name">{{theme.name}}</label>
                 </div>
-            </ng-template>
+            </div>
 
             <h5>Topbar Themes</h5>
             <div class="flex gap-4">
                 <div class="field-radiobutton flex-1" *ngFor="let theme of topbarThemes">
-                    <p-radioButton name="colorScheme" [value]="theme.name" [(ngModel)]="topbarTheme"
+                    <p-radioButton name="colorScheme" [value]="theme.name" [disabled]="colorScheme !== 'light'" [(ngModel)]="topbarTheme"
                         [inputId]="theme.name"></p-radioButton>
                     <label [for]="theme.name">{{theme.name}}</label>
                 </div>
