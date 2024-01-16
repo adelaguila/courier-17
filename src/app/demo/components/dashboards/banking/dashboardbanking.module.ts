@@ -11,7 +11,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { TagModule } from 'primeng/tag';
-
+import { RatingModule } from 'primeng/rating';
+import { MenuModule } from 'primeng/menu';
 @NgModule({
     imports: [
         CommonModule,
@@ -24,7 +25,10 @@ import { TagModule } from 'primeng/tag';
         InputTextareaModule,
         InputTextModule,
         FormsModule,
-        TagModule
+        TagModule,
+        RatingModule,
+        MenuModule
+
     ],
     declarations: [
         DashboardBankingComponent

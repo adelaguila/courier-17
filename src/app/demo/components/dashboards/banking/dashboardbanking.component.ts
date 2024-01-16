@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/api';
 import { Subscription, debounceTime } from 'rxjs';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
-
+import { AppConfig } from 'src/app/layout/service/app.layout.service';
+import { ProductService } from 'src/app/demo/service/product.service';
 interface MonthlyPayment {
     name?: string;
     amount?: number;
@@ -14,148 +15,274 @@ interface MonthlyPayment {
     templateUrl: './dashboardbanking.component.html',
 })
 export class DashboardBankingComponent implements OnInit {
-    dropdownItem: SelectItem[] = [];
+    ordersChart: any;
 
-    selectedDropdownItem: any;
+    ordersOptions: any;
 
-    payments: MonthlyPayment[] = [];
+    activeOrders = 0;
 
-    visitorChart: any;
+    trafficChart: any;
 
-    visitorChartOptions: any;
+    trafficOptions: any;
 
-    subscription!: Subscription;
+    activeTraffic = 0;
 
-    constructor(public layoutService: LayoutService) {
-        this.subscription = this.layoutService.configUpdate$
-            .pipe(debounceTime(25))
-            .subscribe((config) => {
-                this.initChart();
-            });
-    }
+    goalChart: any;
+
+    goalOptions: any;
+
+    items: any[] = [];
+
+    val1 = 1;
+
+    val2 = 2;
+
+    orderWeek: any;
+
+    selectedOrderWeek: any;
+
+    products: any[] = [];
+
+    productsThisWeek: any[] = [];
+
+    productsLastWeek: any[] = [];
+
+    config: AppConfig | undefined;
+
+    subscription: Subscription | undefined;
+    constructor(public layoutService: LayoutService , private productService: ProductService) {
+    //     this.subscription = this.layoutService.configUpdate$
+    //         .pipe(debounceTime(25))
+    //         .subscribe((config) => {
+    //             this.initChart();
+    //         });
+     }
 
     ngOnInit() {
-        this.dropdownItem.push({ label: 'Select One', value: null });
-        this.dropdownItem.push({
-            label: 'Xbox Series X',
-            value: { id: 1, name: 'Xbox One', code: 'XO' },
-        });
-        this.dropdownItem.push({
-            label: 'PlayStation 5',
-            value: { id: 2, name: 'PS4', code: 'PS4' },
-        });
-        this.dropdownItem.push({
-            label: 'Nintendo Switch',
-            value: { id: 3, name: 'Wii U', code: 'WU' },
-        });
+        this.productService.getProducts().then(data => this.products = data);
+        this.productService.getProducts().then(data => this.productsThisWeek = data);
+        this.productService.getProductsMixed().then(data => this.productsLastWeek = data);
 
-        this.payments = [
-            {
-                name: 'Electric Bill',
-                amount: 75.6,
-                paid: true,
-                date: '06/04/2022',
-            },
-            {
-                name: 'Water Bill',
-                amount: 45.5,
-                paid: true,
-                date: '07/04/2022',
-            },
-            { name: 'Gas Bill', amount: 45.2, paid: false, date: '12/04/2022' },
-            {
-                name: 'Internet Bill',
-                amount: 25.9,
-                paid: true,
-                date: '17/04/2022',
-            },
-            {
-                name: 'Streaming',
-                amount: 40.9,
-                paid: false,
-                date: '20/04/2022',
-            },
-            {
-                name: 'Phone Bill',
-                amount: 32.9,
-                paid: false,
-                date: '23/04/2022',
-            },
-        ];
-
-        this.initChart();
-    }
-
-    initChart() {
-        const textColor = getComputedStyle(document.body).getPropertyValue(
-            '--text-color'
-        );
-        const primaryColor = getComputedStyle(document.body).getPropertyValue(
-            '--primary-color'
-        );
-        const surfaceLight = getComputedStyle(document.body).getPropertyValue(
-            '--surface-100'
-        );
-
-        this.visitorChart = {
-            labels: [
-                'Jan',
-                'Feb',
-                'Mar',
-                'Apr',
-                'May',
-                'Jun',
-                'July',
-                'Aug',
-                'Sept',
-                'Oct',
-                'Nov',
-                'Dec',
-            ],
-            datasets: [
-                {
-                    data: [
-                        600, 671, 660, 665, 700, 610, 810, 790, 710, 860, 810,
-                        780,
-                    ],
-                    backgroundColor: primaryColor,
-                    fill: true,
-                    barPercentage: 0.75,
-                    stepped: true,
-                },
-            ],
+        this.ordersChart = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September'],
+            datasets: [{
+                label: 'Revenue',
+                data: [31, 83, 69, 29, 62, 25, 59, 26, 46],
+                borderColor: [
+                    '#f1b263',
+                ],
+                backgroundColor: [
+                    'rgba(241, 178, 99, 0.1)'
+                ],
+                borderWidth: 2,
+                fill: true,
+                borderDash: [3, 6],
+                tension: .4
+            }, {
+                label: 'Cost',
+                data: [67, 98, 27, 88, 38, 3, 22, 60, 56],
+                borderColor: [
+                    '#2f8ee5',
+                ],
+                backgroundColor: [
+                    'rgba(47, 142, 229, 0.05)',
+                ],
+                borderWidth: 2,
+                fill: true,
+                pointRadius: 3,
+                tension: .4
+            }],
+            responsive: true
         };
 
-        this.visitorChartOptions = {
+        this.trafficChart = this.getTrafficChartData();
+
+        this.trafficOptions = {
             plugins: {
                 legend: {
                     display: false,
-                },
+                }
+            },
+            responsive: true,
+            cutout: 70
+        };
+
+        // this.appMain['refreshTrafficChart'] = () => {
+        //     this.trafficChart = this.getTrafficChartData();
+        // };
+
+        this.goalChart = {
+            labels: [
+                'Complete',
+                'Not Complete',
+                'Extra Tasks',
+            ],
+            datasets: [{
+                data:  [183, 62, 10],
+                backgroundColor: [
+                    '#ffffff',
+                    'rgba(255,255,255,.2)',
+                    'rgba(255,255,255,.5)',
+                ],
+                borderWidth: 0,
+            }]
+        };
+
+        this.goalOptions = {
+            plugins: {
+                legend: {
+                    display: false,
+                }
+            },
+            responsive: true,
+        };
+
+        this.items = [
+            {label: 'View Profile', icon: 'pi pi-user'},
+            {label: 'Update Profile', icon: 'pi pi-refresh'},
+            {label: 'Delete Profile', icon: 'pi pi-trash'},
+        ];
+
+        this.orderWeek = [
+            {name: 'This Week', code: '0'},
+            {name: 'Last Week', code: '1'}
+        ];
+    }
+    getTrafficChartData() {
+        return {
+            labels: [
+                'Add View',
+                'Total View',
+            ],
+            datasets: [{
+                data:  [48, 52],
+                backgroundColor: [
+                    getComputedStyle(document.body).getPropertyValue('--primary-dark-color') || '#2c84d8',
+                    getComputedStyle(document.body).getPropertyValue('--content-alt-bg-color') || '#B1B9C9',
+                ],
+                borderWidth: 0,
+            }]
+        };
+    }
+    changeDataset(event:any) {
+        const dataSet = [
+            [31, 83, 69, 29, 62, 25, 59, 26, 46],
+            [40, 29, 7, 73, 81, 69, 46, 21, 96],
+        ];
+        const dataSet2 = [
+            [67, 98, 27, 88, 38, 3, 22, 60, 56],
+            [74, 67, 11, 36, 100, 49, 34, 56, 45],
+        ];
+
+        this.activeOrders = parseInt(event.currentTarget.getAttribute('data-index'));
+
+        this.ordersChart.datasets[0].data = dataSet[parseInt(event.currentTarget.getAttribute('data-index'))];
+        this.ordersChart.datasets[1].data = dataSet2[parseInt(event.currentTarget.getAttribute('data-index'))];
+        this.ordersChart.datasets[0].label = event.currentTarget.getAttribute('data-label');
+        this.ordersChart.datasets[0].borderColor = event.currentTarget.getAttribute('data-stroke');
+    }
+    changeTrafficset(event:any){
+        const traffidDataSet = [
+            [48, 52],
+            [26, 74],
+            [12, 88],
+        ];
+        this.activeTraffic = parseInt(event.currentTarget.getAttribute('data-index'));
+
+        this.trafficChart.datasets[0].data = traffidDataSet[parseInt(event.currentTarget.getAttribute('data-index'))];
+    }
+    recentSales(event:any) {
+        if (event.value.code === '0') {
+            this.products = this.productsThisWeek;
+        } else {
+            this.products = this.productsLastWeek;
+        }
+    }
+
+    // updateChartOptions() {
+    //     if(this.config.dark){
+    //         this.applyDarkTheme();
+    //     } else {
+    //         this.applyLightTheme();
+    //     }
+    // }
+
+    applyDarkTheme() {
+
+        this.ordersOptions = {
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        color: '#ebedef'
+                    }
+                }
             },
             responsive: true,
             hover: {
-                mode: 'index',
+                mode: 'index'
             },
             scales: {
                 y: {
-                    min: 500,
-                    max: 900,
                     ticks: {
-                        color: textColor,
+                        color: '#ebedef'
                     },
                     grid: {
-                        color: surfaceLight,
-                    },
+                        color:  'rgba(160, 167, 181, .3)',
+                    }
                 },
                 x: {
                     ticks: {
-                        color: textColor,
+                        color: '#ebedef'
                     },
                     grid: {
-                        display: false,
-                    },
+                        color:  'rgba(160, 167, 181, .3)',
+                    }
                 },
-            },
+            }
         };
     }
+
+    applyLightTheme() {
+
+        this.ordersOptions = {
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        color: '#A0A7B5'
+                    }
+                }
+            },
+            responsive: true,
+            hover: {
+                mode: 'index'
+            },
+            scales: {
+                y: {
+                    ticks: {
+                        color: '#A0A7B5'
+                    },
+                    grid: {
+                        color:  'rgba(160, 167, 181, .3)',
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: '#A0A7B5'
+                    },
+                    grid: {
+                        color:  'rgba(160, 167, 181, .3)',
+                    }
+                },
+            }
+        };
+    }
+
+    ngOnDestroy() {
+        if(this.subscription){
+            this.subscription.unsubscribe();
+        }
+    }
+
 }

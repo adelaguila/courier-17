@@ -9,6 +9,8 @@ import { ChartModule } from 'primeng/chart';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { RatingModule } from 'primeng/rating';
+import { BadgeModule } from 'primeng/badge';
 
 @NgModule({
     imports: [
@@ -20,7 +22,9 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
         ChartModule,
         TableModule,
         InputTextModule,
-        OverlayPanelModule
+        OverlayPanelModule,
+        RatingModule,
+        BadgeModule,
     ],
     declarations: [
         DashboardEcommerceComponent

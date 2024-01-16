@@ -1,20 +1,44 @@
-<div class="overflow-hidden m-0 relative h-screen bg-cover bg-center" style="background: url('assets/layout/images/exception/bg-access.png');">
-    <div class="text-center text-5xl pt-5 font-bold text-white">
-        <div class="inline-block py-1 px-2 text-color surface-ground">
-            <span>Access</span>
-        </div>
-        <span>Denied</span>
+<div
+    class="h-screen"
+    style="background: linear-gradient(0deg, #812038 0%, #f16383 100%)"
+>
+    <div
+        class="bg-gray-100 flex align-items-center justify-content-center"
+        style="height: 30%"
+    >
+        <img
+            src="assets/layout/images/icon-access.png"
+            alt="poseidon-layout"
+            width="100px"
+            class="block"
+        />
     </div>
-    <div class="w-full absolute bottom-0 text-center surface-900 h-14rem">
-        <div class="w-full absolute text-center z-1" style="top: -36px">
-            <img src="assets/layout/images/exception/icon-error.png" alt="poseidon-ng"/>
-        </div>
-        <div class="w-29rem relative text-white" style="margin-left: -200px; left: 50%; top: 30px;">
-            <div class="p-3">
-                <h3 class="m-0 mb-2 text-0">Access denied to this resource.</h3>
-                <p class="m-0 text-0">You don't have the necessary permission.</p>
-            </div>
-            <button pButton pRipple type="button" [routerLink]="['/']" label="Go To Dashboard"></button>
+
+    <div class="flex align-items-center flex-column" style="height: 70%">
+        <div class="p-7 text-center">
+            <span class="block text-white text-5xl font-bold mb-4"
+                >Access Denied</span
+            >
+            <span class="block text-white mb-6"
+                >You Don't Have Permissions To Access This Resource</span
+            >
+            <button
+                pButton
+                pRipple
+                [routerLink]="['/']"
+                label="Dashboard"
+                icon="pi pi-home"
+                class="w-9 block mx-auto mt-0 mb-8 bg-white text-color border-none"
+            ></button>
+            <a [routerLink]="['/']">
+                <img
+                    src="assets/layout/images/logo.svg"
+                    alt="poseidon-layout"
+                    class="block mx-auto mt-0 mb-3"
+                    style="height: 56px"
+                />
+            </a>
+            <span class="text-white">PrimeNG Poseidon</span>
         </div>
     </div>
 </div>
