@@ -24,7 +24,7 @@ import { MegaMenuModule } from 'primeng/megamenu';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { StyleClassModule } from 'primeng/styleclass';
-
+import { CheckboxModule } from 'primeng/checkbox';
 @NgModule({
     declarations: [
         AppLayoutComponent,
@@ -54,6 +54,7 @@ import { StyleClassModule } from 'primeng/styleclass';
         ButtonModule,
         MenuModule,
         AppConfigModule,
+        CheckboxModule
     ],
 })
 export class AppLayoutModule {}

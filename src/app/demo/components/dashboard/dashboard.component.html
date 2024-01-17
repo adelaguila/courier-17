@@ -323,12 +323,21 @@
                                 'text-white bg-primary-500': activeTraffic === 0
                             }"
                             (click)="
-                                changeTrafficset($event); traffic.refresh()
+                                changeTrafficset($event);
+                                traffic.refresh();
+                                activeTraffic = 0
                             "
                             data-label="New Sales"
                             data-index="0"
                         >
-                            <h6 class="m-0 mb-2 font-bold text-white">48%</h6>
+                            <h6
+                                class="m-0 mb-2 font-bold"
+                                [ngClass]="{
+                                    'text-white': activeTraffic === 0
+                                }"
+                            >
+                                48%
+                            </h6>
                             <i class="pi pi-facebook text-3xl"></i>
                             <span class="block text-sm mt-2">Facebook</span>
                         </div>
@@ -338,12 +347,21 @@
                                 'text-white bg-primary-500': activeTraffic === 1
                             }"
                             (click)="
-                                changeTrafficset($event); traffic.refresh()
+                                changeTrafficset($event);
+                                traffic.refresh();
+                                activeTraffic = 1
                             "
                             data-label="Previous Sales"
                             data-index="1"
                         >
-                            <h6 class="m-0 mb-2 font-bold">26%</h6>
+                            <h6
+                                class="m-0 mb-2 font-bold"
+                                [ngClass]="{
+                                    'text-white': activeTraffic === 1
+                                }"
+                            >
+                                26%
+                            </h6>
                             <i class="pi pi-twitter text-3xl"></i>
                             <span class="block text-sm mt-2">Twitter</span>
                         </div>
@@ -353,12 +371,21 @@
                                 'text-white bg-primary-500': activeTraffic === 2
                             }"
                             (click)="
-                                changeTrafficset($event); traffic.refresh()
+                                changeTrafficset($event);
+                                traffic.refresh();
+                                activeTraffic = 2
                             "
                             data-label="Previous Sales"
                             data-index="2"
                         >
-                            <h6 class="m-0 mb-2 font-bold">17%</h6>
+                            <h6
+                                class="m-0 mb-2 font-bold"
+                                [ngClass]="{
+                                    'text-white': activeTraffic === 2
+                                }"
+                            >
+                                17%
+                            </h6>
                             <i class="pi pi-github text-3xl"></i>
                             <span class="block text-sm mt-2">Github</span>
                         </div>
@@ -379,7 +406,7 @@
                     <div
                         class="flex align-items-center justify-content-between text-white"
                     >
-                        <h6 class="m-0">Today's Goal</h6>
+                        <h6 class="m-0 text-white">Today's Goal</h6>
                         <span
                             ><span class="font-semibold">183</span> /
                             <span class="text-sm">255</span></span

@@ -1,38 +1,71 @@
-<div class="layout-topbar" [ngClass]="{'border-bottom-none': layoutService.config().topbarTheme !== 'light'}">
-    <div  class="layout-topbar-start">
-        <a #mobileMenuButton class="layout-menu-button lg:hidden" (click)="onMenuButtonClick()" pRipple>
+<div
+    class="layout-topbar"
+    [ngClass]="{
+        'border-bottom-none': layoutService.config().topbarTheme !== 'light'
+    }"
+>
+    <div class="layout-topbar-start">
+        <a
+            #mobileMenuButton
+            class="layout-menu-button lg:hidden"
+            (click)="onMenuButtonClick()"
+            pRipple
+        >
             <i class="pi pi-bars"></i>
         </a>
         <a class="layout-topbar-logo" routerLink="/">
             <img
-            [src]="'assets/layout/images/logo-' + (layoutService.config().topbarTheme === 'light' ? 'poseidon' : 'poseidon-dark') + '.png'"
-            alt="poseidon-layout">      
+                [src]="
+                    'assets/layout/images/logo-' +
+                    (layoutService.config().topbarTheme === 'light'
+                        ? 'poseidon'
+                        : 'poseidon-dark') +
+                    '.png'
+                "
+                alt="poseidon-layout"
+            />
         </a>
-        <a class="lg:hidden" pStyleClass="@next" enterFromClass="hidden" enterActiveClass="scalein" leaveToClass="hidden" leaveActiveClass="fadeout" [hideOnOutsideClick]="true">
-            <img src="assets/layout/images/avatar-profile.png" alt="demo">
+        <a
+            class="lg:hidden"
+            pStyleClass="@next"
+            enterFromClass="hidden"
+            enterActiveClass="scalein"
+            leaveToClass="hidden"
+            leaveActiveClass="fadeout"
+            [hideOnOutsideClick]="true"
+        >
+            <img src="assets/layout/images/avatar-profile.png" alt="demo" />
         </a>
         <div class="layout-topbar-menu shadow-2 hidden">
             <ul class="list-none p-0 m-0">
                 <li>
-                    <a class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary">
+                    <a
+                        class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary"
+                    >
                         <i class="pi pi-fw pi-palette text-lg"></i>
                         <span>Change Theme</span>
                     </a>
                 </li>
                 <li>
-                    <a class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary ">
+                    <a
+                        class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary"
+                    >
                         <i class="pi pi-fw pi-star text-lg"></i>
                         <span>Favorites</span>
                     </a>
                 </li>
                 <li>
-                    <a class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary">
+                    <a
+                        class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary"
+                    >
                         <i class="pi pi-fw pi-lock text-lg"></i>
                         <span>Lock Screen</span>
                     </a>
                 </li>
                 <li>
-                    <a class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary">
+                    <a
+                        class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary"
+                    >
                         <i class="pi pi-fw pi-image text-lg"></i>
                         <span>Wallpaper</span>
                     </a>
@@ -43,95 +76,169 @@
 
     <div class="layout-topbar-end surface-border border-top-1">
         <div class="layout-topbar-actions-start">
-            <a *ngIf="!layoutService.isHorizontal()" #menuButton class="layout-menu-button hidden lg:flex" (click)="onMenuButtonClick()" pRipple>
+            <a
+                *ngIf="!layoutService.isHorizontal()"
+                #menuButton
+                class="layout-menu-button hidden lg:flex"
+                (click)="onMenuButtonClick()"
+                pRipple
+            >
                 <i class="pi pi-bars"></i>
             </a>
         </div>
-        
+
         <div class="layout-topbar-actions-end">
             <ul class="layout-topbar-items">
                 <li class="layout-topbar-search hidden lg:flex">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" placeholder="Search...">
+                    <input pInputText type="text" placeholder="Search..." />
                 </li>
                 <li class="lg:hidden">
-                    <a pStyleClass="@next" enterFromClass="hidden" enterActiveClass="scalein" leaveToClass="hidden" leaveActiveClass="fadeout" [hideOnOutsideClick]="true" pRipple>
+                    <a
+                        pStyleClass="@next"
+                        enterFromClass="hidden"
+                        enterActiveClass="scalein"
+                        leaveToClass="hidden"
+                        leaveActiveClass="fadeout"
+                        [hideOnOutsideClick]="true"
+                        pRipple
+                    >
                         <i class="pi pi-search"></i>
                     </a>
-                    <div class="layout-topbar-search hidden absolute origin-top surface-overlay p-2 border-top-1 surface-border shadow-2" style="top:3.5rem;">
+                    <div
+                        class="layout-topbar-search hidden absolute origin-top surface-overlay p-2 border-top-1 surface-border shadow-2"
+                        style="top: 3.5rem"
+                    >
                         <span class="p-input-icon-left w-full">
                             <i class="pi pi-search"></i>
-                            <input type="text" pInputText placeholder="Search" class="w-full"/>
+                            <input
+                                type="text"
+                                pInputText
+                                placeholder="Search"
+                                class="w-full"
+                            />
                         </span>
                     </div>
                 </li>
                 <li>
-                    <a pStyleClass="@next" enterFromClass="hidden" enterActiveClass="scalein" leaveToClass="hidden" leaveActiveClass="fadeout" [hideOnOutsideClick]="true" pRipple>
+                    <a
+                        pStyleClass="@next"
+                        enterFromClass="hidden"
+                        enterActiveClass="scalein"
+                        leaveToClass="hidden"
+                        leaveActiveClass="fadeout"
+                        [hideOnOutsideClick]="true"
+                        pRipple
+                    >
                         <i class="pi pi-bell" pBadge value="2"></i>
                     </a>
-                <div class="layout-topbar-menu shadow-2 hidden">
-                    <ul class="list-none p-0 m-0">
-                        <li>
-                            <a class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary">
-                                <i class="pi pi-fw pi-sliders-h text-lg"></i>
-                                <span>Pending tasks</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary ">
-                                <i class="pi pi-fw pi-calendar text-lg"></i>
-                                <span>Meeting today at 3pm</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary">
-                                <i class="pi pi-fw pi-download text-lg"></i>
-                                <span>Download documents</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary">
-                                <i class="pi pi-fw pi-bookmark text-lg"></i>
-                                <span>Book flight</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
+                    <div class="layout-topbar-menu shadow-2 hidden">
+                        <ul class="list-none p-0 m-0">
+                            <li>
+                                <a
+                                    class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary"
+                                >
+                                    <i
+                                        class="pi pi-fw pi-sliders-h text-lg"
+                                    ></i>
+                                    <span>Pending tasks</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary"
+                                >
+                                    <i class="pi pi-fw pi-calendar text-lg"></i>
+                                    <span>Meeting today at 3pm</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary"
+                                >
+                                    <i class="pi pi-fw pi-download text-lg"></i>
+                                    <span>Download documents</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary"
+                                >
+                                    <i class="pi pi-fw pi-bookmark text-lg"></i>
+                                    <span>Book flight</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
                 <li>
-                    <a pStyleClass="@next" enterFromClass="hidden" enterActiveClass="scalein" leaveToClass="hidden" leaveActiveClass="fadeout" [hideOnOutsideClick]="true" pRipple>
+                    <a
+                        pStyleClass="@next"
+                        enterFromClass="hidden"
+                        enterActiveClass="scalein"
+                        leaveToClass="hidden"
+                        leaveActiveClass="fadeout"
+                        [hideOnOutsideClick]="true"
+                        pRipple
+                    >
                         <i class="pi pi-comments" pBadge value="6"></i>
                     </a>
                     <div class="layout-topbar-menu shadow-2 hidden">
-                        <ul class="list-none p-0 m-0 flex flex-column text-color">
+                        <ul
+                            class="list-none p-0 m-0 flex flex-column text-color"
+                        >
                             <li>
-                                <a class="cursor-pointer flex align-items-center px-3 py-2 gap-3 hover:text-primary">
-                                    <img src="assets/layout/images/avatar5.png" class="w-3rem h-3rem">
+                                <a
+                                    class="cursor-pointer flex align-items-center px-3 py-2 gap-3 hover:text-primary"
+                                >
+                                    <img
+                                        src="assets/layout/images/avatar5.png"
+                                        class="w-3rem h-3rem"
+                                    />
                                     <span>Give me a call</span>
                                 </a>
                             </li>
                             <li>
-                                <a class="cursor-pointer flex align-items-center px-3 py-2 gap-3 hover:text-primary">
-                                    <img src="assets/layout/images/avatar1.png" class="w-3rem h-3rem">
+                                <a
+                                    class="cursor-pointer flex align-items-center px-3 py-2 gap-3 hover:text-primary"
+                                >
+                                    <img
+                                        src="assets/layout/images/avatar1.png"
+                                        class="w-3rem h-3rem"
+                                    />
                                     <span>Sales reports attached</span>
                                 </a>
                             </li>
                             <li>
-                                <a class="cursor-pointer flex align-items-center px-3 py-2 gap-3 hover:text-primary">
-                                    <img src="assets/layout/images/avatar2.png" class="w-3rem h-3rem">
+                                <a
+                                    class="cursor-pointer flex align-items-center px-3 py-2 gap-3 hover:text-primary"
+                                >
+                                    <img
+                                        src="assets/layout/images/avatar2.png"
+                                        class="w-3rem h-3rem"
+                                    />
                                     <span>About your invoice</span>
                                 </a>
                             </li>
                             <li>
-                                <a class="cursor-pointer flex align-items-center px-3 py-2 gap-3 hover:text-primary">
-                                    <img src="assets/layout/images/avatar3.png" class="w-3rem h-3rem">
+                                <a
+                                    class="cursor-pointer flex align-items-center px-3 py-2 gap-3 hover:text-primary"
+                                >
+                                    <img
+                                        src="assets/layout/images/avatar3.png"
+                                        class="w-3rem h-3rem"
+                                    />
                                     <span>Meeting today at 10pm</span>
                                 </a>
                             </li>
                             <li>
-                                <a class="cursor-pointer flex align-items-center px-3 py-2 gap-3 hover:text-primary">
-                                    <img src="assets/layout/images/avatar4.png" class="w-3rem h-3rem">
+                                <a
+                                    class="cursor-pointer flex align-items-center px-3 py-2 gap-3 hover:text-primary"
+                                >
+                                    <img
+                                        src="assets/layout/images/avatar4.png"
+                                        class="w-3rem h-3rem"
+                                    />
                                     <span>Out of office</span>
                                 </a>
                             </li>
@@ -139,31 +246,47 @@
                     </div>
                 </li>
                 <li>
-                    <a pStyleClass="@next" enterFromClass="hidden" enterActiveClass="scalein" leaveToClass="hidden" leaveActiveClass="fadeout" [hideOnOutsideClick]="true" pRipple>
-                     <i class="pi pi-cog"></i>
+                    <a
+                        pStyleClass="@next"
+                        enterFromClass="hidden"
+                        enterActiveClass="scalein"
+                        leaveToClass="hidden"
+                        leaveActiveClass="fadeout"
+                        [hideOnOutsideClick]="true"
+                        pRipple
+                    >
+                        <i class="pi pi-cog"></i>
                     </a>
                     <div class="layout-topbar-menu shadow-2 hidden">
                         <ul class="list-none p-0 m-0">
                             <li>
-                                <a class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary">
+                                <a
+                                    class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary"
+                                >
                                     <i class="pi pi-fw pi-palette text-lg"></i>
                                     <span>Change Theme</span>
                                 </a>
                             </li>
                             <li>
-                                <a class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary ">
+                                <a
+                                    class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary"
+                                >
                                     <i class="pi pi-fw pi-star text-lg"></i>
                                     <span>Favorites</span>
                                 </a>
                             </li>
                             <li>
-                                <a class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary">
+                                <a
+                                    class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary"
+                                >
                                     <i class="pi pi-fw pi-lock text-lg"></i>
                                     <span>Lock Screen</span>
                                 </a>
                             </li>
                             <li>
-                                <a class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary">
+                                <a
+                                    class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary"
+                                >
                                     <i class="pi pi-fw pi-image text-lg"></i>
                                     <span>Wallpaper</span>
                                 </a>
@@ -172,9 +295,20 @@
                     </div>
                 </li>
                 <li class="layout-topbar-profile">
-                    <a *ngIf="!layoutService.isMobile()" pStyleClass="@next" enterFromClass="hidden" enterActiveClass="scalein" leaveToClass="hidden" leaveActiveClass="fadeout" [hideOnOutsideClick]="true">
+                    <a
+                        *ngIf="!layoutService.isMobile()"
+                        pStyleClass="@next"
+                        enterFromClass="hidden"
+                        enterActiveClass="scalein"
+                        leaveToClass="hidden"
+                        leaveActiveClass="fadeout"
+                        [hideOnOutsideClick]="true"
+                    >
                         <div class="flex gap-2">
-                            <img src="assets/layout/images/avatar-profile.png" alt="demo">
+                            <img
+                                src="assets/layout/images/avatar-profile.png"
+                                alt="demo"
+                            />
                             <div class="flex flex-column">
                                 <span class="font-semibold">Peter Taylor</span>
                                 <span class="text-sm">Webmaster</span>
@@ -184,25 +318,33 @@
                     <div class="layout-topbar-menu shadow-2 hidden">
                         <ul class="list-none p-0 m-0">
                             <li>
-                                <a class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary">
+                                <a
+                                    class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary"
+                                >
                                     <i class="pi pi-fw pi-palette text-lg"></i>
                                     <span>Change Theme</span>
                                 </a>
                             </li>
                             <li>
-                                <a class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary ">
+                                <a
+                                    class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary"
+                                >
                                     <i class="pi pi-fw pi-star text-lg"></i>
                                     <span>Favorites</span>
                                 </a>
                             </li>
                             <li>
-                                <a class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary">
+                                <a
+                                    class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary"
+                                >
                                     <i class="pi pi-fw pi-lock text-lg"></i>
                                     <span>Lock Screen</span>
                                 </a>
                             </li>
                             <li>
-                                <a class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary">
+                                <a
+                                    class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary"
+                                >
                                     <i class="pi pi-fw pi-image text-lg"></i>
                                     <span>Wallpaper</span>
                                 </a>
@@ -211,7 +353,12 @@
                     </div>
                 </li>
                 <li class="layout-rightpanel-button">
-                    <a (click)="layoutService.state.rightMenuActive = !layoutService.state.rightMenuActive">
+                    <a
+                        (click)="
+                            layoutService.state.rightMenuActive =
+                                !layoutService.state.rightMenuActive
+                        "
+                    >
                         <i class="pi pi-arrow-left"></i>
                     </a>
                 </li>

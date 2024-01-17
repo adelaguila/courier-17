@@ -6,6 +6,22 @@ import { LayoutService } from './service/app.layout.service';
     templateUrl: './app.rightmenu.component.html',
 })
 export class AppRightMenuComponent {
+    checked1 = true;
+
+    checked2 = true;
+
+    checked3 = false;
+
+    checked4 = false;
+
+    checked5 = false;
+
+    checked6 = false;
+
+    checked7 = false;
+
+    checked8 = false;
+    
     constructor(public layoutService: LayoutService) {}
 
     get rightMenuActive(): boolean {
