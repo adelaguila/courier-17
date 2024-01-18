@@ -4,13 +4,14 @@ import { AccessdeniedRoutingModule } from './accessdenied-routing.module';
 import { AccessdeniedComponent } from './accessdenied.component'
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
-
+import { AppConfigModule } from 'src/app/layout/config/app.config.module';
 @NgModule({
     imports: [
         CommonModule,
         AccessdeniedRoutingModule,
         ButtonModule,
-        RippleModule
+        RippleModule,
+        AppConfigModule
     ],
     declarations: [AccessdeniedComponent]
 })
