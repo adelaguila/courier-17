@@ -36,38 +36,48 @@
         >
             <img src="assets/layout/images/avatar-profile.png" alt="demo" />
         </a>
-        <div class="layout-topbar-menu shadow-2 hidden">
+        <div class="layout-topbar-menu shadow-2 hidden" style="top: 9rem">
             <ul class="list-none p-0 m-0">
                 <li>
-                    <a
-                        class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary"
-                    >
-                        <i class="pi pi-fw pi-palette text-lg"></i>
-                        <span>Change Theme</span>
+                    <div class="flex gap-3 p-3 bg-primary-600">
+                        <img
+                            src="assets/layout/images/avatar-profile.png"
+                            alt="demo"
+                        />
+                        <div class="flex flex-column">
+                            <span class="font-semibold text-white"
+                                >Peter Taylor</span
+                            >
+                            <span class="text-xs font-normal text-white"
+                                >Webmaster</span
+                            >
+                        </div>
+                    </div>
+                </li>
+                <li class="py-3 px-4 flex gap-2 cursor-pointer">
+                    <a>
+                        <i class="pi pi-cog pi-star text-lg mr-3"></i>
+                        <span class="text-color font-semibold">Settings</span>
                     </a>
                 </li>
-                <li>
-                    <a
-                        class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary"
-                    >
-                        <i class="pi pi-fw pi-star text-lg"></i>
-                        <span>Favorites</span>
+                <li class="py-3 px-4 flex gap-2 cursor-pointer">
+                    <a>
+                        <i class="pi pi-file pi-lock text-lg mr-3"></i>
+                        <span class="text-color font-semibold"
+                            >Terms of Usage</span
+                        >
                     </a>
                 </li>
-                <li>
-                    <a
-                        class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary"
-                    >
-                        <i class="pi pi-fw pi-lock text-lg"></i>
-                        <span>Lock Screen</span>
+                <li class="py-3 px-4 flex gap-2 cursor-pointer">
+                    <a>
+                        <i class="pi pi-compass pi-image text-lg mr-3"></i>
+                        <span class="text-color font-semibold">Support</span>
                     </a>
                 </li>
-                <li>
-                    <a
-                        class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary"
-                    >
-                        <i class="pi pi-fw pi-image text-lg"></i>
-                        <span>Wallpaper</span>
+                <li class="py-3 px-4 flex gap-2 cursor-pointer">
+                    <a>
+                        <i class="pi pi-power-off pi-image text-lg mr-3"></i>
+                        <span class="text-color font-semibold">Logout</span>
                     </a>
                 </li>
             </ul>
@@ -132,17 +142,17 @@
                     >
                         <i class="pi pi-bell" pBadge value="2"></i>
                     </a>
-                    <div class="layout-topbar-menu shadow-2 hidden">
+                    <div class="layout-topbar-menu shadow-2 pt-0 hidden">
                         <ul class="list-none p-0 m-0">
                             <li
-                                class="flex justify-content-between align-items-center px-3 pt-2 pb-4"
+                                class="flex justify-content-between align-items-center px-3 p-3 mb-3 hover:bg-blue-50 cursor-pointer"
                             >
                                 <h6 class="m-0 text-color font-semibold">
                                     Notifications
                                 </h6>
                                 <span class="p-badge">3</span>
                             </li>
-                            <li>
+                            <li class="hover:bg-blue-50">
                                 <a
                                     class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary"
                                 >
@@ -170,7 +180,7 @@
                                     </div>
                                 </a>
                             </li>
-                            <li>
+                            <li class="hover:bg-blue-50">
                                 <a
                                     class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary"
                                 >
@@ -195,7 +205,7 @@
                                     </div>
                                 </a>
                             </li>
-                            <li>
+                            <li class="hover:bg-blue-50">
                                 <a
                                     class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary"
                                 >
@@ -220,7 +230,7 @@
                                     </div>
                                 </a>
                             </li>
-                            <li>
+                            <li class="hover:bg-blue-50">
                                 <a
                                     class="py-2 px-3 flex gap-2 cursor-pointer text-color hover:text-primary"
                                 >
@@ -263,19 +273,19 @@
                     >
                         <i class="pi pi-comments" pBadge value="6"></i>
                     </a>
-                    <div class="layout-topbar-menu shadow-2 hidden">
+                    <div class="layout-topbar-menu shadow-2 hidden pt-0">
                         <ul
                             class="list-none p-0 m-0 flex flex-column text-color"
                         >
                             <li
-                                class="flex justify-content-between align-items-center px-3 pt-2 pb-4"
+                                class="flex justify-content-between align-items-center p-3 mb-3 hover:bg-blue-50 cursor-pointer"
                             >
                                 <h6 class="m-0 text-color font-semibold">
                                     Messages
                                 </h6>
                                 <span class="p-badge">5</span>
                             </li>
-                            <li>
+                            <li class="hover:bg-blue-50">
                                 <a
                                     class="cursor-pointer flex align-items-center px-3 py-2 gap-3 hover:text-primary"
                                 >
@@ -295,7 +305,7 @@
                                     </div>
                                 </a>
                             </li>
-                            <li>
+                            <li class="hover:bg-blue-50">
                                 <a
                                     class="cursor-pointer flex align-items-center px-3 py-2 gap-3 hover:text-primary"
                                 >
@@ -315,7 +325,7 @@
                                     </div>
                                 </a>
                             </li>
-                            <li>
+                            <li class="hover:bg-blue-50">
                                 <a
                                     class="cursor-pointer flex align-items-center px-3 py-2 gap-3 hover:text-primary"
                                 >
@@ -335,7 +345,7 @@
                                     </div>
                                 </a>
                             </li>
-                            <li>
+                            <li class="hover:bg-blue-50">
                                 <a
                                     class="cursor-pointer flex align-items-center px-3 py-2 gap-3 hover:text-primary"
                                 >
@@ -370,18 +380,20 @@
                     >
                         <i class="pi pi-cog"></i>
                     </a>
-                    <div class="layout-topbar-menu shadow-2 hidden">
+                    <div
+                        class="layout-topbar-menu shadow-2 pt-0 hidden cursor-pointer"
+                    >
                         <ul class="list-none p-0 m-0">
                             <li
-                                class="flex justify-content-between align-items-center px-3 pt-2 pb-4"
+                                class="flex justify-content-between align-items-center px-3 p-3 mb-3 hover:bg-blue-50"
                             >
                                 <h6 class="m-0 text-color font-semibold">
                                     Settings
                                 </h6>
                             </li>
-                            <li>
+                            <li class="hover:bg-blue-50">
                                 <a
-                                    class="py-2 px-3 flex gap-2 align-items-center cursor-pointer text-color hover:text-primary"
+                                    class="py-2 px-3 flex gap-2 align-items-center cursor-pointer text-color"
                                 >
                                     <div
                                         class="flex align-items-center justify-content-center border-1 border-circle border-transparent bg-blue-100 text-500"
@@ -396,9 +408,9 @@
                                     </h6>
                                 </a>
                             </li>
-                            <li>
+                            <li class="hover:bg-blue-50">
                                 <a
-                                    class="py-2 px-3 flex gap-2 align-items-center cursor-pointer text-color hover:text-primary"
+                                    class="py-2 px-3 flex gap-2 align-items-center cursor-pointer text-color"
                                 >
                                     <div
                                         class="flex align-items-center justify-content-center border-1 border-circle border-transparent bg-cyan-100 text-500"
@@ -413,9 +425,9 @@
                                     </h6>
                                 </a>
                             </li>
-                            <li>
+                            <li class="hover:bg-blue-50">
                                 <a
-                                    class="py-2 px-3 flex gap-2 align-items-center cursor-pointer text-color hover:text-primary"
+                                    class="py-2 px-3 flex gap-2 align-items-center cursor-pointer text-color"
                                 >
                                     <div
                                         class="flex align-items-center justify-content-center border-1 border-circle border-transparent bg-pink-100 text-500"
@@ -430,9 +442,9 @@
                                     </h6>
                                 </a>
                             </li>
-                            <li>
+                            <li class="hover:bg-blue-50">
                                 <a
-                                    class="py-2 px-3 flex gap-2 align-items-center cursor-pointer text-color hover:text-primary"
+                                    class="py-2 px-3 flex gap-2 align-items-center cursor-pointer text-color"
                                 >
                                     <div
                                         class="flex align-items-center justify-content-center border-1 border-circle border-transparent bg-blue-100 text-500"
