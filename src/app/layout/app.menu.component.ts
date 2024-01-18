@@ -252,29 +252,14 @@ export class AppMenuComponent implements OnInit {
                                 routerLink: ['/auth/login'],
                             },
                             {
-                                label: 'Login 2',
-                                icon: 'pi pi-fw pi-sign-in',
-                                routerLink: ['/auth/login2'],
-                            },
-                            {
                                 label: 'Error',
                                 icon: 'pi pi-fw pi-times-circle',
                                 routerLink: ['/auth/error'],
                             },
                             {
-                                label: 'Error 2',
-                                icon: 'pi pi-fw pi-times-circle',
-                                routerLink: ['/auth/error2'],
-                            },
-                            {
                                 label: 'Access Denied',
                                 icon: 'pi pi-fw pi-lock',
                                 routerLink: ['/auth/access'],
-                            },
-                            {
-                                label: 'Access Denied 2',
-                                icon: 'pi pi-fw pi-lock',
-                                routerLink: ['/auth/access2'],
                             },
                         ],
                     },
