@@ -4,6 +4,35 @@ import { LayoutService } from './service/app.layout.service';
 @Component({
     selector: 'app-rightmenu',
     templateUrl: './app.rightmenu.component.html',
+    styles: [
+        `
+            :host ::ng-deep {
+                .p-checkbox {
+                    width: 32px;
+                    height: 32px;
+                    .p-checkbox-box {
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 50%;
+
+                        &.p-highlight {
+                            color: #515c66;
+                            background-color: transparent;
+                            border-color: transparent;
+
+                            .p-checkbox-icon {
+                                color: #515c66;
+                            }
+
+                            &:hover {
+                                border-color: #d9dee6;
+                            }
+                        }
+                    }
+                }
+            }
+        `,
+    ],
 })
 export class AppRightMenuComponent {
     checked1 = true;
@@ -21,7 +50,7 @@ export class AppRightMenuComponent {
     checked7 = false;
 
     checked8 = false;
-    
+
     constructor(public layoutService: LayoutService) {}
 
     get rightMenuActive(): boolean {

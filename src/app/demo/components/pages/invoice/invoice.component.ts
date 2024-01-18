@@ -1,14 +1,19 @@
 import { Component } from '@angular/core';
-import { AppComponent } from 'src/app/app.component';
+import { LayoutService } from 'src/app/layout/service/app.layout.service';
 @Component({
-    templateUrl: './invoice.component.html'
+    templateUrl: './invoice.component.html',
+    styles: [
+        `
+          :host ::ng-deep .p-button-label {
+            font-weight: 400;
+          }
+        `,
+      ],
 })
 export class InvoiceComponent {
-    constructor( public app: AppComponent) {
-      
-    }
+    constructor(public layoutService: LayoutService) {}
 
     print() {
         window.print();
     }
- }
+}

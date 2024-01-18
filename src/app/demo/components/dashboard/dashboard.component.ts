@@ -44,6 +44,7 @@ export class DashboardComponent implements OnInit {
     config: AppConfig | undefined;
 
     subscription: Subscription | undefined;
+
     constructor(
         public layoutService: LayoutService,
         private productService: ProductService
@@ -112,7 +113,7 @@ export class DashboardComponent implements OnInit {
                 },
             },
             responsive: true,
-            cutout: 70,
+            cutout: '80%',
         };
 
         // this.appMain['refreshTrafficChart'] = () => {
@@ -153,6 +154,7 @@ export class DashboardComponent implements OnInit {
             { name: 'This Week', code: '0' },
             { name: 'Last Week', code: '1' },
         ];
+        this.selectedOrderWeek = this.orderWeek[0]
     }
     getTrafficChartData() {
         return {

@@ -249,32 +249,32 @@
             </div>
             <div id="order-tabs-container" class="flex justify-content-start">
                 <div
-                    class="cursor-pointer py-2 px-4 border-round-sm mr-4 bg-blue-50 hover:text-blue-300"
+                    class="cursor-pointer py-2 px-4 border-round-sm mr-4 bg-blue-50"
                     [ngClass]="{ 'opacity-80': activeOrders === 1 }"
                     (click)="changeDataset($event); orders.refresh()"
                     data-label="New Sales"
                     data-index="0"
                     data-stroke="#00acac"
                 >
-                    <h6 class="mb-1 text-900">Current Week</h6>
+                    <h6 class="mb-1 text-color">Current Week</h6>
                     <h3
-                        class="m-0"
+                        class="m-0  hover:text-blue-300"
                         [ngClass]="{ 'text-primary': activeOrders === 0 }"
                     >
                         $455.55
                     </h3>
                 </div>
                 <div
-                    class="cursor-pointer py-2 px-4 border-round-sm bg-blue-50 hover:text-blue-300"
+                    class="cursor-pointer py-2 px-4 border-round-sm bg-blue-50 "
                     [ngClass]="{ 'opacity-80': activeOrders === 0 }"
                     (click)="changeDataset($event); orders.refresh()"
                     data-label="Previous Sales"
                     data-index="1"
                     data-stroke="#2f8ee5"
                 >
-                    <h6 class="mb-1 text-900">Previous Week</h6>
+                    <h6 class="mb-1 text-color">Previous Week</h6>
                     <h3
-                        class="m-0"
+                        class="m-0 hover:text-blue-300"
                         [ngClass]="{ 'text-primary': activeOrders === 1 }"
                     >
                         $244.40
@@ -300,10 +300,10 @@
                     <div
                         class="flex align-items-center justify-content-between pb-1"
                     >
-                        <h6>Traffic</h6>
+                        <h6 class="mb-0 text-color">Traffic</h6>
                     </div>
-                    <span>26 May - 27 May</span>
-                    <div class="flex justify-content-center">
+                    <span class="font-semibold text-sm text-color">26 May - 27 May</span>
+                    <div class="flex justify-content-center mt-3">
                         <p-chart
                             #traffic
                             type="doughnut"

@@ -15,29 +15,22 @@
             <div>
                 <img
                     id="invoice-logo"
-                    [src]="'assets/layout/images/logo-' + 'poseidon' + '.png'"
+                    [src]="
+                        'assets/layout/images/logo-' +
+                        (layoutService.config().colorScheme === 'light'
+                            ? 'poseidon'
+                            : 'poseidon-dark') +
+                        '.png'
+                    "
                     alt="poseidon-layout"
                 />
-                <!-- <img
-				id="invoice-logo"
-				[src]="
-					'assets/layout/images/logo-' +
-					(app.layoutMode === 'light'
-						? 'poseidon'
-						: 'poseidon-dark') +
-					'.png'
-				"
-				alt="poseidon-layout"
-			/> -->
             </div>
             <div class="my-3 text-2xl font-bold">YOUR COMPANY</div>
             <span class="mb-2">9137 3rd Lane California City</span>
             <span>CA 93504, U.S.A.</span>
         </div>
         <div class="flex flex-column mt-5 md:mt-0">
-            <div
-                class="text-2xl font-semibold text-left md:text-right mb-3 text-4xl"
-            >
+            <div class="text-2xl text-left md:text-right mb-3 text-4xl">
                 INVOICE
             </div>
             <div class="flex flex-column">
@@ -164,18 +157,24 @@
     <div
         class="flex flex-column md:flex-row md:align-items-start md:justify-content-between mt-8"
     >
-        <div class="font-semibold mb-3 md:mb-0">NOTES</div>
+        <div class="font-bold mb-3 md:mb-0">NOTES</div>
         <div class="flex flex-column">
-            <div class="flex justify-content-between align-items-center mb-2">
-                <span class="font-semibold mr-6">SUBTOTAL</span>
+            <div
+                class="flex font-bold justify-content-between align-items-center mb-2"
+            >
+                <span class="mr-6">SUBTOTAL</span>
                 <span>$332.00</span>
             </div>
-            <div class="flex justify-content-between align-items-center mb-2">
-                <span class="font-semibold mr-6">VAT #</span>
+            <div
+                class="flex font-bold justify-content-between align-items-center mb-2"
+            >
+                <span class="mr-6">VAT #</span>
                 <span>0</span>
             </div>
-            <div class="flex justify-content-between align-items-center">
-                <span class="font-semibold mr-6">TOTAL</span>
+            <div
+                class="flex font-bold justify-content-between align-items-center"
+            >
+                <span class="mr-6">TOTAL</span>
                 <span>$332.00</span>
             </div>
         </div>
