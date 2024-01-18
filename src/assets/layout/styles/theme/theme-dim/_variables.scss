@@ -51,7 +51,6 @@ $maskBg: rgba(0, 0, 0, 0.4) !default; //modal mask bg color
 $loadingIconFontSize: 2rem !default;
 $errorColor: #ef9a9a !default;
 $bodyBgColor: linear-gradient(99deg, #344057 0%, #232D40 100%) !default;
-$contentBgColor:#3C4962 !default;
 $contentAltBgColor:#495771 !default;
 
 //scale
@@ -78,7 +77,7 @@ $actionIconBorderRadius: 50% !default;
 //input field (e.g. inputtext, spinner, inputmask)
 $inputPadding: 0.5rem 0.5rem !default;
 $inputTextFontSize: 1rem !default;
-$inputBg: $shade600 !default;
+$inputBg: $shade900 !default;
 $inputTextColor: $shade000 !default;
 $inputIconColor: $shade100 !default;
 $inputBorder: 1px solid $shade600 !default;
@@ -513,7 +512,7 @@ $editorContentBorder: $panelContentBorder !default;
 $editorContentBg: $panelContentBg !default;
 
 //paginator
-$paginatorBg: $contentBgColor !default;
+$paginatorBg: $shade800 !default;
 $paginatorTextColor: $shade100 !default;
 $paginatorBorder: solid $shade600 !default;
 $paginatorBorderWidth: 1px !default;
@@ -533,13 +532,13 @@ $paginatorElementPadding: 0 !default;
 //table
 $tableHeaderBorder: 1px solid $shade600 !default;
 $tableHeaderBorderWidth: 0 0 1px 0 !default;
-$tableHeaderBg: $contentBgColor !default;
+$tableHeaderBg: $shade800 !default;
 $tableHeaderTextColor: $shade100 !default;
 $tableHeaderFontWeight: 600 !default;
 $tableHeaderPadding: 1rem 1rem !default;
 
 $tableHeaderCellPadding: 1rem 1rem !default;
-$tableHeaderCellBg: $contentBgColor !default;
+$tableHeaderCellBg: $shade800 !default;
 $tableHeaderCellTextColor: $shade000 !default;
 $tableHeaderCellFontWeight: 600 !default;
 $tableHeaderCellBorder: 1px solid $shade600 !default;
@@ -554,7 +553,7 @@ $tableHeaderCellHighlightHoverBg: $hoverBg !default;
 $tableHeaderCellHighlightTextHoverColor: $primaryColor !default;
 $tableSortableColumnBadgeSize: 1.143rem !default;
 
-$tableBodyRowBg: $contentBgColor !default;
+$tableBodyRowBg: $shade800 !default;
 $tableBodyRowTextColor: $shade000 !default;
 $tableBodyRowEvenBg: #253144 !default;
 $tableBodyRowHoverBg: $hoverBg !default;
@@ -564,7 +563,7 @@ $tableBodyCellBorderWidth: 0 0 1px 0 !default;
 $tableBodyCellPadding: 1rem 1rem !default;
 
 $tableFooterCellPadding: 1rem 1rem !default;
-$tableFooterCellBg: $contentBgColor !default;
+$tableFooterCellBg: $shade800 !default;
 $tableFooterCellTextColor: $shade000 !default;
 $tableFooterCellFontWeight: 600 !default;
 $tableFooterCellBorder: 1px solid $shade600 !default;
@@ -573,7 +572,7 @@ $tableResizerHelperBg: $primaryColor !default;
 
 $tableFooterBorder: 1px solid $shade600 !default;
 $tableFooterBorderWidth: 0 0 1px 0 !default;
-$tableFooterBg: $contentBgColor !default;
+$tableFooterBg: $shade800 !default;
 $tableFooterTextColor: $shade000 !default;
 $tableFooterFontWeight: 600 !default;
 $tableFooterPadding: 1rem 1rem !default;
@@ -950,7 +949,7 @@ $imagePreviewActionIconBorderRadius: 50% !default;
     --border-radius: #{$borderRadius};
     --surface-ground: #17212f;
     --surface-section: #17212f;
-    --surface-card: #{$contentAltBgColor};
+    --surface-card: #1f2d40;
     --surface-overlay: #1f2d40;
     --surface-border: #304562;
     --surface-hover: rgba(255, 255, 255, 0.03);
@@ -959,7 +958,7 @@ $imagePreviewActionIconBorderRadius: 50% !default;
     --highlight-text-color: #{$highlightTextColor};
     --focus-ring: #{$focusShadow};
     --layout-body-bg: #{$bodyBgColor};
-    --content-bg: #{$contentBgColor};
+    --content-bg: #{$shade800};
     --content-alt-bg-color: #{$contentAltBgColor};
     --transition-duration: #{$transitionDuration};
     color-scheme: light dark;

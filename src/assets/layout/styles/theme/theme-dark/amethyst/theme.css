@@ -36,7 +36,7 @@
   --border-radius: 3px;
   --surface-ground: #121212;
   --surface-section: #121212;
-  --surface-card: #4E565F;
+  --surface-card: #434B54;
   --surface-overlay: #1e1e1e;
   --surface-border: #383838;
   --surface-hover: rgba(255, 255, 255, 0.03);
@@ -6610,5 +6610,3 @@
   color: rgba(255, 255, 255, 0.87);
   background: rgba(186, 104, 200, 0.16);
 }
-
-/*# sourceMappingURL=theme.css.map */

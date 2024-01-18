@@ -45,7 +45,6 @@ $maskBg: rgba(0, 0, 0, 0.4) !default; //modal mask bg color
 $loadingIconFontSize: 2rem !default;
 $errorColor: #ef9a9a !default;
 $bodyBgColor:linear-gradient(99deg, #394149 0%, #2F363E 100%)!default;
-$contentBgColor:#434B54 !default;
 $contentAltBgColor:#4E565F !default;
 
 //scale
@@ -945,7 +944,7 @@ $imagePreviewActionIconBorderRadius: 50% !default;
     --border-radius: #{$borderRadius};
     --surface-ground: #121212;
     --surface-section: #121212;
-    --surface-card: #{$contentAltBgColor};
+    --surface-card: #434B54;
     --surface-overlay: #1e1e1e;
     --surface-border: #383838;
     --surface-hover: rgba(255, 255, 255, 0.03);
@@ -954,7 +953,7 @@ $imagePreviewActionIconBorderRadius: 50% !default;
     --highlight-bg: #{$highlightBg};
     --highlight-text-color: #{$highlightTextColor};
     --layout-body-bg: #{$bodyBgColor};
-    --content-bg: #{$contentBgColor};
+    --content-bg: #{$shade800};
     --content-alt-bg-color: #{$contentAltBgColor};
     --transition-duration: #{$transitionDuration};
     color-scheme: dark;

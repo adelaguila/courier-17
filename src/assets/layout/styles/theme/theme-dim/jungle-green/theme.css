@@ -36,7 +36,7 @@
   --border-radius: 3px;
   --surface-ground: #17212f;
   --surface-section: #17212f;
-  --surface-card: #495771;
+  --surface-card: #1f2d40;
   --surface-overlay: #1f2d40;
   --surface-border: #304562;
   --surface-hover: rgba(255, 255, 255, 0.03);
@@ -225,7 +225,7 @@
   border: 1px solid #65738D;
 }
 .p-editor-container .p-editor-content .ql-editor {
-  background: #65738D;
+  background: #2B364C;
   color: #E5E8EC;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
@@ -682,7 +682,7 @@
     }
   }
   .p-cascadeselect {
-    background: #65738D;
+    background: #2B364C;
     border: 1px solid #65738D;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
     border-radius: 3px;
@@ -796,7 +796,7 @@
   }
   .p-checkbox .p-checkbox-box {
     border: 2px solid #65738D;
-    background: #65738D;
+    background: #2B364C;
     width: 20px;
     height: 20px;
     color: #E5E8EC;
@@ -927,7 +927,7 @@
   }
 
   .p-dropdown {
-    background: #65738D;
+    background: #2B364C;
     border: 1px solid #65738D;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
     border-radius: 3px;
@@ -1204,7 +1204,7 @@
     font-feature-settings: var(--font-feature-settings, normal);
     font-size: 1rem;
     color: #E5E8EC;
-    background: #65738D;
+    background: #2B364C;
     padding: 0.5rem 0.5rem;
     border: 1px solid #65738D;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
@@ -1382,7 +1382,7 @@
   }
 
   .p-multiselect {
-    background: #65738D;
+    background: #2B364C;
     border: 1px solid #65738D;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
     border-radius: 3px;
@@ -1584,7 +1584,7 @@
   }
   .p-radiobutton .p-radiobutton-box {
     border: 2px solid #65738D;
-    background: #65738D;
+    background: #2B364C;
     width: 20px;
     height: 20px;
     color: #E5E8EC;
@@ -1805,7 +1805,7 @@
   }
 
   .p-treeselect {
-    background: #65738D;
+    background: #2B364C;
     border: 1px solid #65738D;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
     border-radius: 3px;
@@ -6610,5 +6610,3 @@
   color: #4dcfcb;
   background: rgba(43, 159, 156, 0.16);
 }
-
-/*# sourceMappingURL=theme.css.map */
