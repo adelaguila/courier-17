@@ -3,40 +3,32 @@
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 300;
-  src: url("../../fonts/open-sans-v18-latin-ext_latin-300.eot");
-  /* IE9 Compat Modes */
-  src: local(""), url("../../fonts/open-sans-v18-latin-ext_latin-300.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v18-latin-ext_latin-300.woff2") format("woff2"), url("../../fonts/open-sans-v18-latin-ext_latin-300.woff") format("woff"), url("../../fonts/open-sans-v18-latin-ext_latin-300.ttf") format("truetype"), url("../../fonts/open-sans-v18-latin-ext_latin-300.svg#OpenSans") format("svg");
-  /* Legacy iOS */
+  src: url("../../fonts/open-sans-v18-latin-ext_latin-300.eot"); /* IE9 Compat Modes */
+  src: local(""), url("../../fonts/open-sans-v18-latin-ext_latin-300.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v18-latin-ext_latin-300.woff2") format("woff2"), url("../../fonts/open-sans-v18-latin-ext_latin-300.woff") format("woff"), url("../../fonts/open-sans-v18-latin-ext_latin-300.ttf") format("truetype"), url("../../fonts/open-sans-v18-latin-ext_latin-300.svg#OpenSans") format("svg"); /* Legacy iOS */
 }
 /* open-sans-regular - latin-ext_latin */
 @font-face {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 400;
-  src: url("../../fonts/open-sans-v18-latin-ext_latin-regular.eot");
-  /* IE9 Compat Modes */
-  src: local(""), url("../../fonts/open-sans-v18-latin-ext_latin-regular.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v18-latin-ext_latin-regular.woff2") format("woff2"), url("../../fonts/open-sans-v18-latin-ext_latin-regular.woff") format("woff"), url("../../fonts/open-sans-v18-latin-ext_latin-regular.ttf") format("truetype"), url("../../fonts/open-sans-v18-latin-ext_latin-regular.svg#OpenSans") format("svg");
-  /* Legacy iOS */
+  src: url("../../fonts/open-sans-v18-latin-ext_latin-regular.eot"); /* IE9 Compat Modes */
+  src: local(""), url("../../fonts/open-sans-v18-latin-ext_latin-regular.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v18-latin-ext_latin-regular.woff2") format("woff2"), url("../../fonts/open-sans-v18-latin-ext_latin-regular.woff") format("woff"), url("../../fonts/open-sans-v18-latin-ext_latin-regular.ttf") format("truetype"), url("../../fonts/open-sans-v18-latin-ext_latin-regular.svg#OpenSans") format("svg"); /* Legacy iOS */
 }
 /* open-sans-600 - latin-ext_latin */
 @font-face {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 600;
-  src: url("../../fonts/open-sans-v18-latin-ext_latin-600.eot");
-  /* IE9 Compat Modes */
-  src: local(""), url("../../fonts/open-sans-v18-latin-ext_latin-600.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v18-latin-ext_latin-600.woff2") format("woff2"), url("../../fonts/open-sans-v18-latin-ext_latin-600.woff") format("woff"), url("../../fonts/open-sans-v18-latin-ext_latin-600.ttf") format("truetype"), url("../../fonts/open-sans-v18-latin-ext_latin-600.svg#OpenSans") format("svg");
-  /* Legacy iOS */
+  src: url("../../fonts/open-sans-v18-latin-ext_latin-600.eot"); /* IE9 Compat Modes */
+  src: local(""), url("../../fonts/open-sans-v18-latin-ext_latin-600.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v18-latin-ext_latin-600.woff2") format("woff2"), url("../../fonts/open-sans-v18-latin-ext_latin-600.woff") format("woff"), url("../../fonts/open-sans-v18-latin-ext_latin-600.ttf") format("truetype"), url("../../fonts/open-sans-v18-latin-ext_latin-600.svg#OpenSans") format("svg"); /* Legacy iOS */
 }
 /* open-sans-700 - latin-ext_latin */
 @font-face {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
-  src: url("../../fonts/open-sans-v18-latin-ext_latin-700.eot");
-  /* IE9 Compat Modes */
-  src: local(""), url("../../fonts/open-sans-v18-latin-ext_latin-700.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v18-latin-ext_latin-700.woff2") format("woff2"), url("../../fonts/open-sans-v18-latin-ext_latin-700.woff") format("woff"), url("../../fonts/open-sans-v18-latin-ext_latin-700.ttf") format("truetype"), url("../../fonts/open-sans-v18-latin-ext_latin-700.svg#OpenSans") format("svg");
-  /* Legacy iOS */
+  src: url("../../fonts/open-sans-v18-latin-ext_latin-700.eot"); /* IE9 Compat Modes */
+  src: local(""), url("../../fonts/open-sans-v18-latin-ext_latin-700.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v18-latin-ext_latin-700.woff2") format("woff2"), url("../../fonts/open-sans-v18-latin-ext_latin-700.woff") format("woff"), url("../../fonts/open-sans-v18-latin-ext_latin-700.ttf") format("truetype"), url("../../fonts/open-sans-v18-latin-ext_latin-700.svg#OpenSans") format("svg"); /* Legacy iOS */
 }
 .card {
   background-color: var(--surface-card);
@@ -213,15 +205,15 @@ p:last-child {
 .layout-topbar .layout-topbar-start {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   padding: 1rem;
   position: relative;
-  width: 17rem;
+  width: 18rem;
 }
 .layout-topbar .layout-topbar-start .layout-topbar-logo {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
 }
 .layout-topbar .layout-topbar-start .layout-topbar-logo img {
   height: 2.25rem;
@@ -379,7 +371,7 @@ p:last-child {
   margin-top: 4rem;
   top: 0;
   left: 0;
-  width: 17rem;
+  width: 18rem;
   display: flex;
   flex-direction: column;
 }
@@ -498,6 +490,7 @@ p:last-child {
     z-index: 998;
     overflow: visible;
     flex-direction: row;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.03), 0px 0px 2px rgba(0, 0, 0, 0.06), 0px 2px 6px rgba(0, 0, 0, 0.12);
   }
   .layout-container.layout-horizontal .layout-sidebar .layout-menu-container {
     overflow: auto;
@@ -780,7 +773,6 @@ a {
   .blocked-scroll {
     overflow: hidden;
   }
-
   .layout-container .layout-content-wrapper {
     margin-left: 0;
     margin-top: 5rem;
@@ -847,17 +839,9 @@ a {
   }
 }
 @media screen and (min-width: 1960px) {
-  .layout-content {
-    width: 1504px;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-
-  .layout-topbar {
+  .layout-content, .landing-wrapper {
     width: 1504px;
     margin-left: auto !important;
     margin-right: auto !important;
   }
 }
-
-/*# sourceMappingURL=layout.css.map */
