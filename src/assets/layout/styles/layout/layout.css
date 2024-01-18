@@ -213,15 +213,15 @@ p:last-child {
 .layout-topbar .layout-topbar-start {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   padding: 1rem;
   position: relative;
-  width: 17rem;
+  width: 18rem;
 }
 .layout-topbar .layout-topbar-start .layout-topbar-logo {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
 }
 .layout-topbar .layout-topbar-start .layout-topbar-logo img {
   height: 2.25rem;
@@ -379,7 +379,7 @@ p:last-child {
   margin-top: 4rem;
   top: 0;
   left: 0;
-  width: 17rem;
+  width: 18rem;
   display: flex;
   flex-direction: column;
 }
@@ -498,6 +498,7 @@ p:last-child {
     z-index: 998;
     overflow: visible;
     flex-direction: row;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.03), 0px 0px 2px rgba(0, 0, 0, 0.06), 0px 2px 6px rgba(0, 0, 0, 0.12);
   }
   .layout-container.layout-horizontal .layout-sidebar .layout-menu-container {
     overflow: auto;
@@ -847,13 +848,7 @@ a {
   }
 }
 @media screen and (min-width: 1960px) {
-  .layout-content {
-    width: 1504px;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-
-  .layout-topbar {
+  .layout-content, .landing-wrapper {
     width: 1504px;
     margin-left: auto !important;
     margin-right: auto !important;

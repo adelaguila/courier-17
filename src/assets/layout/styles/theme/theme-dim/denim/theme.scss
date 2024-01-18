@@ -4,9 +4,9 @@ $primaryDarkColor: #135AA9;
 $primaryDarkerColor: #0D438D;
 $primaryTextColor: #f8fafc;
 
-$highlightBg: $primaryColor;
-$highlightTextColor: $primaryTextColor;
-$highlightFocusBg: rgba($primaryColor, 0.24);
+$highlightBg: rgba(100, 181, 246, .16) !default;
+$highlightTextColor: rgba(255,255,255,.87) !default;
+$highlightFocusBg: rgba($primaryColor, .24) !default;
 
 @import '../_variables';
 @import '../../theme-base/_components';

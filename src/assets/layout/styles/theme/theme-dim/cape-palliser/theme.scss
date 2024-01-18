@@ -4,8 +4,8 @@ $primaryDarkColor: #A46B3E;
 $primaryDarkerColor: #8D522D;
 $primaryTextColor: #f8fafc;
 
-$highlightBg: $primaryColor;
-$highlightTextColor: $primaryTextColor;
+$highlightBg: rgba(255, 213, 79, 0.16) !default;
+$highlightTextColor: rgba(255,255,255,.87) !default;
 $highlightFocusBg: rgba($primaryColor, 0.24);
 
 @import '../_variables';
