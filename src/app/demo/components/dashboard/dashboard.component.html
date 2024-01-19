@@ -2,16 +2,16 @@
     <div class="col-12 md:col-12 xl:col-3">
         <div class="surface-card py-3 px-4 shadow-1 border-round-md h-full">
             <div class="mb-4 flex justify-content-between align-items-center">
-                <span class="font-semibold">Revenue Status</span>
+                <span class="font-semibold text-600">Revenue Status</span>
                 <div
-                    class="flex align-items-center justify-content-center border-1 border-circle border-transparent bg-gray-100 text-500 cursor-pointer hover:border-gray-500"
+                    class="flex align-items-center justify-content-center border-1 border-circle border-transparent surface-200 text-500 cursor-pointer hover:border-gray-500"
                     style="height: 20px; width: 20px; transform: rotate(45deg)"
                 >
                     <i class="pi pi-arrow-up text-sm"></i>
                 </div>
             </div>
             <div class="flex align-items-center justify-content-between">
-                <h3>87363</h3>
+                <h3 class="text-700">87363</h3>
                 <div class="flex align-items-baseline gap-1">
                     <div class="flex flex-column align-items-center">
                         <div
@@ -62,16 +62,16 @@
     <div class="col-12 md:col-12 xl:col-3">
         <div class="surface-card py-3 px-4 shadow-1 border-round-md h-full">
             <div class="mb-4 flex justify-content-between align-items-center">
-                <span class="font-semibold">Page View</span>
+                <span class="font-semibold text-600">Page View</span>
                 <div
-                    class="flex align-items-center justify-content-center border-1 border-circle border-transparent bg-gray-100 text-500 cursor-pointer hover:border-gray-500"
+                    class="flex align-items-center justify-content-center border-1 border-circle border-transparent surface-200 text-500 cursor-pointer hover:border-gray-500"
                     style="height: 20px; width: 20px; transform: rotate(45deg)"
                 >
                     <i class="pi pi-arrow-up text-sm"></i>
                 </div>
             </div>
             <div class="flex align-items-center justify-content-between">
-                <h3>5592</h3>
+                <h3 class="text-700">5592</h3>
                 <div class="flex align-items-baseline gap-1">
                     <div class="flex flex-column align-items-center">
                         <div
@@ -123,16 +123,16 @@
     <div class="col-12 md:col-12 xl:col-3">
         <div class="surface-card py-3 px-4 shadow-1 border-round-md h-full">
             <div class="mb-4 flex justify-content-between align-items-center">
-                <span class="font-semibold">Bounce Rate</span>
+                <span class="font-semibold text-600">Bounce Rate</span>
                 <div
-                    class="flex align-items-center justify-content-center border-1 border-circle border-transparent bg-gray-100 text-500 cursor-pointer hover:border-gray-500"
+                    class="flex align-items-center justify-content-center border-1 border-circle border-transparent surface-200 text-500 cursor-pointer hover:border-gray-500"
                     style="height: 20px; width: 20px; transform: rotate(45deg)"
                 >
                     <i class="pi pi-arrow-up text-sm"></i>
                 </div>
             </div>
             <div class="flex align-items-center justify-content-between">
-                <h3>55.95%</h3>
+                <h3 class="text-700">55.95%</h3>
                 <div class="flex align-items-baseline gap-1">
                     <div class="flex flex-column align-items-center">
                         <div
@@ -184,16 +184,16 @@
     <div class="col-12 md:col-12 xl:col-3">
         <div class="surface-card py-3 px-4 shadow-1 border-round-md h-full">
             <div class="mb-4 flex justify-content-between align-items-center">
-                <span class="font-semibold">Products Sale Rate</span>
+                <span class="font-semibold text-600">Products Sale Rate</span>
                 <div
-                    class="flex align-items-center justify-content-center border-1 border-circle border-transparent bg-gray-100 text-500 cursor-pointer hover:border-gray-500"
+                    class="flex align-items-center justify-content-center border-1 border-circle border-transparent surface-200 text-500 cursor-pointer hover:border-gray-500"
                     style="height: 20px; width: 20px; transform: rotate(45deg)"
                 >
                     <i class="pi pi-arrow-up text-sm"></i>
                 </div>
             </div>
             <div class="flex align-items-center justify-content-between">
-                <h3>15.37%</h3>
+                <h3 class="text-700">15.37%</h3>
                 <div class="flex align-items-baseline gap-1">
                     <div class="flex flex-column align-items-center">
                         <div
@@ -245,19 +245,20 @@
     <div class="col-12 xl:col-9">
         <div class="surface-card py-3 px-4 shadow-1 border-round-md">
             <div class="mb-4">
-                <h6>Top Products</h6>
+                <h6 class="text-600 text-600">Top Products</h6>
             </div>
             <div id="order-tabs-container" class="flex justify-content-start">
                 <div
-                    class="cursor-pointer py-2 px-4 border-round-sm mr-4 bg-blue-50"
+                    class="cursor-pointer py-2 px-4 border-round-sm mr-4"
+                    style="background-color:var(--surface-b);"
                     [ngClass]="{ 'opacity-80': activeOrders === 1 }"
                     (click)="changeDataset($event); orders.refresh()"
                     data-label="New Sales"
                     data-index="0"
                     data-stroke="#00acac"
                 >
-                    <h6 class="mb-1 text-color">Current Week</h6>
-                    <h3
+                    <h6 class="text-600 mb-1 text-color">Current Week</h6>
+                    <h3 class="text-700"
                         class="m-0  hover:text-blue-300"
                         [ngClass]="{ 'text-primary': activeOrders === 0 }"
                     >
@@ -265,15 +266,16 @@
                     </h3>
                 </div>
                 <div
-                    class="cursor-pointer py-2 px-4 border-round-sm bg-blue-50 "
+                    class="cursor-pointer py-2 px-4 border-round-sm"
+                    style="background-color:var(--surface-b);"
                     [ngClass]="{ 'opacity-80': activeOrders === 0 }"
                     (click)="changeDataset($event); orders.refresh()"
                     data-label="Previous Sales"
                     data-index="1"
                     data-stroke="#2f8ee5"
                 >
-                    <h6 class="mb-1 text-color">Previous Week</h6>
-                    <h3
+                    <h6 class="text-600 mb-1 text-color">Previous Week</h6>
+                    <h3 class="text-700"
                         class="m-0 hover:text-blue-300"
                         [ngClass]="{ 'text-primary': activeOrders === 1 }"
                     >
@@ -300,9 +302,9 @@
                     <div
                         class="flex align-items-center justify-content-between pb-1"
                     >
-                        <h6 class="mb-0 text-color">Traffic</h6>
+                        <h6 class="text-600 mb-0">Traffic</h6>
                     </div>
-                    <span class="font-semibold text-sm text-color">26 May - 27 May</span>
+                    <span class="font-semibold text-sm text-700">26 May - 27 May</span>
                     <div class="flex justify-content-center mt-3">
                         <p-chart
                             #traffic
@@ -318,7 +320,8 @@
                         class="mt-5 flex justify-content-between align-items-center"
                     >
                         <div
-                            class="border-round-sm bg-primary-100 text-center w-full cursor-pointer mr-2 pt-1 px-1 pb-2"
+                            class="border-round-sm text-center w-full cursor-pointer mr-2 pt-1 px-1 pb-2"
+                            style="background-color:var(--surface-b);"
                             [ngClass]="{
                                 'text-white bg-primary-500': activeTraffic === 0
                             }"
@@ -331,7 +334,7 @@
                             data-index="0"
                         >
                             <h6
-                                class="m-0 mb-2 font-bold"
+                                class="m-0 mb-2 font-semibold text-600"
                                 [ngClass]="{
                                     'text-white': activeTraffic === 0
                                 }"
@@ -342,7 +345,8 @@
                             <span class="block text-sm mt-2">Facebook</span>
                         </div>
                         <div
-                            class="border-round-sm bg-primary-100 text-center w-full cursor-pointer mr-2 pt-1 px-1 pb-2"
+                            class="border-round-sm text-center w-full cursor-pointer mr-2 pt-1 px-1 pb-2"
+                            style="background-color:var(--surface-b);"
                             [ngClass]="{
                                 'text-white bg-primary-500': activeTraffic === 1
                             }"
@@ -355,7 +359,7 @@
                             data-index="1"
                         >
                             <h6
-                                class="m-0 mb-2 font-bold"
+                                class="m-0 mb-2 font-semibold text-600"
                                 [ngClass]="{
                                     'text-white': activeTraffic === 1
                                 }"
@@ -366,7 +370,8 @@
                             <span class="block text-sm mt-2">Twitter</span>
                         </div>
                         <div
-                            class="border-round-sm bg-primary-100 text-center w-full cursor-pointer pt-1 px-1 pb-2"
+                            class="border-round-sm text-center w-full cursor-pointer pt-1 px-1 pb-2"
+                            style="background-color:var(--surface-b);"
                             [ngClass]="{
                                 'text-white bg-primary-500': activeTraffic === 2
                             }"
@@ -379,7 +384,7 @@
                             data-index="2"
                         >
                             <h6
-                                class="m-0 mb-2 font-bold"
+                                class="m-0 mb-2 font-semibold text-600"
                                 [ngClass]="{
                                     'text-white': activeTraffic === 2
                                 }"
@@ -431,7 +436,7 @@
     <div class="col-12 md:col-6 xl:col-4">
         <div class="surface-card py-3 px-4 shadow-1 border-round-md h-full">
             <div class="flex align-items-center justify-content-between pb-2">
-                <h6 class="pb-1 m-0">Leaderboard</h6>
+                <h6 class="text-600 pb-1 m-0">Leaderboard</h6>
             </div>
             <ul class="m-0 p-0">
                 <li
@@ -444,10 +449,10 @@
                             style="width: 32px; height: 32px"
                             class="mr-3"
                         />
-                        <p class="m-0">Peter Taylor</p>
+                        <p class="m-0 text-600">Peter Taylor</p>
                     </div>
                     <div class="flex align-items-center">
-                        <h6 class="m-0 font-semibold mr-3">$224.44</h6>
+                        <h6 class="text-600 m-0 font-semibold mr-3">$224.44</h6>
                         <i class="pi pi-arrow-up text-cyan-500"></i>
                     </div>
                 </li>
@@ -461,10 +466,10 @@
                             style="width: 32px; height: 32px"
                             class="mr-3"
                         />
-                        <p class="m-0">Nicolina Lindholm</p>
+                        <p class="m-0 text-600">Nicolina Lindholm</p>
                     </div>
                     <div class="flex align-items-center">
-                        <h6 class="m-0 font-semibold mr-3">$86.05</h6>
+                        <h6 class="text-600 m-0 font-semibold mr-3">$86.05</h6>
                         <i class="pi pi-arrow-up text-cyan-500"></i>
                     </div>
                 </li>
@@ -478,10 +483,10 @@
                             style="width: 32px; height: 32px"
                             class="mr-3"
                         />
-                        <p class="m-0">Su Hua</p>
+                        <p class="m-0 text-600">Su Hua</p>
                     </div>
                     <div class="flex align-items-center">
-                        <h6 class="m-0 font-semibold mr-3">$59.44</h6>
+                        <h6 class="text-600 m-0 font-semibold mr-3">$59.44</h6>
                         <i class="pi pi-arrow-up text-cyan-500"></i>
                     </div>
                 </li>
@@ -495,10 +500,10 @@
                             style="width: 32px; height: 32px"
                             class="mr-3"
                         />
-                        <p class="m-0">Maria Illescas</p>
+                        <p class="m-0 text-600">Maria Illescas</p>
                     </div>
                     <div class="flex align-items-center">
-                        <h6 class="m-0 font-semibold mr-3">$12.32</h6>
+                        <h6 class="text-600 m-0 font-semibold mr-3">$12.32</h6>
                         <i class="pi pi-arrow-up text-cyan-500"></i>
                     </div>
                 </li>
@@ -512,10 +517,10 @@
                             style="width: 32px; height: 32px"
                             class="mr-3"
                         />
-                        <p class="m-0">Ezequiel Dengra</p>
+                        <p class="m-0 text-600">Ezequiel Dengra</p>
                     </div>
                     <div class="flex align-items-center">
-                        <h6 class="m-0 font-semibold mr-3">$12.32</h6>
+                        <h6 class="text-600 m-0 font-semibold mr-3">$12.32</h6>
                         <i class="pi pi-arrow-up text-cyan-500"></i>
                     </div>
                 </li>
@@ -529,10 +534,10 @@
                             style="width: 32px; height: 32px"
                             class="mr-3"
                         />
-                        <p class="m-0">Conan Matusov</p>
+                        <p class="m-0 text-600">Conan Matusov</p>
                     </div>
                     <div class="flex align-items-center">
-                        <h6 class="m-0 font-semibold mr-3">$12.32</h6>
+                        <h6 class="text-600 m-0 font-semibold mr-3">$12.32</h6>
                         <i class="pi pi-arrow-up text-cyan-500"></i>
                     </div>
                 </li>
@@ -546,10 +551,10 @@
                             style="width: 32px; height: 32px"
                             class="mr-3"
                         />
-                        <p class="m-0">Hector Mariano</p>
+                        <p class="m-0 text-600">Hector Mariano</p>
                     </div>
                     <div class="flex align-items-center">
-                        <h6 class="m-0 font-semibold mr-3">$12.32</h6>
+                        <h6 class="text-600 m-0 font-semibold mr-3">$12.32</h6>
                         <i class="pi pi-arrow-up text-cyan-500"></i>
                     </div>
                 </li>
@@ -560,7 +565,7 @@
     <div class="col-12 md:col-6 xl:col-4">
         <div class="surface-card py-3 px-4 shadow-1 border-round-md h-full">
             <div class="mb-2">
-                <h6>Product List</h6>
+                <h6 class="text-600 text-600">Product List</h6>
             </div>
             <ul class="p-0 m-0 list-none">
                 <li
@@ -574,7 +579,7 @@
                             class="mr-3"
                         />
                         <div class="product-info">
-                            <p class="m-0">Nike Air X12</p>
+                            <p class="m-0 text-600">Nike Air X12</p>
                             <span
                                 class="block text-sm font-normal text-color-secondary"
                                 >Sold
@@ -596,7 +601,7 @@
                             class="mr-3"
                         />
                         <div class="m-0">
-                            <p class="m-0">Nike Sports Watch</p>
+                            <p class="m-0 text-600">Nike Sports Watch</p>
                             <span
                                 class="block text-sm font-normal text-color-secondary"
                                 >Sold
@@ -618,7 +623,7 @@
                             class="mr-3"
                         />
                         <div class="m-0">
-                            <p class="m-0">Heinz Yellow Mustard</p>
+                            <p class="m-0 text-600">Heinz Yellow Mustard</p>
                             <span
                                 class="block text-sm font-normal text-color-secondary"
                                 >Sold
@@ -640,7 +645,7 @@
                             class="mr-3"
                         />
                         <div class="m-0">
-                            <p class="m-0">Beats Headphone</p>
+                            <p class="m-0 text-600">Beats Headphone</p>
                             <span
                                 class="block text-sm font-normal text-color-secondary"
                                 >Sold
@@ -662,7 +667,7 @@
                             class="mr-3"
                         />
                         <div class="m-0">
-                            <p class="m-0">Black Racing Bike</p>
+                            <p class="m-0 text-600">Black Racing Bike</p>
                             <span
                                 class="block text-sm font-normal text-color-secondary"
                                 >Sold
@@ -680,7 +685,7 @@
     <div class="col-12 md:col-6 xl:col-4">
         <div class="surface-card py-3 px-4 shadow-1 border-round-md h-full">
             <div class="mb-2">
-                <h6>Seller List</h6>
+                <h6 class="text-600 text-600">Seller List</h6>
             </div>
             <ul class="p-0 m-0 list-none">
                 <li
@@ -693,11 +698,11 @@
                             style="width: 32; height: 32px"
                             class="m-0 mr-3"
                         />
-                        <p class="m-0 mr-2" style="min-width: 100px">
+                        <p class="m-0 text-600 mr-2" style="min-width: 100px">
                             Hector Mariano
                         </p>
                     </div>
-                    <span class="text-sm font-semibold">Tier 1</span>
+                    <span class="text-sm font-semibold text-600">Tier 1</span>
                     <p-rating
                         [(ngModel)]="val2"
                         [readonly]="true"
@@ -723,11 +728,11 @@
                             style="width: 32; height: 32px"
                             class="m-0 mr-3"
                         />
-                        <p class="m-0 mr-2" style="min-width: 100px">
+                        <p class="m-0 text-600 mr-2" style="min-width: 100px">
                             Maria Illescas
                         </p>
                     </div>
-                    <span class="text-sm font-semibold">Tier 2</span>
+                    <span class="text-sm font-semibold text-600">Tier 2</span>
                     <p-rating
                         [(ngModel)]="val2"
                         [readonly]="true"
@@ -753,11 +758,11 @@
                             style="width: 32; height: 32px"
                             class="m-0 mr-3"
                         />
-                        <p class="m-0 mr-2" style="min-width: 100px">
+                        <p class="m-0 text-600 mr-2" style="min-width: 100px">
                             Ngô Hải Giang
                         </p>
                     </div>
-                    <span class="text-sm font-semibold">Tier 3</span>
+                    <span class="text-sm font-semibold text-600">Tier 3</span>
                     <p-rating
                         [(ngModel)]="val1"
                         [readonly]="true"
@@ -783,11 +788,11 @@
                             style="width: 32; height: 32px"
                             class="m-0 mr-3"
                         />
-                        <p class="m-0 mr-2" style="min-width: 100px">
+                        <p class="m-0 text-600 mr-2" style="min-width: 100px">
                             Tamas Bunce
                         </p>
                     </div>
-                    <span class="text-sm font-semibold">Tier 4</span>
+                    <span class="text-sm font-semibold text-600">Tier 4</span>
                     <p-rating
                         [(ngModel)]="val1"
                         [readonly]="true"
@@ -813,11 +818,11 @@
                             style="width: 32; height: 32px"
                             class="m-0 mr-3"
                         />
-                        <p class="m-0 mr-2" style="min-width: 100px">
+                        <p class="m-0 text-600 mr-2" style="min-width: 100px">
                             Conan Matusov
                         </p>
                     </div>
-                    <span class="text-sm font-semibold">Tier 4</span>
+                    <span class="text-sm font-semibold text-600">Tier 4</span>
                     <p-rating
                         [(ngModel)]="val1"
                         [readonly]="true"
@@ -843,11 +848,11 @@
                             style="width: 32; height: 32px"
                             class="m-0 mr-3"
                         />
-                        <p class="m-0 mr-2" style="min-width: 100px">
+                        <p class="m-0 text-600 mr-2" style="min-width: 100px">
                             Maria Illescas
                         </p>
                     </div>
-                    <span class="text-sm font-semibold">Tier 4</span>
+                    <span class="text-sm font-semibold text-600">Tier 4</span>
                     <p-rating
                         [(ngModel)]="val1"
                         [readonly]="true"
@@ -873,9 +878,9 @@
                             style="width: 32; height: 32px"
                             class="m-0 mr-3"
                         />
-                        <p class="m-0 mr-2" style="min-width: 100px">Su Hua</p>
+                        <p class="m-0 text-600 mr-2" style="min-width: 100px">Su Hua</p>
                     </div>
-                    <span class="text-sm font-semibold">Tier 4</span>
+                    <span class="text-sm font-semibold text-600">Tier 4</span>
                     <p-rating
                         [(ngModel)]="val1"
                         [readonly]="true"
@@ -898,7 +903,7 @@
     <div class="col-12 md:col-6 xl:col-4">
         <div class="surface-card py-3 px-4 shadow-1 border-round-md h-full">
             <div class="mb-2">
-                <h6>Tasks</h6>
+                <h6 class="text-600 text-600">Tasks</h6>
             </div>
             <div>
                 <div class="p-0 pt-2 mb-2">
@@ -1092,7 +1097,7 @@
             <div
                 class="mb-2 pb-1 flex justify-content-between align-items-center"
             >
-                <h4>Recent Sales</h4>
+                <h6 class="text-600">Recent Sales</h6>
                 <p-dropdown
                     [options]="orderWeek"
                     [(ngModel)]="selectedOrderWeek"
