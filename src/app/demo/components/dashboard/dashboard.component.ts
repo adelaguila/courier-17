@@ -49,11 +49,11 @@ export class DashboardComponent implements OnInit {
         public layoutService: LayoutService,
         private productService: ProductService
     ) {
-        //     this.subscription = this.layoutService.configUpdate$
-        //         .pipe(debounceTime(25))
-        //         .subscribe((config) => {
-        //             this.initChart();
-        //         });
+        // this.subscription = this.layoutService.configUpdate$
+        //     .pipe(debounceTime(25))
+        //     .subscribe((config) => {
+        //         this.initChart();
+        //     });
     }
 
     ngOnInit() {
@@ -154,7 +154,7 @@ export class DashboardComponent implements OnInit {
             { name: 'This Week', code: '0' },
             { name: 'Last Week', code: '1' },
         ];
-        this.selectedOrderWeek = this.orderWeek[0]
+        this.selectedOrderWeek = this.orderWeek[0];
     }
     getTrafficChartData() {
         return {
@@ -220,14 +220,6 @@ export class DashboardComponent implements OnInit {
             this.products = this.productsLastWeek;
         }
     }
-
-    // updateChartOptions() {
-    //     if(this.config.dark){
-    //         this.applyDarkTheme();
-    //     } else {
-    //         this.applyLightTheme();
-    //     }
-    // }
 
     applyDarkTheme() {
         this.ordersOptions = {
