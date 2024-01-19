@@ -250,7 +250,7 @@
             <div id="order-tabs-container" class="flex justify-content-start">
                 <div
                     class="cursor-pointer py-2 px-4 border-round-sm mr-4"
-                    style="background-color:var(--surface-b);"
+                    style="background-color: var(--surface-b)"
                     [ngClass]="{ 'opacity-80': activeOrders === 1 }"
                     (click)="changeDataset($event); orders.refresh()"
                     data-label="New Sales"
@@ -258,8 +258,9 @@
                     data-stroke="#00acac"
                 >
                     <h6 class="text-600 mb-1 text-color">Current Week</h6>
-                    <h3 class="text-700"
-                        class="m-0  hover:text-blue-300"
+                    <h3
+                        class="text-700"
+                        class="m-0 hover:text-blue-300"
                         [ngClass]="{ 'text-primary': activeOrders === 0 }"
                     >
                         $455.55
@@ -267,7 +268,7 @@
                 </div>
                 <div
                     class="cursor-pointer py-2 px-4 border-round-sm"
-                    style="background-color:var(--surface-b);"
+                    style="background-color: var(--surface-b)"
                     [ngClass]="{ 'opacity-80': activeOrders === 0 }"
                     (click)="changeDataset($event); orders.refresh()"
                     data-label="Previous Sales"
@@ -275,7 +276,8 @@
                     data-stroke="#2f8ee5"
                 >
                     <h6 class="text-600 mb-1 text-color">Previous Week</h6>
-                    <h3 class="text-700"
+                    <h3
+                        class="text-700"
                         class="m-0 hover:text-blue-300"
                         [ngClass]="{ 'text-primary': activeOrders === 1 }"
                     >
@@ -304,7 +306,9 @@
                     >
                         <h6 class="text-600 mb-0">Traffic</h6>
                     </div>
-                    <span class="font-semibold text-sm text-700">26 May - 27 May</span>
+                    <span class="font-semibold text-sm text-700"
+                        >26 May - 27 May</span
+                    >
                     <div class="flex justify-content-center mt-3">
                         <p-chart
                             #traffic
@@ -321,7 +325,7 @@
                     >
                         <div
                             class="border-round-sm text-center w-full cursor-pointer mr-2 pt-1 px-1 pb-2"
-                            style="background-color:var(--surface-b);"
+                            style="background-color: var(--surface-b)"
                             [ngClass]="{
                                 'text-white bg-primary-500': activeTraffic === 0
                             }"
@@ -346,7 +350,7 @@
                         </div>
                         <div
                             class="border-round-sm text-center w-full cursor-pointer mr-2 pt-1 px-1 pb-2"
-                            style="background-color:var(--surface-b);"
+                            style="background-color: var(--surface-b)"
                             [ngClass]="{
                                 'text-white bg-primary-500': activeTraffic === 1
                             }"
@@ -371,7 +375,7 @@
                         </div>
                         <div
                             class="border-round-sm text-center w-full cursor-pointer pt-1 px-1 pb-2"
-                            style="background-color:var(--surface-b);"
+                            style="background-color: var(--surface-b)"
                             [ngClass]="{
                                 'text-white bg-primary-500': activeTraffic === 2
                             }"
@@ -878,7 +882,9 @@
                             style="width: 32; height: 32px"
                             class="m-0 mr-3"
                         />
-                        <p class="m-0 text-600 mr-2" style="min-width: 100px">Su Hua</p>
+                        <p class="m-0 text-600 mr-2" style="min-width: 100px">
+                            Su Hua
+                        </p>
                     </div>
                     <span class="text-sm font-semibold text-600">Tier 4</span>
                     <p-rating

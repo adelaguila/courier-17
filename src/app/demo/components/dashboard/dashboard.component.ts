@@ -49,11 +49,11 @@ export class DashboardComponent implements OnInit {
         public layoutService: LayoutService,
         private productService: ProductService
     ) {
-        //     this.subscription = this.layoutService.configUpdate$
-        //         .pipe(debounceTime(25))
-        //         .subscribe((config) => {
-        //             this.initChart();
-        //         });
+            this.subscription = this.layoutService.configUpdate$
+                .pipe(debounceTime(25))
+                .subscribe((config) => {
+                    this.initCharts();
+                });
     }
 
     ngOnInit() {
@@ -67,6 +67,37 @@ export class DashboardComponent implements OnInit {
             .getProductsMixed()
             .then((data) => (this.productsLastWeek = data));
 
+        this.items = [
+            { label: 'View Profile', icon: 'pi pi-user' },
+            { label: 'Update Profile', icon: 'pi pi-refresh' },
+            { label: 'Delete Profile', icon: 'pi pi-trash' },
+        ];
+
+        this.orderWeek = [
+            { name: 'This Week', code: '0' },
+            { name: 'Last Week', code: '1' },
+        ];
+        this.selectedOrderWeek = this.orderWeek[0];
+        this.initCharts()
+    }
+    initCharts() {
+        this.trafficChart = {
+            labels: ['Add View', 'Total View'],
+            datasets: [
+                {
+                    data: [48, 52],
+                    backgroundColor: [
+                        getComputedStyle(document.body).getPropertyValue(
+                            '--primary-dark-color'
+                        ) || '#2c84d8',
+                        getComputedStyle(document.body).getPropertyValue(
+                            '--content-alt-bg-color'
+                        ) || '#B1B9C9',
+                    ],
+                    borderWidth: 0,
+                },
+            ],
+        };
         this.ordersChart = {
             labels: [
                 'January',
@@ -104,8 +135,6 @@ export class DashboardComponent implements OnInit {
             responsive: true,
         };
 
-        this.trafficChart = this.getTrafficChartData();
-
         this.trafficOptions = {
             plugins: {
                 legend: {
@@ -115,10 +144,6 @@ export class DashboardComponent implements OnInit {
             responsive: true,
             cutout: '80%',
         };
-
-        // this.appMain['refreshTrafficChart'] = () => {
-        //     this.trafficChart = this.getTrafficChartData();
-        // };
 
         this.goalChart = {
             labels: ['Complete', 'Not Complete', 'Extra Tasks'],
@@ -142,37 +167,6 @@ export class DashboardComponent implements OnInit {
                 },
             },
             responsive: true,
-        };
-
-        this.items = [
-            { label: 'View Profile', icon: 'pi pi-user' },
-            { label: 'Update Profile', icon: 'pi pi-refresh' },
-            { label: 'Delete Profile', icon: 'pi pi-trash' },
-        ];
-
-        this.orderWeek = [
-            { name: 'This Week', code: '0' },
-            { name: 'Last Week', code: '1' },
-        ];
-        this.selectedOrderWeek = this.orderWeek[0]
-    }
-    getTrafficChartData() {
-        return {
-            labels: ['Add View', 'Total View'],
-            datasets: [
-                {
-                    data: [48, 52],
-                    backgroundColor: [
-                        getComputedStyle(document.body).getPropertyValue(
-                            '--primary-dark-color'
-                        ) || '#2c84d8',
-                        getComputedStyle(document.body).getPropertyValue(
-                            '--content-alt-bg-color'
-                        ) || '#B1B9C9',
-                    ],
-                    borderWidth: 0,
-                },
-            ],
         };
     }
     changeDataset(event: any) {
@@ -219,84 +213,6 @@ export class DashboardComponent implements OnInit {
         } else {
             this.products = this.productsLastWeek;
         }
-    }
-
-    // updateChartOptions() {
-    //     if(this.config.dark){
-    //         this.applyDarkTheme();
-    //     } else {
-    //         this.applyLightTheme();
-    //     }
-    // }
-
-    applyDarkTheme() {
-        this.ordersOptions = {
-            plugins: {
-                legend: {
-                    display: true,
-                    labels: {
-                        color: '#ebedef',
-                    },
-                },
-            },
-            responsive: true,
-            hover: {
-                mode: 'index',
-            },
-            scales: {
-                y: {
-                    ticks: {
-                        color: '#ebedef',
-                    },
-                    grid: {
-                        color: 'rgba(160, 167, 181, .3)',
-                    },
-                },
-                x: {
-                    ticks: {
-                        color: '#ebedef',
-                    },
-                    grid: {
-                        color: 'rgba(160, 167, 181, .3)',
-                    },
-                },
-            },
-        };
-    }
-
-    applyLightTheme() {
-        this.ordersOptions = {
-            plugins: {
-                legend: {
-                    display: true,
-                    labels: {
-                        color: '#A0A7B5',
-                    },
-                },
-            },
-            responsive: true,
-            hover: {
-                mode: 'index',
-            },
-            scales: {
-                y: {
-                    ticks: {
-                        color: '#A0A7B5',
-                    },
-                    grid: {
-                        color: 'rgba(160, 167, 181, .3)',
-                    },
-                },
-                x: {
-                    ticks: {
-                        color: '#A0A7B5',
-                    },
-                    grid: {
-                        color: 'rgba(160, 167, 181, .3)',
-                    },
-                },
-            },
-        };
     }
 
     ngOnDestroy() {
