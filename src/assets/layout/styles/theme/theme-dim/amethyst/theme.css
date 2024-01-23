@@ -35,10 +35,10 @@
   --inline-spacing: 0.5rem;
   --border-radius: 3px;
   --surface-ground: #17212f;
-  --surface-section: #17212f;
-  --surface-card: #1f2d40;
+  --surface-section: #3C4962;
+  --surface-card: #3C4962;
   --surface-overlay: #1f2d40;
-  --surface-border: #304562;
+  --surface-border: #495771;
   --surface-hover: rgba(255, 255, 255, 0.03);
   --maskbg: rgba(0, 0, 0, 0.4);
   --highlight-bg: rgba(174, 119, 202, 0.16);

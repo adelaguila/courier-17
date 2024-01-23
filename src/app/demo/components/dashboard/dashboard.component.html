@@ -1,10 +1,10 @@
 <div class="grid">
     <div class="col-12 md:col-12 xl:col-3">
-        <div class="surface-card py-3 px-4 shadow-1 border-round-md h-full">
+        <div class="overview-card surface-card py-3 px-4 shadow-1 border-round-md h-full">
             <div class="mb-4 flex justify-content-between align-items-center">
                 <span class="font-semibold text-600">Revenue Status</span>
                 <div
-                    class="flex align-items-center justify-content-center border-1 border-circle border-transparent surface-200 text-500 cursor-pointer hover:border-gray-500"
+                    class="header-button flex align-items-center justify-content-center border-1 border-circle border-transparent text-500 cursor-pointer hover:border-gray-500"
                     style="height: 20px; width: 20px; transform: rotate(45deg)"
                 >
                     <i class="pi pi-arrow-up text-sm"></i>
@@ -60,11 +60,11 @@
         </div>
     </div>
     <div class="col-12 md:col-12 xl:col-3">
-        <div class="surface-card py-3 px-4 shadow-1 border-round-md h-full">
+        <div class="overview-card surface-card py-3 px-4 shadow-1 border-round-md h-full">
             <div class="mb-4 flex justify-content-between align-items-center">
                 <span class="font-semibold text-600">Page View</span>
                 <div
-                    class="flex align-items-center justify-content-center border-1 border-circle border-transparent surface-200 text-500 cursor-pointer hover:border-gray-500"
+                    class="header-button flex align-items-center justify-content-center border-1 border-circle border-transparent text-500 cursor-pointer hover:border-gray-500"
                     style="height: 20px; width: 20px; transform: rotate(45deg)"
                 >
                     <i class="pi pi-arrow-up text-sm"></i>
@@ -121,11 +121,11 @@
     </div>
 
     <div class="col-12 md:col-12 xl:col-3">
-        <div class="surface-card py-3 px-4 shadow-1 border-round-md h-full">
+        <div class="overview-card surface-card py-3 px-4 shadow-1 border-round-md h-full">
             <div class="mb-4 flex justify-content-between align-items-center">
                 <span class="font-semibold text-600">Bounce Rate</span>
                 <div
-                    class="flex align-items-center justify-content-center border-1 border-circle border-transparent surface-200 text-500 cursor-pointer hover:border-gray-500"
+                    class="header-button flex align-items-center justify-content-center border-1 border-circle border-transparent text-500 cursor-pointer hover:border-gray-500"
                     style="height: 20px; width: 20px; transform: rotate(45deg)"
                 >
                     <i class="pi pi-arrow-up text-sm"></i>
@@ -182,11 +182,11 @@
     </div>
 
     <div class="col-12 md:col-12 xl:col-3">
-        <div class="surface-card py-3 px-4 shadow-1 border-round-md h-full">
+        <div class="overview-card surface-card py-3 px-4 shadow-1 border-round-md h-full">
             <div class="mb-4 flex justify-content-between align-items-center">
                 <span class="font-semibold text-600">Products Sale Rate</span>
                 <div
-                    class="flex align-items-center justify-content-center border-1 border-circle border-transparent surface-200 text-500 cursor-pointer hover:border-gray-500"
+                    class="header-button flex align-items-center justify-content-center border-1 border-circle border-transparent text-500 cursor-pointer hover:border-gray-500"
                     style="height: 20px; width: 20px; transform: rotate(45deg)"
                 >
                     <i class="pi pi-arrow-up text-sm"></i>
@@ -249,35 +249,32 @@
             </div>
             <div id="order-tabs-container" class="flex justify-content-start">
                 <div
-                    class="cursor-pointer py-2 px-4 border-round-sm mr-4"
-                    style="background-color:var(--surface-b);"
-                    [ngClass]="{ 'opacity-80': activeOrders === 1 }"
+                    class="order-tab cursor-pointer py-2 px-4 border-round-sm mr-4"
+                    [ngClass]="{ 'order-tab-active': activeOrders === 0 }"
                     (click)="changeDataset($event); orders.refresh()"
                     data-label="New Sales"
                     data-index="0"
                     data-stroke="#00acac"
                 >
-                    <h6 class="text-600 mb-1 text-color">Current Week</h6>
-                    <h3 class="text-700"
-                        class="m-0  hover:text-blue-300"
-                        [ngClass]="{ 'text-primary': activeOrders === 0 }"
+                    <h6 class="mb-1 text-color">Current Week</h6>
+                    <h3 
+                        class="m-0"
+                        
                     >
                         $455.55
                     </h3>
                 </div>
                 <div
-                    class="cursor-pointer py-2 px-4 border-round-sm"
-                    style="background-color:var(--surface-b);"
-                    [ngClass]="{ 'opacity-80': activeOrders === 0 }"
+                    class="order-tab cursor-pointer py-2 px-4 border-round-sm"
+                    [ngClass]="{ 'order-tab-active': activeOrders === 1 }"
                     (click)="changeDataset($event); orders.refresh()"
                     data-label="Previous Sales"
                     data-index="1"
                     data-stroke="#2f8ee5"
                 >
-                    <h6 class="text-600 mb-1 text-color">Previous Week</h6>
-                    <h3 class="text-700"
-                        class="m-0 hover:text-blue-300"
-                        [ngClass]="{ 'text-primary': activeOrders === 1 }"
+                    <h6 class="mb-1 text-color">Previous Week</h6>
+                    <h3 
+                        class="m-0"
                     >
                         $244.40
                     </h3>
@@ -320,10 +317,9 @@
                         class="mt-5 flex justify-content-between align-items-center"
                     >
                         <div
-                            class="border-round-sm text-center w-full cursor-pointer mr-2 pt-1 px-1 pb-2"
-                            style="background-color:var(--surface-b);"
+                            class="traffic-tab border-round-sm text-center w-full cursor-pointer mr-2 pt-1 px-1 pb-2"
                             [ngClass]="{
-                                'text-white bg-primary-500': activeTraffic === 0
+                                'traffic-tab-active text-white': activeTraffic === 0
                             }"
                             (click)="
                                 changeTrafficset($event);
@@ -334,21 +330,18 @@
                             data-index="0"
                         >
                             <h6
-                                class="m-0 mb-2 font-semibold text-600"
-                                [ngClass]="{
-                                    'text-white': activeTraffic === 0
-                                }"
+                                class="m-0 mb-2 font-semibold"
+                                [ngClass]="{'text-white': activeTraffic === 0}"
                             >
                                 48%
                             </h6>
-                            <i class="pi pi-facebook text-3xl"></i>
+                            <i class="pi pi-facebook text-3xl" ></i>
                             <span class="block text-sm mt-2">Facebook</span>
                         </div>
                         <div
-                            class="border-round-sm text-center w-full cursor-pointer mr-2 pt-1 px-1 pb-2"
-                            style="background-color:var(--surface-b);"
+                            class="traffic-tab border-round-sm text-center w-full cursor-pointer mr-2 pt-1 px-1 pb-2"
                             [ngClass]="{
-                                'text-white bg-primary-500': activeTraffic === 1
+                                'traffic-tab-active text-white': activeTraffic === 1
                             }"
                             (click)="
                                 changeTrafficset($event);
@@ -359,10 +352,8 @@
                             data-index="1"
                         >
                             <h6
-                                class="m-0 mb-2 font-semibold text-600"
-                                [ngClass]="{
-                                    'text-white': activeTraffic === 1
-                                }"
+                                class="m-0 mb-2 font-semibold"
+                                [ngClass]="{'text-white': activeTraffic === 1}"
                             >
                                 26%
                             </h6>
@@ -370,10 +361,9 @@
                             <span class="block text-sm mt-2">Twitter</span>
                         </div>
                         <div
-                            class="border-round-sm text-center w-full cursor-pointer pt-1 px-1 pb-2"
-                            style="background-color:var(--surface-b);"
+                            class="traffic-tab border-round-sm text-center w-full cursor-pointer pt-1 px-1 pb-2"
                             [ngClass]="{
-                                'text-white bg-primary-500': activeTraffic === 2
+                                'traffic-tab-active text-white': activeTraffic === 2
                             }"
                             (click)="
                                 changeTrafficset($event);
@@ -384,10 +374,8 @@
                             data-index="2"
                         >
                             <h6
-                                class="m-0 mb-2 font-semibold text-600"
-                                [ngClass]="{
-                                    'text-white': activeTraffic === 2
-                                }"
+                                class="m-0 mb-2 font-semibold"
+                                [ngClass]="{'text-white': activeTraffic === 2}"
                             >
                                 17%
                             </h6>

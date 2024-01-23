@@ -1,40 +1,55 @@
+.layout-dark :root {
+  --content-alt-bg-color:#4E565F;
+}
+
+.layout-dim :root {
+  --content-alt-bg-color:#495771;
+}
+
 /* open-sans-300 - latin-ext_latin */
 @font-face {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 300;
-  src: url("../../fonts/open-sans-v18-latin-ext_latin-300.eot"); /* IE9 Compat Modes */
-  src: local(""), url("../../fonts/open-sans-v18-latin-ext_latin-300.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v18-latin-ext_latin-300.woff2") format("woff2"), url("../../fonts/open-sans-v18-latin-ext_latin-300.woff") format("woff"), url("../../fonts/open-sans-v18-latin-ext_latin-300.ttf") format("truetype"), url("../../fonts/open-sans-v18-latin-ext_latin-300.svg#OpenSans") format("svg"); /* Legacy iOS */
+  src: url("../../fonts/open-sans-v18-latin-ext_latin-300.eot");
+  /* IE9 Compat Modes */
+  src: local(""), url("../../fonts/open-sans-v18-latin-ext_latin-300.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v18-latin-ext_latin-300.woff2") format("woff2"), url("../../fonts/open-sans-v18-latin-ext_latin-300.woff") format("woff"), url("../../fonts/open-sans-v18-latin-ext_latin-300.ttf") format("truetype"), url("../../fonts/open-sans-v18-latin-ext_latin-300.svg#OpenSans") format("svg");
+  /* Legacy iOS */
 }
 /* open-sans-regular - latin-ext_latin */
 @font-face {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 400;
-  src: url("../../fonts/open-sans-v18-latin-ext_latin-regular.eot"); /* IE9 Compat Modes */
-  src: local(""), url("../../fonts/open-sans-v18-latin-ext_latin-regular.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v18-latin-ext_latin-regular.woff2") format("woff2"), url("../../fonts/open-sans-v18-latin-ext_latin-regular.woff") format("woff"), url("../../fonts/open-sans-v18-latin-ext_latin-regular.ttf") format("truetype"), url("../../fonts/open-sans-v18-latin-ext_latin-regular.svg#OpenSans") format("svg"); /* Legacy iOS */
+  src: url("../../fonts/open-sans-v18-latin-ext_latin-regular.eot");
+  /* IE9 Compat Modes */
+  src: local(""), url("../../fonts/open-sans-v18-latin-ext_latin-regular.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v18-latin-ext_latin-regular.woff2") format("woff2"), url("../../fonts/open-sans-v18-latin-ext_latin-regular.woff") format("woff"), url("../../fonts/open-sans-v18-latin-ext_latin-regular.ttf") format("truetype"), url("../../fonts/open-sans-v18-latin-ext_latin-regular.svg#OpenSans") format("svg");
+  /* Legacy iOS */
 }
 /* open-sans-600 - latin-ext_latin */
 @font-face {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 600;
-  src: url("../../fonts/open-sans-v18-latin-ext_latin-600.eot"); /* IE9 Compat Modes */
-  src: local(""), url("../../fonts/open-sans-v18-latin-ext_latin-600.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v18-latin-ext_latin-600.woff2") format("woff2"), url("../../fonts/open-sans-v18-latin-ext_latin-600.woff") format("woff"), url("../../fonts/open-sans-v18-latin-ext_latin-600.ttf") format("truetype"), url("../../fonts/open-sans-v18-latin-ext_latin-600.svg#OpenSans") format("svg"); /* Legacy iOS */
+  src: url("../../fonts/open-sans-v18-latin-ext_latin-600.eot");
+  /* IE9 Compat Modes */
+  src: local(""), url("../../fonts/open-sans-v18-latin-ext_latin-600.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v18-latin-ext_latin-600.woff2") format("woff2"), url("../../fonts/open-sans-v18-latin-ext_latin-600.woff") format("woff"), url("../../fonts/open-sans-v18-latin-ext_latin-600.ttf") format("truetype"), url("../../fonts/open-sans-v18-latin-ext_latin-600.svg#OpenSans") format("svg");
+  /* Legacy iOS */
 }
 /* open-sans-700 - latin-ext_latin */
 @font-face {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
-  src: url("../../fonts/open-sans-v18-latin-ext_latin-700.eot"); /* IE9 Compat Modes */
-  src: local(""), url("../../fonts/open-sans-v18-latin-ext_latin-700.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v18-latin-ext_latin-700.woff2") format("woff2"), url("../../fonts/open-sans-v18-latin-ext_latin-700.woff") format("woff"), url("../../fonts/open-sans-v18-latin-ext_latin-700.ttf") format("truetype"), url("../../fonts/open-sans-v18-latin-ext_latin-700.svg#OpenSans") format("svg"); /* Legacy iOS */
+  src: url("../../fonts/open-sans-v18-latin-ext_latin-700.eot");
+  /* IE9 Compat Modes */
+  src: local(""), url("../../fonts/open-sans-v18-latin-ext_latin-700.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v18-latin-ext_latin-700.woff2") format("woff2"), url("../../fonts/open-sans-v18-latin-ext_latin-700.woff") format("woff"), url("../../fonts/open-sans-v18-latin-ext_latin-700.ttf") format("truetype"), url("../../fonts/open-sans-v18-latin-ext_latin-700.svg#OpenSans") format("svg");
+  /* Legacy iOS */
 }
 .card {
   background-color: var(--surface-card);
   padding: 1rem;
   margin-bottom: 2rem;
-  border: 1px solid var(--surface-border);
   border-radius: var(--border-radius);
 }
 .card:last-child {
@@ -743,6 +758,36 @@ a {
   flex-shrink: 0;
 }
 
+#order-tabs-container .order-tab {
+  background-color: color-mix(in srgb, var(--content-alt-bg-color) 30%, transparent);
+}
+#order-tabs-container .order-tab h3 {
+  color: #949aa6;
+}
+#order-tabs-container .order-tab:hover {
+  background-color: color-mix(in srgb, var(--content-alt-bg-color) 50%, transparent);
+}
+#order-tabs-container .order-tab:hover h3 {
+  color: rgba(47, 142, 229, 0.6);
+}
+#order-tabs-container .order-tab.order-tab-active {
+  background-color: color-mix(in srgb, var(--content-alt-bg-color) 70%, transparent);
+}
+#order-tabs-container .order-tab.order-tab-active h3 {
+  color: #2f8ee5;
+}
+
+#traffic-tabs-container .traffic-tab {
+  background-color: var(--content-alt-bg-color);
+}
+#traffic-tabs-container .traffic-tab.traffic-tab-active {
+  background-color: var(--primary-600);
+}
+
+.overview-card .header-button {
+  background-color: rgba(148, 154, 166, 0.1);
+}
+
 @media screen and (min-width: 992px) {
   .layout-container.layout-static .layout-sidebar {
     transition: transform var(--transition-duration);
@@ -773,6 +818,7 @@ a {
   .blocked-scroll {
     overflow: hidden;
   }
+
   .layout-container .layout-content-wrapper {
     margin-left: 0;
     margin-top: 5rem;
