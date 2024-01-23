@@ -161,6 +161,8 @@ export class LayoutService {
                     : el
             )
             .join('/');
+
+        console.log(newHref);
         this.replaceThemeLink(newHref);
     }
 

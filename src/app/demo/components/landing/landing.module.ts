@@ -8,6 +8,7 @@ import { RippleModule } from 'primeng/ripple';
 import { InputTextModule } from 'primeng/inputtext';
 import { AppConfigModule } from 'src/app/layout/config/app.config.module';
 import { StyleClassModule } from 'primeng/styleclass';
+import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 @NgModule({
     imports: [
@@ -18,8 +19,8 @@ import { StyleClassModule } from 'primeng/styleclass';
         InputTextModule,
         AppConfigModule,
         StyleClassModule,
-        SidebarModule
+        SidebarModule,
     ],
-    declarations: [LandingComponent]
+    declarations: [LandingComponent],
 })
-export class LandingModule { }
+export class LandingModule {}
