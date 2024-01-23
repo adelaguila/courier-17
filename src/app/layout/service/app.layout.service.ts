@@ -141,22 +141,6 @@ export class LayoutService {
         this.configUpdate.next(this.config());
     }
 
-    reset() {
-        this.config.set({
-            ripple: true,
-            inputStyle: 'outlined',
-            menuMode: 'static',
-            colorScheme: 'light',
-            componentTheme: 'blue',
-            scale: 14,
-            menuTheme: 'dark',
-            topbarTheme: 'light',
-        });
-        console.log('reset');
-        this.changeTheme();
-        this.onConfigUpdate();
-    }
-
     changeTheme() {
         let { colorScheme, componentTheme } = this.config();
 
