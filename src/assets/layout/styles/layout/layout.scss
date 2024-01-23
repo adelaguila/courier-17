@@ -1,9 +1,6 @@
 $scale: 14px !default;
 $breakpoint:992px !default;
 
-@import './layout_dark';
-@import './layout_light';
-@import './layout_dim';
 @import './_fonts';
 @import './_utils';
 @import './_typography';
