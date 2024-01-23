@@ -176,8 +176,13 @@
         min-width: 18rem;
         padding: .5rem 0;
         transform-origin: top;
-        background: var(--surface-overlay);
+        background: var(--content-alt-bg-color);
         color: var(--text-color);
         border-top: 1px solid var(--topbar-bg);
+    }
+}
+.layout-light {
+    .layout-topbar-menu {
+        background-color: var(--surface-section);
     }
 }
