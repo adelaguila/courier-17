@@ -49,11 +49,11 @@ export class DashboardComponent implements OnInit {
         public layoutService: LayoutService,
         private productService: ProductService
     ) {
-            this.subscription = this.layoutService.configUpdate$
-                .pipe(debounceTime(25))
-                .subscribe((config) => {
-                    this.initCharts();
-                });
+        this.subscription = this.layoutService.configUpdate$
+            .pipe(debounceTime(25))
+            .subscribe((config) => {
+                this.initCharts();
+            });
     }
 
     ngOnInit() {
@@ -78,9 +78,17 @@ export class DashboardComponent implements OnInit {
             { name: 'Last Week', code: '1' },
         ];
         this.selectedOrderWeek = this.orderWeek[0];
-        this.initCharts()
+        this.initCharts();
     }
     initCharts() {
+        const documentStyle = getComputedStyle(document.documentElement);
+        const textColor = documentStyle.getPropertyValue('--text-color');
+        const textColorSecondary = documentStyle.getPropertyValue(
+            '--text-color-secondary'
+        );
+        const surfaceBorder =
+            documentStyle.getPropertyValue('--surface-border');
+
         this.trafficChart = {
             labels: ['Add View', 'Total View'],
             datasets: [
@@ -167,6 +175,56 @@ export class DashboardComponent implements OnInit {
                 },
             },
             responsive: true,
+        };
+
+        this.ordersOptions = {
+            animation: {
+                duration: 0,
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: textColor,
+                    },
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (context: any) {
+                            let label = context.dataset.label || '';
+
+                            if (label) {
+                                label += ': ';
+                            }
+
+                            if (context.parsed.y !== null) {
+                                label += new Intl.NumberFormat('en-US', {
+                                    style: 'currency',
+                                    currency: 'USD',
+                                }).format(context.parsed.y);
+                            }
+                            return label;
+                        },
+                    },
+                },
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: textColorSecondary,
+                    },
+                    grid: {
+                        color: surfaceBorder,
+                    },
+                },
+                y: {
+                    ticks: {
+                        color: textColorSecondary,
+                    },
+                    grid: {
+                        color: surfaceBorder,
+                    },
+                },
+            },
         };
     }
     changeDataset(event: any) {

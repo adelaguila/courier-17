@@ -21,7 +21,7 @@ import { LayoutService } from './service/app.layout.service';
                             border-color: transparent;
 
                             .p-checkbox-icon {
-                                color: #515c66;
+                                color: var(--text-color);
                             }
 
                             &:hover {
