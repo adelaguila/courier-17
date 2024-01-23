@@ -80,11 +80,20 @@ export class ChartsDemoComponent implements OnInit, OnDestroy {
         };
 
         this.barOptions = {
+            animation: {
+                duration: 0,
+            },
             plugins: {
                 legend: {
                     labels: {
-                        fontColor: textColor,
+                        color: textColor,
+                        usePointStyle: true,
+                        font: {
+                            weight: 700,
+                        },
+                        padding: 28,
                     },
+                    position: 'bottom',
                 },
             },
             scales: {
@@ -177,10 +186,32 @@ export class ChartsDemoComponent implements OnInit, OnDestroy {
         };
 
         this.lineOptions = {
+            animation: {
+                duration: 0,
+            },
             plugins: {
                 legend: {
                     labels: {
-                        fontColor: textColor,
+                        color: textColor,
+                    },
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (context: any) {
+                            let label = context.dataset.label || '';
+
+                            if (label) {
+                                label += ': ';
+                            }
+
+                            if (context.parsed.y !== null) {
+                                label += new Intl.NumberFormat('en-US', {
+                                    style: 'currency',
+                                    currency: 'USD',
+                                }).format(context.parsed.y);
+                            }
+                            return label;
+                        },
                     },
                 },
             },
@@ -191,7 +222,6 @@ export class ChartsDemoComponent implements OnInit, OnDestroy {
                     },
                     grid: {
                         color: surfaceBorder,
-                        drawBorder: false,
                     },
                 },
                 y: {
@@ -200,7 +230,6 @@ export class ChartsDemoComponent implements OnInit, OnDestroy {
                     },
                     grid: {
                         color: surfaceBorder,
-                        drawBorder: false,
                     },
                 },
             },
@@ -281,7 +310,7 @@ export class ChartsDemoComponent implements OnInit, OnDestroy {
             plugins: {
                 legend: {
                     labels: {
-                        fontColor: textColor,
+                        color: textColor,
                     },
                 },
             },
