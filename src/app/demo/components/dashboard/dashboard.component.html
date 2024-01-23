@@ -364,10 +364,10 @@
                     </div>
                     <div
                         id="traffic-tabs-container"
-                        class="mt-5 flex justify-content-between align-items-center"
+                        class="mt-5 flex gap-2 justify-content-between align-items-center"
                     >
                         <div
-                            class="traffic-tab border-round-sm text-center w-full cursor-pointer mr-2 pt-1 px-1 pb-2"
+                            class="traffic-tab border-round-sm text-center w-full cursor-pointer pt-1  pb-2"
                             [ngClass]="{
                                 'traffic-tab-active text-white': activeTraffic === 0
                             }"
@@ -389,7 +389,7 @@
                             <span class="block text-sm mt-2">Facebook</span>
                         </div>
                         <div
-                            class="traffic-tab border-round-sm text-center w-full cursor-pointer mr-2 pt-1 px-1 pb-2"
+                            class="traffic-tab border-round-sm text-center w-full cursor-pointer pt-1  pb-2"
                             [ngClass]="{
                                 'traffic-tab-active text-white': activeTraffic === 1
                             }"
@@ -411,7 +411,7 @@
                             <span class="block text-sm mt-2">Twitter</span>
                         </div>
                         <div
-                            class="traffic-tab border-round-sm text-center w-full cursor-pointer pt-1 px-1 pb-2"
+                            class="traffic-tab border-round-sm text-center w-full cursor-pointer pt-1  pb-2"
                             [ngClass]="{
                                 'traffic-tab-active text-white': activeTraffic === 2
                             }"
@@ -483,11 +483,10 @@
                     <div class="flex align-items-center">
                         <img
                             src="assets/layout/images/dashboard/leader-1.png"
-                            alt="poseidon-layout"
                             style="width: 2.3rem; height: 2.3rem"
-                            class="mr-3"
+                            class="m-0 mr-3"
                         />
-                        <p class="m-0 text-600">Peter Taylor</p>
+                        <p class="m-0 text-600 mr-2">Peter Taylor</p>
                     </div>
                     <div class="flex align-items-center">
                         <h6 class="text-600 m-0 font-semibold mr-3">$224.44</h6>
@@ -504,7 +503,7 @@
                             style="width: 2.3rem; height: 2.3rem"
                             class="mr-3"
                         />
-                        <p class="m-0 text-600">Nicolina Lindholm</p>
+                        <p class="m-0 text-600 mr-2">Nicolina Lindholm</p>
                     </div>
                     <div class="flex align-items-center">
                         <h6 class="text-600 m-0 font-semibold mr-3">$86.05</h6>
@@ -521,7 +520,7 @@
                             style="width: 2.3rem; height: 2.3rem"
                             class="mr-3"
                         />
-                        <p class="m-0 text-600">Su Hua</p>
+                        <p class="m-0 text-600 mr-2">Su Hua</p>
                     </div>
                     <div class="flex align-items-center">
                         <h6 class="text-600 m-0 font-semibold mr-3">$59.44</h6>
@@ -538,7 +537,7 @@
                             style="width: 2.3rem; height: 2.3rem"
                             class="mr-3"
                         />
-                        <p class="m-0 text-600">Maria Illescas</p>
+                        <p class="m-0 text-600 mr-2">Maria Illescas</p>
                     </div>
                     <div class="flex align-items-center">
                         <h6 class="text-600 m-0 font-semibold mr-3">$12.32</h6>
@@ -555,7 +554,7 @@
                             style="width: 2.3rem; height: 2.3rem"
                             class="mr-3"
                         />
-                        <p class="m-0 text-600">Ezequiel Dengra</p>
+                        <p class="m-0 text-600 mr-2">Ezequiel Dengra</p>
                     </div>
                     <div class="flex align-items-center">
                         <h6 class="text-600 m-0 font-semibold mr-3">$12.32</h6>
@@ -572,7 +571,7 @@
                             style="width: 2.3rem; height: 2.3rem"
                             class="mr-3"
                         />
-                        <p class="m-0 text-600">Conan Matusov</p>
+                        <p class="m-0 text-600 mr-2">Conan Matusov</p>
                     </div>
                     <div class="flex align-items-center">
                         <h6 class="text-600 m-0 font-semibold mr-3">$12.32</h6>
@@ -589,7 +588,7 @@
                             style="width: 2.3rem; height: 2.3rem"
                             class="mr-3"
                         />
-                        <p class="m-0 text-600">Hector Mariano</p>
+                        <p class="m-0 text-600 mr-2">Hector Mariano</p>
                     </div>
                     <div class="flex align-items-center">
                         <h6 class="text-600 m-0 font-semibold mr-3">$12.32</h6>
@@ -614,9 +613,9 @@
                             src="assets/layout/images/dashboard/image-product-1.png"
                             alt="poseidon-layout"
                             style="width: 5rem; height: 3rem"
-                            class="mr-3"
+                            
                         />
-                        <div class="product-info">
+                        <div class="mx-3">
                             <p class="m-0 text-600">Nike Air X12</p>
                             <span
                                 class="block text-sm font-normal text-color-secondary"
@@ -636,9 +635,9 @@
                             src="assets/layout/images/dashboard/image-product-2.png"
                             alt="poseidon-layout"
                             style="width: 5rem; height: 3rem"
-                            class="mr-3"
+                            
                         />
-                        <div class="m-0">
+                        <div class="mx-3">
                             <p class="m-0 text-600">Nike Sports Watch</p>
                             <span
                                 class="block text-sm font-normal text-color-secondary"
@@ -658,9 +657,9 @@
                             src="assets/layout/images/dashboard/image-product-3.png"
                             alt="poseidon-layout"
                             style="width: 5rem; height: 3rem"
-                            class="mr-3"
+                          
                         />
-                        <div class="m-0">
+                        <div class="mx-3">
                             <p class="m-0 text-600">Heinz Yellow Mustard</p>
                             <span
                                 class="block text-sm font-normal text-color-secondary"
@@ -680,9 +679,9 @@
                             src="assets/layout/images/dashboard/image-product-4.png"
                             alt="poseidon-layout"
                             style="width: 5rem; height: 3rem"
-                            class="mr-3"
+                      
                         />
-                        <div class="m-0">
+                        <div class="mx-3">
                             <p class="m-0 text-600">Beats Headphone</p>
                             <span
                                 class="block text-sm font-normal text-color-secondary"
@@ -702,9 +701,9 @@
                             src="assets/layout/images/dashboard/image-product-5.png"
                             alt="poseidon-layout"
                             style="width: 5rem; height: 3rem"
-                            class="mr-3"
+                         
                         />
-                        <div class="m-0">
+                        <div class="mx-3">
                             <p class="m-0 text-600">Black Racing Bike</p>
                             <span
                                 class="block text-sm font-normal text-color-secondary"

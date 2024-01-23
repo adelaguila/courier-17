@@ -14,6 +14,7 @@ export interface AppConfig {
     scale: number;
     menuTheme: ColorScheme;
     topbarTheme: string;
+    rtl: boolean;
 }
 
 interface LayoutState {
@@ -40,6 +41,7 @@ export class LayoutService {
         scale: 14,
         menuTheme: 'dark',
         topbarTheme: 'light',
+        rtl: false,
     };
 
     state: LayoutState = {

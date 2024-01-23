@@ -150,6 +150,7 @@ export class AppLayoutComponent implements OnDestroy {
             'layout-overlay-active': this.layoutService.state.overlayMenuActive,
             'layout-mobile-active':
                 this.layoutService.state.staticMenuMobileActive,
+            'layout-rtl': this.layoutService.config().rtl,
         };
 
         styleClass['layout-topbar-' + this.layoutService.config().topbarTheme] =
