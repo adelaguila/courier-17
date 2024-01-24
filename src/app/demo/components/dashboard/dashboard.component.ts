@@ -56,6 +56,10 @@ export class DashboardComponent implements OnInit {
             });
     }
 
+    get rtl() {
+        return this.layoutService.config().rtl;
+    }
+
     ngOnInit() {
         this.productService
             .getProducts()

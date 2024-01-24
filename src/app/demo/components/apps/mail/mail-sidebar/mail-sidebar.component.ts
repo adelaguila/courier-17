@@ -4,6 +4,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { Mail } from 'src/app/demo/api/mail';
 import { MailService } from 'src/app/demo/components/apps/mail/service/mail.service';
 import { filter, Subscription } from 'rxjs';
+import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 @Component({
     selector: 'app-mail-sidebar',
@@ -21,7 +22,7 @@ export class MailSidebarComponent implements OnDestroy {
 
     url: string = '';
 
-    constructor(private router: Router, private mailService: MailService) {
+    constructor(private router: Router, private mailService: MailService, private layoutService : LayoutService) {
         this.mailSubscription = this.mailService.mails$.subscribe(data => this.getBadgeValues(data));
 
         this.routeSubscription = this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((params: any) => {
@@ -29,6 +30,10 @@ export class MailSidebarComponent implements OnDestroy {
         });
     }
 
+    get rtl() {
+        return this.layoutService.config().rtl;
+    }
+    
     navigate(item: MenuItem) {
         if (item.routerLink) {
             this.router.navigate([item.routerLink]);

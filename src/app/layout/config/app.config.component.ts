@@ -84,6 +84,7 @@ export class AppConfigComponent implements OnInit {
     get rtl(): boolean {
         return this.layoutService.config().rtl;
     }
+    
     set rtl(_val: boolean) {
         this.layoutService.config.update((config) => ({
             ...config,

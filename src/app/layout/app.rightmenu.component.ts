@@ -60,4 +60,8 @@ export class AppRightMenuComponent {
     set rightMenuActive(_val: boolean) {
         this.layoutService.state.rightMenuActive = _val;
     }
+
+    get rtl() {
+        return this.layoutService.config().rtl;
+    }
 }

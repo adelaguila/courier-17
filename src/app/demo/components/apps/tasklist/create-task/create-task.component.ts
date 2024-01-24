@@ -5,6 +5,7 @@ import { DialogConfig, Task } from 'src/app/demo/api/task';
 import { TaskService } from '../service/task.service';
 import { MemberService } from 'src/app/demo/service/member.service';
 import { Subscription } from 'rxjs';
+import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 @Component({
     selector: 'app-create-task',
@@ -25,7 +26,7 @@ export class CreateTaskComponent implements OnInit, OnDestroy {
 
     dialogSubscription: Subscription;
 
-    constructor(private memberService: MemberService, private messageService: MessageService, private taskService: TaskService) {
+    constructor(private memberService: MemberService, private messageService: MessageService, private taskService: TaskService, private layoutService: LayoutService) {
         this.subscription = this.taskService.selectedTask$.subscribe(data => this.task = data);
         this.dialogSubscription = this.taskService.dialogSource$.subscribe(data => {
             this.dialogConfig = data;
@@ -34,6 +35,10 @@ export class CreateTaskComponent implements OnInit, OnDestroy {
                 this.resetTask();
             }
         });
+    }
+    
+    get rtl() {
+        return this.layoutService.config().rtl;
     }
 
     ngOnInit(): void {

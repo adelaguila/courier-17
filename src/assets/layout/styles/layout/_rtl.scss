@@ -32,22 +32,22 @@
                         padding: 0px;
 
                         &.layout-root-menuitem {
-                            >div {
+                            > div {
                                 padding-left: 0px;
                                 padding-right: 20px;
                                 margin-bottom: 6px;
                                 margin-top: 24px;
                             }
 
-                            >ul {
-                                >li {
+                            > ul {
+                                > li {
                                     overflow: hidden;
                                     border-top-right-radius: 8px;
                                     border-bottom-right-radius: 8px;
                                     border-bottom-left-radius: 0px;
                                     border-top-left-radius: 0px;
 
-                                    >ul {
+                                    > ul {
                                         padding-left: 0px;
                                         padding-right: 0px;
                                     }
@@ -55,7 +55,7 @@
                             }
                         }
 
-                        >a {
+                        > a {
                             padding: 7px 8px 6px 20px;
 
                             .layout-menuitem-text {
@@ -73,7 +73,7 @@
                             }
                         }
 
-                        >ul {
+                        > ul {
                             padding-left: 0px;
                             padding-right: 19px;
                         }
@@ -85,7 +85,7 @@
         .layout-breadcrumb {
             direction: ltr;
 
-            >ol {
+            > ol {
                 flex-direction: row-reverse;
 
                 i {
@@ -99,11 +99,10 @@
             left: 0;
             transform: translateX(0);
 
-
             .rightpanel-wrapper {
                 .section-tasks {
-                    >ul {
-                        >li {
+                    > ul {
+                        > li {
                             .task {
                                 margin-left: 0px;
                                 margin-right: 12px;
@@ -177,7 +176,7 @@
                     .layout-menu-container {
                         .layout-menu {
                             li {
-                                >ul {
+                                > ul {
                                     padding: 1rem;
 
                                     > li {
@@ -185,7 +184,7 @@
                                     }
                                 }
 
-                                >a {
+                                > a {
                                     padding: 6px;
                                 }
                             }
@@ -238,8 +237,8 @@
                         padding: 0;
 
                         .layout-topbar-actions {
-                            >li {
-                                >ul {
+                            > li {
+                                > ul {
                                     left: 5%;
                                     right: 0;
                                 }
@@ -265,8 +264,8 @@
 
                     .layout-topbar-actions-end {
                         .layout-topbar-items {
-                            >li {
-                                >div {
+                            > li {
+                                > div {
                                     right: -1rem;
                                 }
                             }

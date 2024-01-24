@@ -3,6 +3,7 @@ import { MenuItem } from 'primeng/api';
 import { Menu } from 'primeng/menu';
 import { Task } from 'src/app/demo/api/task';
 import { TaskService } from '../service/task.service';
+import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 @Component({
     selector: 'app-task-list',
@@ -21,8 +22,12 @@ export class TaskListComponent implements OnInit {
 
     clickedTask!: Task;
 
-    constructor(private taskService: TaskService) { }
+    constructor(private taskService: TaskService, private layoutService: LayoutService) { }
 
+    get rtl() {
+        return this.layoutService.config().rtl;
+    }
+    
     ngOnInit(): void {
         this.menuItems = [
             { label: 'Edit', icon: 'pi pi-pencil', command: () => this.onEdit() },

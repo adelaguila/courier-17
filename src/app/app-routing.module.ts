@@ -100,13 +100,6 @@ const routes: Routes = [
             ),
     },
     {
-        path: 'notfound2',
-        loadChildren: () =>
-            import('./demo/components/notfound2/notfound2.module').then(
-                (m) => m.Notfound2Module
-            ),
-    },
-    {
         path: 'landing',
         loadChildren: () =>
             import('./demo/components/landing/landing.module').then(
