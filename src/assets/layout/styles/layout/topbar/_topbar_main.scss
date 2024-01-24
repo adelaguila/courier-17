@@ -127,7 +127,9 @@
                         font-size: 1rem;
                         transition: var(--transition-duration);
                         border: 0 none;
-
+                        &:enabled:focus {
+                            box-shadow: 0 0 0 1px #4D9FDC;
+                        }
                         &::placeholder {
                             color: var(--topbar-item-secondary-text-color);
                         }
@@ -189,8 +191,14 @@
                 transition: background-color var(--transition-duration);
             }
         }
+
+        h6, span, a, li{
+            color: var(--topbar-item-text-color);
+        }
+        
     }
 }
+
 .layout-light {
     .layout-topbar-menu {
         background-color: var(--surface-section);
