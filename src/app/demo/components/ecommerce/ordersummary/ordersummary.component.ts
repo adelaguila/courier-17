@@ -1,9 +1,16 @@
 import { Component } from '@angular/core';
+import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 @Component({
     templateUrl: './ordersummary.component.html',
 })
 export class OrderSummaryComponent {
+
+    constructor(public layoutService: LayoutService) {}
+
+    get rtl() {
+        return this.layoutService.config().rtl;
+    }
 
     products = [
         {

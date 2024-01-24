@@ -3,6 +3,7 @@ import { Product } from 'src/app/demo/api/product';
 import { ProductService } from 'src/app/demo/service/product.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
+import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 @Component({
     templateUrl: './crud.component.html',
@@ -30,8 +31,12 @@ export class CrudComponent implements OnInit {
 
     rowsPerPageOptions = [5, 10, 20];
 
-    constructor(private productService: ProductService, private messageService: MessageService, private confirmationService: ConfirmationService) { }
+    constructor(private productService: ProductService, private messageService: MessageService, private confirmationService: ConfirmationService, private layoutService: LayoutService) { }
 
+    get rtl() {
+        return this.layoutService.config().rtl;
+    }
+    
     ngOnInit() {
         this.productService.getProducts().then(data => this.products = data);
 

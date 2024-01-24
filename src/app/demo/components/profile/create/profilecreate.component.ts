@@ -1,11 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-
+import { LayoutService } from 'src/app/layout/service/app.layout.service';
 @Component({
     templateUrl: './profilecreate.component.html'
 })
 export class ProfileCreateComponent implements OnInit { 
 
     countries: any[] = [];
+
+    constructor(private layoutService : LayoutService) { }
+    
+    get rtl() {
+        return this.layoutService.config().rtl;
+    }
 
     ngOnInit() {
         this.countries = [

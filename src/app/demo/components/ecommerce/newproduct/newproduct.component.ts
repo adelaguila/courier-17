@@ -1,4 +1,5 @@
 import { Component, ViewChildren, QueryList, ElementRef } from '@angular/core';
+import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 interface Product {
     name: string;
@@ -26,6 +27,12 @@ interface Image {
 })
 export class NewProductComponent {
 
+    constructor(public layoutService: LayoutService) {}
+
+    get rtl() {
+        return this.layoutService.config().rtl;
+    }
+    
     @ViewChildren('buttonEl') buttonEl!: QueryList<ElementRef>;
 
     text: string = '';

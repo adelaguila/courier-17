@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 @Component({
     templateUrl: './checkoutform.component.html',
@@ -23,4 +24,9 @@ export class CheckoutFormComponent {
 
     selectedCity: string = '';
 
+    constructor(public layoutService: LayoutService) {}
+
+    get rtl() {
+        return this.layoutService.config().rtl;
+    }
 }

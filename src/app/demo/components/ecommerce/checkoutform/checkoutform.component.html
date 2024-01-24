@@ -5,18 +5,29 @@
         </div>
         <div class="col-12 lg:col-6 h-full px-4 py-4 md:px-6">
             <ul class="flex list-none flex-wrap p-0 mb-6">
-                <li class="flex align-items-center text-primary mr-2">
+                <li
+                    class="flex align-items-center text-primary"
+                    [ngClass]="rtl ? 'ml-2' : 'mr-2'"
+                >
                     Cart
-                    <i class="pi pi-chevron-right text-500 text-xs ml-2"></i>
+                    <i class="pi pi-chevron-right text-500 text-xs"></i>
                 </li>
-                <li class="flex align-items-center text-500 mr-2">
+                <li
+                    class="flex align-items-center text-500"
+                    [ngClass]="rtl ? 'ml-2' : 'mr-2'"
+                >
                     Information<i
-                        class="pi pi-chevron-right text-500 text-xs ml-2"
+                        class="pi pi-chevron-right text-500 text-xs"
+                        [ngClass]="rtl ? 'mr-2' : 'ml-2'"
                     ></i>
                 </li>
-                <li class="flex align-items-center text-500 mr-2">
+                <li
+                    class="flex align-items-center text-500"
+                    [ngClass]="rtl ? 'ml-2' : 'mr-2'"
+                >
                     Shipping<i
-                        class="pi pi-chevron-right text-500 text-xs ml-2"
+                        class="pi pi-chevron-right text-500 text-xs"
+                        [ngClass]="rtl ? 'mr-2' : 'ml-2'"
                     ></i>
                 </li>
                 <li class="flex align-items-center text-500 mr-2">Payment</li>
@@ -36,10 +47,15 @@
                         name="checkbox-1"
                         [(ngModel)]="checked"
                         [binary]="true"
-                        label="Email me with news and offers"
                         class="text-900"
                         inputId="id"
                     ></p-checkbox>
+                    <label
+                        for="id"
+                        class="m-0"
+                        [ngClass]="rtl ? 'mr-2' : 'ml-2'"
+                        >Email me with news and offers</label
+                    >
                 </div>
                 <div class="col-12 field mb-4">
                     <span class="text-900 text-2xl block font-medium mb-5"
@@ -118,9 +134,11 @@
                     <button
                         pButton
                         pRipple
-                        class="p-button-secondary p-button-outlined mt-3 lg:mt-0 w-full lg:w-auto flex-order-2 lg:flex-order-1 lg:mr-4"
+                        class="p-button-secondary p-button-outlined mt-3 lg:mt-0 w-full lg:w-auto flex-order-2 lg:flex-order-1"
+                        [ngClass]="rtl ? 'lg:ml-4' : 'lg:mr-4'"
                         label="Return to Cart"
                         icon="pi pi-fw pi-arrow-left"
+                        id="return-card"
                     ></button>
                     <button
                         pButton
@@ -144,7 +162,7 @@
                     class="w-8rem h-8rem flex-shrink-0 mb-3"
                     alt="product"
                 />
-                <div class="flex-auto lg:ml-3">
+                <div class="flex-auto" [ngClass]="rtl ? 'lg:mr-3' : 'lg:ml-3'">
                     <div
                         class="flex align-items-center justify-content-between mb-3"
                     >

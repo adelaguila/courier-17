@@ -4,14 +4,18 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
     templateUrl: './invoice.component.html',
     styles: [
         `
-          :host ::ng-deep .p-button-label {
-            font-weight: 400;
-          }
+            :host ::ng-deep .p-button-label {
+                font-weight: 400;
+            }
         `,
-      ],
+    ],
 })
 export class InvoiceComponent {
     constructor(public layoutService: LayoutService) {}
+
+    get rtl() {
+        return this.layoutService.config().rtl;
+    }
 
     print() {
         window.print();

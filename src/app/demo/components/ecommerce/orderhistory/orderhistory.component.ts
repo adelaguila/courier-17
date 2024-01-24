@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
-
+import { LayoutService } from 'src/app/layout/service/app.layout.service';
 @Component({
     templateUrl: './orderhistory.component.html'
 })
 export class OrderHistoryComponent {
 
+    constructor(public layoutService: LayoutService) {}
+
+    get rtl() {
+        return this.layoutService.config().rtl;
+    }
     orders = [
         {
             orderNumber: '45123',
