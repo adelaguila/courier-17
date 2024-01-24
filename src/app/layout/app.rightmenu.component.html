@@ -1,6 +1,6 @@
 <p-sidebar
     [(visible)]="rightMenuActive"
-    position="right"
+    [position]="layoutService.config().rtl ? 'left' : 'right'"
     [baseZIndex]="1000"
     [transitionOptions]="'.3s cubic-bezier(0, 0, 0.2, 1)'"
 >

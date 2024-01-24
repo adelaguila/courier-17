@@ -136,6 +136,7 @@ export class AppLayoutComponent implements OnDestroy {
             'layout-dark': this.layoutService.config().colorScheme === 'dark',
             'layout-dim': this.layoutService.config().colorScheme === 'dim',
             'layout-light': this.layoutService.config().colorScheme === 'light',
+            'layout-rtl': this.layoutService.config().rtl,
             'layout-overlay':
                 this.layoutService.config().menuMode === 'overlay',
             'layout-static': this.layoutService.config().menuMode === 'static',
@@ -150,7 +151,6 @@ export class AppLayoutComponent implements OnDestroy {
             'layout-overlay-active': this.layoutService.state.overlayMenuActive,
             'layout-mobile-active':
                 this.layoutService.state.staticMenuMobileActive,
-            'layout-rtl': this.layoutService.config().rtl,
         };
 
         styleClass['layout-topbar-' + this.layoutService.config().topbarTheme] =

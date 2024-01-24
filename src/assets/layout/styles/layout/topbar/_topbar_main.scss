@@ -176,9 +176,19 @@
         min-width: 18rem;
         padding: .5rem 0;
         transform-origin: top;
-        background: var(--content-alt-bg-color);
         color: var(--text-color);
         border-top: 1px solid var(--topbar-bg);
+
+        ul {
+            background-color: var(--topbar-bg);
+        }
+
+        li {
+            &:hover {
+                background-color: var(--topbar-item-hover-bg);
+                transition: background-color var(--transition-duration);
+            }
+        }
     }
 }
 .layout-light {

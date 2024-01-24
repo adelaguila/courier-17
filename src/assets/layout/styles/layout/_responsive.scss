@@ -21,7 +21,7 @@
             }
         }
 
-        &.layout-overlay {
+        &.layout-overlay:not(.layout-rtl) {
             .layout-content-wrapper {
                 margin-left: 0;
             }
