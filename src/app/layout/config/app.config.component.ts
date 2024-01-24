@@ -84,7 +84,7 @@ export class AppConfigComponent implements OnInit {
     get rtl(): boolean {
         return this.layoutService.config().rtl;
     }
-    
+
     set rtl(_val: boolean) {
         this.layoutService.config.update((config) => ({
             ...config,
@@ -134,8 +134,8 @@ export class AppConfigComponent implements OnInit {
 
     ngOnInit() {
         this.componentThemes = [
-            { name: 'purple', color: '#6f42c1' },
-            { name: 'indigo', color: '#6610f2' },
+            { name: 'denim', color: 'rgb(47, 142, 229)' },
+            { name: 'sea-green', color: 'rgb(48, 160, 89)' },
             { name: 'pink', color: '#d63384' },
             { name: 'blue', color: '#0d6efd' },
             { name: 'cyan', color: '#0dcaf0' },
