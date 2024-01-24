@@ -37,7 +37,7 @@ export class LayoutService {
         inputStyle: 'outlined',
         menuMode: 'static',
         colorScheme: 'light',
-        componentTheme: 'blue',
+        componentTheme: 'denim',
         scale: 14,
         menuTheme: 'dark',
         topbarTheme: 'light',

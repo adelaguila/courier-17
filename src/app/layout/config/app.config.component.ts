@@ -136,14 +136,16 @@ export class AppConfigComponent implements OnInit {
         this.componentThemes = [
             { name: 'denim', color: 'rgb(47, 142, 229)' },
             { name: 'sea-green', color: 'rgb(48, 160, 89)' },
-            { name: 'pink', color: '#d63384' },
-            { name: 'blue', color: '#0d6efd' },
-            { name: 'cyan', color: '#0dcaf0' },
-            { name: 'teal', color: '#20c997' },
-            { name: 'green', color: '#198754' },
-            { name: 'yellow', color: '#ffc107' },
-            { name: 'orange', color: '#fd7e14' },
-            { name: 'black', color: '#000000' },
+            { name: 'amethyst', color: 'rgb(131, 76, 168)' },
+            { name: 'wedgewood', color: 'rgb(85, 125, 170)' },
+            { name: 'tapestry', color: 'rgb(167, 72, 150)' },
+            { name: 'cape-palliser', color: 'rgb(164, 107, 62)' },
+            { name: 'apple', color: 'rgb(82, 162, 53)' },
+            { name: 'gigas', color: 'rgb(87, 81, 169)' },
+            { name: 'jungle-green', color: 'rgb(43, 159, 156)' },
+            { name: 'camelot', color: 'rgb(165, 67, 87)' },
+            { name: 'amber', color: 'rgb(212, 147, 65)' },
+            { name: 'cyan', color: 'rgb(57, 157, 178)' },
         ];
 
         this.menuThemes = [
