@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/api';
 import { CountryService } from 'src/app/demo/service/country.service';
+import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 @Component({
     templateUrl: './inputdemo.component.html',
@@ -42,7 +43,11 @@ export class InputDemoComponent implements OnInit {
 
     valueKnob = 20;
 
-    constructor(private countryService: CountryService) {}
+    constructor(private countryService: CountryService, private layoutService : LayoutService) {}
+
+    get rtl() {
+        return this.layoutService.config().rtl;
+    }
 
     ngOnInit() {
         this.countryService.getCountries().then((countries) => {
