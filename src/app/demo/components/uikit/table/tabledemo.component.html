@@ -101,13 +101,19 @@
 						<td>
 							{{customer.name}}
 						</td>
-						<td>
+						<td  >
+							<div [ngClass]="{'flex justify-content-between' : rtl}">
 							<img src="assets/demo/images/flag/flag_placeholder.png" [class]="'flag flag-' + customer.country.code" width="30">
-							<span class="image-text ml-2">{{customer.country.name}}</span>
+							<span  [ngClass]="rtl ? 'mr-2' : 'ml-2'" >{{customer.country.name}}</span>
+							</div>
+							
 						</td>
 						<td>
+							<div [ngClass]="{'flex justify-content-between' : rtl}">
+								
 							<img [alt]="customer.representative.name" src="assets/demo/images/avatar/{{customer.representative.image}}" width="32" style="vertical-align: middle"/>
-							<span class="image-text ml-2">{{customer.representative.name}}</span>
+							<span  [ngClass]="rtl ? 'mr-2' : 'ml-2'" >{{customer.representative.name}}</span>
+							</div>
 						</td>
 						<td>
 							{{customer.date | date: 'MM/dd/yyyy'}}
@@ -165,8 +171,10 @@
 						<td pFrozenColumn class="font-bold">{{customer.name}}</td>
 						<td alignFrozen="left" pFrozenColumn [frozen]="idFrozen" [ngClass]="{'font-bold': idFrozen}">{{customer.id}}</td>
 						<td>
+							<div [ngClass]="{'flex justify-content-between' : rtl}">
 							<img src="assets/demo/images/flag/flag_placeholder.png" [class]="'flag flag-' + customer.country.code" width="30">
-							<span class="image-text ml-2">{{customer.country.name}}</span>
+							<span [ngClass]="rtl ? 'mr-2' : 'ml-2'" >{{customer.country.name}}</span>
+							</div>
 						</td>
 						<td>{{customer.date}}</td>
 						<td>{{customer.company}}</td>
@@ -175,8 +183,10 @@
 						</td>
 						<td>{{customer.activity}}</td>
 						<td>
+							<div [ngClass]="{'flex justify-content-between' : rtl}">
 							<img [alt]="customer.representative.name" src="assets/demo/images/avatar/{{customer.representative.image}}" width="32" style="vertical-align: middle"/>
-							<span class="image-text ml-2">{{customer.representative.name}}</span>
+							<span [ngClass]="rtl ? 'mr-2' : 'ml-2'">{{customer.representative.name}}</span>
+						</div>
 						</td>
 						<td pFrozenColumn  class="font-bold" alignFrozen="right">{{formatCurrency(customer.balance)}}</td>
 					</tr>
@@ -291,8 +301,11 @@
 							{{customer.name}}
 						</td>
 						<td>
-							<img src="assets/demo/images/flag/flag_placeholder.png" [class]="'flag flag-' + customer.country.code" width="30">
-							<span class="ml-2">{{customer.country.name}}</span>
+							<div [ngClass]="{'flex justify-content-between' : rtl}">
+							
+								<img src="assets/demo/images/flag/flag_placeholder.png" [class]="'flag flag-' + customer.country.code" width="30">
+								<span [ngClass]="rtl ? 'mr-2' : 'ml-2'">{{customer.country.name}}</span>
+							</div>
 						</td>
 						<td>
 							{{customer.company}}

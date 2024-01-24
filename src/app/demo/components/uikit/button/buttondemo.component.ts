@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-
+import { LayoutService } from 'src/app/layout/service/app.layout.service';
 @Component({
     templateUrl: './buttondemo.component.html'
 })
@@ -9,6 +9,12 @@ export class ButtonDemoComponent implements OnInit {
     items: MenuItem[] = [];
 
     loading = [false, false, false, false];
+
+    constructor( private layoutService : LayoutService) {}
+
+    get rtl() {
+        return this.layoutService.config().rtl;
+    }
 
     ngOnInit() {
         this.items = [

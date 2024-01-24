@@ -5,6 +5,7 @@ import { Product } from 'src/app/demo/api/product';
 import { ProductService } from 'src/app/demo/service/product.service';
 import { Table } from 'primeng/table';
 import { MessageService, ConfirmationService } from 'primeng/api';
+import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 interface expandedRows {
     [key: string]: boolean;
@@ -48,8 +49,12 @@ export class TableDemoComponent implements OnInit {
 
     @ViewChild('filter') filter!: ElementRef;
 
-    constructor(private customerService: CustomerService, private productService: ProductService) { }
+    constructor(private customerService: CustomerService, private productService: ProductService, private layoutService: LayoutService) { }
 
+    get rtl() {
+        return this.layoutService.config().rtl;
+    }
+    
     ngOnInit() {
         this.customerService.getCustomersLarge().then(customers => {
             this.customers1 = customers;
