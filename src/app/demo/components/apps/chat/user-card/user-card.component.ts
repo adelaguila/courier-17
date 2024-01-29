@@ -23,8 +23,6 @@ export class UserCardComponent implements OnInit {
     ngOnInit(): void {
         let filtered = this.user.messages.filter(m => m.ownerId !== 123)
         this.lastMessage = filtered[filtered.length - 1];
-        console.log(this.user);
-        
     }
 
     changeView(user: User) {
