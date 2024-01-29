@@ -14,7 +14,7 @@ export class MailArchiveComponent implements OnDestroy {
 
     constructor(private mailService: MailService) {
         this.subscription = this.mailService.mails$.subscribe((data) => {
-            this.archivedMails = data.filter((d) => d.archived);
+            this.archivedMails = data.filter((d) => d.archived && !d.trash);
         });
     }
 
