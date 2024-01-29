@@ -49,11 +49,8 @@ export class TableDemoComponent implements OnInit {
 
     @ViewChild('filter') filter!: ElementRef;
 
-    constructor(private customerService: CustomerService, private productService: ProductService, private layoutService: LayoutService) { }
+    constructor(private customerService: CustomerService, private productService: ProductService) { }
 
-    get rtl() {
-        return this.layoutService.config().rtl;
-    }
     
     ngOnInit() {
         this.customerService.getCustomersLarge().then(customers => {

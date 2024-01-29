@@ -2,10 +2,7 @@
     <div
         class="flex flex-column md:flex-row justify-content-between align-items-center mb-4"
     >
-        <div
-            class="flex flex-column text-center"
-            [ngClass]="rtl ? 'md:text-right' : 'md:text-left'"
-        >
+        <div class="flex flex-column text-center md:text-left">
             <span class="text-900 text-2xl mb-2">My Orders</span>
             <span class="text-700 text-lg"
                 >Dignissim diam quis enim lobortis.</span
@@ -27,10 +24,7 @@
         *ngFor="let order of orders"
     >
         <div class="col-12 flex p-2 surface-100 border-round-top">
-            <div
-                class="p-2 flex-auto text-center"
-                [ngClass]="rtl ? 'md:text-right' : 'md:text-left'"
-            >
+            <div class="p-2 flex-auto text-center md:text-left">
                 <span class="text-700 block">Order Number</span>
                 <span class="text-900 font-medium block mt-2">{{
                     order.orderNumber
@@ -41,10 +35,7 @@
                 layout="vertical"
                 styleClass="h-full  mx-0 lg:mx-3 surface-border"
             ></p-divider>
-            <div
-                class="p-2 flex-auto text-center"
-                [ngClass]="rtl ? 'md:text-right' : 'md:text-left'"
-            >
+            <div class="p-2 flex-auto text-center md:text-left">
                 <span class="text-700 block">Order Date</span>
                 <span class="text-900 font-medium block mt-2">{{
                     order.orderDate
@@ -55,10 +46,7 @@
                 layout="vertical"
                 styleClass="h-full  mx-0 lg:mx-3 surface-border"
             ></p-divider>
-            <div
-                class="p-2 flex-auto text-center"
-                [ngClass]="rtl ? 'md:text-right' : 'md:text-left'"
-            >
+            <div class="p-2 flex-auto text-center md:text-left">
                 <span class="text-700 block">Total Amount</span>
                 <span class="text-900 font-medium block mt-2">{{
                     order.amount
@@ -76,12 +64,10 @@
                     <img
                         [src]="product.image"
                         alt="product"
-                        class="w-8rem h-8rem flex-shrink-0"
-                        [ngClass]="rtl ? 'ml-3' : 'mr-3'"
+                        class="w-8rem h-8rem flex-shrink-0 mr-3"
                     />
                     <div
-                        class="flex flex-column my-auto text-center"
-                        [ngClass]="rtl ? 'md:text-right' : 'md:text-left'"
+                        class="flex flex-column my-auto text-center md:text-left"
                     >
                         <span class="text-900 font-medium mb-3 mt-3 lg:mt-0">{{
                             product.name
@@ -101,14 +87,12 @@
                     </div>
                 </div>
                 <div
-                    class="mr-0 mt-4 lg:mt-0 p-2 flex align-items-center"
-                    [ngClass]="rtl ? 'lg:ml-3' : 'lg:mr-3'"
+                    class="mr-0 mt-4 lg:mt-0 p-2 flex align-items-center lg:mr-3"
                     style="background-color: rgba(76, 175, 80, 0.1)"
                     [style.border-radius]="'2.5rem'"
                 >
                     <span
-                        class="bg-green-500 text-white flex align-items-center justify-content-center border-circle"
-                        [ngClass]="rtl ? 'ml-2' : 'mr-2'"
+                        class="bg-green-500 text-white flex align-items-center justify-content-center border-circle mr-2"
                         style="min-width: 2rem; min-height: 2rem"
                     >
                         <i class="pi pi-check"></i>
@@ -128,39 +112,24 @@
                 tabindex="0"
                 class="cursor-pointer py-4 flex flex-column md:flex-row text-center justify-content-center align-items-center text-primary hover:bg-primary hover:text-0 transition-duration-150 w-full"
                 style="border-bottom-left-radius: 6px"
-                ><i
-                    class="pi pi-folder mb-2 md:mb-1"
-                    [ngClass]="rtl ? 'ml-2' : 'mr-2'"
-                ></i
-                >Archive Order</a
+                ><i class="pi pi-folder mb-2 md:mb-1 mr-2"></i>Archive Order</a
             >
             <a
                 tabindex="0"
                 class="cursor-pointer py-4 flex flex-column md:flex-row text-center justify-content-center align-items-center text-primary hover:bg-primary hover:text-0 transition-duration-150 w-full"
-                ><i
-                    class="pi pi-refresh mb-2 md:mb-1"
-                    [ngClass]="rtl ? 'ml-2' : 'mr-2'"
-                ></i
-                >Return</a
+                ><i class="pi pi-refresh mb-2 md:mb-1 mr-2"></i>Return</a
             >
             <a
                 tabindex="0"
                 class="cursor-pointer py-4 flex flex-column md:flex-row text-center justify-content-center align-items-center text-primary hover:bg-primary hover:text-0 transition-duration-150 w-full"
-                ><i
-                    class="pi pi-file mb-2 md:mb-1"
-                    [ngClass]="rtl ? 'ml-2' : 'mr-2'"
-                ></i
-                >View Invoice</a
+                ><i class="pi pi-file mb-2 md:mb-1 mr-2"></i>View Invoice</a
             >
             <a
                 tabindex="0"
                 class="cursor-pointer py-4 flex flex-column md:flex-row text-center justify-content-center align-items-center text-primary hover:bg-primary hover:text-0 transition-duration-150 w-full"
                 style="border-bottom-right-radius: 6px"
-                ><i
-                    class="pi pi-comment mb-2 md:mb-1"
-                    [ngClass]="rtl ? 'ml-2' : 'mr-2'"
-                ></i
-                >Write a Review</a
+                ><i class="pi pi-comment mb-2 md:mb-1 mr-2"></i>Write a
+                Review</a
             >
         </div>
     </div>

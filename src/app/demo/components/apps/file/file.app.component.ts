@@ -39,10 +39,6 @@ export class FileAppComponent implements OnInit {
             });
     }
 
-    get rtl() {
-        return this.layoutService.config().rtl;
-    }
-    
     ngOnInit() {
         this.fileService.getFiles().then((data) => (this.files = data));
         this.fileService.getMetrics().then((data) => (this.metrics = data));

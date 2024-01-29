@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
 import { Message } from 'src/app/demo/api/message';
 import { User } from 'src/app/demo/api/user';
 import { ChatService } from '../service/chat.service';
-import { LayoutService } from 'src/app/layout/service/app.layout.service';
+
 
 @Component({
     selector: 'app-chat-box',
@@ -27,11 +27,9 @@ export class ChatBoxComponent implements OnInit {
 
     @Input() user!: User;
 
-    constructor(private chatService: ChatService, private layoutService: LayoutService) { }
+    constructor(private chatService: ChatService) { }
 
-    get rtl() {
-        return this.layoutService.config().rtl;
-    }
+
     
     setMessage() {
         if (this.user) {

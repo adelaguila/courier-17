@@ -8,7 +8,7 @@
 
     <p-sidebar
         [(visible)]="visible"
-        [position]="layoutService.config().rtl ? 'left' : 'right'"
+        [position]="'right'"
         [transitionOptions]="'.3s cubic-bezier(0, 0, 0.2, 1)'"
     >
         <div class="p-3">
@@ -19,8 +19,8 @@
                     type="button"
                     pButton
                     (click)="decrementScale()"
-                    class="p-button-text p-button-rounded w-2rem h-2rem"
-                    [ngClass]="rtl ? 'ml-2' : 'mr-2'"
+                    class="p-button-text p-button-rounded w-2rem h-2rem mr-2"
+               
                     [disabled]="scale === scales[0]"
                 ></button>
                 <div class="flex gap-2 align-items-center">
@@ -49,7 +49,7 @@
                         [(ngModel)]="colorScheme"
                         inputId="light"
                     ></p-radioButton>
-                    <label for="light" [ngClass]="{ 'mr-2': rtl }">Light</label>
+                    <label for="light" >Light</label>
                 </div>
                 <div class="field-radiobutton flex-1">
                     <p-radioButton
@@ -58,7 +58,7 @@
                         [(ngModel)]="colorScheme"
                         inputId="dark"
                     ></p-radioButton>
-                    <label for="dark" [ngClass]="{ 'mr-2': rtl }">Dark</label>
+                    <label for="dark" >Dark</label>
                 </div>
 
                 <div class="field-radiobutton flex-1">
@@ -68,7 +68,7 @@
                         [(ngModel)]="colorScheme"
                         inputId="dim"
                     ></p-radioButton>
-                    <label for="dim" [ngClass]="{ 'mr-2': rtl }">Dim</label>
+                    <label for="dim" >Dim</label>
                 </div>
             </div>
 
@@ -86,7 +86,7 @@
                             [(ngModel)]="menuTheme"
                             [inputId]="theme.name"
                         ></p-radioButton>
-                        <label [for]="theme.name" [ngClass]="{ 'mr-2': rtl }">{{
+                        <label [for]="theme.name">{{
                             theme.name | titlecase
                         }}</label>
                     </div>
@@ -105,7 +105,7 @@
                             [(ngModel)]="topbarTheme"
                             [inputId]="theme.name"
                         ></p-radioButton>
-                        <label [for]="theme.name" [ngClass]="{ 'mr-2': rtl }">{{
+                        <label [for]="theme.name" >{{
                             theme.name | titlecase
                         }}</label>
                     </div>
@@ -122,7 +122,7 @@
                             [(ngModel)]="menuMode"
                             inputId="mode1"
                         ></p-radioButton>
-                        <label for="mode1" [ngClass]="{ 'mr-2': rtl }"
+                        <label for="mode1" 
                             >Static</label
                         >
                     </div>
@@ -133,7 +133,7 @@
                             [(ngModel)]="menuMode"
                             inputId="mode2"
                         ></p-radioButton>
-                        <label for="mode2" [ngClass]="{ 'mr-2': rtl }"
+                        <label for="mode2" 
                             >Overlay</label
                         >
                     </div>
@@ -144,7 +144,7 @@
                             [(ngModel)]="menuMode"
                             inputId="mode5"
                         ></p-radioButton>
-                        <label for="mode4" [ngClass]="{ 'mr-2': rtl }"
+                        <label for="mode4" 
                             >Horizontal</label
                         >
                     </div>
@@ -161,7 +161,7 @@
                             [(ngModel)]="inputStyle"
                             inputId="outlined_input"
                         ></p-radioButton>
-                        <label for="outlined_input" [ngClass]="{ 'mr-2': rtl }"
+                        <label for="outlined_input" 
                             >Outlined</label
                         >
                     </div>
@@ -172,7 +172,7 @@
                             [(ngModel)]="inputStyle"
                             inputId="filled_input"
                         ></p-radioButton>
-                        <label for="filled_input" [ngClass]="{ 'mr-2': rtl }"
+                        <label for="filled_input" 
                             >Filled</label
                         >
                     </div>
@@ -184,13 +184,7 @@
                 [(ngModel)]="ripple"
                 styleClass="mb-3"
             ></p-inputSwitch>
-            <ng-container *ngIf="!minimal">
-                <h5>RTL</h5>
-                <p-inputSwitch
-                    [(ngModel)]="rtl"
-                    styleClass="mb-3"
-                ></p-inputSwitch>
-            </ng-container>
+            
             <h5>Component Themes</h5>
             <div class="flex flex-wrap row-gap-3">
                 <div class="w-3" *ngFor="let theme of componentThemes">

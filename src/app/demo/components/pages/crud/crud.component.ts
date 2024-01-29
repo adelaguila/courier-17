@@ -33,9 +33,7 @@ export class CrudComponent implements OnInit {
 
     constructor(private productService: ProductService, private messageService: MessageService, private confirmationService: ConfirmationService, private layoutService: LayoutService) { }
 
-    get rtl() {
-        return this.layoutService.config().rtl;
-    }
+
     
     ngOnInit() {
         this.productService.getProducts().then(data => this.products = data);

@@ -1,5 +1,4 @@
 import { Component, ViewChildren, QueryList, ElementRef } from '@angular/core';
-import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 interface Product {
     name: string;
@@ -23,16 +22,9 @@ interface Image {
 
 @Component({
     templateUrl: './newproduct.component.html',
-    styleUrls: ['./newproduct.component.scss']
+    styleUrls: ['./newproduct.component.scss'],
 })
 export class NewProductComponent {
-
-    constructor(public layoutService: LayoutService) {}
-
-    get rtl() {
-        return this.layoutService.config().rtl;
-    }
-    
     @ViewChildren('buttonEl') buttonEl!: QueryList<ElementRef>;
 
     text: string = '';
@@ -40,9 +32,9 @@ export class NewProductComponent {
     categoryOptions = ['Sneakers', 'Apparel', 'Socks'];
 
     colorOptions: any[] = [
-        { name: 'Black', background: "bg-gray-900" },
-        { name: 'Orange', background: "bg-orange-500" },
-        { name: 'Navy', background: "bg-blue-500" }
+        { name: 'Black', background: 'bg-gray-900' },
+        { name: 'Orange', background: 'bg-orange-500' },
+        { name: 'Navy', background: 'bg-blue-500' },
     ];
 
     product: Product = {
@@ -57,7 +49,7 @@ export class NewProductComponent {
         stock: 'Sneakers',
         inStock: true,
         description: '',
-        images: []
+        images: [],
     };
 
     uploadedFiles: any[] = [];
@@ -65,11 +57,13 @@ export class NewProductComponent {
     showRemove: boolean = false;
 
     onChipRemove(item: string) {
-        this.product.tags = this.product.tags.filter(i => i !== item);
+        this.product.tags = this.product.tags.filter((i) => i !== item);
     }
 
     onColorSelect(color: string) {
-        this.product.colors.indexOf(color) == -1 ? this.product.colors.push(color) : this.product.colors.splice(this.product.colors.indexOf(color), 1);
+        this.product.colors.indexOf(color) == -1
+            ? this.product.colors.push(color)
+            : this.product.colors.splice(this.product.colors.indexOf(color), 1);
     }
 
     onUpload(event: any) {
@@ -79,19 +73,22 @@ export class NewProductComponent {
     }
 
     onImageMouseOver(file: Image) {
-        this.buttonEl.toArray().forEach(el => {
-            el.nativeElement.id === file.name ? el.nativeElement.style.display = 'flex' : null;
-        })
+        this.buttonEl.toArray().forEach((el) => {
+            el.nativeElement.id === file.name
+                ? (el.nativeElement.style.display = 'flex')
+                : null;
+        });
     }
 
     onImageMouseLeave(file: Image) {
-        this.buttonEl.toArray().forEach(el => {
-            el.nativeElement.id === file.name ? el.nativeElement.style.display = 'none' : null;
-        })
+        this.buttonEl.toArray().forEach((el) => {
+            el.nativeElement.id === file.name
+                ? (el.nativeElement.style.display = 'none')
+                : null;
+        });
     }
 
     removeImage(file: Image) {
-        this.product.images = this.product.images.filter(i => i !== file);
+        this.product.images = this.product.images.filter((i) => i !== file);
     }
-
 }

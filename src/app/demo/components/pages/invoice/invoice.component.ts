@@ -13,10 +13,6 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 export class InvoiceComponent {
     constructor(public layoutService: LayoutService) {}
 
-    get rtl() {
-        return this.layoutService.config().rtl;
-    }
-
     print() {
         window.print();
     }

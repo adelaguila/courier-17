@@ -3,7 +3,7 @@ import { MenuItem } from 'primeng/api';
 import { KanbanCard } from 'src/app/demo/api/kanban';
 import { KanbanService } from '../service/kanban.service';
 import { Subscription } from 'rxjs';
-import { LayoutService } from 'src/app/layout/service/app.layout.service';
+
 
 @Component({
     selector: 'app-kanban-card',
@@ -19,15 +19,13 @@ export class KanbanCardComponent implements OnDestroy {
 
     subscription: Subscription;
 
-    constructor(private kanbanService: KanbanService, private layoutService : LayoutService ) {
+    constructor(private kanbanService: KanbanService) {
         this.subscription = this.kanbanService.lists$.subscribe(data => {
             let subMenu = data.map(d => ({ id: d.listId, label: d.title, command: () => this.onMove(d.listId) }));
             this.generateMenu(subMenu);
         })
     }
-    get rtl() {
-        return this.layoutService.config().rtl;
-    }
+
     parseDate(dueDate: string) {
         return new Date(dueDate).toDateString().split(' ').slice(1, 3).join(' ');
     }

@@ -1,6 +1,6 @@
 <p-sidebar
     [(visible)]="rightMenuActive"
-    [position]="layoutService.config().rtl ? 'left' : 'right'"
+    [position]="'right'"
     [baseZIndex]="1000"
     [transitionOptions]="'.3s cubic-bezier(0, 0, 0.2, 1)'"
 >
@@ -16,7 +16,7 @@
                             [binary]="true"
                             [(ngModel)]="checked1"
                         ></p-checkbox>
-                        <div [ngClass]="rtl ? 'mr-3' : 'ml-3'">
+                        <div class="ml-3">
                             <h6
                                 class="m-0 text-color"
                                 [ngClass]="{ 'line-through': checked1 }"
@@ -33,7 +33,7 @@
                             [binary]="true"
                             [(ngModel)]="checked2"
                         ></p-checkbox>
-                        <div [ngClass]="rtl ? 'mr-3' : 'ml-3'">
+                        <div class="ml-3">
                             <h6
                                 class="m-0 text-color"
                                 [ngClass]="{ 'line-through': checked2 }"
@@ -50,7 +50,7 @@
                             [binary]="true"
                             [(ngModel)]="checked3"
                         ></p-checkbox>
-                        <div [ngClass]="rtl ? 'mr-3' : 'ml-3'">
+                        <div class="ml-3">
                             <h6
                                 class="m-0 text-color"
                                 [ngClass]="{ 'line-through': checked3 }"
@@ -67,7 +67,7 @@
                             [binary]="true"
                             [(ngModel)]="checked4"
                         ></p-checkbox>
-                        <div [ngClass]="rtl ? 'mr-3' : 'ml-3'">
+                        <div class="ml-3">
                             <h6
                                 class="m-0 text-color"
                                 [ngClass]="{ 'line-through': checked4 }"
@@ -92,7 +92,7 @@
                             [binary]="true"
                             [(ngModel)]="checked5"
                         ></p-checkbox>
-                        <div [ngClass]="rtl ? 'mr-3' : 'ml-3'">
+                        <div class="ml-3">
                             <h6
                                 class="m-0 text-color"
                                 [ngClass]="{ 'line-through': checked5 }"
@@ -109,7 +109,7 @@
                             [binary]="true"
                             [(ngModel)]="checked6"
                         ></p-checkbox>
-                        <div [ngClass]="rtl ? 'mr-3' : 'ml-3'">
+                        <div class="ml-3">
                             <h6
                                 class="m-0 text-color"
                                 [ngClass]="{ 'line-through': checked6 }"
@@ -126,7 +126,7 @@
                             [binary]="true"
                             [(ngModel)]="checked7"
                         ></p-checkbox>
-                        <div [ngClass]="rtl ? 'mr-3' : 'ml-3'">
+                        <div class="ml-3">
                             <h6
                                 class="m-0 text-color"
                                 [ngClass]="{ 'line-through': checked7 }"
@@ -143,7 +143,7 @@
                             [binary]="true"
                             [(ngModel)]="checked8"
                         ></p-checkbox>
-                        <div [ngClass]="rtl ? 'mr-3' : 'ml-3'">
+                        <div class="ml-3">
                             <h6
                                 class="m-0 text-color"
                                 [ngClass]="{ 'line-through': checked8 }"

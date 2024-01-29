@@ -20,10 +20,7 @@
                             >Product Name</span
                         >
                         <span>
-                            <i
-                                class="pi pi-star-fill text-yellow-500"
-                                [ngClass]="rtl ? 'ml-1' : 'mr-1'"
-                            ></i>
+                            <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
                             <span class="font-medium">5.0</span>
                         </span>
                     </div>
@@ -53,10 +50,7 @@
                     class="border-1 border-white border-round py-2 px-3 absolute bg-black-alpha-30 text-white inline-flex align-items-center justify-content-center hover:bg-black-alpha-40 transition-colors transition-duration-300 cursor-pointer"
                     style="bottom: 1rem; left: 1rem; width: calc(100% - 2rem)"
                 >
-                    <i
-                        class="pi pi-shopping-cart text-base"
-                        [ngClass]="rtl ? 'ml-3' : 'mr-3'"
-                    ></i>
+                    <i class="pi pi-shopping-cart text-base mr-3"></i>
                     <span class="text-base">Add to Cart</span>
                 </button>
             </div>
@@ -67,8 +61,7 @@
                 <span class="text-xl text-900 mb-3">$150.00</span>
                 <div class="flex align-items-center mb-3">
                     <div
-                        class="w-2rem h-2rem flex-shrink-0 border-circle bg-bluegray-500 cursor-pointer border-2 surface-border transition-all transition-duration-300"
-                        [ngClass]="rtl ? 'ml-3' : 'mr-3'"
+                        class="w-2rem h-2rem flex-shrink-0 border-circle bg-bluegray-500 cursor-pointer border-2 surface-border transition-all transition-duration-300 mr-3"
                         [ngStyle]="{
                             'box-shadow':
                                 product.color === 'Bluegray'
@@ -78,8 +71,7 @@
                         (click)="product.color = 'Bluegray'"
                     ></div>
                     <div
-                        class="w-2rem h-2rem flex-shrink-0 border-circle bg-indigo-500 hover:border-indigo-500 cursor-pointer border-2 surface-border transition-all transition-duration-300"
-                        [ngClass]="rtl ? 'ml-3' : 'mr-3'"
+                        class="w-2rem h-2rem flex-shrink-0 border-circle bg-indigo-500 hover:border-indigo-500 cursor-pointer border-2 surface-border transition-all transition-duration-300 mr-3"
                         [ngStyle]="{
                             'box-shadow':
                                 product.color === 'Indigo'
@@ -89,8 +81,7 @@
                         (click)="product.color = 'Indigo'"
                     ></div>
                     <div
-                        class="w-2rem h-2rem flex-shrink-0 border-circle bg-purple-500 hover:border-purple-500 cursor-pointer border-2 surface-border transition-all transition-duration-300"
-                        [ngClass]="rtl ? 'ml-3' : 'mr-3'"
+                        class="w-2rem h-2rem flex-shrink-0 border-circle bg-purple-500 hover:border-purple-500 cursor-pointer border-2 surface-border transition-all transition-duration-300 mr-3"
                         [ngStyle]="{
                             'box-shadow':
                                 product.color === 'Purple'

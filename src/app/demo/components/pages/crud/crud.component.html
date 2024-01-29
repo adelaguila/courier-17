@@ -10,8 +10,7 @@
                             pRipple
                             label="New"
                             icon="pi pi-plus"
-                            class="p-button-success"
-                            [ngClass]="rtl ? 'ml-2' : 'mr-2'"
+                            class="p-button-success mr-2"
                             (click)="openNew()"
                         ></button>
                         <button
@@ -35,8 +34,7 @@
                         [maxFileSize]="1000000"
                         label="Import"
                         chooseLabel="Import"
-                        class="inline-block"
-                        [ngClass]="rtl ? 'ml-2' : 'mr-2'"
+                        class="inline-block mr-2"
                     ></p-fileUpload>
                     <button
                         pButton
@@ -177,9 +175,8 @@
                                     pButton
                                     pRipple
                                     icon="pi pi-pencil"
-                                    class="p-button-rounded p-button-success"
+                                    class="p-button-rounded p-button-success mr-2"
                                     (click)="editProduct(product)"
-                                    [ngClass]="rtl ? 'ml-2' : 'mr-2'"
                                 ></button>
                                 <button
                                     pButton

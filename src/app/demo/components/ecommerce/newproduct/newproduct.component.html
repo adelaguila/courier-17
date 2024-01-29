@@ -137,8 +137,7 @@
                         class="bg-gray-100 py-2 px-3 flex align-items-center border-round"
                     >
                         <span
-                            class="text-black-alpha-90 font-bold"
-                            [ngClass]="rtl ? 'ml-3' : 'mr-3'"
+                            class="text-black-alpha-90 font-bold mr-3"
                             >Status:</span
                         >
                         <span class="text-black-alpha-60 font-semibold">{{
@@ -166,7 +165,7 @@
                         styleClass="mr-2 py-2 px-3 text-900 font-bold surface-card border-1 surface-border"
                         [style]="{ 'border-radius': '20px' }"
                     >
-                        <span [ngClass]="rtl ? 'ml-3' : 'mr-3'">{{ tag }}</span>
+                        <span class="mr-3">{{ tag }}</span>
                         <span
                             class="chip-remove-icon flex align-items-center justify-content-center border-1 surface-border bg-gray-100 border-circle cursor-pointer"
                             (click)="onChipRemove(tag)"

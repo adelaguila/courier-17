@@ -5,7 +5,7 @@
     tabindex="0"
 >
     <div class="flex align-items-center">
-        <div class="relative" [ngClass]="rtl ? 'md:ml-3' : 'md:mr-3'">
+        <div class="relative md:mr-3">
             <img
                 src="assets/demo/images/avatar/{{ user.image }}"
                 alt="user"
@@ -18,22 +18,18 @@
                     'bg-pink-400': user.status === 'busy',
                     'bg-yellow-400': 'away'
                 }"
-                [style.bottom.px]="'2'"
-                [style.right.px]="!rtl ? '2' : ''"
-                [style.left.px]="rtl ? '2' : ''"
+                style="bottom: 2px; right: 2px"
             ></span>
         </div>
         <div class="flex-column hidden md:flex">
-            <span class="text-900 font-semibold block">{{ user.name }}</span>
+            <span class="text-900 font-semibold block">{{ user.name }}qw</span>
             <span
                 class="block text-600 text-overflow-ellipsis overflow-hidden white-space-nowrap w-10rem text-sm"
                 >{{ lastMessage.text }}</span
             >
         </div>
     </div>
-    <span
-        class="text-700 font-semibold ml-auto hidden md:inline"
-        [ngClass]="rtl ? 'mr-auto' : 'ml-auto'"
-        >{{ user.lastSeen }}</span
-    >
+    <span class="text-700 font-semibold ml-auto hidden md:inline">{{
+        user.lastSeen
+    }}</span>
 </div>

@@ -4,7 +4,6 @@ import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { Mail } from 'src/app/demo/api/mail';
 import { MailService } from '../service/mail.service';
-import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 @Component({
     templateUrl: './mail-compose.component.html'
@@ -27,12 +26,9 @@ export class MailComposeComponent {
         sent: true
     };
 
-    constructor(private messageService: MessageService, private location: Location, private router: Router, private mailService: MailService, private layoutService:LayoutService) { }
+    constructor(private messageService: MessageService, private location: Location, private router: Router, private mailService: MailService) { }
 
-    get rtl() {
-        return this.layoutService.config().rtl;
-    }
-    
+
     sendMail() {
         if (this.newMail.message) {
             this.newMail.id = Math.floor(Math.random() * 1000);

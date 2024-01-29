@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { Comment } from 'src/app/demo/api/blog';
-import { LayoutService } from 'src/app/layout/service/app.layout.service';
-
 @Component({
     templateUrl: './blog-detail.component.html',
 })
@@ -36,9 +34,4 @@ export class BlogDetailComponent {
         },
     ];
 
-    constructor(private layoutService: LayoutService) {}
-
-    get rtl() {
-        return this.layoutService.config().rtl;
-    }
 }

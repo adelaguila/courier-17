@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Table } from 'primeng/table';
 import { Customer } from 'src/app/demo/api/customer';
 import { CustomerService } from 'src/app/demo/service/customer.service';
-import { LayoutService } from 'src/app/layout/service/app.layout.service';
+
 
 @Component({
     templateUrl: './profilelist.component.html'
@@ -12,11 +12,8 @@ export class ProfileListComponent implements OnInit {
 
     customers: Customer[] = [];
 
-    constructor(private customerService: CustomerService, private router: Router, private layoutService : LayoutService) { }
-    
-    get rtl() {
-        return this.layoutService.config().rtl;
-    }
+    constructor(private customerService: CustomerService, private router: Router) { }
+
 
     ngOnInit() {
         this.customerService.getCustomersLarge().then(customers => this.customers = customers);

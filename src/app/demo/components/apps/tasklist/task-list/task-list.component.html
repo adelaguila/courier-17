@@ -19,11 +19,9 @@
                 <label
                     for="task.id"
                     style="word-break: break-word"
-                    class="font-medium"
+                    class="font-medium ml-2"
                     [ngClass]="{
                         'line-through': task.completed,
-                        'mr-2': rtl,
-                        'ml-2': !rtl
                     }"
                     >{{ task.name }}</label
                 >
@@ -34,31 +32,20 @@
                 <div class="flex align-items-center">
                     <span
                         *ngIf="task.comments"
-                        class="flex align-items-center font-semibold"
-                        [ngClass]="rtl ? 'ml-3' : 'mr-3'"
-                        ><i
-                            class="pi pi-comment"
-                            [ngClass]="rtl ? 'ml-2' : 'mr-2'"
-                        ></i
+                        class="flex align-items-center font-semibold mr-3"
+                        ><i class="pi pi-comment mr-2"></i
                         >{{ task.comments }}</span
                     >
                     <span
                         *ngIf="task.attachments"
-                        class="flex align-items-center font-semibold"
-                        [ngClass]="rtl ? 'ml-3' : 'mr-3'"
-                        ><i
-                            class="pi pi-paperclip"
-                            [ngClass]="rtl ? 'ml-2' : 'mr-2'"
-                        ></i
+                        class="flex align-items-center font-semibold mr-3"
+                        ><i class="pi pi-paperclip mr-2"></i
                         >{{ task.attachments }}</span
                     >
                     <span
                         class="flex align-items-center font-semibold white-space-nowrap"
                         *ngIf="task.startDate"
-                        ><i
-                            class="pi pi-clock"
-                            [ngClass]="rtl ? 'ml-2' : 'mr-2'"
-                        ></i
+                        ><i class="pi pi-clock mr-2"></i
                         >{{ parseDate(task.startDate) }}</span
                     >
                 </div>
@@ -89,8 +76,7 @@
                         pRipple
                         type="button"
                         icon="pi pi-ellipsis-v"
-                        class="p-button-rounded p-button-text z-3 sm:ml-0"
-                        [ngClass]="rtl ? 'mr-3' : 'ml-auto'"
+                        class="p-button-rounded p-button-text z-3 sm:ml-0 ml-auto"
                         (click)="toggleMenu($event, task)"
                     ></button>
                     <p-menu

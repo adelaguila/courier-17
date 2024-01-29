@@ -1,17 +1,8 @@
 import { Component } from '@angular/core';
-import { LayoutService } from 'src/app/layout/service/app.layout.service';
-
 @Component({
     templateUrl: './ordersummary.component.html',
 })
 export class OrderSummaryComponent {
-
-    constructor(public layoutService: LayoutService) {}
-
-    get rtl() {
-        return this.layoutService.config().rtl;
-    }
-
     products = [
         {
             name: 'Cotton Sweatshirt',
@@ -19,7 +10,7 @@ export class OrderSummaryComponent {
             color: 'White',
             price: '$12',
             quantity: '1',
-            image: 'assets/demo/images/ecommerce/ordersummary/order-summary-1-1.png'
+            image: 'assets/demo/images/ecommerce/ordersummary/order-summary-1-1.png',
         },
         {
             name: 'Regular Jeans',
@@ -27,7 +18,7 @@ export class OrderSummaryComponent {
             color: 'Black',
             price: '$24',
             quantity: '1',
-            image: 'assets/demo/images/ecommerce/ordersummary/order-summary-1-2.png'
-        }
+            image: 'assets/demo/images/ecommerce/ordersummary/order-summary-1-2.png',
+        },
     ];
 }

@@ -61,7 +61,5 @@ export class AppRightMenuComponent {
         this.layoutService.state.rightMenuActive = _val;
     }
 
-    get rtl() {
-        return this.layoutService.config().rtl;
-    }
+   
 }
