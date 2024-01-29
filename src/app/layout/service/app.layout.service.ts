@@ -39,7 +39,7 @@ export class LayoutService {
         colorScheme: 'light',
         componentTheme: 'denim',
         scale: 14,
-        menuTheme: 'dark',
+        menuTheme: 'dim',
         topbarTheme: 'light',
         rtl: false,
     };
