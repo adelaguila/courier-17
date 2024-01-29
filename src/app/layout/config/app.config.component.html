@@ -87,7 +87,7 @@
                             [inputId]="theme.name"
                         ></p-radioButton>
                         <label [for]="theme.name" [ngClass]="{ 'mr-2': rtl }">{{
-                            theme.name
+                            theme.name | titlecase
                         }}</label>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                             [inputId]="theme.name"
                         ></p-radioButton>
                         <label [for]="theme.name" [ngClass]="{ 'mr-2': rtl }">{{
-                            theme.name
+                            theme.name | titlecase
                         }}</label>
                     </div>
                 </div>
