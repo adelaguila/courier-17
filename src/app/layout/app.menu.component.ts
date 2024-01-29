@@ -223,14 +223,7 @@ export class AppMenuComponent implements OnInit {
                         url: ['https://www.primefaces.org/primeflex/'],
                         target: '_blank',
                     },
-                    {
-                        label: 'Figma',
-                        icon: 'pi pi-fw pi-pencil',
-                        url: [
-                            'https://www.figma.com/file/LuzEn29BAxr03T2vMQ5A1y/Preview-%7C-Avalon-1.0.0?node-id=0%3A1&t=uRZE9N9j7l5GUvvA-1',
-                        ],
-                        target: '_blank',
-                    },
+             
                 ],
             },
             {
