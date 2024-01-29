@@ -3,40 +3,32 @@
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 300;
-  src: url("../../fonts/open-sans-v18-latin-ext_latin-300.eot");
-  /* IE9 Compat Modes */
-  src: local(""), url("../../fonts/open-sans-v18-latin-ext_latin-300.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v18-latin-ext_latin-300.woff2") format("woff2"), url("../../fonts/open-sans-v18-latin-ext_latin-300.woff") format("woff"), url("../../fonts/open-sans-v18-latin-ext_latin-300.ttf") format("truetype"), url("../../fonts/open-sans-v18-latin-ext_latin-300.svg#OpenSans") format("svg");
-  /* Legacy iOS */
+  src: url("../../fonts/open-sans-v18-latin-ext_latin-300.eot"); /* IE9 Compat Modes */
+  src: local(""), url("../../fonts/open-sans-v18-latin-ext_latin-300.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v18-latin-ext_latin-300.woff2") format("woff2"), url("../../fonts/open-sans-v18-latin-ext_latin-300.woff") format("woff"), url("../../fonts/open-sans-v18-latin-ext_latin-300.ttf") format("truetype"), url("../../fonts/open-sans-v18-latin-ext_latin-300.svg#OpenSans") format("svg"); /* Legacy iOS */
 }
 /* open-sans-regular - latin-ext_latin */
 @font-face {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 400;
-  src: url("../../fonts/open-sans-v18-latin-ext_latin-regular.eot");
-  /* IE9 Compat Modes */
-  src: local(""), url("../../fonts/open-sans-v18-latin-ext_latin-regular.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v18-latin-ext_latin-regular.woff2") format("woff2"), url("../../fonts/open-sans-v18-latin-ext_latin-regular.woff") format("woff"), url("../../fonts/open-sans-v18-latin-ext_latin-regular.ttf") format("truetype"), url("../../fonts/open-sans-v18-latin-ext_latin-regular.svg#OpenSans") format("svg");
-  /* Legacy iOS */
+  src: url("../../fonts/open-sans-v18-latin-ext_latin-regular.eot"); /* IE9 Compat Modes */
+  src: local(""), url("../../fonts/open-sans-v18-latin-ext_latin-regular.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v18-latin-ext_latin-regular.woff2") format("woff2"), url("../../fonts/open-sans-v18-latin-ext_latin-regular.woff") format("woff"), url("../../fonts/open-sans-v18-latin-ext_latin-regular.ttf") format("truetype"), url("../../fonts/open-sans-v18-latin-ext_latin-regular.svg#OpenSans") format("svg"); /* Legacy iOS */
 }
 /* open-sans-600 - latin-ext_latin */
 @font-face {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 600;
-  src: url("../../fonts/open-sans-v18-latin-ext_latin-600.eot");
-  /* IE9 Compat Modes */
-  src: local(""), url("../../fonts/open-sans-v18-latin-ext_latin-600.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v18-latin-ext_latin-600.woff2") format("woff2"), url("../../fonts/open-sans-v18-latin-ext_latin-600.woff") format("woff"), url("../../fonts/open-sans-v18-latin-ext_latin-600.ttf") format("truetype"), url("../../fonts/open-sans-v18-latin-ext_latin-600.svg#OpenSans") format("svg");
-  /* Legacy iOS */
+  src: url("../../fonts/open-sans-v18-latin-ext_latin-600.eot"); /* IE9 Compat Modes */
+  src: local(""), url("../../fonts/open-sans-v18-latin-ext_latin-600.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v18-latin-ext_latin-600.woff2") format("woff2"), url("../../fonts/open-sans-v18-latin-ext_latin-600.woff") format("woff"), url("../../fonts/open-sans-v18-latin-ext_latin-600.ttf") format("truetype"), url("../../fonts/open-sans-v18-latin-ext_latin-600.svg#OpenSans") format("svg"); /* Legacy iOS */
 }
 /* open-sans-700 - latin-ext_latin */
 @font-face {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
-  src: url("../../fonts/open-sans-v18-latin-ext_latin-700.eot");
-  /* IE9 Compat Modes */
-  src: local(""), url("../../fonts/open-sans-v18-latin-ext_latin-700.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v18-latin-ext_latin-700.woff2") format("woff2"), url("../../fonts/open-sans-v18-latin-ext_latin-700.woff") format("woff"), url("../../fonts/open-sans-v18-latin-ext_latin-700.ttf") format("truetype"), url("../../fonts/open-sans-v18-latin-ext_latin-700.svg#OpenSans") format("svg");
-  /* Legacy iOS */
+  src: url("../../fonts/open-sans-v18-latin-ext_latin-700.eot"); /* IE9 Compat Modes */
+  src: local(""), url("../../fonts/open-sans-v18-latin-ext_latin-700.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v18-latin-ext_latin-700.woff2") format("woff2"), url("../../fonts/open-sans-v18-latin-ext_latin-700.woff") format("woff"), url("../../fonts/open-sans-v18-latin-ext_latin-700.ttf") format("truetype"), url("../../fonts/open-sans-v18-latin-ext_latin-700.svg#OpenSans") format("svg"); /* Legacy iOS */
 }
 .card {
   background-color: var(--surface-card);
@@ -300,6 +292,9 @@ p:last-child {
   transition: var(--transition-duration);
   border: 0 none;
 }
+.layout-topbar .layout-topbar-end .layout-topbar-actions-end .layout-topbar-items .layout-topbar-search input:enabled:focus {
+  box-shadow: 0 0 0 1px #4d9fdc;
+}
 .layout-topbar .layout-topbar-end .layout-topbar-actions-end .layout-topbar-items .layout-topbar-search input::placeholder {
   color: var(--topbar-item-secondary-text-color);
 }
@@ -335,10 +330,8 @@ p:last-child {
   top: 3.25rem;
   right: 0;
   min-width: 18rem;
-  padding: 0.5rem 0;
   transform-origin: top;
   color: var(--text-color);
-  border-top: 1px solid var(--topbar-bg);
 }
 .layout-topbar .layout-topbar-menu ul {
   background-color: var(--topbar-bg);
@@ -347,9 +340,15 @@ p:last-child {
   background-color: var(--topbar-item-hover-bg);
   transition: background-color var(--transition-duration);
 }
+.layout-topbar .layout-topbar-menu h6,
+.layout-topbar .layout-topbar-menu span:not(.p-badge),
+.layout-topbar .layout-topbar-menu a,
+.layout-topbar .layout-topbar-menu li {
+  color: var(--topbar-item-text-color);
+}
 
 .layout-light .layout-topbar-menu {
-  background-color: var(--surface-section);
+  background-color: var(--topbar-bg);
 }
 
 .layout-menu-light {
@@ -397,6 +396,7 @@ p:last-child {
   flex: 1;
   padding-bottom: 2rem;
   background-color: var(--menu-bg);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.06);
 }
 .layout-sidebar .layout-menu {
   margin: 0;
@@ -838,7 +838,6 @@ a {
   .blocked-scroll {
     overflow: hidden;
   }
-
   .layout-container .layout-content-wrapper {
     margin-left: 0;
     margin-top: 5rem;
