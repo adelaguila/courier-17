@@ -286,6 +286,16 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-circle-off',
                         routerLink: ['/pages/empty'],
                     },
+                    {
+                        label: 'FAQ',
+                        icon: 'pi pi-fw pi-question',
+                        routerLink: ['/pages/faq']
+                    },
+                    {
+                        label: 'Contact Us',
+                        icon: 'pi pi-fw pi-phone',
+                        routerLink: ['/pages/contact']
+                    }
                 ],
             },
             {
