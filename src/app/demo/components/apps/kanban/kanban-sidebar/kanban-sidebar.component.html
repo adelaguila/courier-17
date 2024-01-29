@@ -72,7 +72,7 @@
                     </div>
                     <textarea type="text" pInputTextarea name="taskContent" [(ngModel)]="taskContent" style="resize: none" class="w-full mt-4" placeholder="Add a task" (keydown.enter)="addTask($event)"></textarea>
         
-                    <ul *ngIf="formValue.taskList?.tasks?.length !== 0" class="list-none p-4 flex flex-column gap-3 surface-ground surface-border border-1 border-round">
+                    <ul *ngIf="formValue.taskList?.tasks?.length !== 0" class="list-none p-4 flex flex-column gap-3 surface-border border-1 border-round" style="background-color: var(--surface-b);">
                         <li class="flex align-items-start gap-3" *ngFor="let task of formValue.taskList?.tasks;let i=index">
                             <p-checkbox [name]="task.text + i" [(ngModel)]="task.completed" [binary]="true" [inputId]="task.text" (onChange)="calculateProgress()"></p-checkbox>
                             <span style="word-break: break-all;" [ngClass]="{'text-600 line-through': task.completed, 'text-900': !task.completed}">
@@ -114,7 +114,7 @@
                                 <span class="block text-900">{{comment.name}}</span>
                                 <span class="block text-700">1 Jun 17:58 pm</span>
                             </div>
-                            <span class="block text-900 border-1 surface-ground surface-border p-2 border-round" style="word-break: break-all;">{{comment?.text}}</span>
+                            <span class="block text-900 border-1 surface-border p-2 border-round" style="word-break: break-all; background-color: var(--surface-b);">{{comment?.text}}</span>
                         </div>
                     </div>
                 </div>
