@@ -15,11 +15,12 @@
                 class="w-1rem h-1rem border-circle border-2 surface-border absolute"
                 [ngClass]="{
                     'bg-green-400': user.status === 'active',
-                    'bg-red-400': user.status === 'busy',
+                    'bg-pink-400': user.status === 'busy',
                     'bg-yellow-400': 'away'
                 }"
-                [style.bottom.px]="rtl ? '2px' : null"
-                [style.right.px]="rtl ? null : '2px'"
+                [style.bottom.px]="'2'"
+                [style.right.px]="!rtl ? '2' : ''"
+                [style.left.px]="rtl ? '2' : ''"
             ></span>
         </div>
         <div class="flex-column hidden md:flex">
