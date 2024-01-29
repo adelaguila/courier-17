@@ -284,7 +284,21 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
             }
         }
     }
-
+    unblockBodyScroll(): void {
+        if (document.body.classList) {
+            document.body.classList.remove('blocked-scroll');
+        } else {
+            document.body.className = document.body.className.replace(
+                new RegExp(
+                    '(^|\\b)' +
+                        'blocked-scroll'.split(' ').join('|') +
+                        '(\\b|$)',
+                    'gi'
+                ),
+                ' '
+            );
+        }
+    }
     itemClick(event: Event) {
         // avoid processing disabled items
         if (this.item.disabled) {
@@ -313,6 +327,7 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
         } else {
             if (this.layoutService.isMobile()) {
                 this.layoutService.state.staticMenuMobileActive = false;
+                this.unblockBodyScroll()
             }
 
             if (this.isHorizontal) {
