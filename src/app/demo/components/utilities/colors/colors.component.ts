@@ -12,7 +12,6 @@ export class ColorsComponent {
         'cyan',
         'pink',
         'indigo',
-        'red',
         'teal',
         'orange',
         'bluegray',
