@@ -48,16 +48,16 @@ export class AppLayoutComponent implements OnDestroy {
                                 this.appSidebar.el.nativeElement.contains(
                                     event.target
                                 ) ||
-                                this.appTopbar.menuButton.nativeElement.isSameNode(
+                                this.appTopbar.menuButton?.nativeElement.isSameNode(
                                     event.target
                                 ) ||
-                                this.appTopbar.menuButton.nativeElement.contains(
+                                this.appTopbar.menuButton?.nativeElement.contains(
                                     event.target
                                 ) ||
-                                this.appTopbar.mobileMenuButton.nativeElement.isSameNode(
+                                this.appTopbar.mobileMenuButton?.nativeElement.isSameNode(
                                     event.target
                                 ) ||
-                                this.appTopbar.mobileMenuButton.nativeElement.contains(
+                                this.appTopbar.mobileMenuButton?.nativeElement.contains(
                                     event.target
                                 )
                             );
