@@ -1065,27 +1065,23 @@
   }
 
   .p-inputgroup > .p-component,
-.p-inputgroup > .p-element,
-.p-inputgroup > .p-inputwrapper > .p-component > .p-inputtext,
+.p-inputgroup > .p-inputwrapper > .p-inputtext,
 .p-inputgroup > .p-float-label > .p-component {
     border-radius: 0;
     margin: 0;
   }
   .p-inputgroup > .p-component + .p-inputgroup-addon,
-.p-inputgroup > .p-element + .p-inputgroup-addon,
-.p-inputgroup > .p-inputwrapper > .p-component > .p-inputtext + .p-inputgroup-addon,
+.p-inputgroup > .p-inputwrapper > .p-inputtext + .p-inputgroup-addon,
 .p-inputgroup > .p-float-label > .p-component + .p-inputgroup-addon {
     border-left: 0 none;
   }
   .p-inputgroup > .p-component:focus,
-.p-inputgroup > .p-element:focus,
-.p-inputgroup > .p-inputwrapper > .p-component > .p-inputtext:focus,
+.p-inputgroup > .p-inputwrapper > .p-inputtext:focus,
 .p-inputgroup > .p-float-label > .p-component:focus {
     z-index: 1;
   }
   .p-inputgroup > .p-component:focus ~ label,
-.p-inputgroup > .p-element:focus ~ label,
-.p-inputgroup > .p-inputwrapper > .p-component > .p-inputtext:focus ~ label,
+.p-inputgroup > .p-inputwrapper > .p-inputtext:focus ~ label,
 .p-inputgroup > .p-float-label > .p-component:focus ~ label {
     z-index: 1;
   }
@@ -3311,14 +3307,23 @@
   .p-orderlist .p-orderlist-controls .p-button {
     margin-bottom: 0.5rem;
   }
-  .p-orderlist .p-orderlist-header {
+  .p-orderlist .p-orderlist-list-container {
     background: #434B54;
-    color: #E6E8EB;
     border: 1px solid #5B646D;
+    border-radius: 3px;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    outline-color: transparent;
+  }
+  .p-orderlist .p-orderlist-list-container.p-focus {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 1px #7FE2CE;
+    border-color: #59C5B9;
+  }
+  .p-orderlist .p-orderlist-header {
+    color: #E6E8EB;
     padding: 1rem;
-    border-bottom: 0 none;
-    border-top-right-radius: 3px;
-    border-top-left-radius: 3px;
+    font-weight: 600;
   }
   .p-orderlist .p-orderlist-header .p-orderlist-title {
     font-weight: 600;
@@ -3337,13 +3342,12 @@
     color: #D0D3D7;
   }
   .p-orderlist .p-orderlist-list {
-    border: 1px solid #5B646D;
-    background: #434B54;
     color: #E6E8EB;
     padding: 0.5rem 0;
-    border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px;
     outline: 0 none;
+  }
+  .p-orderlist .p-orderlist-list:not(:first-child) {
+    border-top: 1px solid #5B646D;
   }
   .p-orderlist .p-orderlist-list .p-orderlist-item {
     padding: 0.5rem 1rem;
@@ -3519,14 +3523,23 @@
   .p-picklist .p-picklist-buttons .p-button {
     margin-bottom: 0.5rem;
   }
-  .p-picklist .p-picklist-header {
+  .p-picklist .p-picklist-list-wrapper {
     background: #434B54;
-    color: #E6E8EB;
     border: 1px solid #5B646D;
+    border-radius: 3px;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    outline-color: transparent;
+  }
+  .p-picklist .p-picklist-list-wrapper.p-focus {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 1px #7FE2CE;
+    border-color: #59C5B9;
+  }
+  .p-picklist .p-picklist-header {
+    color: #E6E8EB;
     padding: 1rem;
-    border-bottom: 0 none;
-    border-top-right-radius: 3px;
-    border-top-left-radius: 3px;
+    font-weight: 600;
   }
   .p-picklist .p-picklist-header .p-picklist-title {
     font-weight: 600;
@@ -3545,13 +3558,12 @@
     color: #D0D3D7;
   }
   .p-picklist .p-picklist-list {
-    border: 1px solid #5B646D;
-    background: #434B54;
     color: #E6E8EB;
     padding: 0.5rem 0;
-    border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px;
     outline: 0 none;
+  }
+  .p-picklist .p-picklist-list:not(:first-child) {
+    border-top: 1px solid #5B646D;
   }
   .p-picklist .p-picklist-list .p-picklist-item {
     padding: 0.5rem 1rem;
@@ -4219,6 +4231,12 @@
   .p-scrollpanel .p-scrollpanel-bar {
     background: #5B646D;
     border: 0 none;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  }
+  .p-scrollpanel .p-scrollpanel-bar:focus-visible {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 1px #7FE2CE;
   }
 
   .p-splitter {
@@ -4233,6 +4251,11 @@
   }
   .p-splitter .p-splitter-gutter .p-splitter-gutter-handle {
     background: #5B646D;
+  }
+  .p-splitter .p-splitter-gutter .p-splitter-gutter-handle:focus-visible {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 1px #7FE2CE;
   }
   .p-splitter .p-splitter-gutter-resizing {
     background: #5B646D;
