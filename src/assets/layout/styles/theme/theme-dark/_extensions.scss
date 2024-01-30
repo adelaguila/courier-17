@@ -1,7 +1,3 @@
-@mixin focused-ring($ring-color) {
-    box-shadow: 0 0 0 2px #1c2127, 0 0 0 4px $ring-color, 0 1px 2px 0 rgba(0, 0, 0, 0.0);
-}
-
 .p-button-label {
     font-weight: 700;
 }
@@ -45,35 +41,6 @@
     }
 }
 
-.p-button {
-    &:focus {
-        @include focused-ring(rgba($buttonBg, .7));
-    }
-
-    &.p-button-secondary:enabled:focus {
-        @include focused-ring(rgba($secondaryButtonBg, .7));
-    }
-
-    &.p-button-success:enabled:focus {
-        @include focused-ring(rgba($successButtonBg, .7));
-    }
-
-    &.p-button-info:enabled:focus {
-        @include focused-ring(rgba($infoButtonBg, .7));
-    }
-
-    &.p-button-warning:enabled:focus {
-        @include focused-ring(rgba($warningButtonBg, .7));
-    }
-
-    &.p-button-help:enabled:focus {
-        @include focused-ring(rgba($helpButtonBg, .7));
-    }
-
-    &.p-button-danger:enabled:focus {
-        @include focused-ring(rgba($dangerButtonBg, .7));
-    }
-}
 
 .p-datatable {
     .p-datatable-tbody {
