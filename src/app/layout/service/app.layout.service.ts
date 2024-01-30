@@ -14,7 +14,6 @@ export interface AppConfig {
     scale: number;
     menuTheme: ColorScheme;
     topbarTheme: string;
-
 }
 
 interface LayoutState {
@@ -41,7 +40,6 @@ export class LayoutService {
         scale: 14,
         menuTheme: 'dim',
         topbarTheme: 'light',
-    
     };
 
     state: LayoutState = {
@@ -162,7 +160,6 @@ export class LayoutService {
             )
             .join('/');
 
-        console.log(newHref);
         this.replaceThemeLink(newHref);
     }
 
