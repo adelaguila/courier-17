@@ -3656,7 +3656,7 @@
   .p-tree .p-tree-container .p-treenode .p-treenode-content {
     border-radius: 3px;
     transition: box-shadow 0.2s;
-    padding: 0.25;
+    padding: 0.5rem;
   }
   .p-tree .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler {
     margin-right: 0.5rem;
@@ -3737,7 +3737,7 @@
     border: 1px solid #5B646D;
     background-color: #434B54;
     color: #E6E8EB;
-    padding: 0.25;
+    padding: 0.5rem;
     transition: box-shadow 0.2s;
   }
   .p-tree.p-tree-horizontal .p-treenode .p-treenode-content.p-highlight {
