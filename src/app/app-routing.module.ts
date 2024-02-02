@@ -4,7 +4,7 @@ import { AppLayoutComponent } from './layout/app.layout.component';
 
 const routerOptions: ExtraOptions = {
     anchorScrolling: 'enabled',
-    scrollPositionRestoration: 'enabled'
+    scrollPositionRestoration: 'enabled',
 };
 
 const routes: Routes = [
