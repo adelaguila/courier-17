@@ -1,14 +1,29 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
+import { MenuService } from '../admin/services/menu.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
     selector: 'app-menu',
     templateUrl: './app.menu.component.html',
 })
 export class AppMenuComponent implements OnInit {
+    username: string;
+
     model: any[] = [];
 
+    constructor(private menuService: MenuService){}
+
     ngOnInit() {
+        // const helper = new JwtHelperService
+        // const decodeToken = helper.decodeToken(localStorage.getItem(environment.TOKEN_NAME));
+
+        // this.username = decodeToken.sub;
+
+        // this.menuService.getMenusByUser(this.username).subscribe(menus => {
+        //     this.model = menus;
+        // })
         this.model = [
             {
                 label: 'Favorites',
@@ -223,7 +238,7 @@ export class AppMenuComponent implements OnInit {
                         url: ['https://www.primefaces.org/primeflex/'],
                         target: '_blank',
                     },
-             
+
                 ],
             },
             {
@@ -235,31 +250,16 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-globe',
                         routerLink: ['/landing'],
                     },
-                    {
-                        label: 'Auth',
-                        icon: 'pi pi-fw pi-user',
-                        items: [
-                            {
-                                label: 'Login',
-                                icon: 'pi pi-fw pi-sign-in',
-                                routerLink: ['/auth/login'],
-                            },
-                            {
-                                label: 'Error',
-                                icon: 'pi pi-fw pi-times-circle',
-                                routerLink: ['/auth/error'],
-                            },
-                            {
-                                label: 'Access Denied',
-                                icon: 'pi pi-fw pi-lock',
-                                routerLink: ['/auth/access'],
-                            },
-                        ],
-                    },
+
                     {
                         label: 'Crud',
                         icon: 'pi pi-fw pi-pencil',
                         routerLink: ['/pages/crud'],
+                    },
+                    {
+                        label: 'Plan',
+                        icon: 'pi pi-fw pi-pencil',
+                        routerLink: ['/pages/plan'],
                     },
                     {
                         label: 'Timeline',
@@ -296,6 +296,51 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-phone',
                         routerLink: ['/pages/contact']
                     }
+                ],
+            },
+            {
+                label: 'Tablas',
+                icon: 'pi pi-fw pi-briefcase',
+                items: [
+                    {
+                        label: 'Agencias',
+                        icon: 'pi pi-fw pi-globe',
+                        routerLink: ['/pages/tablas/agencias'],
+                    },
+                    {
+                        label: 'Destinos',
+                        icon: 'pi pi-fw pi-globe',
+                        routerLink: ['/pages/tablas/destinos'],
+                    },
+
+                    {
+                        label: 'Clientes/Proveedores',
+                        icon: 'pi pi-fw pi-globe',
+                        routerLink: ['/pages/tablas/clientes-proveedores'],
+                    },
+
+                    {
+                        label: 'Ubigeos',
+                        icon: 'pi pi-fw pi-globe',
+                        routerLink: ['/pages/tablas/ubigeos'],
+                    },
+                    {
+                        label: 'Tipos Agencias',
+                        icon: 'pi pi-fw pi-globe',
+                        routerLink: ['/pages/tablas/tipos-agencias'],
+                    },
+                    {
+                        label: 'Tipos Clientes/Proveedores',
+                        icon: 'pi pi-fw pi-globe',
+                        routerLink: ['/pages/tablas/tipos-clientes-proveedores'],
+                    },
+
+                    {
+                        label: 'Tipos Documentos Identidad',
+                        icon: 'pi pi-fw pi-globe',
+                        routerLink: ['/pages/tablas/tipos-documentos-identidad'],
+                    },
+
                 ],
             },
             {
