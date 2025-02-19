@@ -1,0 +1,415 @@
+<div class="grid">
+
+    <p-toast position="top-center" key="tc"></p-toast>
+    <div class="col-12 md:col-6">
+        <p-toolbar *ngIf="isEdit">
+            <div class="p-toolbar-group-left flex flex-wrap">
+                <button pButton type="button" label="Nuevo" icon="pi pi-page" class="p-button-sm mr-2"
+                    routerLink="/pages/abonados/detalles"></button>
+
+                <button pButton type="button" label="Imprimir CtaCte" icon="pi pi-print"
+                    class="p-button-secondary p-button-sm mr-2" (click)="imprimirCuentaCorriente()"></button>
+
+                <button pButton type="button" label="Aviso Cobranza" icon="pi pi-print"
+                    class="p-button-warning p-button-sm mr-2" (click)="imprimirAvisoCobranza()"></button>
+
+            </div>
+
+            <div class="p-toolbar-group-right">
+                <div class="caja-datos-deuda">
+                    <h6 *ngIf="deuda > 0" class="datos-deuda">DEUDA: {{deuda | currency:'S/ '}}</h6>
+                    <h6 *ngIf="saldoFavor > 0" class="datos-deuda">SALDO A FAVOR: {{saldoFavor | currency:'S/ '}}</h6>
+                </div>
+            </div>
+        </p-toolbar>
+        <div class="card p-fluid">
+
+            <form [formGroup]="form" (submit)="operate()" #formAbonado="ngForm">
+                <!-- <h5>Datos Abonado</h5> -->
+                <div class="p-formgrid grid">
+                    <div class="field col-12 md:col-2">
+                        <label for="idAbonado">ID</label>
+                        <input pInputText id="idAbonado" type="text" formControlName="idAbonado" readonly />
+                        <input pInputText id="tercero" type="hidden" formControlName="tercero" readonly />
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="dniruc">DNI/RUC</label>
+                        <div class="p-inputgroup">
+                            <input type="text" pInputText id="dniruc" formControlName="dniruc" />
+                            <button type="button" pButton icon="pi pi-search" (click)="buscarMigo()"
+                                styleClass="p-button-warn"></button>
+                        </div>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="nombreTercero">Nombre Razón Social</label>
+                        <input type="text" pInputText formControlName="nombreTercero" readonly
+                            [ngClass]="{'ng-invalid ng-dirty' : f['nombreTercero'].touched && f['nombreTercero'].errors}" />
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['nombreTercero'].errors?.['required'] && f['nombreTercero'].touched">Es
+                            requerido</small>
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['nombreTercero'].errors?.['minlength'] && f['nombreTercero'].touched">Debe
+                            ingresar mínimo 2 caracteres</small>
+                    </div>
+                </div>
+
+                <div class="p-formgrid grid">
+                    <div class="field col-12 md:col-4">
+                        <label for="sector">Sector</label>
+                        <p-dropdown appendTo="body" formControlName="sector" [options]="sectores" [filter]="true"
+                            filterBy="nombreSector" [showClear]="true" optionLabel="nombreSector"
+                            placeholder="Seleccionar..." [virtualScroll]="true" [virtualScrollItemSize]="10"
+                            [ngClass]="{'ng-invalid ng-dirty' : f['sector'].touched && f['sector'].errors}"></p-dropdown>
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['sector'].errors?.['required'] && f['sector'].touched" class="invalid">Es
+                            requerido</small>
+                    </div>
+                    <div class="field col-12 md:col-5">
+                        <label for="via">Vía</label>
+                        <p-dropdown appendTo="body" formControlName="via" [options]="vias" optionLabel="nombreViaCombo"
+                            placeholder="Seleccionar..."  [virtualScroll]="true" [virtualScrollItemSize]="10" [filter]="true" filterBy="nombreViaCombo" [showClear]="true"
+                            [ngClass]="{'ng-invalid ng-dirty' : f['via'].touched && f['via'].errors}"></p-dropdown>
+                        <small class="ng-dirty ng-invalid" *ngIf="f['via'].errors?.['required'] && f['via'].touched"
+                            class="invalid">Es
+                            requerido</small>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="numero">Número</label>
+                        <input type="text" pInputText formControlName="numero"
+                            [ngClass]="{'ng-invalid ng-dirty' : f['numero'].touched && f['numero'].errors}" />
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['numero'].errors?.['required'] && f['numero'].touched">Es
+                            requerido</small>
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['numero'].errors?.['minlength'] && f['numero'].touched">Debe
+                            ingresar mínimo 2 caracteres</small>
+                    </div>
+                </div>
+
+                <div class="p-formgrid grid">
+
+                    <div class="field col-12 md:col-5">
+                        <label for="referencia">Referencia</label>
+                        <input type="text" pInputText formControlName="referencia" />
+                    </div>
+
+                    <div class="field col-12 md:col-3">
+                        <label for="numero">Suministro</label>
+                        <input type="text" pInputText formControlName="suministro"
+                            [ngClass]="{'ng-invalid ng-dirty' : f['suministro'].touched && f['suministro'].errors}" />
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['suministro'].errors?.['required'] && f['suministro'].touched" class="invalid">Es
+                            requerido</small>
+                    </div>
+
+                    <div class="field col-12 md:col-4">
+                        <label for="cajaNap">Caja Nap</label>
+                        <p-dropdown appendTo="body" formControlName="cajaNap" [options]="cajasNaps"
+                            optionLabel="nombreCajaNap" placeholder="Seleccionar..." [filter]="true" filterBy="nombreCajaNap" [showClear]="true"
+                            [virtualScrollItemSize]="10" [virtualScroll]="true"
+                            [ngClass]="{'ng-invalid ng-dirty' : f['cajaNap'].touched && f['cajaNap'].errors}"></p-dropdown>
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['cajaNap'].errors?.['required'] && f['cajaNap'].touched" class="invalid">Es
+                            requerido</small>
+                    </div>
+                </div>
+                <div class="p-formgrid grid">
+                    <div class="field col-12 md:col-6">
+                        <label for="plan">Plan</label>
+                        <p-dropdown appendTo="body" formControlName="plan" [options]="planes" optionLabel="nombrePlan"
+                            [filter]="true" filterBy="nombrePlan" [showClear]="true" [readonly]="estado != 'REGISTRADO'"
+                            placeholder="Seleccionar..." [virtualScroll]="true" [virtualScrollItemSize]="10"
+                            [ngClass]="{'ng-invalid ng-dirty' : f['plan'].touched && f['plan'].errors}"></p-dropdown>
+                        <small class="ng-dirty ng-invalid" *ngIf="f['plan'].errors?.['required'] && f['plan'].touched"
+                            class="invalid">Es
+                            requerido</small>
+                    </div>
+
+                    <div class="field col-12 md:col-6">
+                        <label for="vendedor">Vendedor</label>
+                        <p-dropdown appendTo="body" formControlName="vendedor" [options]="vendedores" optionLabel="name"
+                            optionValue="code" [readonly]="estado != 'REGISTRADO'" placeholder="Seleccionar..."
+                            [virtualScroll]="true" [virtualScrollItemSize]="10" [filter]="true" filterBy="name" [showClear]="true"
+                            [ngClass]="{'ng-invalid ng-dirty' : f['vendedor'].touched && f['vendedor'].errors}"></p-dropdown>
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['vendedor'].errors?.['required'] && f['vendedor'].touched" class="invalid">Es
+                            requerido</small>
+                    </div>
+
+                </div>
+
+                <div class="p-formgrid grid">
+                    <div class="field col-12 md:col-4">
+                        <label for="latitud">Latitud</label>
+                        <input type="text" pInputText formControlName="latitud" />
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="longitud">Longitud</label>
+                        <input type="text" pInputText formControlName="longitud" />
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="estado">Estado</label>
+                        <input type="text" pInputText formControlName="estado" readonly />
+                    </div>
+                </div>
+                <div class="p-formgrid grid">
+                    <div class="field col-12 md:col-4">
+                        <label for="fechaRegistro">F.Registro</label>
+                        <input type="text" pInputText formControlName="fechaRegistro" readonly />
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="fechaRegistro">F.Activación</label>
+                        <input type="text" pInputText formControlName="fechaActivacion" readonly />
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="fechaUltimaLiquidacion">F.U.Liquidación</label>
+                        <input type="text" pInputText formControlName="fechaUltimaLiquidacion" readonly />
+                    </div>
+                </div>
+                <div>
+                    <button pButton pRipple label="Guardar" class="p-button-sm mr-2 mb-2" type="submit"
+                        [disabled]="formAbonado.invalid"></button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+    <div class="col-12 md:col-6" *ngIf="isEdit">
+        <p-card>
+            <p-table [value]="listaOrdenes" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-sm p-datatable-gridlines"
+                currentPageReportTemplate="Mostrando {first} de {last} de {totalRecords} registros"
+                [rowsPerPageOptions]="[10, 20, 50]">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h5 class="m-0">Ordenes Registradas</h5>
+                        <div class="my-2">
+                            <button *ngIf="isEdit" pButton pRipple label="Nueva Orden" icon="pi pi-plus"
+                                class="p-button-sm p-button-primary mr-2" (click)="nuevaOrden()"></button>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="min-width:100px" pFrozenColumn>Acción</th>
+                        <th style="min-width:100px" pFrozenColumn pSortableColumn="idOrden">ID <p-sortIcon
+                                field="idOrden"></p-sortIcon></th>
+                        <th style="min-width:100px" pSortableColumn="estado">Estado <p-sortIcon
+                                field="estado"></p-sortIcon></th>
+                        <th style="min-width:200px" pSortableColumn="tipoOrden.nombreTipoOrden">Tipo <p-sortIcon
+                                field="tipoOrden.nombreTipoOrden"></p-sortIcon></th>
+                        <th style="min-width:200px" pSortableColumn="detalle">Detalle <p-sortIcon
+                                field="detalle"></p-sortIcon></th>
+                        <th style="min-width:120px" pSortableColumn="fechaRegistro">F.Registro <p-sortIcon
+                                field="fechaRegistro"></p-sortIcon></th>
+                        <th style="min-width:130px" pSortableColumn="fechaAsignacion">F.Asignación <p-sortIcon
+                                field="fechaAsignacion"></p-sortIcon></th>
+                        <th style="min-width:120px" pSortableColumn="fechaAtencion">F.Atención <p-sortIcon
+                                field="fechaAtencion"></p-sortIcon></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-row>
+                    <tr>
+                        <td pFrozenColumn>
+                            <div class="flex">
+                                <p-button *ngIf="row.estado == 'REGISTRADO'" icon="pi pi-user-edit" pTooltip="Asignar"
+                                    styleClass="p-button-info p-button-text p-button-table"
+                                    (click)="asignarOrden(row)"></p-button>
+                                <p-button *ngIf="row.estado == 'ASIGNADO'" icon="pi pi-check-circle" pTooltip="Atender"
+                                    styleClass="p-button-info p-button-text p-button-table"
+                                    (click)="atenderOrden(row)"></p-button>
+                                <p-button icon="pi pi-print" styleClass="p-button-danger p-button-text p-button-table"
+                                    pTooltip="Imprimir" (click)="imprimirOrden(row)"></p-button>
+                            </div>
+                        </td>
+                        <td style="min-width:100px" pFrozenColumn>{{row.idOrden}}</td>
+                        <td>{{row.estado}}</td>
+                        <td>{{row.tipoOrden.nombreTipoOrden}}</td>
+                        <td>{{row.detalle}}</td>
+                        <td>{{row.fechaRegistro}}</td>
+                        <td>{{row.fechaAsignacion}}</td>
+                        <td>{{row.fechaAtencion}}</td>
+                    </tr>
+                </ng-template>
+
+
+            </p-table>
+            <br>
+            <!-- <p-table *ngIf="listaOnus.length > 0" [value]="listaOnus" [paginator]="false" [rows]="10" -->
+            <p-table [value]="listaOnus" [paginator]="false" [rows]="10" [showCurrentPageReport]="true"
+                [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-sm p-datatable-gridlines"
+                currentPageReportTemplate="Mostrando {first} de {last} de {totalRecords} registros"
+                [rowsPerPageOptions]="[10, 20, 50]">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h5 class="m-0">ONTs Asignadas</h5>
+                        <div class="my-2">
+                            <button *ngIf="botonAsingarOnu" pButton pRipple label="Asignar ONU" icon="pi pi-plus"
+                                class="p-button-sm p-button-primary mr-2" (click)="asignarOnt()"></button>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="min-width:50px" pFrozenColumn>Acción</th>
+                        <th style="min-width:100px" pFrozenColumn pSortableColumn="serie">Serie <p-sortIcon
+                                field="serie"></p-sortIcon></th>
+                        <th style="min-width:100px" pSortableColumn="nombreProducto">Detalle <p-sortIcon
+                                field="nombreProducto"></p-sortIcon></th>
+                        <th style="min-width:100px" pSortableColumn="proceso">Proceso <p-sortIcon
+                                field="proceso"></p-sortIcon></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-row>
+                    <tr>
+                        <td pFrozenColumn>
+                            <div class="flex">
+                                <p-button icon="pi pi-undo" pTooltip="Recuperar"
+                                    styleClass="p-button-info p-button-text p-button-table"></p-button>
+
+                            </div>
+                        </td>
+                        <td style="min-width:100px" pFrozenColumn>{{row.ont.serie}}</td>
+                        <td>{{row.ont.producto.nombreProducto}}</td>
+                        <td>{{row.proceso}}</td>
+                    </tr>
+                </ng-template>
+
+
+            </p-table>
+        </p-card>
+    </div>
+
+
+</div>
+<div class="grid" *ngIf="isEdit">
+    <div class="col-12">
+
+        <p-tabView>
+            <p-tabPanel header="Cargos del Abonado">
+
+                <p-table [value]="listaCargos" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                    [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-sm p-datatable-gridlines"
+                    currentPageReportTemplate="Mostrando {first} de {last} de {totalRecords} registros"
+                    [rowsPerPageOptions]="[10, 20, 50]">
+                    <ng-template pTemplate="caption">
+                        <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                            <h5 class="m-0">Cargos Registrados</h5>
+                            <div class="my-2">
+                                <button *ngIf="isEdit" pButton type="button" label="Nuevo Cargo" icon="pi pi-plus"
+                                    class="p-button-sm p-button-primary mr-2" (click)="nuevoCargo()"></button>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width:5%; min-width:100px"></th>
+                            <th style="width:10%; min-width:100px">F.Emisión</th>
+                            <th style="width:35%; min-width:100px">Descripción</th>
+                            <th style="width:20%; min-width:100px">Tipo</th>
+                            <th style="width:10%; min-width:100px">Generado</th>
+                            <th style="width:10%; min-width:100px">Pagado</th>
+                            <th style="width:10%; min-width:100px">Saldo</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-cargo>
+                        <tr>
+                            <td>
+                                <p-button icon="pi pi-trash" styleClass="p-button-danger p-button-text p-button-table"
+                                    pTooltip="Eliminar" (click)="eliminarCargo(cargo)"></p-button>
+                            </td>
+                            <td>{{ cargo.fechaEmision }}</td>
+                            <td>{{ cargo.glosa }}</td>
+                            <td>{{ cargo.tipoCargo.nombreTipoCargo }}</td>
+                            <td class="text-right">{{ cargo.total | currency:'S/ '}}</td>
+                            <td class="text-right">{{ cargo.pagado | currency:'S/ '}}</td>
+                            <td class="text-right">{{ cargo.total - cargo.pagado | currency:'S/ '}}</td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <tr>
+                            <td colspan="4" class="text-right">Total Cargos:</td>
+                            <td class="text-right">{{totalCargos | currency:'S/ '}}</td>
+                            <td class="text-right">{{totalPagado | currency:'S/ '}}</td>
+                            <td class="text-right">{{totalSaldo | currency:'S/ '}}</td>
+                        </tr>
+                    </ng-template>
+
+                </p-table>
+
+            </p-tabPanel>
+            <p-tabPanel header="Pagos Registrados">
+                <p-table [value]="listaPagos" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                    [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-sm p-datatable-gridlines"
+                    currentPageReportTemplate="Mostrando {first} de {last} de {totalRecords} registros"
+                    [rowsPerPageOptions]="[10, 20, 50]">
+                    <ng-template pTemplate="caption">
+                        <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                            <h5 class="m-0">Pagos Registradas</h5>
+                            <div class="my-2">
+                                <button *ngIf="isEdit" pButton type="button" label="Nuevo Pago" icon="pi pi-plus"
+                                    class="p-button-sm p-button-primary mr-2" (click)="nuevoPago()"></button>
+
+                            </div>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width:5%; min-width:100px"></th>
+                            <th style="width:10%; min-width:100px">F.Pago</th>
+                            <th style="width:20%; min-width:100px">Tipo</th>
+                            <th style="width:20%; min-width:100px">Referencia</th>
+                            <th style="width:15%; min-width:100px">Cuenta</th>
+                            <th style="width:20%; min-width:100px">Comprobante</th>
+                            <th style="width:10%; min-width:100px">Total</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-pago>
+                        <tr>
+                            <td>
+                                <p-button icon="pi pi-trash" styleClass="p-button-danger p-button-text p-button-table"
+                                    pTooltip="Eliminar" (click)="eliminarPago(pago)"></p-button>
+                            </td>
+                            <td>{{ pago.fechaPago }}</td>
+                            <td>{{ pago.tipoPago }}</td>
+                            <td>{{ pago.referencia }}</td>
+                            <td>
+                                <div *ngIf="pago.cuentaBancaria">
+                                    {{ pago.cuentaBancaria.numeroCuenta }}
+                                </div>
+                            </td>
+                            <td>{{ pago.serie }} - {{ pago.numero}}</td>
+                            <td class="text-right">{{ pago.total | currency:'S/ '}}</td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <tr>
+                            <td colspan="6" class="text-right">Total Pagos:</td>
+                            <td class="text-right">{{totalPagos | currency:'S/ '}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </div>
+
+    <p-dialog [(visible)]="deleteCargoDialog" header="Confirmar" [modal]="true" [style]="{width:'450px'}">
+        <div class="flex align-items-center justify-content-center">
+            <i class="pi pi-question-circle mr-3" style="font-size: 2rem"></i>
+            <span>¿Está seguro que desea eliminar el cargo?</span>
+        </div>
+        <ng-template pTemplate="footer">
+            <button pButton pRipple icon="pi pi-times" class="p-button-secondary" label="No"
+                (click)="deleteCargoDialog = false"></button>
+            <button pButton pRipple icon="pi pi-check" class="p-button-danger" label="Si, Eliminar"
+                (click)="confirmDeleteCargo()"></button>
+        </ng-template>
+    </p-dialog>
+
+    <p-confirmDialog />
+
+</div>

@@ -1,0 +1,79 @@
+<div class="card">
+    <div class="invoice-to">
+        <div class="bill-to">Comprobante Afectado: {{facturacion.serie}}-{{facturacion.numero}} </div>
+        <!-- <div class="invoice-to-info">
+            <div>{{ facturacion.serie }}</div>
+            <div>{{ facturacion.numero }}</div>
+        </div> -->
+    </div>
+    <hr>
+    <form [formGroup]="form" (submit)="operate()" #formNotaCredito="ngForm">
+        <div class="p-fluid">
+            <div class="formgrid grid">
+                <div class="field col md:col-3">
+                    <label for="idFacturacion">ID</label>
+                    <input type="text" pInputText formControlName="idFacturacion" readonly />
+                </div>
+
+                <div class="field col md:col-3">
+                    <label for="serie">Serie</label>
+                    <p-dropdown appendTo="body" formControlName="serie" [options]="seriesFiltrados"
+                            optionLabel="serie" optionValue="serie" [virtualScroll]="true" [virtualScrollItemSize]="5"
+                            [ngClass]="{'ng-invalid ng-dirty' : f['serie'].touched && f['serie'].errors}"></p-dropdown>
+                        <small class="ng-dirty ng-invalid" *ngIf="f['serie'].errors?.['required'] && f['serie'].touched"
+                            class="invalid">Es
+                            requerido</small>
+                </div>
+
+                <div class="field col md:col-6">
+                    <label for="fechaEmision">Fecha Emisión</label>
+                    <input type="date" pInputText formControlName="fechaEmision"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['fechaEmision'].touched && f['fechaEmision'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['fechaEmision'].errors?.['required'] && f['fechaEmision'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['fechaEmision'].errors?.['minlength'] && f['fechaEmision'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+            </div>
+
+
+            <div class="field ">
+                <label for="codigoTipoNota">Tipo Nota</label>
+                <p-dropdown appendTo="body" formControlName="codigoTipoNota" [options]="tiposNotas" optionLabel="name" value="code" [virtualScroll]="true" [virtualScrollItemSize]="5"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['codigoTipoNota'].touched && f['codigoTipoNota'].errors}"></p-dropdown>
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['codigoTipoNota'].errors?.['required'] && f['codigoTipoNota'].touched" class="invalid">Es
+                    requerido</small>
+            </div>
+
+            <div class="field ">
+                <label for="motivoNota">Motivo de la Nota</label>
+                <input type="text" pInputText formControlName="motivoNota"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['motivoNota'].touched && f['motivoNota'].errors}" />
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['motivoNota'].errors?.['required'] && f['motivoNota'].touched">Es
+                    requerido</small>
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['motivoNota'].errors?.['minlength'] && f['motivoNota'].touched">Debe
+                    ingresar mínimo 2 caracteres</small>
+            </div>
+
+            <div class="field ">
+                <label for="motivoNota">ID Documento Afectado</label>
+                <input type="text" pInputText formControlName="documentoAfectado" readonly/>
+            </div>
+        </div>
+
+
+
+        <div>
+            <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                [disabled]="formNotaCredito.invalid"></button>
+            <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2"
+                (click)="close()"></button>
+        </div>
+
+    </form>
+</div>

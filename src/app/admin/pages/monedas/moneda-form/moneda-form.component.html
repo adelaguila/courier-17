@@ -1,0 +1,45 @@
+<div class="card">
+    <form [formGroup]="form" (submit)="operate()" #formPlan="ngForm">
+        <div class="p-fluid mb-4">
+            <div class="formgrid grid">
+                <div class="field col md:col-3">
+                    <label for="codigo">Código</label>
+                    <input type="text" pInputText formControlName="codigo" [readOnly]="readOnlyID"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['codigo'].touched && f['codigo'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['codigo'].errors?.['required'] && f['codigo'].touched">Es
+                        requerido</small>
+                </div>
+
+                <div class="field col md:col-6">
+                    <label for="nombreMoneda">Nombre de Moneda</label>
+                    <input type="text" pInputText formControlName="nombreMoneda"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['nombreMoneda'].touched && f['nombreMoneda'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['nombreMoneda'].errors?.['required'] && f['nombreMoneda'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['nombreMoneda'].errors?.['minlength'] && f['nombreMoneda'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+
+                <div class="field col md:col-3">
+                    <label for="simbolo">Símbolo</label>
+                    <input type="text" pInputText formControlName="simbolo"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['simbolo'].touched && f['simbolo'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['simbolo'].errors?.['required'] && f['simbolo'].touched">Es
+                        requerido</small>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                [disabled]="formPlan.invalid"></button>
+            <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2"
+                (click)="close()"></button>
+        </div>
+
+    </form>
+</div>

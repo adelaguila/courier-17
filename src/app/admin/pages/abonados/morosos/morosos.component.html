@@ -1,0 +1,139 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-3 py-3">
+            <p-toast></p-toast>
+            <p-table #dt [value]="abonados" dataKey="id" styleClass="p-datatable-sm p-datatable-gridlines"
+                [tableStyle]="{ 'min-width': '75rem' }" [paginator]="true" [rows]="rows" selectionMode="single"
+                [totalRecords]="totalRecords" [loading]="loading" [showCurrentPageReport]="true"
+                [rowsPerPageOptions]="rowsPerPageOptions" [scrollable]="true" scrollHeight="600px"
+                currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} registros">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h5 class="m-0">Abonados por cobrar</h5>
+
+                        <div class="my-2">
+                            <p-dropdown [options]="parametros" [(ngModel)]="selectedParametro" optionLabel="name"
+                                placeholder="Seleccinar Parametro" class="mr-2" />
+
+                            <button pButton pRipple label="Cargar" icon="pi pi-refresh"
+                                class="p-button-primary p-button-sm mr-2" (click)="cargar()"></button>
+                            <button pButton pRipple label="Imprimir" icon="pi pi-print"
+                                class="p-button-secondary p-button-sm mr-2" (click)="imprimir()"></button>
+                            <button pButton pRipple label="Exportar" icon="pi pi-file-export"
+                                class="p-button-secondary p-button-sm mr-2" (click)="exportar()"></button>
+
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="idAbonado">ID <p-sortIcon field="idAbonado"></p-sortIcon></th>
+                        <th pSortableColumn="dniruc">DNI/RUC <p-sortIcon field="dniruc"></p-sortIcon></th>
+                        <th pSortableColumn="nombreTercero">Nombre Razón Social <p-sortIcon
+                                field="nombreTercero"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="nombrePlan">Plan <p-sortIcon field="nombrePlan"></p-sortIcon></th>
+                        <th pSortableColumn="nombreSector">Sector <p-sortIcon field="nombreSector"></p-sortIcon></th>
+                        <th pSortableColumn="nombreVia">Dirección <p-sortIcon field="nombreVia"></p-sortIcon></th>
+                        <th pSortableColumn="telefonos">Teléfonos <p-sortIcon field="telefonos"></p-sortIcon></th>
+                        <th pSortableColumn="deuda">Deuda <p-sortIcon field="deuda"></p-sortIcon></th>
+
+                        <th pFrozenColumn></th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <p-columnFilter type="text" field="idAbonado"></p-columnFilter>
+                        </th>
+
+                        <th>
+                            <p-columnFilter type="text" field="dniruc"></p-columnFilter>
+                        </th>
+
+                        <th>
+                            <p-columnFilter type="text" field="nombreTercero"></p-columnFilter>
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="nombrePlan"></p-columnFilter>
+                        </th>
+
+                        <th>
+                            <p-columnFilter type="text" field="nombreSector"></p-columnFilter>
+                        </th>
+
+                        <th></th>
+                        <th></th>
+                        <th></th>
+
+                        <th pFrozenColumn></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-row>
+                    <tr>
+                        <td style="width:5%; min-width:5rem;">
+                            <span class="p-column-title">ID</span>
+                            {{row.idAbonado}}
+                        </td>
+
+
+                        <td style="width:5%; min-width:5rem;">
+                            <span class="p-column-title">DNI/RUC</span>
+                            {{row.dniruc}}
+                        </td>
+
+                        <td style="width:20%; min-width:10rem;">
+                            <span class="p-column-title">Nombre Razón Social</span>
+                            {{row.nombreTercero}}
+                        </td>
+
+
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">Plan</span>
+                            {{row.nombrePlan}}
+                        </td>
+
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">Sector</span>
+                            {{row.nombreSector}}
+                        </td>
+
+                        <td style="width:20%; min-width:10rem;">
+                            <span class="p-column-title">Dirección</span>
+                            {{row.nombreVia}} # {{row.numero}}
+                        </td>
+
+                        <td style="width:20%; min-width:10rem;">
+                            <span class="p-column-title">Teléfonos</span>
+                            {{row.telefonos}}
+                        </td>
+
+                        <td style="width:20%; min-width:10rem;" class="text-right">
+                            <span class="p-column-title">Deuda</span>
+                            {{row.deuda | currency:'S/ '}}
+                        </td>
+
+                        <td style="width:10%; min-width:10rem;" pFrozenColumn>
+                            <div class="flex justify-content-center">
+                                <p-button icon="pi pi-eye" styleClass="p-button-success p-button-text p-button-table"
+                                    pTooltip="Ver detalles"
+                                    [routerLink]="['/pages/abonados/detalles', row.idAbonado]"></p-button>
+                                <p-button icon="pi pi-money-bill"
+                                    styleClass="p-button-help p-button-text p-button-table"
+                                    (click)="nuevoPago(row.idAbonado)"></p-button>
+                            </div>
+                        </td>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="footer">
+                    <tr>
+                        <td colspan="7" class="text-right">Total General</td>
+                        <td class="text-right" xs>{{totalGeneral | currency: ' '}}</td>
+                        <!-- <td>{{thisYearTotal | currency: 'USD'}}</td> -->
+                    </tr>
+                </ng-template>
+
+            </p-table>
+        </div>
+
+    </div>
+</div>

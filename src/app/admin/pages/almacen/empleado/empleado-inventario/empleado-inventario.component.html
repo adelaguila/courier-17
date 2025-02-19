@@ -1,0 +1,101 @@
+<div class="card">
+    <h5>Inventario de Productos por Empleado</h5>
+    <!-- <p>All input text components support floating labels by adding (<mark>.p-float-label</mark>) to wrapper class.</p> -->
+    <form [formGroup]="form" #formInventario="ngForm">
+        <div class="grid p-fluid mt-3">
+
+            <div class="field col-12 md:col-4">
+                <span class="p-float-label">
+                    <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" formControlName="empleado"
+                        [options]="empleados" optionLabel="name"></p-dropdown>
+                    <label for="dropdown">Empleado</label>
+                </span>
+            </div>
+            <div class="field col-12 md:col-2">
+                <button pButton type="button" label="Cargar" icon="pi pi-page" class="mr-2" (click)="cargar()"></button>
+            </div>
+
+        </div>
+    </form>
+</div>
+<div class="grid">
+    <!-- <div class="col-12"> -->
+    <div class="col-12 md:col-6">
+
+        <p-table [value]="listaProductosEmpleado" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+            [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-gridlines p-datatable-sm"
+            currentPageReportTemplate="Mostrando {first} de {last} de {totalRecords} registros"
+            [rowsPerPageOptions]="[5, 10, 20]">
+            <ng-template pTemplate="caption">
+                <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                    <h5 class="m-0">Insumos</h5>
+                    <!-- <div class="my-2">
+                        <button pButton type="button" label="Devolver" icon="pi pi-refresh" class="p-button-primary mr-2"
+                        ></button>
+                    </div> -->
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width:5%; min-width:100px"></th>
+                    <th style="width:70%; min-width:100px">Descripción</th>
+                    <th style="width:25%; min-width:100px">Stock</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-row>
+                <tr>
+                    <td>
+                        <p-button *ngIf="row.stock > 0" icon="pi pi-refresh" (onClick)="devolverProducto(row)"
+                            styleClass="p-button-info p-button-text p-button-table" pTooltip="Devolver"></p-button>
+                    </td>
+                    <td>{{ row.producto.nombreProducto }}</td>
+                    <td>{{ row.stock }}</td>
+                </tr>
+            </ng-template>
+
+
+        </p-table>
+
+
+    </div>
+
+    <div class="col-12 md:col-6">
+
+        <p-table [value]="listaONTSEmpleado" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+            [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-gridlines p-datatable-sm"
+            currentPageReportTemplate="Mostrando {first} de {last} de {totalRecords} registros"
+            [rowsPerPageOptions]="[5, 10, 20]">
+            <ng-template pTemplate="caption">
+                <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                    <h5 class="m-0">ONUS</h5>
+                    <!-- <div class="my-2">
+                    <button pButton type="button" label="Devolver" icon="pi pi-refresh" class="p-button-primary mr-2"
+                    ></button>
+                </div> -->
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width:5%; min-width:100px"></th>
+                    <th style="width:70%; min-width:100px">Descripción</th>
+                    <th style="width:25%; min-width:100px">Estado</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-row>
+                <tr>
+                    <td>
+                        <p-button icon="pi pi-refresh" styleClass="p-button-info p-button-text p-button-table"
+                            pTooltip="Devolver" (onClick)="devolverOnu(row)"></p-button>
+                    </td>
+                    <td>{{ row.serieMarca }}</td>
+                    <td>{{ row.estado }}</td>
+                </tr>
+            </ng-template>
+
+
+        </p-table>
+
+
+    </div>
+</div>
+<p-confirmDialog />

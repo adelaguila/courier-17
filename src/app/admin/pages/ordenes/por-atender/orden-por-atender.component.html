@@ -1,0 +1,141 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-3 py-3">
+            <p-toast></p-toast>
+            <p-table #dt [value]="ordenes" dataKey="idOrden" styleClass="p-datatable-sm p-datatable-gridlines"
+                [tableStyle]="{ 'min-width': '75rem' }" [paginator]="true" [rows]="rows" selectionMode="single"
+                [totalRecords]="totalRecords" [loading]="loading" [showCurrentPageReport]="true"
+                [rowsPerPageOptions]="rowsPerPageOptions" [scrollable]="true" scrollHeight="600px"
+                currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} registros">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h5 class="m-0">Ordenes x Atender</h5>
+                        <div class="my-2">
+
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+
+                        <th pSortableColumn="orden.idOrden">ID <p-sortIcon field="orden.idOrden"></p-sortIcon></th>
+
+                        <th pSortableColumn="orden.fechaAsignacion">F.Asignación <p-sortIcon
+                                field="orden.fechaAsignacion"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="user.name">Técnico <p-sortIcon field="user.name"></p-sortIcon></th>
+
+                        <th pSortableColumn="orden.tipoOrden.nombreTipoOrden">Tipo <p-sortIcon
+                                field="orden.tipoOrden.nombreTipoOrden"></p-sortIcon>
+                        </th>
+                        <th pFrozenColumn pSortableColumn="orden.abonado.tercero.nombreTercero">Abonado <p-sortIcon
+                                field="orden.abonado.tercero.nombreTercero"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="orden.abonado.sector.nombreSector">Sector <p-sortIcon
+                                field="orden.abonado.sector.nombreSector"></p-sortIcon></th>
+                        <th>Dirección</th>
+
+                        <th pFrozenColumn></th>
+                    </tr>
+                    <tr>
+                        <th pFrozenColumn>
+                            <p-columnFilter type="text" field="orden.idOrden"
+                                [matchModeOptions]="matchModeOptionsNumber" [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+
+                        <th>
+                            <p-columnFilter type="text" field="orden.fechaAsignacion"
+                                [matchModeOptions]="matchModeOptionsText" [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="user.name" [matchModeOptions]="matchModeOptionsText"
+                                [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+
+                        <th>
+                            <p-columnFilter type="text" field="orden.tipoOrden.nombreTipoOrden"
+                                [matchModeOptions]="matchModeOptionsText" [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+                        <th pFrozenColumn>
+                            <p-columnFilter type="text" field="orden.abonado.tercero.nombreTercero"
+                                [matchModeOptions]="matchModeOptionsText" [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="orden.abonado.sector.nombreSector"
+                                [matchModeOptions]="matchModeOptionsText" [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+                        <th>
+                        </th>
+                        <th pFrozenColumn></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-row>
+                    <tr>
+                        <td pFrozenColumn style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">ID</span>
+                            {{row.orden.idOrden}}
+                        </td>
+
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">F.Asignación</span>
+                            {{row.orden.fechaAsignacion}}
+                        </td>
+                        <td style="width:20%; min-width:10rem;">
+                            <span class="p-column-title">Técnico</span>
+                            {{row.user.name}}
+                        </td>
+                        <td style="width:20%; min-width:15rem;">
+                            <span class="p-column-title">Tipo</span>
+                            {{row.orden.tipoOrden.nombreTipoOrden}} - {{row.orden.detalle}}
+                        </td>
+                        <td pFrozenColumn style="width:30%; min-width:20rem;">
+                            <span class="p-column-title">Abonado</span>
+                            {{row.orden.abonado.tercero.nombreTercero}}
+                        </td>
+
+                        <td style="width:20%; min-width:10rem;">
+                            <span class="p-column-title">Sector</span>
+                            {{row.orden.abonado.sector.nombreSector}}
+                        </td>
+                        <td style="width:20%; min-width:10rem;">
+                            <span class="p-column-title">Dirección</span>
+                            {{row.orden.abonado.via.tipoVia.idTipoVia}}. {{row.orden.abonado.via.nombreVia}}
+                            {{row.orden.abonado.numero}} {{row.orden.estado}}
+                        </td>
+
+                        <td style="width:10%; min-width:10rem;" pFrozenColumn>
+                            <div class="flex justify-content-center">
+
+                                <p-button *ngIf="row.orden.estado == 'ASIGNADO'" icon="pi pi-check-circle"
+                                    pTooltip="Atender" styleClass="p-button-info p-button-text p-button-table"
+                                    (click)="atenderOrden(row.orden)"></p-button>
+                                <p-button icon="pi pi-print"
+                                    styleClass="p-button-secondary p-button-text p-button-table" pTooltip="Imprimir"
+                                    (click)="imprimirOrden(row.orden)"></p-button>
+                                <p-button icon="pi pi-trash" styleClass="p-button-danger p-button-text p-button-table"
+                                    (click)="delete(row)"></p-button>
+
+
+                            </div>
+                        </td>
+
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <p-dialog [(visible)]="deleteOrdenDialog" header="Confirmar" [modal]="true" [style]="{width:'450px'}">
+            <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-question-circle mr-3" style="font-size: 2rem"></i>
+                <span *ngIf="ordenAsignacion">¿Está seguro que desea eliminar el registro?</span>
+            </div>
+            <ng-template pTemplate="footer">
+                <button pButton pRipple icon="pi pi-times" class="p-button-secondary" label="No"
+                    (click)="deleteOrdenDialog = false"></button>
+                <button pButton pRipple icon="pi pi-check" class="p-button-danger" label="Si, Eliminar"
+                    (click)="confirmDelete()"></button>
+            </ng-template>
+        </p-dialog>
+
+    </div>
+</div>

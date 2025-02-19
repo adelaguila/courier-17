@@ -1,0 +1,50 @@
+<div class="h-screen text-bluegray-700" style="background: linear-gradient(180deg, #dbe0e9 0%, #d5d5d6 100%)">
+    <div class="flex justify-content-center align-items-center h-full ">
+        <div class="h-full text-center py-6 px-4 flex justify-content-between flex-column max-w-30rem">
+
+            <div>
+                <h2 class="text-bluegray-700">Ingrese su contraseña nueva</h2>
+                <form [formGroup]="form" (submit)="onSubmit()" *ngIf="validRandom">
+                    <div class="p-fluid mb-4">
+                        <div class="field">
+                            <label for="password">New Password</label>
+                            <input type="password" pInputText formControlName="password"
+                                [ngClass]="{'ng-invalid ng-dirty' : f['password'].touched && f['password'].errors}" />
+                            <small class="ng-dirty ng-invalid"
+                                *ngIf="f['password'].errors?.['required'] && f['password'].touched">Es
+                                requerido</small>
+                        </div>
+                        <div class="field">
+                            <label for="password">Repeat Password</label>
+                            <input type="password" pInputText formControlName="confirmPassword"
+                                [ngClass]="{'ng-invalid ng-dirty' : f['password'].touched && f['password'].errors}" />
+                            <small class="ng-dirty ng-invalid"
+                                *ngIf="f['password'].errors?.['required'] && f['password'].touched">Es
+                                requerido</small>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                            [disabled]="form.invalid"></button>
+                    </div>
+                </form>
+
+                <p-messages *ngIf="form.controls['confirmPassword'].errors?.['not_the_same']" [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
+                <p-messages *ngIf="message" [(value)]="messages1" [enableService]="false" [closable]="false"></p-messages>
+                <p-messages *ngIf="error" [(value)]="messages2" [enableService]="false" [closable]="false"></p-messages>
+
+
+
+            </div>
+
+            <p class="font-semibold m-0 text-bluegray-200">
+                <!-- A problem? <a href="#" class="text-white">Click here</a> and let
+                us help you. -->
+                Datasystem Soluciones Integrales E.I.R.L.
+            </p>
+        </div>
+    </div>
+</div>
+<!-- <app-config [minimal]="true"></app-config> -->

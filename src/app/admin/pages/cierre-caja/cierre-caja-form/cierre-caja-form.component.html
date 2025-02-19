@@ -1,0 +1,39 @@
+<div class="card">
+    <form [formGroup]="form" (submit)="operate()" #formulario="ngForm">
+        <div class="p-fluid mb-2">
+            <div class="formgrid grid">
+                <div class="field col md:col-2">
+                    <label for="idPlan">ID</label>
+                    <input type="text" pInputText formControlName="idCierreCaja" readonly />
+                </div>
+
+                <div class="field col md:col-10">
+                    <label for="fecha">Fecha</label>
+                    <input type="date" pInputText formControlName="fecha"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['fecha'].touched && f['fecha'].errors}" />
+                    <small class="ng-dirty ng-invalid" *ngIf="f['fecha'].errors?.['required'] && f['fecha'].touched">Es
+                        requerido</small>
+                </div>
+                <!-- <div class="field col md:col-2">
+                    <label for="fecha">.</label>
+                    <button pButton pRipple label="Cargar" class="mr-2 mb-2" type="button"
+                        [disabled]="formulario.invalid" (click)="cargar()"></button>
+                </div> -->
+
+            </div>
+
+        </div>
+
+        <div>
+            <button pButton pRipple label="Generar Cierre" class="mr-2 mb-2" type="button"
+            [disabled]="formulario.invalid" (click)="operate()"></button>
+            <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2"
+                (click)="close()"></button>
+        </div>
+
+    </form>
+
+
+</div>
+
+<p-confirmDialog />

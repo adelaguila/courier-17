@@ -1,0 +1,75 @@
+<div class="grid">
+    <div class="col-12">
+
+        <p-toast></p-toast>
+        <p-table [value]="pagos" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+            [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-gridlines p-datatable-sm"
+            currentPageReportTemplate="Mostrando {first} de {last} de {totalRecords} registros"
+            [rowsPerPageOptions]="[5, 10, 20]">
+            <ng-template pTemplate="caption">
+                <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                    <h5 class="m-0">Pagos registrados por fecha</h5>
+                    <div class="my-2">
+                        <form [formGroup]="form" #formulario="ngForm">
+                            <label for="dropdown" class="mr-2">Rango de Fechas: </label>
+                            <p-calendar [(ngModel)]="rangeDates" selectionMode="range" formControlName="rango" [readonlyInput]="true" class="mr-2" />
+                        <button pButton pRipple label="Cargar" icon="pi pi-sync"
+                            class="p-button-primary p-button-sm mr-1" (click)="cargar()" ></button>
+                            <button pButton pRipple label="Exportar" icon="pi pi-file-export"
+                            class="p-button-primary p-button-sm mr-1"  (click)="exportar()"></button>
+                        </form>
+                    </div>
+                </div>
+
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+
+                    <th style="width:10%; min-width:100px">ID</th>
+                    <th style="width:10%; min-width:100px">Fecha</th>
+                    <th style="width:20%; min-width:100px">Abonado</th>
+                    <th style="width:15%; min-width:100px">Referencia</th>
+                    <th style="width:10%; min-width:100px">Tipo</th>
+                    <th style="width:10%; min-width:100px">Importe</th>
+                    <th style="width:10%; min-width:100px">Cobrador</th>
+                    <th style="width:10%; min-width:100px">Cajero</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-row>
+                <tr>
+
+                    <td>{{ row.idPago }}</td>
+                    <td>{{ row.fechaPago }}</td>
+                    <td>{{ row.abonado }}</td>
+                    <td>{{ row.referencia }}</td>
+                    <td>{{ row.tipoPago }}</td>
+                    <td class="text-right">{{ row.total | currency: ' ' }}</td>
+                    <td>{{ row.cobrador }}</td>
+                    <td>{{ row.cajero }}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <tr>
+                    <td colspan="6" class="text-right">Total General</td>
+                    <td class="text-right"xs>{{totalGeneral | currency: ' '}}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="6" class="text-right">Total Efectivo</td>
+                    <td class="text-right"xs>{{totalEfectivo | currency: ' '}}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="6" class="text-right">Total Transferencias</td>
+                    <td class="text-right"xs>{{totalTransferencia | currency: ' '}}</td>
+                    <td></td>
+                </tr>
+            </ng-template>
+
+        </p-table>
+
+
+    </div>
+
+</div>
+<p-confirmDialog />

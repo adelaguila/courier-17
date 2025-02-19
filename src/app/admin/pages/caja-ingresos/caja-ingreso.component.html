@@ -1,0 +1,129 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-3 py-3">
+            <p-toast></p-toast>
+            <p-table #dt [value]="cajaIngresos" [lazy]="true" (onLazyLoad)="loadCajaIngresos($event)" dataKey="id"
+                styleClass="p-datatable-sm p-datatable-gridlines" [tableStyle]="{ 'min-width': '75rem' }"
+                [paginator]="true" [rows]="rows" selectionMode="single" [totalRecords]="totalRecords"
+                [loading]="loading" [showCurrentPageReport]="true" [rowsPerPageOptions]="rowsPerPageOptions"
+                [scrollable]="true" scrollHeight="600px"
+                currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} registros">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h5 class="m-0">Mantenimiento de Ingresos - Caja</h5>
+                        <div class="my-2">
+                            <button pButton pRipple label="Nuevo" icon="pi pi-plus"
+                                class="p-button-primary p-button-sm mr-2" (click)="new()"></button>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="idCajaIngreso">ID <p-sortIcon field="idCajaIngreso"></p-sortIcon></th>
+                        <th pSortableColumn="fecha">Fecha <p-sortIcon field="fecha"></p-sortIcon></th>
+                        <th pSortableColumn="tipoIngreso">Tipo <p-sortIcon field="tipoIngreso"></p-sortIcon></th>
+                        <th pSortableColumn="documento">Documento <p-sortIcon field="documento"></p-sortIcon></th>
+                        <th pSortableColumn="cliente">Cliente <p-sortIcon field="cliente"></p-sortIcon></th>
+                        <th pSortableColumn="glosa">Glosa <p-sortIcon field="glosa"></p-sortIcon></th>
+                        <th pSortableColumn="importe">Importe <p-sortIcon field="importe"></p-sortIcon></th>
+                        <th pSortableColumn="idCierre">IDC <p-sortIcon field="idCierre"></p-sortIcon></th>
+
+                        <th pFrozenColumn></th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <p-columnFilter type="text" field="idCajaIngreso"
+                                [matchModeOptions]="matchModeOptionsNumber" [matchMode]="'equals'"></p-columnFilter>
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="fecha"
+                                [matchModeOptions]="matchModeOptionsText" [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="tipoIngreso"
+                                [matchModeOptions]="matchModeOptionsText" [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="documento"
+                                [matchModeOptions]="matchModeOptionsText" [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="cliente"
+                                [matchModeOptions]="matchModeOptionsText" [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+                        <th></th>
+                        <th></th>
+                        <th>
+                            <p-columnFilter type="text" field="idCierre"
+                                [matchModeOptions]="matchModeOptionsNumber" [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+
+                        <th pFrozenColumn></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-cajaIngreso>
+                    <tr>
+                        <td style="width:5%; min-width:5rem;">
+                            <span class="p-column-title">ID</span>
+                            {{cajaIngreso.idCajaIngreso}}
+                        </td>
+
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">Fecha</span>
+                            {{cajaIngreso.fecha}}
+                        </td>
+
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">Tipo</span>
+                            {{cajaIngreso.tipoIngreso.nombreTipoIngreso}}
+                        </td>
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">Documento</span>
+                            {{cajaIngreso.documento}}
+                        </td>
+                        <td style="width:20%; min-width:10rem;">
+                            <span class="p-column-title">Cliente</span>
+                            {{cajaIngreso.cliente}}
+                        </td>
+                        <td style="width:20%; min-width:10rem;">
+                            <span class="p-column-title">Glosa</span>
+                            {{cajaIngreso.glosa}}
+                        </td>
+                        <td style="width:10%; min-width:10rem;" class="text-right">
+                            <span class="p-column-title">Importe</span>
+                            {{cajaIngreso.importe | currency: ' '}}
+                        </td>
+                        <td style="width:5%; min-width:5rem;">
+                            <span class="p-column-title">IDC</span>
+                            {{cajaIngreso.idCierre}}
+                        </td>
+
+                        <td style="width:10%; min-width:10rem;" pFrozenColumn>
+                            <div class="flex justify-content-center" *ngIf="cajaIngreso.idCierre == null">
+                                <p-button icon="pi pi-pencil" styleClass="p-button-info p-button-text p-button-table"
+                                    (click)="edit(cajaIngreso)"></p-button>
+                                <p-button icon="pi pi-trash" styleClass="p-button-danger p-button-text p-button-table"
+                                    (click)="delete(cajaIngreso)"></p-button>
+                            </div>
+                        </td>
+
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <p-dialog [(visible)]="deleteCajaIngresoDialog" header="Confirmar" [modal]="true" [style]="{width:'450px'}">
+            <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-question-circle mr-3" style="font-size: 2rem"></i>
+                <span *ngIf="cajaIngreso">¿Está seguro que desea eliminar el registro</span>
+            </div>
+            <ng-template pTemplate="footer">
+                <button pButton pRipple icon="pi pi-times" class="p-button-secondary" label="No"
+                    (click)="deleteCajaIngresoDialog = false"></button>
+                <button pButton pRipple icon="pi pi-check" class="p-button-danger" label="Si, Eliminar"
+                    (click)="confirmDelete()"></button>
+            </ng-template>
+        </p-dialog>
+
+    </div>
+</div>

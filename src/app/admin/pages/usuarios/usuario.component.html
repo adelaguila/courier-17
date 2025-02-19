@@ -1,0 +1,109 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-3 py-3">
+            <p-toast key="tc"></p-toast>
+            <p-table #dt [value]="usuarios" [lazy]="true" (onLazyLoad)="loadUsuarios($event)" dataKey="id"
+                styleClass="p-datatable-sm p-datatable-gridlines" [tableStyle]="{ 'min-width': '75rem' }"
+                [paginator]="true" [rows]="rows" selectionMode="single" [totalRecords]="totalRecords"
+                [loading]="loading" [showCurrentPageReport]="true" [rowsPerPageOptions]="rowsPerPageOptions"
+                [scrollable]="true" scrollHeight="600px"
+                currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} registros">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h5 class="m-0">Mantenimiento de Usuarios</h5>
+                        <div class="my-2">
+                            <button pButton pRipple label="Nuevo" icon="pi pi-plus"
+                                class="p-button-primary p-button-sm mr-2" (click)="new()"></button>
+                            <button pButton pRipple label="Importar" icon="pi pi-upload"
+                                class="p-button-secondary p-button-sm mr-2" (click)="importarUsuarios()"></button>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="idUser">ID <p-sortIcon field="idUser"></p-sortIcon></th>
+                        <th pSortableColumn="username">Username <p-sortIcon field="username"></p-sortIcon></th>
+                        <th pSortableColumn="name">Nombre <p-sortIcon field="name"></p-sortIcon>
+                        <th pSortableColumn="enabled">Activo <p-sortIcon field="enabled"></p-sortIcon>
+                        <th pFrozenColumn></th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <p-columnFilter type="text" field="idUser" [matchModeOptions]="matchModeOptionsNumber"
+                                [matchMode]="'equals'"></p-columnFilter>
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="username" [matchModeOptions]="matchModeOptionsText"
+                                [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="name" [matchModeOptions]="matchModeOptionsText"
+                                [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="enabled" [matchModeOptions]="matchModeOptionsText"
+                                [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+                        <th pFrozenColumn></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-usuario>
+                    <tr>
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">ID</span>
+                            {{usuario.idUser}}
+                        </td>
+
+                        <td style="width:13%; min-width:10rem;">
+                            <span class="p-column-title">Username</span>
+                            {{usuario.username}}
+                        </td>
+
+                        <td style="width:25%; min-width:10rem;">
+                            <span class="p-column-title">Nombre</span>
+                            {{usuario.name}}
+                        </td>
+
+                        <td style="width:10%; min-width:10rem; text-align: center;">
+                            <span class="p-column-title">Activo</span>
+                            <i class="pi"
+                                [ngClass]="{'true-icon pi-check-circle text-green-500': usuario.enabled, 'false-icon pi-times-circle text-pink-500': !usuario.enabled}"></i>
+
+                        </td>
+
+                        <td style="width:7%; min-width:10rem;" pFrozenColumn>
+                            <div class="flex justify-content-center">
+                                <p-button icon="pi pi-lock-open" *ngIf="!usuario.enabled"
+                                    styleClass="p-button-success p-button-text p-button-table"
+                                    (click)="cambiarEstado($event, usuario)"></p-button>
+                                <p-button icon="pi pi-lock" *ngIf="usuario.enabled"
+                                    styleClass="p-button-danger p-button-text p-button-table"
+                                    (click)="cambiarEstado($event, usuario)"></p-button>
+                                <p-button icon="pi pi-pencil" styleClass="p-button-info p-button-text p-button-table"
+                                    (click)="edit(usuario)"></p-button>
+                                <p-button icon="pi pi-trash" styleClass="p-button-danger p-button-text p-button-table"
+                                    (click)="delete(usuario)"></p-button>
+                            </div>
+                        </td>
+
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <p-dialog [(visible)]="deleteUserDialog" header="Confirmar" [modal]="true" [style]="{width:'450px'}">
+            <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-question-circle mr-3" style="font-size: 2rem"></i>
+                <span *ngIf="usuario">¿Está seguro que desea eliminar el registro <b>{{usuario.name}}</b>?</span>
+            </div>
+            <ng-template pTemplate="footer">
+                <button pButton pRipple icon="pi pi-times" class="p-button-secondary" label="No"
+                    (click)="deleteUserDialog = false"></button>
+                <button pButton pRipple icon="pi pi-check" class="p-button-danger" label="Si, Eliminar"
+                    (click)="confirmDelete()"></button>
+            </ng-template>
+        </p-dialog>
+
+        <p-confirmDialog />
+    </div>
+</div>

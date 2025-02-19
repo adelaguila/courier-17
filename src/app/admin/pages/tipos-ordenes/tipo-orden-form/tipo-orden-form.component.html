@@ -1,0 +1,40 @@
+<div class="card">
+    <form [formGroup]="form" (submit)="operate()" #formPlan="ngForm">
+        <div class="p-fluid mb-4" >
+            <div class="formgrid grid">
+                <div class="field col md:col-2">
+                    <label for="idTipoOrden">ID</label>
+                    <input type="text" pInputText formControlName="idTipoOrden" readonly />
+                </div>
+                <div class="field col md:col-7">
+                    <label for="nombreTipoOrden">Nombre Tipo Orden</label>
+                    <input type="text" pInputText formControlName="nombreTipoOrden"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['nombreTipoOrden'].touched && f['nombreTipoOrden'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['nombreTipoOrden'].errors?.['required'] && f['nombreTipoOrden'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['nombreTipoOrden'].errors?.['minlength'] && f['nombreTipoOrden'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+
+                <div class="field col md:col-3">
+                    <label for="comision">Comisión</label>
+                    <p-dropdown appendTo="body" formControlName="comision" [options]="generaComision" optionLabel="name" optionValue="code"
+                        placeholder="Seleccionar..." [virtualScroll]="true" [virtualScrollItemSize]="2"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['comision'].touched && f['comision'].errors}"></p-dropdown>
+                    <small class="ng-dirty ng-invalid" *ngIf="f['comision'].errors?.['required'] && f['comision'].touched"
+                        class="invalid">Es requerido</small>
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                [disabled]="formPlan.invalid"></button>
+            <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2" (click)="close()"></button>
+        </div>
+
+    </form>
+</div>

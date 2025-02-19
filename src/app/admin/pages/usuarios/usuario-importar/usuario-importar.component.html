@@ -1,0 +1,25 @@
+<div class="card formgrid grid">
+    <div class="field col-12 md:col-12">
+        <p-progressSpinner *ngIf="isLoadingResults || isRateLimitReached" styleClass="w-4rem h-4rem" strokeWidth="8"
+            fill="var(--surface-ground)" animationDuration=".5s" />
+    </div>
+
+    <div class="field col-12 md:col-12">
+        <p-button label="Seleccionar Archivo" onclick="document.getElementById('flFile').click()" />
+        <input type="file" id="flFile" style="display: none;" (change)="selectFile($event)" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+    </div>
+
+    <div class="field col-12 md:col-12">
+        <div *ngIf="filename">
+            <hr>
+            <p>Archivo seleccionado: {{filename}}</p>
+            <hr>
+        </div>
+
+    </div>
+
+    <div class="field col-12 md:col-12">
+        <p-button *ngIf="filename" (click)="upload()" [disabled]="!selectedFiles" label="Subir archhivo" />
+
+    </div>
+</div>

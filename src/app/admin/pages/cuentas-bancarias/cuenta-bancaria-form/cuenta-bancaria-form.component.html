@@ -1,0 +1,78 @@
+<div class="card">
+    <form [formGroup]="form" (submit)="operate()" #formulario="ngForm">
+        <div class="p-fluid">
+            <div class="formgrid grid">
+                <div class="field col md:col-6">
+                    <label for="numeroCuenta">Número</label>
+                    <input type="text" pInputText formControlName="numeroCuenta" [readOnly]="readOnlyID"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['numeroCuenta'].touched && f['numeroCuenta'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['numeroCuenta'].errors?.['required'] && f['numeroCuenta'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['numeroCuenta'].errors?.['minlength'] && f['numeroCuenta'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+
+                <div class="field col md:col-6">
+                    <label for="cci">CCI</label>
+                    <input type="text" pInputText formControlName="cci"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['cci'].touched && f['cci'].errors}" />
+                    <small class="ng-dirty ng-invalid" *ngIf="f['cci'].errors?.['required'] && f['cci'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid" *ngIf="f['cci'].errors?.['minlength'] && f['cci'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+
+            </div>
+
+            <div class="field">
+                <label for="descripcion">Descripción</label>
+                <input type="text" pInputText formControlName="descripcion"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['descripcion'].touched && f['descripcion'].errors}" />
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['descripcion'].errors?.['required'] && f['descripcion'].touched">Es
+                    requerido</small>
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['descripcion'].errors?.['minlength'] && f['descripcion'].touched">Debe
+                    ingresar mínimo 2 caracteres</small>
+            </div>
+            <div class="formgrid grid">
+                <div class="field col md:col-4">
+                    <label for="banco">Banco</label>
+                    <p-dropdown appendTo="body" formControlName="banco" [options]="bancos" [virtualScroll]="true" [virtualScrollItemSize]="2"
+                        optionLabel="nombreBanco" placeholder="Seleccionar..."
+                        [ngClass]="{'ng-invalid ng-dirty' : f['banco'].touched && f['banco'].errors}"></p-dropdown>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['banco'].errors?.['required'] && f['banco'].touched" class="invalid">Es
+                        requerido</small>
+                </div>
+
+                <div class="field col md:col-4">
+                    <label for="moneda">Moneda</label>
+                    <p-dropdown appendTo="body" formControlName="moneda" [options]="monedas" [virtualScroll]="true" [virtualScrollItemSize]="2"
+                        optionLabel="nombreMoneda" placeholder="Seleccionar..."
+                        [ngClass]="{'ng-invalid ng-dirty' : f['moneda'].touched && f['moneda'].errors}"></p-dropdown>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['moneda'].errors?.['required'] && f['moneda'].touched" class="invalid">Es
+                        requerido</small>
+                </div>
+
+                <div class="field col md:col-4">
+                    <label for="saldoInicial">Saldo Inicial</label>
+                    <input type="text" pInputText formControlName="saldoInicial"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['saldoInicial'].touched && f['saldoInicial'].errors}" />
+                    <small class="ng-dirty ng-invalid" *ngIf="f['saldoInicial'].errors?.['required'] && f['saldoInicial'].touched">Es
+                        requerido</small>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                [disabled]="formulario.invalid"></button>
+            <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2"
+                (click)="close()"></button>
+        </div>
+
+    </form>
+</div>

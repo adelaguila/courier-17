@@ -1,0 +1,40 @@
+<div class="card">
+    <form [formGroup]="form" (submit)="operate()" #formulario="ngForm">
+        <div class="p-fluid mb-4">
+            <div class="formgrid grid">
+                <div class="field col md:col-3">
+                    <label for="idBanco">ID</label>
+                    <input type="text" pInputText formControlName="idBanco"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['idBanco'].touched && f['idBanco'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['idBanco'].errors?.['required'] && f['idBanco'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['idBanco'].errors?.['minlength'] && f['idBanco'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+                <div class="field col md:col-9">
+                    <label for="nombreBanco">Nombre</label>
+                    <input type="text" pInputText formControlName="nombreBanco"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['nombreBanco'].touched && f['nombreBanco'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['nombreBanco'].errors?.['required'] && f['nombreBanco'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['nombreBanco'].errors?.['minlength'] && f['nombreBanco'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div>
+            <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                [disabled]="formulario.invalid"></button>
+            <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2"
+                (click)="close()"></button>
+        </div>
+
+    </form>
+</div>

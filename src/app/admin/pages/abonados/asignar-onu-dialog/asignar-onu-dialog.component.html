@@ -1,0 +1,36 @@
+<div class="card">
+    <form [formGroup]="form" (submit)="operate()" #formulario="ngForm">
+        <div class="p-fluid">
+            <div class="formgrid grid">
+                <div class="field col md:col-8">
+                    <label for="fecha">Fecha</label>
+                    <input type="date" pInputText formControlName="fecha"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['fecha'].touched && f['fecha'].errors}" />
+                    <small class="ng-dirty ng-invalid" *ngIf="f['fecha'].errors?.['required'] && f['fecha'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['fecha'].errors?.['minlength'] && f['fecha'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="ont">ONT</label>
+                <p-dropdown appendTo="body" formControlName="ont" [options]="ontsDisponibles" optionLabel="serieMarca"
+                    [filter]="true" filterBy="serieMarca" [showClear]="true" placeholder="Seleccionar..."
+                    [virtualScroll]="true" [virtualScrollItemSize]="2"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['ont'].touched && f['ont'].errors}"></p-dropdown>
+                <small class="ng-dirty ng-invalid" *ngIf="f['ont'].errors?.['required'] && f['ont'].touched"
+                    class="invalid">Es requerido</small>
+            </div>
+        </div>
+
+        <div>
+            <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                [disabled]="formulario.invalid"></button>
+            <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2"
+                (click)="close()"></button>
+        </div>
+
+    </form>
+</div>

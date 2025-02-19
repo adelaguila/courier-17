@@ -1,0 +1,28 @@
+<div>
+
+    <!-- <div class="flex justify-content-center flex-wrap gap-3 mb-4">
+        <i class="pi pi-check-square color-verde" style="font-size: 2rem"></i>
+    </div> -->
+
+    <div class="flex justify-content-center flex-wrap gap-3 mb-4">
+        <!-- <h4 class="color-verde">Comprobante generado con éxito</h4> -->
+        <h4 *ngIf="facturacion" class="color-verde">{{facturacion.respuestaCdr}}</h4>
+    </div>
+
+    <!-- <div class="flex justify-content-center flex-wrap gap-3 mb-4">
+        <span class="p-buttonset">
+            <button pButton pRipple label="Imprimir A4" icon="pi pi-print" (click)="imprimirA4()"></button>
+            <button pButton pRipple label="Imprimir Ticket" icon="pi pi-ticket" (click)="imprimirTicket()"></button>
+            <button pButton pRipple label="Nuevo Comprobante" icon="pi pi-file" (click)="generarNuevoComprobante()"></button>
+            <button pButton pRipple label="Ir al listado" icon="pi pi-book" (click)="irListado()"></button>
+        </span>
+    </div> -->
+
+    <div class="card flex flex-wrap gap-3 justify-content-center">
+        <button pButton pRipple label="A4" icon="pi pi-print" (click)="imprimirA4()"></button>
+        <button pButton pRipple label="Ticket" icon="pi pi-ticket" (click)="imprimirTicket()"></button>
+        <button pButton pRipple label="Nuevo" icon="pi pi-file"
+            (click)="generarNuevoComprobante()"></button>
+        <button pButton pRipple label="Listado" icon="pi pi-book" (click)="irListado()"></button>
+    </div>
+</div>

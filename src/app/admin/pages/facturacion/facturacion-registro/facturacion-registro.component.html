@@ -1,0 +1,227 @@
+<p-toast position="top-center" key="tc"></p-toast>
+<form [formGroup]="form"  #formFacturacion="ngForm">
+    <div class="grid">
+
+
+        <div class="col-12 md:col-9">
+
+            <div class="card p-fluid">
+
+                <!-- <form [formGroup]="form" (submit)="operate()" #formAbonado="ngForm"> -->
+                <!-- <form> -->
+                <h5>Datos Comprobante</h5>
+                <div class="p-formgrid grid">
+                    <div class="field col-12 md:col-4">
+                        <label for="tipoComprobante">Tipo Compobante</label>
+                        <p-dropdown appendTo="body" formControlName="tipoComprobante" [options]="tiposComprobantes"
+                            optionLabel="name" optionValue="code" (onChange)="onChange()" placeholder="Seleccionar" [virtualScroll]="true" [virtualScrollItemSize]="2"
+                            [ngClass]="{'ng-invalid ng-dirty' : f['tipoPago'].touched && f['tipoPago'].errors}"></p-dropdown>
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['tipoPago'].errors?.['required'] && f['tipoPago'].touched" class="invalid">Es
+                            requerido</small>
+                    </div>
+                    <div class="field col-12 md:col-2">
+                        <label for="serie">Serie</label>
+                        <p-dropdown appendTo="body" formControlName="serie" [options]="seriesFiltrados"
+                            optionLabel="serie" optionValue="serie" [virtualScroll]="true" [virtualScrollItemSize]="2"
+                            [ngClass]="{'ng-invalid ng-dirty' : f['serie'].touched && f['serie'].errors}"></p-dropdown>
+                        <small class="ng-dirty ng-invalid" *ngIf="f['serie'].errors?.['required'] && f['serie'].touched"
+                            class="invalid">Es
+                            requerido</small>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="tipoOperacion">Tipo Venta</label>
+                        <p-dropdown appendTo="body" formControlName="tipoVenta" [options]="tiposVentas"
+                            optionLabel="name" optionValue="code" (onChange)="onChangeTipoVenta()" [virtualScroll]="true" [virtualScrollItemSize]="2"
+                            [ngClass]="{'ng-invalid ng-dirty' : f['tipoVenta'].touched && f['tipoVenta'].errors}"></p-dropdown>
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['tipoVenta'].errors?.['required'] && f['tipoVenta'].touched" class="invalid">Es
+                            requerido</small>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="tipoPago">Tipo Pago</label>
+                        <p-dropdown appendTo="body" formControlName="tipoPago" [options]="tiposPagos" optionLabel="name"
+                            optionValue="code" [virtualScroll]="true" [virtualScrollItemSize]="2"
+                            [ngClass]="{'ng-invalid ng-dirty' : f['tipoPago'].touched && f['tipoPago'].errors}"></p-dropdown>
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['tipoPago'].errors?.['required'] && f['tipoPago'].touched" class="invalid">Es
+                            requerido</small>
+                    </div>
+                </div>
+                <div class="p-formgrid grid">
+                    <div class="field col-12 md:col-3">
+                        <label for="moneda">Moneda</label>
+                        <p-dropdown appendTo="body" formControlName="moneda" [options]="monedas"
+                            optionLabel="name" optionValue="code" [virtualScroll]="true" [virtualScrollItemSize]="2"
+                            [ngClass]="{'ng-invalid ng-dirty' : f['moneda'].touched && f['moneda'].errors}"></p-dropdown>
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['moneda'].errors?.['required'] && f['moneda'].touched" class="invalid">Es
+                            requerido</small>
+                    </div>
+
+                    <div class="field col-12 md:col-3">
+                        <label for="tipoCambio">Tipo de cambio</label>
+                        <input type="number" pInputText formControlName="tipoCambio"/>
+                        <small class="ng-dirty ng-invalid"
+                        *ngIf="f['tipoCambio'].errors?.['required'] && f['tipoCambio'].touched" class="invalid">Es
+                        requerido</small>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="fechaEmision">F.Emisión</label>
+                        <!-- <input type="date" pInputText formControlName="fechaEmision"
+                            [ngClass]="{'ng-invalid ng-dirty' : f['fechaEmision'].touched && f['fechaEmision'].errors}" />
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['fechaEmision'].errors?.['required'] && f['fechaEmision'].touched">Es
+                            requerido</small> -->
+                            <p-calendar formControlName="fechaEmision" dateFormat="dd/mm/yy" [ngClass]="{'ng-invalid ng-dirty' : f['fechaEmision'].touched && f['fechaEmision'].errors}" />
+                            <small class="ng-dirty ng-invalid"
+                            *ngIf="f['fechaEmision'].errors?.['required'] && f['fechaEmision'].touched">Es
+                            requerido</small>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="fechaVencimiento">F.Vencimiento</label>
+                        <p-calendar formControlName="fechaVencimiento" dateFormat="dd/mm/yy" [ngClass]="{'ng-invalid ng-dirty' : f['fechaVencimiento'].touched && f['fechaVencimiento'].errors}" />
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['fechaVencimiento'].errors?.['required'] && f['fechaVencimiento'].touched">Es
+                            requerido</small>
+                    </div>
+                </div>
+
+                <div class="p-formgrid grid">
+                    <div class="field col-12 md:col-6">
+                        <label for="nombreTercero">Cliente</label>
+                        <div class="p-inputgroup">
+                            <p-autoComplete formControlName="tercero" [forceSelection]="true"
+                                [suggestions]="tercerosFiltrados" (completeMethod)="filtrarTerceros($event)"
+                                field="nombreTercero" styleClass="w-full" appendTo="body"
+                                (onSelect)="onChangeTercero()"></p-autoComplete>
+
+                            <button type="button" pButton icon="pi pi-plus" styleClass="p-button-warn"></button>
+                        </div>
+
+                    </div>
+
+                    <div class="field col-12 md:col-6">
+                        <label for="direccion">Dirección</label>
+                        <p-dropdown appendTo="body" formControlName="direccion" [options]="direcciones"
+                            optionLabel="direccion"
+                            [ngClass]="{'ng-invalid ng-dirty' : f['direccion'].touched && f['direccion'].errors}"></p-dropdown>
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['direccion'].errors?.['required'] && f['direccion'].touched" class="invalid">Es
+                            requerido</small>
+
+                    </div>
+
+                </div>
+
+                <div class="p-formgrid grid">
+                    <div class="field col-12 md:col-7">
+                        <label for="direccion">Detalle</label>
+                        <input type="text" *ngIf="tipoVenta!='BIENES'" pInputText formControlName="glosa"/>
+                        <p-autoComplete *ngIf="tipoVenta=='BIENES'" formControlName="producto" [forceSelection]="true" #inputProducto
+                            [suggestions]="productosFiltrados" (completeMethod)="filtrarProductos($event)"
+                            field="nombreProducto" styleClass="w-full" appendTo="body"></p-autoComplete>
+                    </div>
+
+                    <div class="field col-12 md:col-2">
+                        <label for="direccion">Cantidad</label>
+                        <input type="number" pInputText formControlName="cantidad"/>
+                    </div>
+
+                    <div class="field col-12 md:col-3">
+                        <label for="direccion">Precio</label>
+                        <div class="p-inputgroup">
+                            <input type="text" pInputText id="precio" formControlName="precio"/>
+                            <button type="button" pButton icon="pi pi-plus" styleClass="p-button-warn"
+                                label="Agregar" (click)="agregarItem()"></button>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                <!-- </form> -->
+            </div>
+
+        </div>
+
+
+        <div class="col-12 md:col-3">
+
+            <div class="card p-fluid">
+                <h5>Datos Adicionales</h5>
+                <div class="field col-12">
+                    <label for="ordenCompra">Orden de Compra</label>
+                    <input type="text" formControlName="ordenCompra" pInputText />
+                </div>
+                <div class="field col-12">
+                    <label for="referencia">Referencia / Observaciones</label>
+                    <input type="text" formControlName="referencia" pInputText />
+                </div>
+
+                <div class="field col-12">
+                    <button pButton pRipple label="Generar" class="mb-2" type="button" (click)="operate()"
+                        ></button>
+
+                    <button pButton pRipple label="Cancelar" class="p-button-secondary mb-2" type="button"></button>
+                    <!-- <button pButton pRipple label="Otro" class="p-button-secondary mb-2" type="button" (click)="dialogOpciones()"></button> -->
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <div class="col-12 md:col-9">
+            <p-table [value]="items" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-gridlines p-datatable-sm"
+                currentPageReportTemplate="Mostrando {first} de {last} de {totalRecords} registros"
+                [rowsPerPageOptions]="[10, 20, 30, 40, 50]">
+                <!-- <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h5 class="m-0">Ordenes Registradas</h5>
+                        <div class="my-2">
+                            <button *ngIf="isEdit" pButton pRipple label="Nueva Orden" icon="pi pi-plus"
+                                class="p-button-primary mr-2" (click)="nuevaOrden()"></button>
+                        </div>
+                    </div>
+                </ng-template> -->
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="min-width:100px">Acción</th>
+                        <th style="min-width:100px">Descripción</th>
+                        <th style="min-width:100px">Cantidad</th>
+                        <th style="min-width:100px">Precio</th>
+                        <th style="min-width:100px">SubTotal</th>
+                        <th style="min-width:100px">IGV</th>
+                        <th style="min-width:100px">Total</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-row>
+                    <tr>
+                        <td style="width:5%; min-width:10rem;">
+                            <div class="flex">
+                                <p-button *ngIf="row.estado == 'REGISTRADO'" icon="pi pi-user-edit" pTooltip="Asignar"
+                                    styleClass="p-button-info p-button-text"></p-button>
+                            </div>
+                        </td>
+                        <td style="width:45%; min-width:10rem;">{{row.glosa}}</td>
+                        <td style="width:10%; min-width:10rem;">{{row.cantidad}}</td>
+                        <td style="width:10%; min-width:10rem;">{{row.precio}}</td>
+                        <td style="width:10%; min-width:10rem;">{{row.subtotal}}</td>
+                        <td style="width:10%; min-width:10rem;">{{row.igv}}</td>
+                        <td style="width:10%; min-width:10rem;">{{row.total}}</td>
+                    </tr>
+                </ng-template>
+
+            </p-table>
+
+        </div>
+
+    </div>
+
+</form>
+

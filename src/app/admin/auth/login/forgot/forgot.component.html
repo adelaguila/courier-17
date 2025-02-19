@@ -1,0 +1,26 @@
+<div class="h-screen text-bluegray-700" style="background: linear-gradient(180deg, #dbe0e9 0%, #d5d5d6 100%)" *ngIf="route.children.length === 0">
+    <div class="flex justify-content-center align-items-center h-full ">
+        <div class="h-full text-center py-6 px-4 flex justify-content-between flex-column max-w-30rem">
+
+            <div>
+                <a [routerLink]="['/']">
+                    <img src="assets/layout/images/logo-500-500.png" alt="poseidon-layout" height="150px" />
+                </a>
+                <h2 class="text-bluegray-700">Recuperar contraseña</h2>
+                <input type="email" autocomplete="off" pInputText placeholder="Email" [(ngModel)]="email" required
+                    class="w-11 mb-4 text-bluegray-600 surface-ground " />
+                <button pButton pRipple label="Enviar Correo" type="button" class="w-11 " (click)="sendMail()" [disabled]="!email"></button>
+
+                <p-messages *ngIf="message" [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
+                <p-messages *ngIf="error" [(value)]="messages1" [enableService]="false" [closable]="false"></p-messages>
+            </div>
+
+            <p class="font-semibold m-0 text-bluegray-200">
+                Datasystem Soluciones Integrales E.I.R.L.
+            </p>
+        </div>
+    </div>
+</div>
+
+<router-outlet *ngIf="route.children.length !== 0"></router-outlet>
+

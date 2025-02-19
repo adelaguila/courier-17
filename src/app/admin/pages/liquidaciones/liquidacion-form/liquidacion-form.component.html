@@ -1,0 +1,77 @@
+<div class="card">
+    <form [formGroup]="form" (submit)="operate()" #formulario="ngForm">
+        <div class="p-fluid">
+            <div class="formgrid grid">
+                <div class="field col md:col-2">
+                    <label for="idLiquidacion">ID</label>
+                    <input type="text" pInputText formControlName="idLiquidacion" readonly />
+                </div>
+                <div class="field col md:col-5">
+                    <label for="anio">Año</label>
+                    <input type="number" pInputText formControlName="anio"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['anio'].touched && f['anio'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['anio'].errors?.['required'] && f['anio'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['anio'].errors?.['minlength'] && f['anio'].touched">Debe
+                        ingresar mínimo 4 caracteres</small>
+                        <small class="ng-dirty ng-invalid"
+                        *ngIf="f['anio'].errors?.['maxlength'] && f['anio'].touched">Debe
+                        ingresar máximo 4 caracteres</small>
+                </div>
+
+                <div class="field col md:col-5">
+                    <label for="mes">Mes</label>
+                    <p-dropdown appendTo="body" formControlName="mes" [options]="meses" optionLabel="name"
+                        optionValue="code" placeholder="Seleccionar..."
+                        [ngClass]="{'ng-invalid ng-dirty' : f['mes'].touched && f['mes'].errors}"></p-dropdown>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['mes'].errors?.['required'] && f['mes'].touched" class="invalid">Es
+                        requerido</small>
+                </div>
+            </div>
+            <div class="field">
+                <label for="fechaEmision">Fecha Emisión</label>
+                <input type="date" pInputText formControlName="fechaEmision"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['fechaEmision'].touched && f['fechaEmision'].errors}" />
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['fechaEmision'].errors?.['required'] && f['fechaEmision'].touched">Es
+                    requerido</small>
+            </div>
+
+            <div class="field">
+                <label for="fechaCierre">Fecha Cierre</label>
+                <input type="date" pInputText formControlName="fechaCierre"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['fechaCierre'].touched && f['fechaCierre'].errors}" />
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['fechaCierre'].errors?.['required'] && f['fechaCierre'].touched">Es
+                    requerido</small>
+            </div>
+
+            <div class="field">
+                <label for="fechaCorte">Fecha Corte</label>
+                <input type="date" pInputText formControlName="fechaCorte"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['fechaCorte'].touched && f['fechaCorte'].errors}" />
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['fechaCorte'].errors?.['required'] && f['fechaCorte'].touched">Es
+                    requerido</small>
+            </div>
+
+            <div class="field">
+                <label for="fechaVencimiento">Fecha Vencimiento</label>
+                <input type="date" pInputText formControlName="fechaVencimiento"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['fechaVencimiento'].touched && f['fechaVencimiento'].errors}" />
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['fechaVencimiento'].errors?.['required'] && f['fechaVencimiento'].touched">Es
+                    requerido</small>
+            </div>
+        </div>
+
+        <div>
+            <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                [disabled]="formulario.invalid"></button>
+            <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2" (click)="close()"></button>
+        </div>
+    </form>
+</div>

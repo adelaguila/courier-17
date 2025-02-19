@@ -1,0 +1,221 @@
+<!-- <div class="card">
+    <form [formGroup]="form" (submit)="operate()" #formPlan="ngForm">
+        <div class="p-fluid mb-4" >
+            <div class="formgrid grid">
+                <div class="field col md:col-3">
+                    <label for="idPlan">ID</label>
+                    <input type="text" pInputText formControlName="idPlan" readonly />
+                </div>
+
+                <div class="field col md:col-9">
+                    <label for="nombreCajaNap">Nombre Plan</label>
+                    <input type="text" pInputText formControlName="nombrePlan"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['nombrePlan'].touched && f['nombrePlan'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['nombrePlan'].errors?.['required'] && f['nombrePlan'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['nombrePlan'].errors?.['minlength'] && f['nombrePlan'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+            </div>
+
+            <div class="formgrid grid">
+                <div class="field col md:col-6">
+                    <label for="precioDia">Precio x Día</label>
+                    <p-inputNumber inputId="integeronly" formControlName="precioDia"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['precioDia'].touched && f['precioDia'].errors}"></p-inputNumber>
+                    <small class="ng-dirty ng-invalid" *ngIf="f['precioDia'].errors?.['required'] && f['precioDia'].touched"
+                        class="invalid">Es requerido</small>
+                </div>
+                <div class="field col md:col-6">
+                    <label for="precioMes">Precio x Día</label>
+                    <p-inputNumber inputId="integeronly" formControlName="precioMes"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['precioMes'].touched && f['precioMes'].errors}"></p-inputNumber>
+                    <small class="ng-dirty ng-invalid" *ngIf="f['precioMes'].errors?.['required'] && f['precioMes'].touched"
+                        class="invalid">Es requerido</small>
+                </div>
+
+            </div>
+
+            <div class="formgrid grid">
+                <div class="field col md:col-6">
+                    <label for="estado">Estado</label>
+                    <p-dropdown appendTo="body" formControlName="estado" [options]="estados" optionLabel="name" optionValue="code"
+                        placeholder="Seleccionar..."
+                        [ngClass]="{'ng-invalid ng-dirty' : f['estado'].touched && f['estado'].errors}"></p-dropdown>
+                    <small class="ng-dirty ng-invalid" *ngIf="f['estado'].errors?.['required'] && f['estado'].touched"
+                        class="invalid">Es requerido</small>
+                </div>
+
+                <div class="field col md:col-6">
+                    <label for="usaOnu">UsaOnu</label>
+                    <p-dropdown appendTo="body" formControlName="usaOnu" [options]="usaOnus" optionLabel="name" optionValue="code"
+                        placeholder="Seleccionar..."
+                        [ngClass]="{'ng-invalid ng-dirty' : f['usaOnu'].touched && f['usaOnu'].errors}"></p-dropdown>
+                    <small class="ng-dirty ng-invalid" *ngIf="f['usaOnu'].errors?.['required'] && f['usaOnu'].touched"
+                        class="invalid">Es requerido</small>
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                [disabled]="formPlan.invalid"></button>
+            <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2" (click)="close()"></button>
+        </div>
+
+    </form>
+</div> -->
+
+<div class="card">
+    <p-tabView [(activeIndex)]="activeIndex">
+        <p-tabPanel header="Datos Generales">
+            <form [formGroup]="form" (submit)="operate()" #formPlan="ngForm">
+                <div class="p-fluid mb-4">
+                    <div class="formgrid grid">
+                        <div class="field col md:col-3">
+                            <label for="idPlan">ID</label>
+                            <input type="text" pInputText formControlName="idPlan" readonly />
+                        </div>
+
+                        <div class="field col md:col-9">
+                            <label for="nombreCajaNap">Nombre Plan</label>
+                            <input type="text" pInputText formControlName="nombrePlan"
+                                [ngClass]="{'ng-invalid ng-dirty' : f['nombrePlan'].touched && f['nombrePlan'].errors}" />
+                            <small class="ng-dirty ng-invalid"
+                                *ngIf="f['nombrePlan'].errors?.['required'] && f['nombrePlan'].touched">Es
+                                requerido</small>
+                            <small class="ng-dirty ng-invalid"
+                                *ngIf="f['nombrePlan'].errors?.['minlength'] && f['nombrePlan'].touched">Debe
+                                ingresar mínimo 2 caracteres</small>
+                        </div>
+                    </div>
+
+                    <!-- <div class="formgrid grid">
+                        <div class="field col md:col-6">
+                            <label for="precioDia">Precio x Día</label>
+                            <p-inputNumber inputId="integeronly" formControlName="precioDia" [readonly]="true"
+                                [ngClass]="{'ng-invalid ng-dirty' : f['precioDia'].touched && f['precioDia'].errors}"></p-inputNumber>
+                            <small class="ng-dirty ng-invalid"
+                                *ngIf="f['precioDia'].errors?.['required'] && f['precioDia'].touched" class="invalid">Es
+                                requerido</small>
+                        </div>
+                        <div class="field col md:col-6">
+                            <label for="precioMes">Precio x Día</label>
+                            <p-inputNumber inputId="integeronly" formControlName="precioMes" [readonly]="true"
+                                [ngClass]="{'ng-invalid ng-dirty' : f['precioMes'].touched && f['precioMes'].errors}"></p-inputNumber>
+                            <small class="ng-dirty ng-invalid"
+                                *ngIf="f['precioMes'].errors?.['required'] && f['precioMes'].touched" class="invalid">Es
+                                requerido</small>
+                        </div>
+
+                    </div> -->
+
+                    <div class="formgrid grid">
+                        <div class="field col md:col-6">
+                            <label for="estado">Estado</label>
+                            <p-dropdown appendTo="body" formControlName="estado" [options]="estados" optionLabel="name"
+                                optionValue="code" placeholder="Seleccionar..."
+                                [ngClass]="{'ng-invalid ng-dirty' : f['estado'].touched && f['estado'].errors}"></p-dropdown>
+                            <small class="ng-dirty ng-invalid"
+                                *ngIf="f['estado'].errors?.['required'] && f['estado'].touched" class="invalid">Es
+                                requerido</small>
+                        </div>
+
+                        <div class="field col md:col-6">
+                            <label for="usaOnu">UsaOnu</label>
+                            <p-dropdown appendTo="body" formControlName="usaOnu" [options]="usaOnus" optionLabel="name"
+                                optionValue="code" placeholder="Seleccionar..." [virtualScroll]="true" [virtualScrollItemSize]="2"
+                                [ngClass]="{'ng-invalid ng-dirty' : f['usaOnu'].touched && f['usaOnu'].errors}"></p-dropdown>
+                            <small class="ng-dirty ng-invalid"
+                                *ngIf="f['usaOnu'].errors?.['required'] && f['usaOnu'].touched" class="invalid">Es
+                                requerido</small>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div>
+                    <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                        [disabled]="formPlan.invalid"></button>
+                    <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2"
+                        (click)="close()"></button>
+                </div>
+
+            </form>
+        </p-tabPanel>
+
+
+        <p-tabPanel header="Servicios">
+            <p-table [value]="planServicios" styleClass="p-datatable-sm p-datatable-gridlines" [tableStyle]="{ 'min-width': '30rem' }">
+                <ng-template pTemplate="caption">
+                    <form [formGroup]="formServicio" #formPlanServicio="ngForm">
+                        <div class="p-fluid">
+                            <div class="field grid">
+                                <input type="hidden" pInputText formControlName="idPlanServicio" />
+                                <label htmlFor="servicio" class="col-12 mb-2 md:col-2 md:mb-0">Servicio</label>
+                                <div class="col-12 md:col-10">
+                                    <p-dropdown appendTo="body" formControlName="servicio" [options]="servicios"
+                                        optionLabel="nombreServicio" placeholder="Seleccionar..."
+                                        [ngClass]="{'ng-invalid ng-dirty' : fs['servicio'].touched && fs['servicio'].errors}"></p-dropdown>
+                                    <small class="ng-dirty ng-invalid"
+                                        *ngIf="fs['servicio'].errors?.['required'] && fs['servicio'].touched"
+                                        class="invalid">Es requerido</small>
+                                </div>
+                            </div>
+                            <div class="field grid">
+                                <label htmlFor="precioDia" class="col-12 mb-2 md:col-2 md:mb-0">Precio Día</label>
+                                <div class="col-12 md:col-4">
+                                    <input type="text" pInputText formControlName="precioDia"
+                                        [ngClass]="{'ng-invalid ng-dirty' : fs['precioDia'].touched && fs['precioDia'].errors}" />
+                                    <small class="ng-dirty ng-invalid"
+                                        *ngIf="fs['precioDia'].errors?.['required'] && fs['precioDia'].touched">Es
+                                        requerido</small>
+                                </div>
+
+                                <label htmlFor="precioMes" class="col-12 mb-2 md:col-2 md:mb-0">Precio Mes</label>
+                                <div class="col-12 md:col-4">
+                                    <input type="text" pInputText formControlName="precioMes"
+                                        [ngClass]="{'ng-invalid ng-dirty' : fs['precioMes'].touched && fs['precioMes'].errors}" />
+                                    <small class="ng-dirty ng-invalid"
+                                        *ngIf="fs['precioMes'].errors?.['required'] && fs['precioMes'].touched">Es
+                                        requerido</small>
+                                </div>
+                            </div>
+
+                        </div>
+                        <button pButton pRipple label="Agregar" class="mr-2 mb-2" type="button"
+                            (click)="agregarServicio()" [disabled]="formPlanServicio.invalid"></button>
+
+                    </form>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Servicio</th>
+                        <th>P. Día</th>
+                        <th>P. Mes</th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-row>
+                    <tr>
+                        <td>{{ row.servicio.nombreServicio }}</td>
+                        <td>{{ row.precioDia }}</td>
+                        <td>{{ row.precioMes }}</td>
+                        <td>
+                            <div class="flex">
+                                <p-button icon="pi pi-trash" styleClass="p-button-danger p-button-text"
+                                    (click)="deleteServicio(row)"></p-button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </p-tabPanel>
+    </p-tabView>
+
+</div>
+
+<p-confirmDialog />

@@ -1,0 +1,189 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-3 py-3">
+            <p-toast></p-toast>
+            <p-table #dt [value]="abonados" [lazy]="true" (onLazyLoad)="loadAbonados($event)" dataKey="id"
+            styleClass="p-datatable-sm p-datatable-gridlines" [tableStyle]="{ 'min-width': '75rem' }"
+            [paginator]="true" [rows]="rows" selectionMode="single"
+            [totalRecords]="totalRecords" [loading]="loading" [showCurrentPageReport]="true"
+            [rowsPerPageOptions]="rowsPerPageOptions" [scrollable]="true" scrollHeight="600px"
+            currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} registros">
+            <ng-template pTemplate="caption">
+                <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                    <h5 class="m-0">Mantenimiento de Abonados</h5>
+                    <div class="my-2">
+                        <button pButton pRipple label="Nuevo" icon="pi pi-plus"
+                            class="p-button-primary p-button-sm mr-2"  [routerLink]="['/pages/abonados/detalles']"></button>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th  pSortableColumn="idAbonado">ID <p-sortIcon field="idAbonado"></p-sortIcon></th>
+                        <th  pSortableColumn="dniruc">DNI/RUC <p-sortIcon field="dniruc"></p-sortIcon></th>
+                        <th  pSortableColumn="nombreTercero">Nombre Razón Social <p-sortIcon
+                                field="nombreTercero"></p-sortIcon>
+                        </th>
+                         <th pSortableColumn="nombrePlan">Plan <p-sortIcon field="nombrePlan"></p-sortIcon></th>
+                         <th pSortableColumn="nombreSector">Sector <p-sortIcon field="nombreSector"></p-sortIcon></th>
+
+                        <th pSortableColumn="deuda">Deuda <p-sortIcon field="deuda"></p-sortIcon></th>
+                        <th pSortableColumn="saldoFavor">Saldo Favor <p-sortIcon field="saldoFavor"></p-sortIcon></th>
+                        <th  pSortableColumn="estado">Estado <p-sortIcon field="estado"></p-sortIcon></th>
+                        <th  pSortableColumn="fechaActivacion">Activación <p-sortIcon field="fechaActivacion"></p-sortIcon></th>
+                        <th  pSortableColumn="fechaUltimaLiquidacion">F.U.L <p-sortIcon field="fechaUltimaLiquidacion"></p-sortIcon></th>
+                    <th pFrozenColumn></th>
+                </tr>
+                <tr>
+                    <th >
+                        <p-columnFilter type="text" field="idAbonado" [matchModeOptions]="matchModeOptionsNumber"
+                            [matchMode]="'equals'"></p-columnFilter>
+                    </th>
+                    <th >
+                        <p-columnFilter type="text" field="dniruc" [matchModeOptions]="matchModeOptionsText"
+                            [matchMode]="'contains'"></p-columnFilter>
+                    </th>
+                    <th >
+                        <p-columnFilter type="text" field="nombreTercero" [matchModeOptions]="matchModeOptionsText"
+                            [matchMode]="'contains'"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="nombrePlan" [matchModeOptions]="matchModeOptionsText"
+                        [matchMode]="'contains'"></p-columnFilter>
+                    </th>
+                    <!-- <th>
+                        <p-columnFilter type="text" field="nombreVia" [matchModeOptions]="matchModeOptions"
+                            [matchMode]="'contains'"></p-columnFilter>
+                    </th>-->
+                    <th>
+                        <p-columnFilter type="text" field="nombreSector" [matchModeOptions]="matchModeOptionsText"
+                            [matchMode]="'contains'"></p-columnFilter>
+                    </th>
+                    <!-- <th>
+                        <p-columnFilter type="text" field="nombrePlan" [matchModeOptions]="matchModeOptionsText"
+                            [matchMode]="'contains'"></p-columnFilter>
+                    </th> -->
+
+                    <th>
+                        <p-columnFilter type="text" field="deuda" [matchModeOptions]="matchModeOptionsNumber"
+                            [matchMode]="'contains'"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="saldoFavor" [matchModeOptions]="matchModeOptionsNumber"
+                            [matchMode]="'contains'"></p-columnFilter>
+                    </th>
+                    <th >
+                        <p-columnFilter type="text" field="estado" [matchModeOptions]="matchModeOptionsText"
+                            [matchMode]="'contains'"></p-columnFilter>
+                            <!-- <p-columnFilter field="estado" matchMode="equals" [showMenu]="false">
+                                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                    <p-dropdown [ngModel]="value" [options]="estados" (onChange)="filter($event.value)"
+                                        placeholder="Seleccionar" [showClear]="true">
+                                        <ng-template let-option pTemplate="item">
+                                            <p-tag [value]="option.value"
+                                                [severity]="getSeverity(option.label)"></p-tag>
+                                        </ng-template>
+                                    </p-dropdown>
+                                </ng-template>
+                            </p-columnFilter> -->
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="fechaActivacion" [matchModeOptions]="matchModeOptionsNumber"
+                            [matchMode]="'contains'"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="fechaUltimaLiquidacion" [matchModeOptions]="matchModeOptionsNumber"
+                            [matchMode]="'contains'"></p-columnFilter>
+                    </th>
+
+                    <th pFrozenColumn></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-row>
+                <tr>
+                    <td  style="width:5%; min-width:5rem;">
+                        <span class="p-column-title">ID</span>
+                        {{row.idAbonado}}
+                    </td>
+
+                    <td  style="width:5%; min-width:5rem;">
+                        <span class="p-column-title">DNI/RUC</span>
+                        {{row.dniruc}}
+                    </td>
+
+                    <td  style="width:20%; min-width:10rem;">
+                        <span class="p-column-title">Nombre Razón Social</span>
+                        {{row.nombreTercero}}
+                    </td>
+                    <!-- <td style="width:10%; min-width:10rem;">
+                        <span class="p-column-title">Telefonos</span>
+                        {{row.telefonos}}
+                    </td>
+                    <td style="width:14%; min-width:20rem;">
+                        <span class="p-column-title">Dirección</span>
+                        {{row.direccion}}
+                    </td>-->
+
+                    <td style="width:10%; min-width:10rem;">
+                        <span class="p-column-title">Plan</span>
+                        {{row.nombrePlan}}
+                    </td>
+
+                    <td style="width:10%; min-width:10rem;">
+                        <span class="p-column-title">Sector</span>
+                        {{row.nombreSector}}
+                    </td>
+                    <td style="width:5%; min-width:5rem;" class="text-right">
+                        <span class="p-column-title">Deuda</span>
+                            {{row.deuda | currency:'S/ '}}
+                    </td>
+                    <td style="width:5%; min-width:5rem;" class="text-right">
+                        <span class="p-column-title">Saldo Favor</span>
+                        {{row.saldoFavor | currency:'S/ '}}
+                    </td>
+                    <td  style="width:5%; min-width:5rem;">
+                        <span class="p-column-title">Estado</span>
+                        {{row.estado}}
+                    </td>
+
+                    <td  style="width:5%; min-width:5rem;">
+                        <span class="p-column-title">Activación</span>
+                        {{row.fechaActivacion}}
+                    </td>
+
+                    <td  style="width:5%; min-width:5rem;">
+                        <span class="p-column-title">F.U.L</span>
+                        {{row.fechaUltimaLiquidacion}}
+                    </td>
+
+                    <td style="width:10%; min-width:10rem;" pFrozenColumn>
+                        <div class="flex justify-content-center">
+                            <p-button icon="pi pi-money-bill" styleClass="p-button-help p-button-text p-button-table"
+                                (click)="nuevoPago(row.idAbonado)"></p-button>
+                            <p-button icon="pi pi-pencil" styleClass="p-button-info p-button-text p-button-table"
+                            [routerLink]="['/pages/abonados/detalles', row.idAbonado]"></p-button>
+                            <p-button icon="pi pi-trash" styleClass="p-button-danger p-button-text p-button-table"
+                                (click)="delete(row)"></p-button>
+                        </div>
+                    </td>
+
+                </tr>
+            </ng-template>
+        </p-table>
+        </div>
+
+        <p-dialog [(visible)]="deleteAbonadoDialog" header="Confirmar" [modal]="true" [style]="{width:'450px'}">
+            <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-question-circle mr-3" style="font-size: 2rem"></i>
+                <span *ngIf="abonado">¿Está seguro que desea eliminar el registro?</span>
+            </div>
+            <ng-template pTemplate="footer">
+                <button pButton pRipple icon="pi pi-times" class="p-button-secondary" label="No"
+                    (click)="deleteAbonadoDialog = false"></button>
+                <button pButton pRipple icon="pi pi-check" class="p-button-danger" label="Si, Eliminar"
+                    (click)="confirmDelete()"></button>
+            </ng-template>
+        </p-dialog>
+
+    </div>
+</div>

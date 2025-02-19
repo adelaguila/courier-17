@@ -1,0 +1,53 @@
+<div class="card">
+    <div class="formgrid grid">
+        <div class="field col md:col-9">
+            <form [formGroup]="form" (submit)="operate()" #formulario="ngForm">
+                <div class="p-fluid mb-4">
+
+                    <div class="field ">
+                        <label for="name">Nombre</label>
+                        <input type="text" pInputText formControlName="name"
+                            [ngClass]="{'ng-invalid ng-dirty' : f['name'].touched && f['name'].errors}" />
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['name'].errors?.['required'] && f['name'].touched">Es
+                            requerido</small>
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['name'].errors?.['minlength'] && f['name'].touched">Debe
+                            ingresar mínimo 2 caracteres</small>
+                    </div>
+
+                    <div class="formgrid grid">
+                        <div class="field col-12 md:col-6">
+                            <label for="username">Username</label>
+                            <input type="email" pInputText formControlName="username"
+                                [ngClass]="{'ng-invalid ng-dirty' : f['username'].touched && f['username'].errors}" />
+                            <small class="ng-dirty ng-invalid"
+                                *ngIf="f['username'].errors?.['email'] && f['username'].touched">Datos inválidos</small>
+                        </div>
+                        <div class="field col md:col-6" *ngIf="!isEdit">
+                            <label for="password">Password</label>
+                            <input type="text" pInputText formControlName="password"
+                                [ngClass]="{'ng-invalid ng-dirty' : f['password'].touched && f['password'].errors}" />
+                        </div>
+                    </div>
+
+                </div>
+
+                <div>
+                    <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                        [disabled]="formulario.invalid"></button>
+                    <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2"
+                        (click)="close()"></button>
+                </div>
+
+            </form>
+        </div>
+        <div class="field col md:col-3">
+            <div *ngFor="let rol of roles" class="field-checkbox">
+                <p-checkbox [(ngModel)]="rolesAdd" [label]="rol.name" name="group" [value]="rol"
+                    [trueValue]="rol.checked" />
+            </div>
+        </div>
+    </div>
+
+</div>

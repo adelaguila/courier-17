@@ -1,0 +1,88 @@
+<div class="card">
+    <div class="invoice-to">
+        <div class="invoice-to-info">
+            <div>ABONADO: {{ abonado.tercero.nombreTercero }}</div>
+            <!-- <div>{{ direccion }}</div> -->
+        </div>
+    </div>
+    <hr>
+    <form [formGroup]="form" (submit)="operate()" #formOrden="ngForm">
+        <div class="p-fluid">
+            <div class="formgrid grid">
+                <div class="field col md:col-4">
+                    <label for="idOrden">ID</label>
+                    <input type="text" pInputText formControlName="idOrden" readonly />
+                </div>
+
+                <div class="field col md:col-8">
+                    <label for="fechaRegistro">Fecha</label>
+                    <input type="date" pInputText formControlName="fechaRegistro"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['fechaRegistro'].touched && f['fechaRegistro'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['fechaRegistro'].errors?.['required'] && f['fechaRegistro'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['fechaRegistro'].errors?.['minlength'] && f['fechaRegistro'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="tipoOrden">Tipo de Orden</label>
+                <p-dropdown appendTo="body" formControlName="tipoOrden" [options]="tiposOrden" optionLabel="nombreTipoOrden"
+                    placeholder="Seleccionar..." (onChange)="cambiarTipoOrden($event)" [virtualScroll]="true" [virtualScrollItemSize]="2"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['tipoOrden'].touched && f['tipoOrden'].errors}"></p-dropdown>
+                <small class="ng-dirty ng-invalid" *ngIf="f['tipoOrden'].errors?.['required'] && f['tipoOrden'].touched"
+                    class="invalid">Es requerido</small>
+            </div>
+
+            <div class="field" *ngIf="mostrarPlanVendedor">
+                <label for="plan">Plan</label>
+                <p-dropdown appendTo="body" formControlName="plan" [options]="planes" optionLabel="nombrePlan"
+                    placeholder="Seleccionar..."
+                    [ngClass]="{'ng-invalid ng-dirty' : f['plan'].touched && f['plan'].errors}"></p-dropdown>
+                <small class="ng-dirty ng-invalid" *ngIf="f['plan'].errors?.['required'] && f['plan'].touched"
+                    class="invalid">Es
+                    requerido</small>
+            </div>
+
+            <div class="field" *ngIf="mostrarPlanVendedor">
+                <label for="vendedor">Vendedor</label>
+                <p-dropdown appendTo="body" formControlName="vendedor" [options]="vendedores" optionLabel="name" optionValue="code"
+                    placeholder="Seleccionar..."
+                    [ngClass]="{'ng-invalid ng-dirty' : f['vendedor'].touched && f['vendedor'].errors}"></p-dropdown>
+                <small class="ng-dirty ng-invalid" *ngIf="f['vendedor'].errors?.['required'] && f['vendedor'].touched"
+                    class="invalid">Es
+                    requerido</small>
+            </div>
+
+            <div class="field" *ngIf="mostrarDetalle">
+                <label for="detalle">Detalle</label>
+                <input type="text" pInputText formControlName="detalle"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['detalle'].touched && f['detalle'].errors}" />
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['detalle'].errors?.['required'] && f['detalle'].touched">Es
+                    requerido</small>
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['detalle'].errors?.['minlength'] && f['detalle'].touched">Debe
+                    ingresar mínimo 2 caracteres</small>
+            </div>
+            <div class="field">
+                <label for="estado">Estado</label>
+                <input type="text" pInputText formControlName="estado"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['estado'].touched && f['estado'].errors}" readonly/>
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['estado'].errors?.['required'] && f['estado'].touched">Es
+                    requerido</small>
+            </div>
+        </div>
+
+        <div>
+            <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                [disabled]="formOrden.invalid"></button>
+            <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2"
+                (click)="close()"></button>
+        </div>
+
+    </form>
+</div>

@@ -1,0 +1,95 @@
+<div class="card">
+    <form [formGroup]="form" (submit)="operate()" #formulario="ngForm">
+        <div class="p-fluid mb-4">
+            <div class="formgrid grid">
+                <div class="field col md:col-4">
+                    <label for="idCajaIngreso">ID</label>
+                    <input type="text" pInputText formControlName="idCajaIngreso" readonly />
+                </div>
+                <div class="field col md:col-8">
+                    <label for="fecha">Fecha</label>
+                    <input type="date" pInputText formControlName="fecha"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['fecha'].touched && f['fecha'].errors}" />
+                    <small class="ng-dirty ng-invalid" *ngIf="f['fecha'].errors?.['required'] && f['fecha'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['fecha'].errors?.['minlength'] && f['fecha'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+            </div>
+            <div class="formgrid grid">
+                <div class="field col md:col-6">
+                    <label for="tipoIngreso">Tipo</label>
+                    <p-dropdown appendTo="body" formControlName="tipoIngreso" [options]="tiposIngresos" [filter]="true"
+                        filterBy="nombreTipoIngreso" [showClear]="true" optionLabel="nombreTipoIngreso" [virtualScroll]="true" [virtualScrollItemSize]="2"
+                        placeholder="Seleccionar..."
+                        [ngClass]="{'ng-invalid ng-dirty' : f['tipoIngreso'].touched && f['tipoIngreso'].errors}"></p-dropdown>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['tipoIngreso'].errors?.['required'] && f['tipoIngreso'].touched" class="invalid">Es
+                        requerido</small>
+                </div>
+                <div class="field col md:col-6">
+                    <label for="documento">Documento</label>
+                    <input type="text" pInputText formControlName="documento"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['documento'].touched && f['documento'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['documento'].errors?.['required'] && f['documento'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['documento'].errors?.['minlength'] && f['documento'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+            </div>
+
+            <div class="formgrid grid">
+                <div class="field col md:col-12">
+                    <label for="cliente">Cliente</label>
+                    <input type="text" pInputText formControlName="cliente"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['cliente'].touched && f['cliente'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['cliente'].errors?.['required'] && f['cliente'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['cliente'].errors?.['minlength'] && f['cliente'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+            </div>
+
+            <div class="formgrid grid">
+                <div class="field col md:col-12">
+                    <label for="glosa">Glosa</label>
+                    <input type="text" pInputText formControlName="glosa"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['glosa'].touched && f['glosa'].errors}" />
+                    <small class="ng-dirty ng-invalid" *ngIf="f['glosa'].errors?.['required'] && f['glosa'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['glosa'].errors?.['minlength'] && f['glosa'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+            </div>
+
+            <div class="formgrid grid">
+                <div class="field col md:col-6">
+                    <label for="importe">Importe</label>
+                    <input type="number" pInputText formControlName="importe"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['importe'].touched && f['importe'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['importe'].errors?.['required'] && f['importe'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['importe'].errors?.['minlength'] && f['importe'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+
+            </div>
+        </div>
+
+        <div>
+            <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                [disabled]="formulario.invalid"></button>
+            <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2"
+                (click)="close()"></button>
+        </div>
+
+    </form>
+</div>

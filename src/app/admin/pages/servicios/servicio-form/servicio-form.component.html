@@ -1,0 +1,40 @@
+<div class="card">
+    <form [formGroup]="form" (submit)="operate()" #formulario="ngForm">
+        <div class="p-fluid mb-4">
+            <div class="formgrid grid">
+                <div class="field col md:col-3">
+                    <label for="idServicio">ID</label>
+                    <input type="text" pInputText formControlName="idServicio"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['idServicio'].touched && f['idServicio'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['idServicio'].errors?.['required'] && f['idServicio'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['idServicio'].errors?.['minlength'] && f['idServicio'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+                <div class="field col md:col-9">
+                    <label for="nombreServicio">Nombre</label>
+                    <input type="text" pInputText formControlName="nombreServicio"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['nombreServicio'].touched && f['nombreServicio'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['nombreServicio'].errors?.['required'] && f['nombreServicio'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['nombreServicio'].errors?.['minlength'] && f['nombreServicio'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div>
+            <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                [disabled]="formulario.invalid"></button>
+            <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2"
+                (click)="close()"></button>
+        </div>
+
+    </form>
+</div>

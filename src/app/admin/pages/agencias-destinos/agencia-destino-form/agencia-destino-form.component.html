@@ -1,0 +1,80 @@
+<div class="card">
+    <form [formGroup]="form" (submit)="operate()" #formulario="ngForm">
+        <div class="p-fluid mb-4">
+            <div class="formgrid grid">
+                <div class="field col md:col-3">
+                    <label for="idAgenciaDestino">ID</label>
+                    <input type="text" pInputText formControlName="idAgenciaDestino" readonly />
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="agencia">Agencia</label>
+                    <p-dropdown appendTo="body" formControlName="agencia" [options]="agencias"
+                        optionLabel="nombreAgencia" placeholder="Seleccionar..." [virtualScroll]="true"
+                        [virtualScrollItemSize]="10" [filter]="true" filterBy="nombreAgencia" [showClear]="true"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['agencia'].touched && f['agencia'].errors}"></p-dropdown>
+                    <small class="ng-dirty ng-invalid" *ngIf="f['agencia'].errors?.['required'] && f['agencia'].touched"
+                        class="invalid">Es
+                        requerido</small>
+                </div>
+                <div class="field col-12 md:col-3">
+                    <label for="aceptaCollec">Acepta Collec</label>
+                    <div>
+                        <p-inputSwitch formControlName="aceptaCollec" />
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label for="ubigeo">Distrito - Provincia - Departamento</label>
+                <p-autoComplete formControlName="ubigeo" [suggestions]="ubigeosFiltrados"
+                    (completeMethod)="filtrarUbigeos($event)" field="nombreUbigeo" [minLength]="3"
+                    [forceSelection]="true"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['ubigeo'].touched && f['ubigeo'].errors}">
+                    <ng-template let-ubigeo pTemplate="item">
+                        <div>{{ ubigeo.distrito }} - {{ ubigeo.provincia }} - {{ ubigeo.departamento }}</div>
+                    </ng-template>
+                </p-autoComplete>
+                <small class="ng-dirty ng-invalid" *ngIf="f['ubigeo'].errors?.['required'] && f['ubigeo'].touched">Es
+                    requerido</small>
+            </div>
+
+            <div class="field">
+                <label for="destino">Destino</label>
+                <input type="text" pInputText formControlName="destino"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['destino'].touched && f['destino'].errors}" />
+                <small class="ng-dirty ng-invalid" *ngIf="f['destino'].errors?.['required'] && f['destino'].touched">Es
+                    requerido</small>
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['destino'].errors?.['minlength'] && f['destino'].touched">Debe
+                    ingresar mínimo 2 caracteres</small>
+            </div>
+
+            <div class="formgrid grid">
+                <div class="field col md:col-6">
+                    <label for="adicionalEntrega">Adicional de Entrega</label>
+                    <input type="text" pInputText formControlName="adicionalEntrega"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['adicionalEntrega'].touched && f['adicionalEntrega'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['adicionalEntrega'].errors?.['required'] && f['adicionalEntrega'].touched">Es
+                        requerido</small>
+                </div>
+
+                <div class="field col md:col-6">
+                    <label for="adicionalRecojo">Adiciona de Recojo</label>
+                    <input type="text" pInputText formControlName="adicionalRecojo"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['adicionalRecojo'].touched && f['adicionalRecojo'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['adicionalRecojo'].errors?.['required'] && f['adicionalRecojo'].touched">Es
+                        requerido</small>
+                </div>
+            </div>
+
+        </div>
+        <div>
+            <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                [disabled]="formulario.invalid"></button>
+            <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2"
+                (click)="close()"></button>
+        </div>
+
+    </form>
+</div>

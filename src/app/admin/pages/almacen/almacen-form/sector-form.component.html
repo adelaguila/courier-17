@@ -1,0 +1,47 @@
+<div class="card">
+    <form [formGroup]="form" (submit)="operate()" #formulario="ngForm">
+        <div class="p-fluid mb-4">
+            <div class="formgrid grid">
+                <div class="field col md:col-3">
+                    <label for="idSector">ID</label>
+                    <input type="text" pInputText formControlName="idSector"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['idSector'].touched && f['idSector'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['idSector'].errors?.['required'] && f['idSector'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['idSector'].errors?.['minlength'] && f['idSector'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+                <div class="field col md:col-9">
+                    <label for="nombreSector">Nombre</label>
+                    <input type="text" pInputText formControlName="nombreSector"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['nombreSector'].touched && f['nombreSector'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['nombreSector'].errors?.['required'] && f['nombreSector'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['nombreSector'].errors?.['minlength'] && f['nombreSector'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+
+                <div class="field col ">
+                    <label for="descripcion">Descripción</label>
+                    <input type="text" pInputText formControlName="descripcion"/>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div>
+            <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                [disabled]="formulario.invalid"></button>
+            <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2"
+                (click)="close()"></button>
+        </div>
+
+    </form>
+</div>

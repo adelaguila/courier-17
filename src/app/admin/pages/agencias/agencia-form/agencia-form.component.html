@@ -1,0 +1,153 @@
+<div class="card">
+    <form [formGroup]="form" (submit)="operate()" #formulario="ngForm">
+        <div class="p-fluid mb-4">
+            <div class="formgrid grid">
+                <div class="field col md:col-3">
+                    <label for="idAgencia">ID</label>
+                    <input type="text" pInputText formControlName="idAgencia" readonly />
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="tipoAgencia">Tipo Agencia</label>
+                    <p-dropdown appendTo="body" formControlName="tipoAgencia" [options]="tiposAgencias"
+                        optionLabel="nombreTipoAgencia" placeholder="Seleccionar..." [virtualScroll]="true"
+                        [virtualScrollItemSize]="10" [filter]="true" filterBy="nombreTipoAgencia" [showClear]="true"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['tipoAgencia'].touched && f['tipoAgencia'].errors}"></p-dropdown>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['tipoAgencia'].errors?.['required'] && f['tipoAgencia'].touched" class="invalid">Es
+                        requerido</small>
+                </div>
+                <div class="field col-12 md:col-3">
+                    <label for="ubigeo">Activo</label>
+                    <div>
+                        <p-inputSwitch formControlName="activo" />
+                    </div>
+                </div>
+            </div>
+            <div class="formgrid grid">
+                <div class="field col md:col-3">
+                    <label for="codigo">Código</label>
+                    <input type="text" pInputText formControlName="codigo" [readOnly]="readOnlyID"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['codigo'].touched && f['codigo'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['codigo'].errors?.['required'] && f['codigo'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['codigo'].errors?.['minlength'] && f['codigo'].touched">Debe
+                        ingresar mínimo 5 caracteres</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['codigo'].errors?.['maxlength'] && f['codigo'].touched">Debe
+                        ingresar máximo 5 caracteres</small>
+                </div>
+
+                <div class="field col md:col-9">
+                    <label for="nombreAgencia">Nombre Agencia</label>
+                    <input type="text" pInputText formControlName="nombreAgencia"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['nombreAgencia'].touched && f['nombreAgencia'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['nombreAgencia'].errors?.['required'] && f['nombreAgencia'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['nombreAgencia'].errors?.['minlength'] && f['nombreAgencia'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+            </div>
+            <div class="formgrid grid">
+                <div class="field col md:col-3">
+                    <label for="dniAgente">DNI Agente</label>
+                    <input type="text" pInputText formControlName="dniAgente"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['dniAgente'].touched && f['dniAgente'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['dniAgente'].errors?.['required'] && f['dniAgente'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['dniAgente'].errors?.['minlength'] && f['dniAgente'].touched">Debe
+                        ingresar mínimo 8 caracteres</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['dniAgente'].errors?.['maxlength'] && f['dniAgente'].touched">Debe
+                        ingresar máximo 8 caracteres</small>
+                </div>
+
+                <div class="field col md:col-9">
+                    <label for="nombreAgente">Nombre Agente</label>
+                    <input type="text" pInputText formControlName="nombreAgente"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['nombreAgente'].touched && f['nombreAgente'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['nombreAgente'].errors?.['required'] && f['nombreAgente'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['nombreAgente'].errors?.['minlength'] && f['nombreAgente'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+            </div>
+
+            <!-- <div class="formgrid grid"> -->
+            <div class="field">
+                <label for="direccion">Dirección</label>
+                <input type="text" pInputText formControlName="direccion" [ngClass]="{'ng-invalid ng-dirty' : f['direccion'].touched && f['direccion'].errors}" />
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['direccion'].errors?.['required'] && f['direccion'].touched">Es
+                    requerido</small>
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['direccion'].errors?.['minlength'] && f['direccion'].touched">Debe
+                    ingresar mínimo 2 caracteres</small>
+            </div>
+            <!-- </div> -->
+            <!-- <div class="formgrid grid"> -->
+            <div class="field">
+                <label for="ubigeo">Departamento - Provincia - Distrito</label>
+                <p-autoComplete formControlName="ubigeo" [suggestions]="ubigeosFiltrados"
+                    (completeMethod)="filtrarUbigeos($event)" field="nombreUbigeo" [minLength]="3"
+                    [forceSelection]="true"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['ubigeo'].touched && f['ubigeo'].errors}">
+                    <ng-template let-ubigeo pTemplate="item">
+                        <div>{{ ubigeo.distrito }} - {{ ubigeo.provincia }} - {{ ubigeo.departamento }}</div>
+                    </ng-template>
+                </p-autoComplete>
+                <small class="ng-dirty ng-invalid" *ngIf="f['ubigeo'].errors?.['required'] && f['ubigeo'].touched">Es
+                    requerido</small>
+            </div>
+            <!-- </div> -->
+
+
+            <div class="formgrid grid">
+                <div class="field col md:col-6">
+                    <label for="telefono">Teléfono</label>
+                    <input type="text" pInputText formControlName="telefono" [ngClass]="{'ng-invalid ng-dirty' : f['telefono'].touched && f['telefono'].errors}"/>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['telefono'].errors?.['required'] && f['telefono'].touched">Es
+                        requerido</small>
+                </div>
+
+                <div class="field col md:col-6">
+                    <label for="correo">Correo</label>
+                    <input type="text" pInputText formControlName="correo"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['correo'].touched && f['correo'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['correo'].errors?.['required'] && f['correo'].touched">Es
+                        requerido</small>
+                </div>
+            </div>
+
+
+
+            <div class="formgrid grid">
+                <div class="field col md:col-6">
+                    <label for="latitud">Latitud</label>
+                    <input type="text" pInputText formControlName="latitud" />
+                </div>
+
+                <div class="field col md:col-6">
+                    <label for="longitud">Longitud</label>
+                    <input type="text" pInputText formControlName="longitud" />
+                </div>
+            </div>
+        </div>
+        <div>
+            <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                [disabled]="formulario.invalid"></button>
+            <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2"
+                (click)="close()"></button>
+        </div>
+
+    </form>
+</div>

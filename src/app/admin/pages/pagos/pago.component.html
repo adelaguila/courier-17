@@ -1,0 +1,124 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-3 py-3">
+            <p-toast></p-toast>
+            <p-table #dt [value]="pagos" [lazy]="true" (onLazyLoad)="loadPagos($event)" dataKey="id"
+            styleClass="p-datatable-sm p-datatable-gridlines" [tableStyle]="{ 'min-width': '75rem' }"
+            [paginator]="true" [rows]="rows" selectionMode="single" sortField="fechaPago" [sortOrder]="-1"
+            [totalRecords]="totalRecords" [loading]="loading" [showCurrentPageReport]="true"
+            [rowsPerPageOptions]="rowsPerPageOptions" [scrollable]="true" scrollHeight="600px"
+            currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} registros">
+            <ng-template pTemplate="caption">
+                <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                    <h5 class="m-0">Pagos registrados</h5>
+                    <div class="my-2">
+                        <button pButton pRipple label="Nuevo" icon="pi pi-plus"
+                            class="p-button-primary p-button-sm mr-2" (click)="new()"></button>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="idPago">ID <p-sortIcon field="idPago"></p-sortIcon></th>
+                    <th pSortableColumn="fechaPago">Fecha <p-sortIcon field="fechaPago"></p-sortIcon></th>
+                    <th pSortableColumn="abonado">Abonado <p-sortIcon field="abonado"></p-sortIcon>
+                    <th pSortableColumn="tipoPago">Tipo Pago <p-sortIcon field="tipoPago"></p-sortIcon>
+                    <th pSortableColumn="referencia">Referencia <p-sortIcon field="referencia"></p-sortIcon>
+                    <th pSortableColumn="total">Total <p-sortIcon field="total"></p-sortIcon>
+                    </th>
+                    <th pFrozenColumn></th>
+                </tr>
+                <tr>
+                    <th>
+                        <p-columnFilter type="text" field="idPago" [matchModeOptions]="matchModeOptionsNumber"
+                            [matchMode]="'equals'"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="fechaPago" [matchModeOptions]="matchModeOptionsText"
+                            [matchMode]="'contains'"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="Abonado" [matchModeOptions]="matchModeOptionsText"
+                            [matchMode]="'contains'"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="tipoPago" [matchModeOptions]="matchModeOptionsText"
+                            [matchMode]="'contains'"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="referencia" [matchModeOptions]="matchModeOptionsText"
+                            [matchMode]="'contains'"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="total" [matchModeOptions]="matchModeOptionsNumber"
+                            [matchMode]="'equals'"></p-columnFilter>
+                    </th>
+
+                    <th pFrozenColumn></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-row>
+                <tr>
+                    <td style="width:10%; min-width:10rem;">
+                        <span class="p-column-title">ID</span>
+                        {{row.idPago}}
+                    </td>
+
+                    <td style="width:10%; min-width:10rem;">
+                        <span class="p-column-title">Fecha</span>
+                        {{row.fechaPago}}
+                    </td>
+                    <td style="width:30%; min-width:10rem;">
+                        <span class="p-column-title">Abonado</span>
+                        {{row.abonado}}
+                    </td>
+                    <td style="width:10%; min-width:10rem;">
+                        <span class="p-column-title">Tipo Pago</span>
+                        {{row.tipoPago}}
+                    </td>
+                    <td style="width:20%; min-width:10rem;">
+                        <span class="p-column-title">Referencia</span>
+                        {{row.referencia}}
+                    </td>
+                    <td style="width:10%; min-width:10rem;" class="text-right">
+                        <span class="p-column-title">Total</span>
+                        {{row.total | currency:' '}}
+                    </td>
+                    <td style="width:10%; min-width:10rem;" pFrozenColumn>
+                        <div class="flex justify-content-center">
+                            <!-- <p-button icon="pi pi-pencil" styleClass="p-button-info p-button-text p-button-table"
+                                (click)="edit(row)"></p-button> -->
+                            <p-button icon="pi pi-print" styleClass="p-button-info p-button-text p-button-table"
+                                (click)="imprimirPago(row.idPago)"></p-button>
+                            <p-button icon="pi pi-trash" styleClass="p-button-danger p-button-text p-button-table"
+                                (click)="delete(row)"></p-button>
+                        </div>
+                    </td>
+
+                </tr>
+            </ng-template>
+            <!-- <ng-template pTemplate="footer">
+                <tr>
+                    <td colspan="5" class="text-right">Totales</td>
+                    <td class="text-right">{{granTotal | currency: ''}}</td>
+                    <td></td>
+                </tr>
+            </ng-template> -->
+        </p-table>
+        </div>
+
+        <p-dialog [(visible)]="deletePagoDialog" header="Confirmar" [modal]="true" [style]="{width:'450px'}">
+            <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-question-circle mr-3" style="font-size: 2rem"></i>
+                <span *ngIf="pago">¿Está seguro que desea eliminar el registro?</span>
+            </div>
+            <ng-template pTemplate="footer">
+                <button pButton pRipple icon="pi pi-times" class="p-button-secondary" label="No"
+                    (click)="deletePagoDialog = false"></button>
+                <button pButton pRipple icon="pi pi-check" class="p-button-danger" label="Si, Eliminar"
+                    (click)="confirmDelete()"></button>
+            </ng-template>
+        </p-dialog>
+
+    </div>
+</div>

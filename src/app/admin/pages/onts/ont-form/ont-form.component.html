@@ -1,0 +1,38 @@
+<div class="card">
+    <form [formGroup]="form" (submit)="operate()" #formulario="ngForm">
+        <div class="p-fluid">
+
+            <div class="field">
+                <label for="serie">Serie</label>
+                <input type="text" pInputText formControlName="serie" [ngClass]="{'ng-invalid ng-dirty' : f['serie'].touched && f['serie'].errors}"/>
+                <small class="ng-dirty ng-invalid" *ngIf="f['serie'].errors?.['required'] && f['serie'].touched">Es
+                    requerido</small>
+            </div>
+
+            <div class="field">
+                <label for="producto">Producto</label>
+                <p-dropdown appendTo="body" formControlName="producto" [options]="productos" optionLabel="nombreProducto"
+                    placeholder="Seleccionar..." [virtualScroll]="true" [virtualScrollItemSize]="2"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['producto'].touched && f['producto'].errors}"></p-dropdown>
+                <small class="ng-dirty ng-invalid" *ngIf="f['producto'].errors?.['required'] && f['producto'].touched"
+                    class="invalid">Es requerido</small>
+            </div>
+
+            <div class="field">
+                <label for="estado">Estado</label>
+                <input type="text" pInputText formControlName="estado"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['estado'].touched && f['estado'].errors}" readonly />
+                <small class="ng-dirty ng-invalid" *ngIf="f['estado'].errors?.['required'] && f['estado'].touched">Es
+                    requerido</small>
+            </div>
+        </div>
+
+        <div>
+            <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                [disabled]="formulario.invalid"></button>
+            <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2"
+                (click)="close()"></button>
+        </div>
+
+    </form>
+</div>

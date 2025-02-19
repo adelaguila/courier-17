@@ -1,0 +1,81 @@
+<div class="grid">
+    <div class="col-12">
+
+        <p-toast></p-toast>
+        <p-table [value]="datos" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [loading]="loading"
+            [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-gridlines p-datatable-sm"
+            currentPageReportTemplate="Mostrando {first} de {last} de {totalRecords} registros"
+            [rowsPerPageOptions]="[5, 10, 20]">
+            <ng-template pTemplate="caption">
+                <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                    <h5 class="m-0">Caja - Movimientos por fecha</h5>
+                    <div class="my-2">
+                        <form [formGroup]="form" #formulario="ngForm">
+                            <label for="dropdown" class="mr-2">Fecha: </label>
+                            <p-calendar formControlName="fecha" [readonlyInput]="true" class="mr-2" />
+                        <button pButton pRipple label="Cargar" icon="pi pi-sync"
+                            class="p-button-primary p-button-sm mr-1" (click)="cargar()" ></button>
+                            <button pButton pRipple label="Exportar" icon="pi pi-file-export"
+                            class="p-button-primary p-button-sm mr-1"  (click)="exportar()"></button>
+                        </form>
+                    </div>
+                </div>
+
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+
+                    <th style="width:5%; min-width:100px">ID</th>
+                    <th style="width:10%; min-width:100px">Fecha</th>
+                    <th style="width:10%; min-width:100px">Tipo Movimiento</th>
+                    <th style="width:10%; min-width:100px">Tipo Pago</th>
+                    <th style="width:10%; min-width:100px">Fecha</th>
+                    <th style="width:10%; min-width:100px">Documento</th>
+                    <th style="width:10%; min-width:100px">Cliente / Proveedor</th>
+                    <th style="width:10%; min-width:100px">Partida</th>
+                    <th style="width:10%; min-width:100px">Glosa</th>
+                    <th style="width:10%; min-width:100px">Importe</th>
+                    <th style="width:5%; min-width:100px">IDC</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-row>
+                <tr>
+
+                    <td>{{ row.id }}</td>
+                    <td>{{ row.fecha }}</td>
+                    <td>{{ row.tipoMovimiento }}</td>
+                    <td>{{ row.tipoPago }}</td>
+                    <td>{{ row.fecha }}</td>
+                    <td>{{ row.documento }}</td>
+                    <td>{{ row.clienteProveedor }}</td>
+                    <td>{{ row.partida }}</td>
+                    <td>{{ row.glosa }}</td>
+                    <td class="text-right">{{ row.importe | currency: ' ' }}</td>
+                    <td>{{ row.idCierre }}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <tr>
+                    <td colspan="9" class="text-right">Ingresos Efectivo</td>
+                    <td class="text-right"xs>{{ingresosEfectivo | currency: ' '}}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="9" class="text-right">Ingresos Transferencias</td>
+                    <td class="text-right"xs>{{ingresosTransferencias | currency: ' '}}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="9" class="text-right">Egresos</td>
+                    <td class="text-right"xs>{{egresosEfectivo | currency: ' '}}</td>
+                    <td></td>
+                </tr>
+            </ng-template>
+
+        </p-table>
+
+
+    </div>
+
+</div>
+<p-confirmDialog />

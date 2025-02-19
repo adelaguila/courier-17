@@ -1,0 +1,95 @@
+<p-toast position="top-center" key="tc"></p-toast>
+<div class="card">
+    <div class="invoice-to">
+        <div class="bill-to">{{ nombreTipoOrden }}</div>
+        <div class="invoice-to-info">
+            <div>{{ nombreTercero }}</div>
+            <div>{{ direccion }}</div>
+        </div>
+    </div>
+    <hr>
+    <form [formGroup]="form" (submit)="operate()" #formAtenderOrden="ngForm">
+        <div class="p-fluid">
+            <div class="formgrid grid">
+                <div class="field col md:col-4">
+                    <label for="idOrdenAsignacion">ID</label>
+                    <input type="text" pInputText formControlName="idOrdenAsignacion" readonly />
+                </div>
+
+                <div class="field col md:col-8">
+                    <label for="fechaAtencion">Fecha</label>
+                    <input type="date" pInputText formControlName="fechaAtencion"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['fechaAtencion'].touched && f['fechaAtencion'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['fechaAtencion'].errors?.['required'] && f['fechaAtencion'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['fechaAtencion'].errors?.['minlength'] && f['fechaAtencion'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="user">Reporte</label>
+                <input type="text" pInputText formControlName="reporte" />
+            </div>
+
+            <div class="field">
+                <label for="ont">ONT</label>
+                <p-dropdown appendTo="body" formControlName="ont" [options]="onts" optionLabel="serieMarca"
+                    placeholder="No aplica"></p-dropdown>
+            </div>
+
+            <div class="formgrid grid">
+                <div class="field col md:col-9">
+                    <label for="idOrdenAsignacion">Producto</label>
+                    <p-dropdown appendTo="body" formControlName="producto" [options]="productosEmpleados"
+                        optionLabel="producto.nombreProducto" placeholder="Seleccionar...">
+                    </p-dropdown>
+                    <!-- <p-autoComplete formControlName="producto" [forceSelection]="true"
+                        [suggestions]="productosFiltrados" (completeMethod)="filtrarProductos($event)"
+                        field="nombreProducto" styleClass="w-full" appendTo="body"></p-autoComplete> -->
+                </div>
+
+                <div class="field col md:col-3">
+                    <label for="fechaAtencion">Cantidad</label>
+                    <div class="p-inputgroup">
+                        <input type="number" pInputText formControlName="cantidad" />
+                        <button type="button" pButton icon="pi pi-plus" (click)="agregarProducto()"
+                            styleClass="p-button-warn"></button>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <p-table *ngIf="productosUtilizados.length > 0" [value]="productosUtilizados">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Productos Utilizados</th>
+                        <th>Cantidad</th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-productoUtilizado>
+                    <tr>
+                        <td>{{ productoUtilizado.producto.nombreProducto }}</td>
+                        <td>{{ productoUtilizado.cantidad }}</td>
+                        <td>
+                            <p-button icon="pi pi-trash" styleClass="p-button-danger p-button-text"
+                                (click)="quitarProducto(productoUtilizado)"></p-button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <div>
+            <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                [disabled]="formAtenderOrden.invalid"></button>
+            <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2"
+                (click)="close()"></button>
+        </div>
+
+    </form>
+</div>

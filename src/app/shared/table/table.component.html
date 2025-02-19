@@ -1,0 +1,33 @@
+<p-table #dt [columns]="metaData" [value]="data" [tableStyle]="{ 'min-width': '50rem' }" responsiveLayout="scroll"
+    styleClass="p-datatable-sm" [globalFilterFields]="globalFilterFields" [rows]="rows" [paginator]="paginator"
+    [rowsPerPageOptions]="rowsPerPageOptions" [showCurrentPageReport]="showCurrentPageReport" [rowHover]="rowHover">
+    <ng-template pTemplate="caption">
+        <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+            <h5 class="m-0">{{title}}</h5>
+            <span class="block mt-2 md:mt-0 p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Buscar..."
+                    class="w-full sm:w-auto" />
+            </span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns"  pSortableColumn="{{col.field}}">
+                {{ col.header }} <p-sortIcon field="{{col.field}}"></p-sortIcon>
+            </th>
+        </tr>
+        <tr>
+            <th  *ngFor="let col of columns">
+                <p-columnFilter type="{{col.type}}" field="{{col.field}}" [showClearButton]="false" />
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                {{ rowData[col.field] }}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

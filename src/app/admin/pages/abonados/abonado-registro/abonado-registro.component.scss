@@ -1,0 +1,57 @@
+.invoice {
+    padding: 0rem;
+}
+.invoice .invoice-to {
+    margin-top: 0.5rem;
+    padding-top: 0rem;
+    border-top: 1px solid #E8F1F8;
+    border-top: none;
+}
+.invoice .invoice-items {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+}
+
+.invoice .invoice-items table th, .invoice .invoice-items table td {
+    padding: 0.5rem;
+}
+
+.invoice .invoice-items table th, .invoice .invoice-items table th {
+    text-align: left;
+}
+.invoice .invoice-items table td, .invoice .invoice-items table td {
+    text-align: left;
+}
+.invoice .invoice-items table td:last-child {
+    text-align: right;
+}
+.invoice .invoice-items table th:last-child {
+    text-align: right;
+}
+
+
+.invoice .invoice-summary {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding-top: 1rem;
+}
+
+.size-sm {
+    font-size: 0.875rem;
+    padding: 0.4375rem 0.4375rem;
+}
+
+.caja-datos-deuda {
+    text-align: right;
+}
+
+.datos-deuda {
+    margin: 0.5rem 0 0rem 0 !important
+}
+
+.field {
+    margin-bottom: 0rem;
+}

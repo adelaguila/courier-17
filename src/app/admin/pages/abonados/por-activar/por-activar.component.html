@@ -1,0 +1,131 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-3 py-3">
+            <p-toast></p-toast>
+            <p-table #dt [value]="abonados" dataKey="id" styleClass="p-datatable-sm p-datatable-gridlines"
+                [tableStyle]="{ 'min-width': '75rem' }" [paginator]="true" [rows]="rows" selectionMode="single"
+                [totalRecords]="totalRecords" [loading]="loading" [showCurrentPageReport]="true"
+                [rowsPerPageOptions]="rowsPerPageOptions" [scrollable]="true" scrollHeight="600px"
+                currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} registros">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h5 class="m-0">Abonados por activar</h5>
+                        <div class="my-2">
+                            <button pButton pRipple label="Nuevo" icon="pi pi-plus"
+                                class="p-button-primary p-button-sm mr-2" (click)="new()"></button>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="idAbonado">ID <p-sortIcon field="idAbonado"></p-sortIcon></th>
+                        <th pSortableColumn="fechaRegistro">F.Registro <p-sortIcon field="fechaRegistro"></p-sortIcon></th>
+                        <th pSortableColumn="dniruc">DNI/RUC <p-sortIcon field="dniruc"></p-sortIcon></th>
+                        <th pSortableColumn="nombreTercero">Nombre Razón Social <p-sortIcon
+                                field="nombreTercero"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="nombrePlan">Plan <p-sortIcon field="nombrePlan"></p-sortIcon></th>
+                        <th pSortableColumn="nombreSector">Sector <p-sortIcon field="nombreSector"></p-sortIcon></th>
+                        <th pSortableColumn="nombreVia">Dirección <p-sortIcon field="via.nombreVia"></p-sortIcon></th>
+                        <th pSortableColumn="referencia">Referencia <p-sortIcon field="referencia"></p-sortIcon></th>
+
+                        <th pFrozenColumn></th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <p-columnFilter type="text" field="idAbonado"></p-columnFilter>
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="fechaRegistro"></p-columnFilter>
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="tercero.dniruc"></p-columnFilter>
+                        </th>
+
+                        <th>
+                            <p-columnFilter type="text" field="tercero.nombreTercero"></p-columnFilter>
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="plan.nombrePlan"></p-columnFilter>
+                        </th>
+
+                        <th>
+                            <p-columnFilter type="text" field="sector.nombreSector"></p-columnFilter>
+                        </th>
+
+                        <th></th>
+                        <th></th>
+                        <th pFrozenColumn></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-row>
+                    <tr>
+                        <td style="width:5%; min-width:5rem;">
+                            <span class="p-column-title">ID</span>
+                            {{row.idAbonado}}
+                        </td>
+                        <td style="width:6%; min-width:10rem;">
+                            <span class="p-column-title">F.Registro</span>
+                            {{row.fechaRegistro}}
+                        </td>
+
+                        <td style="width:5%; min-width:5rem;">
+                            <span class="p-column-title">DNI/RUC</span>
+                            {{row.tercero.dniruc}}
+                        </td>
+
+                        <td style="width:20%; min-width:10rem;">
+                            <span class="p-column-title">Nombre Razón Social</span>
+                            {{row.tercero.nombreTercero}}
+                        </td>
+
+
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">Plan</span>
+                            {{row.plan.nombrePlan}}
+                        </td>
+
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">Sector</span>
+                            {{row.sector.nombreSector}}
+                        </td>
+
+                        <td style="width:20%; min-width:10rem;">
+                            <span class="p-column-title">Dirección</span>
+                            {{row.via.tipoVia.idTipoVia}}. {{row.via.nombreVia}} # {{row.numero}}
+                        </td>
+
+                        <td style="width:20%; min-width:10rem;">
+                            <span class="p-column-title">Referencia</span>
+                            {{row.referencia }}
+                        </td>
+
+                        <td style="width:10%; min-width:10rem;" pFrozenColumn>
+                            <div class="flex justify-content-center">
+                                <p-button icon="pi pi-sync" styleClass="p-button-success p-button-text p-button-table" pTooltip="Activar"
+                                [routerLink]="['/pages/abonados/detalles', row.idAbonado]"></p-button>
+                                <p-button icon="pi pi-trash" styleClass="p-button-danger p-button-text p-button-table" pTooltip="Eliminar"
+                                    (click)="delete(row)"></p-button>
+                            </div>
+                        </td>
+
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <p-dialog [(visible)]="deleteAbonadoDialog" header="Confirmar" [modal]="true" [style]="{width:'450px'}">
+            <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-question-circle mr-3" style="font-size: 2rem"></i>
+                <span *ngIf="abonado">¿Está seguro que desea eliminar el registro?</span>
+            </div>
+            <ng-template pTemplate="footer">
+                <button pButton pRipple icon="pi pi-times" class="p-button-secondary" label="No"
+                    (click)="deleteAbonadoDialog = false"></button>
+                <button pButton pRipple icon="pi pi-check" class="p-button-danger" label="Si, Eliminar"
+                    (click)="confirmDelete()"></button>
+            </ng-template>
+        </p-dialog>
+
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="card">
+    <form [formGroup]="form" (submit)="operate()" #formulario="ngForm">
+        <div class="p-fluid">
+            <div class="formgrid grid">
+                <div class="field col md:col-4">
+                    <label for="idVia">ID</label>
+                    <input type="text" pInputText formControlName="idVia" readOnly
+                        [ngClass]="{'ng-invalid ng-dirty' : f['idVia'].touched && f['idVia'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['idVia'].errors?.['required'] && f['idVia'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['idVia'].errors?.['minlength'] && f['idVia'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+
+
+                <div class="field col md:col-8">
+                    <label for="tipoVia">Tipo Vía</label>
+                    <p-dropdown appendTo="body" formControlName="tipoVia" [options]="tiposVias" [virtualScroll]="true" [virtualScrollItemSize]="2"
+                        optionLabel="nombreTipoVia" placeholder="Seleccionar..."
+                        [ngClass]="{'ng-invalid ng-dirty' : f['tipoVia'].touched && f['tipoVia'].errors}"></p-dropdown>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['tipoVia'].errors?.['required'] && f['tipoVia'].touched" class="invalid">Es
+                        requerido</small>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="nombreVia">Nombre</label>
+                <input type="text" pInputText formControlName="nombreVia"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['nombreVia'].touched && f['nombreVia'].errors}" />
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['nombreVia'].errors?.['required'] && f['nombreVia'].touched">Es
+                    requerido</small>
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['nombreVia'].errors?.['minlength'] && f['nombreVia'].touched">Debe
+                    ingresar mínimo 2 caracteres</small>
+            </div>
+
+        </div>
+        <div>
+            <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                [disabled]="formulario.invalid"></button>
+            <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2"
+                (click)="close()"></button>
+        </div>
+
+    </form>
+</div>

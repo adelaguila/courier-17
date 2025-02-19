@@ -1,0 +1,87 @@
+<div class="card">
+
+    <form [formGroup]="form" (submit)="operate()" #formUbigeo="ngForm">
+        <div class="p-fluid mb-4">
+            <div class="formgrid grid">
+                <div class="field col md:col-4">
+                    <label for="idUbigeo">ID</label>
+                    <input type="text" pInputText formControlName="idUbigeo" readonly/>
+                </div>
+                <div class="field col md:col-8">
+                    <label for="codigo">Código</label>
+                    <input type="text" pInputText formControlName="codigo"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['codigo'].touched && f['codigo'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['codigo'].errors?.['required'] && f['codigo'].touched">El código es requerido.</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['codigo'].errors?.['minlength'] && f['codigo'].touched">Mínimo 6 caracteres.</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['codigo'].errors?.['maxlength'] && f['codigo'].touched">Máximo 6 caracteres.</small>
+                </div>
+                <!-- <div class="field col md:col-8">
+                    <label for="capital">Capital</label>
+                    <input type="text" pInputText formControlName="capital"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['capital'].touched && f['capital'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['capital'].errors?.['required'] && f['capital'].touched">La capital es
+                        requerida.</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['capital'].errors?.['minlength'] && f['capital'].touched">Mínimo 3 caracteres.</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['capital'].errors?.['maxlength'] && f['capital'].touched">Máximo 100
+                        caracteres.</small>
+
+                </div> -->
+            </div>
+            <div class="field">
+                <label for="departamento">Departamento</label>
+                <input pInputText formControlName="departamento" type="text"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['departamento'].touched && f['departamento'].errors}" />
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['departamento'].errors?.['required'] && f['departamento'].touched">El departamento es
+                    requerido.</small>
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['departamento'].errors?.['minlength'] && f['departamento'].touched">Mínimo 3
+                    caracteres.</small>
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['departamento'].errors?.['maxlength'] && f['departamento'].touched">Máximo 100
+                    caracteres.</small>
+
+            </div>
+            <div class="field">
+                <label for="provincia">Provincia</label>
+                <input pInputText formControlName="provincia" type="text"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['provincia'].touched && f['provincia'].errors}" />
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['provincia'].errors?.['required'] && f['provincia'].touched">La provincia es
+                    requerido.</small>
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['provincia'].errors?.['minlength'] && f['provincia'].touched">Mínimo 3 caracteres.</small>
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['provincia'].errors?.['maxlength'] && f['provincia'].touched">Máximo 100
+                    caracteres.</small>
+
+            </div>
+            <div class="field">
+                <label for="distrito">Distrito</label>
+                <input pInputText formControlName="distrito" type="text"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['distrito'].touched && f['distrito'].errors}" />
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['distrito'].errors?.['required'] && f['distrito'].touched">El distrito es
+                    requerido.</small>
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['distrito'].errors?.['minlength'] && f['distrito'].touched">Mínimo 3 caracteres.</small>
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['distrito'].errors?.['maxlength'] && f['distrito'].touched">Máximo 100 caracteres.</small>
+
+            </div>
+        </div>
+
+        <div>
+            <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                [disabled]="formUbigeo.invalid"></button>
+            <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2" (click)="close()"></button>
+        </div>
+
+    </form>
+</div>

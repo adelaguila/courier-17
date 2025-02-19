@@ -1,0 +1,57 @@
+<div class="card">
+<form [formGroup]="form" (submit)="operate()" #formulario="ngForm">
+        <div class="p-fluid">
+            <div class="formgrid grid">
+                <div class="field col md:col-4">
+                    <label for="idProducto">ID</label>
+                    <input type="text" pInputText formControlName="idProducto" readonly />
+                </div>
+            </div>
+            <div class="field">
+                <label for="unidadMedida">Nombre Producto</label>
+                <input type="text" pInputText formControlName="nombreProducto"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['nombreProducto'].touched && f['nombreProducto'].errors}" />
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['nombreProducto'].errors?.['required'] && f['nombreProducto'].touched">Es
+                    requerido</small>
+                <small class="ng-dirty ng-invalid"
+                    *ngIf="f['nombreProducto'].errors?.['minlength'] && f['nombreProducto'].touched">Debe
+                    ingresar mínimo 2 caracteres</small>
+            </div>
+            <div class="formgrid grid">
+                <div class="field col md:col-3">
+                    <label for="unidadMedida">Unidad Medida</label>
+                    <input type="text" pInputText formControlName="unidadMedida"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['unidadMedida'].touched && f['unidadMedida'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['unidadMedida'].errors?.['required'] && f['unidadMedida'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['unidadMedida'].errors?.['minlength'] && f['unidadMedida'].touched">Debe
+                        ingresar mínimo 1 caracteres</small>
+                </div>
+                <div class="field col md:col-3">
+                    <label for="stock">Stock</label>
+                    <input type="text" pInputText formControlName="stock" readonly />
+                </div>
+                <div class="field col md:col-3">
+                    <label for="controlSerie">Control Serie</label>
+                    <input type="text" pInputText formControlName="controlSerie"/>
+                </div>
+                <div class="field col md:col-3">
+                    <label for="controlDevolucion">Control Devol.</label>
+                    <input type="text" pInputText formControlName="controlDevolucion"/>
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                [disabled]="formulario.invalid"></button>
+            <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2"
+                (click)="close()"></button>
+        </div>
+
+    </form>
+</div>

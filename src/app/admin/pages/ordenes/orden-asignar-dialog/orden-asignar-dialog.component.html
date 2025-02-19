@@ -1,0 +1,49 @@
+<div class="card">
+    <div class="invoice-to">
+        <div class="bill-to">{{ nombreTipoOrden }}</div>
+        <div class="invoice-to-info">
+            <div>{{ nombreTercero }}</div>
+            <div>{{ direccion }}</div>
+        </div>
+    </div>
+    <hr>
+    <form [formGroup]="form" (submit)="operate()" #formAsignarOrden="ngForm">
+        <div class="p-fluid">
+            <div class="formgrid grid">
+                <div class="field col md:col-4">
+                    <label for="idOrdenAsignacion">ID</label>
+                    <input type="text" pInputText formControlName="idOrdenAsignacion" readonly />
+                </div>
+
+                <div class="field col md:col-8">
+                    <label for="nombreVia">Fecha</label>
+                    <input type="date" pInputText formControlName="fechaAsignacion"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['fechaAsignacion'].touched && f['fechaAsignacion'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['fechaAsignacion'].errors?.['required'] && f['fechaAsignacion'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['fechaAsignacion'].errors?.['minlength'] && f['fechaAsignacion'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="user">Técnico</label>
+                <p-dropdown appendTo="body" formControlName="user" [options]="usuarios" optionLabel="name"
+                    placeholder="Seleccionar..." [virtualScroll]="true" [virtualScrollItemSize]="2"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['user'].touched && f['user'].errors}"></p-dropdown>
+                <small class="ng-dirty ng-invalid" *ngIf="f['user'].errors?.['required'] && f['user'].touched"
+                    class="invalid">Es requerido</small>
+            </div>
+        </div>
+
+        <div>
+            <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                [disabled]="formAsignarOrden.invalid"></button>
+            <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2"
+                (click)="close()"></button>
+        </div>
+
+    </form>
+</div>

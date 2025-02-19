@@ -1,0 +1,35 @@
+<div class="card">
+    <form [formGroup]="form" (submit)="operate()" #formPlan="ngForm">
+        <div class="p-fluid mb-4" >
+            <div class="field">
+                <label for="serie">Serie</label>
+                <input type="text" pInputText formControlName="serie" />
+            </div>
+
+            <div class="field">
+                <label for="numero">Número</label>
+                <input type="number" pInputText formControlName="numero"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['numero'].touched && f['numero'].errors}" />
+                <small class="ng-dirty ng-invalid" *ngIf="f['numero'].errors?.['required'] && f['numero'].touched">Es
+                    requerido</small>
+                <small class="ng-dirty ng-invalid" *ngIf="f['numero'].errors?.['minlength'] && f['numero'].touched">Debe
+                    ingresar mínimo 2 caracteres</small>
+            </div>
+
+            <div class="field">
+                <label for="tipo">Tipo</label>
+                <input type="text" pInputText formControlName="tipo"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['tipo'].touched && f['tipo'].errors}" />
+                <small class="ng-dirty ng-invalid" *ngIf="f['tipo'].errors?.['required'] && f['tipo'].touched">Es
+                    requerido</small>
+            </div>
+        </div>
+
+        <div>
+            <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                [disabled]="formPlan.invalid"></button>
+            <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2" (click)="close()"></button>
+        </div>
+
+    </form>
+</div>

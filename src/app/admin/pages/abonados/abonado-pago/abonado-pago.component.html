@@ -1,0 +1,143 @@
+<div class="card">
+    <p-toast position="top-center" key="tc"></p-toast>
+    <div class="invoice-to">
+        <div class="invoice-to-info">
+            <div>ABONADO: {{ abonado.tercero.nombreTercero }}</div>
+            <!-- <div>{{ direccion }}</div> -->
+        </div>
+    </div>
+    <hr>
+    <form [formGroup]="form" (submit)="operate()" #formPago="ngForm">
+        <div class="p-fluid">
+            <div class="formgrid grid">
+
+                    <input type="hidden" pInputText formControlName="idPago" readonly />
+
+
+                <div class="field col md:col-4">
+                    <label for="fechaPago">Fecha</label>
+                    <input type="date" pInputText formControlName="fechaPago"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['fechaPago'].touched && f['fechaPago'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['fechaPago'].errors?.['required'] && f['fechaPago'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['fechaPago'].errors?.['minlength'] && f['fechaPago'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+                <div class="field col md:col-4">
+                    <label for="tipoPago">Tipo de Pago</label>
+                    <p-dropdown appendTo="body" formControlName="tipoPago" [options]="tiposPagos" optionLabel="name"
+                        optionValue="code" placeholder="Seleccionar..."
+                        [ngClass]="{'ng-invalid ng-dirty' : f['tipoPago'].touched && f['tipoPago'].errors}"></p-dropdown>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['tipoPago'].errors?.['required'] && f['tipoPago'].touched" class="invalid">Es
+                        requerido</small>
+                </div>
+                <div class="field col md:col-4">
+                    <label for="total">Total</label>
+                    <input type="number" pInputText formControlName="total"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['total'].touched && f['total'].errors}" />
+                    <small class="ng-dirty ng-invalid" *ngIf="f['total'].errors?.['required'] && f['total'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid" *ngIf="f['total'].errors?.['min'] && f['total'].touched">El valor debe ser mayor o igual a 0.50</small>
+                </div>
+            </div>
+
+            <div class="formgrid grid">
+
+
+                <div class="field col md:col-6">
+                    <label for="cuentaBancaria">Cuenta Bancaria</label>
+                    <p-dropdown appendTo="body" formControlName="cuentaBancaria" [options]="cuentasBancarias"
+                        optionLabel="descripcion" placeholder="Seleccionar..."
+                        [ngClass]="{'ng-invalid ng-dirty' : f['cuentaBancaria'].touched && f['cuentaBancaria'].errors}"></p-dropdown>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['cuentaBancaria'].errors?.['required'] && f['cuentaBancaria'].touched"
+                        class="invalid">Es
+                        requerido</small>
+                </div>
+
+                <div class="field col md:col-6">
+                    <label for="userCobrador">Cobrador</label>
+                    <p-dropdown appendTo="body" formControlName="userCobrador" [options]="cobradores" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true"
+                        optionValue="code" placeholder="Seleccionar..."
+                        [ngClass]="{'ng-invalid ng-dirty' : f['userCobrador'].touched && f['userCobrador'].errors}"></p-dropdown>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['userCobrador'].errors?.['required'] && f['userCobrador'].touched" class="invalid">Es
+                        requerido</small>
+                </div>
+            </div>
+
+            <div class="formgrid grid">
+                <div class="field col md:col-12">
+                    <label for="referencia">Glosa</label>
+                    <input type="text" pInputText formControlName="referencia"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['referencia'].touched && f['referencia'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['referencia'].errors?.['required'] && f['referencia'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['referencia'].errors?.['minlength'] && f['referencia'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+
+            </div>
+
+            <div class="formgrid grid">
+                <div class="field col md:col-3">
+                    <label for="comprobante">Comprobante?</label>
+                    <p-dropdown appendTo="body" formControlName="comprobante" [options]="comprobantes"
+                        optionLabel="serie" placeholder="Seleccionar..."
+                        [ngClass]="{'ng-invalid ng-dirty' : f['comprobante'].touched && f['comprobante'].errors}"></p-dropdown>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['comprobante'].errors?.['required'] && f['comprobante'].touched" class="invalid">Es
+                        requerido</small>
+                </div>
+
+                <div class="field col md:col-9">
+                    <label for="tercero">DNI/RUC - Nombre / Razón Social</label>
+                    <p-autoComplete formControlName="tercero" [suggestions]="tercerosFiltrados"
+                        (completeMethod)="filtrarTerceros($event)" field="dnirucNombreTercero" [minLength]="3"
+                        [forceSelection]="true" [baseZIndex]="1500" appendTo="body">
+                    </p-autoComplete>
+
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                [disabled]="formPago.invalid"></button>
+            <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2"
+                (click)="close()"></button>
+        </div>
+
+        <div class="grid" *ngIf="cargosPendientes.length > 0">
+            <div class="col-12">
+                <div class="card p-fluid">
+                    <p-table [value]="cargosPendientes" [paginator]="true" [rows]="3" [showCurrentPageReport]="true"
+                        [tableStyle]="{ 'min-width': '30rem' }" styleClass="p-datatable-gridlines p-datatable-sm"
+                        currentPageReportTemplate="Mostrando {first} de {last} de {totalRecords} registros"
+                        [rowsPerPageOptions]="[3, 5, 10, 20]">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="width:20%;">F.Emisión</th>
+                                <th style="width:60%;">Descripción</th>
+                                <th style="width:20%;">Saldo</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-cargo>
+                            <tr>
+                                <td>{{ cargo.fechaEmision }}</td>
+                                <td>{{ cargo.glosa }}</td>
+                                <td class="text-right">{{ cargo.total - cargo.pagado | currency:'S/ '}}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>

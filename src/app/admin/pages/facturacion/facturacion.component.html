@@ -1,0 +1,151 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-3 py-3">
+            <p-toast position="top-center" key="tc"></p-toast>
+            <p-table #dt [value]="facturaciones" [lazy]="true" (onLazyLoad)="loadFacturaciones($event)" dataKey="id"
+                styleClass="p-datatable-sm p-datatable-gridlines" [tableStyle]="{ 'min-width': '75rem' }"
+                [paginator]="true" [rows]="rows" selectionMode="single" sortField="fecha" [sortOrder]="-1"
+                [totalRecords]="totalRecords" [loading]="loading" [showCurrentPageReport]="true"
+                [rowsPerPageOptions]="rowsPerPageOptions" [scrollable]="true" scrollHeight="600px"
+                currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} registros">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h5 class="m-0">Mantenimiento de Facturación</h5>
+                        <div class="my-2">
+                            <button pButton pRipple label="Nuevo" icon="pi pi-plus"
+                                class="p-button-primary p-button-sm mr-2"
+                                [routerLink]="['/pages/facturacion/nuevo']"></button>
+                            <!-- <button pButton pRipple label="Exportar" icon="pi pi-file-excel"
+                        class="p-button-success p-button-sm mr-2" (click)="exportToExcel()"></button>
+                    <button pButton pRipple label="Imprimir" icon="pi pi-print"
+                        class="p-button-secondary p-button-sm" (click)="exportToPdf()"></button> -->
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="serie">Serie <p-sortIcon field="serie"></p-sortIcon></th>
+                        <th pSortableColumn="numero">Número <p-sortIcon field="numero"></p-sortIcon></th>
+                        <th pSortableColumn="fecha">Fecha <p-sortIcon field="fecha"></p-sortIcon></th>
+                        <th pSortableColumn="dniruc">DNI/RUC <p-sortIcon field="dniruc"></p-sortIcon></th>
+                        <th pSortableColumn="nombreTercero">Cliente <p-sortIcon field="nombreTercero"></p-sortIcon></th>
+                        <th pSortableColumn="total">Total <p-sortIcon field="total"></p-sortIcon></th>
+                        <th pSortableColumn="estado">Estado <p-sortIcon field="estado"></p-sortIcon></th>
+                        <th pSortableColumn="pse">Resp. PSE <p-sortIcon field="respuestaCdr"></p-sortIcon></th>
+                        <th pFrozenColumn></th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <p-columnFilter type="text" field="serie" [matchModeOptions]="matchModeOptionsText"
+                                [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="numero" [matchModeOptions]="matchModeOptionsNumber"
+                                [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="fecha" [matchModeOptions]="matchModeOptionsText"
+                                [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="dniruc" [matchModeOptions]="matchModeOptionsText"
+                                [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="nombreTercero" [matchModeOptions]="matchModeOptionsText"
+                                [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th pFrozenColumn></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-row>
+                    <tr>
+                        <td style="width:10%; min-width:5rem;">
+                            <span class="p-column-title">Serie</span>
+                            {{row.serie}}
+                        </td>
+
+                        <td style="width:10%; min-width:7rem;">
+                            <span class="p-column-title">Numero</span>
+                            {{row.numero}}
+                        </td>
+
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">Fecha</span>
+                            {{row.fecha}}
+                        </td>
+
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">DNI / RUC</span>
+                            {{row.dniruc}}
+                        </td>
+
+                        <td style="width:20%; min-width:10rem;">
+                            <span class="p-column-title">Cliente</span>
+                            {{row.nombreTercero}}
+                        </td>
+
+                        <td style="width:10%; min-width:10rem;" class="text-right">
+                            <span class="p-column-title">Total</span>
+                            {{row.total | currency:' '}}
+                        </td>
+
+                        <td style="width:10%; min-width:5rem;">
+                            <span class="p-column-title">Estado</span>
+                            {{row.estado}}
+                        </td>
+
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">Resp.PES</span>
+                            {{row.respuestaCdr}}
+                        </td>
+
+
+                        <td style="width:10%; min-width:10rem;" pFrozenColumn>
+                            <div class="flex" *ngIf="row.estado != 'ANULADA'">
+                                <p-button icon="pi pi-print"
+                                    styleClass="p-button-secondary p-button-text p-button-table"
+                                    (click)="generarJsonComprobante(row)"></p-button>
+                                <p-button icon="pi pi-print"
+                                    styleClass="p-button-secondary p-button-text p-button-table"
+                                    (click)="imprimirA4(row)"></p-button>
+                                <p-button *ngIf="row.idCierre == null" icon="pi pi-ban"
+                                    styleClass="p-button-danger p-button-text p-button-table" pTooltip="Anular"
+                                    (click)="anular(row)"></p-button>
+                                <p-button *ngIf="row.tipoDocumento != '07'" icon="pi pi-book"
+                                    styleClass="p-button-info p-button-text p-button-table" pTooltip="Nota de Crédito"
+                                    (click)="notaCredito(row)"></p-button>
+                                <p-button *ngIf="row.externalId == null"  icon="pi pi-send" styleClass="p-button-info p-button-text p-button-table"
+                                    pTooltip="Reenviar SUNAT" (click)="reenviarSunat(row)"></p-button>
+                            </div>
+                        </td>
+
+
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+
+        <p-dialog [(visible)]="anularFacturacionDialog"
+            header="Comprobante: {{facturacion?.serie}} - {{facturacion?.numero}}" [modal]="true"
+            [style]="{width:'450px'}">
+            <div class="flex flex-column gap-2">
+                <label for="motivoAnulacion">Descripción del motivo de anulación</label>
+                <input pInputText id="motivoAnulacion" aria-describedby="motivo-anulacion"
+                    [(ngModel)]="motivoAnulacion" />
+                <!-- <small id="motivo-anulacion">Descripción del motivo de anulación</small> -->
+            </div>
+            <ng-template pTemplate="footer">
+                <button pButton pRipple icon="pi pi-times" class="p-button-secondary" label="No"
+                    (click)="anularFacturacionDialog = false"></button>
+                <button pButton pRipple icon="pi pi-check" class="p-button-danger" label="Si, ANULAR"
+                    (click)="confirmarAnulacion()"></button>
+            </ng-template>
+        </p-dialog>
+
+    </div>
+</div>

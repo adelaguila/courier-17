@@ -1,0 +1,31 @@
+<div class="card">
+    <form [formGroup]="form" (submit)="operate()" #formPlan="ngForm">
+        <div class="p-fluid mb-4" >
+            <div class="formgrid grid">
+                <div class="field col md:col-2">
+                    <label for="idTipoClienteProveedor">ID</label>
+                    <input type="text" pInputText formControlName="idTipoClienteProveedor" readonly />
+                </div>
+                <div class="field col md:col-10">
+                    <label for="nombreTipoClienteProveedor">Nombre Tipo Orden</label>
+                    <input type="text" pInputText formControlName="nombreTipoClienteProveedor"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['nombreTipoClienteProveedor'].touched && f['nombreTipoClienteProveedor'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['nombreTipoClienteProveedor'].errors?.['required'] && f['nombreTipoClienteProveedor'].touched">Es
+                        requerido</small>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['nombreTipoClienteProveedor'].errors?.['minlength'] && f['nombreTipoClienteProveedor'].touched">Debe
+                        ingresar mínimo 2 caracteres</small>
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                [disabled]="formPlan.invalid"></button>
+            <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2" (click)="close()"></button>
+        </div>
+
+    </form>
+</div>
