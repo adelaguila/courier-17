@@ -13,11 +13,13 @@ import { map } from 'rxjs';
 import { ClienteProveedor } from 'src/app/admin/models/cliente-proveedor';
 import { ClienteProveedorDireccion } from 'src/app/admin/models/cliente-proveedor-direccion';
 import { SunatTipoDocumentoIdentidad } from 'src/app/admin/models/sunat-tipo-documento-identidad';
+import { TipoClienteProveedor } from 'src/app/admin/models/tipo-cliente-proveedor';
 
 import { Ubigeo } from 'src/app/admin/models/ubigeo';
 import { ApimigoService } from 'src/app/admin/services/apimigo.service';
 import { ClienteProveedorService } from 'src/app/admin/services/cliente-proveedor.service';
 import { SunatTipoDocumentoIdentidadService } from 'src/app/admin/services/sunat-tipo-documento-identidad.service';
+import { TipoClienteProveedorService } from 'src/app/admin/services/tipo-cliente-proveedor.service';
 import { UbigeoService } from 'src/app/admin/services/ubigeo.service';
 import { PrimengModule } from 'src/app/primeng/primeng.module';
 
@@ -34,10 +36,12 @@ export class ClienteProveedorFormComponent implements OnInit {
     formDireccion!: FormGroup;
     title: string = 'Editar Cliente/Proveedor';
     isEdit: boolean = false;
+    isEditDireccion: boolean = false;
     submitted = false;
     readOnlyID: boolean = false;
     ubigeosFiltrados = [];
     tiposDocumentosIdentidad: SunatTipoDocumentoIdentidad[];
+    tiposClientesProveedores: TipoClienteProveedor[];
     activeIndex: number = 0;
 
     listaDirecciones: ClienteProveedorDireccion[];
@@ -49,6 +53,7 @@ export class ClienteProveedorFormComponent implements OnInit {
         private clienteProveedorService: ClienteProveedorService,
         private ubigeoService: UbigeoService,
         private sunatTipoDocumentoIdentidadService: SunatTipoDocumentoIdentidadService,
+        private tipoClienteProveedorService: TipoClienteProveedorService,
         public ref: DynamicDialogRef,
         public config: DynamicDialogConfig,
         private messageService: MessageService,
@@ -71,6 +76,10 @@ export class ClienteProveedorFormComponent implements OnInit {
 
         this.sunatTipoDocumentoIdentidadService.findAll().subscribe((data) => {
             this.tiposDocumentosIdentidad = data;
+        });
+
+        this.tipoClienteProveedorService.findAll().subscribe((data) => {
+            this.tiposClientesProveedores = data;
         });
 
         this.form = new FormGroup({
@@ -119,33 +128,6 @@ export class ClienteProveedorFormComponent implements OnInit {
         return this.formDireccion.controls;
     }
 
-    // initForm() {
-    //     if (this.clienteProveedor) {
-    //         this.title = 'Editar ClienteProveedor';
-    //         this.form = new FormGroup({
-    //             idClienteProveedor: new FormControl(
-    //                 this.clienteProveedor.idClienteProveedor
-    //             ),
-    //             dniruc: new FormControl(this.clienteProveedor.dniruc),
-    //             nombreClienteProveedor: new FormControl(
-    //                 this.clienteProveedor.nombreClienteProveedor,
-    //                 [
-    //                     Validators.required,
-    //                     Validators.minLength(2),
-    //                     Validators.maxLength(100),
-    //                 ]
-    //             ),
-    //             telefono1: new FormControl(this.clienteProveedor.telefono1),
-    //             telefono2: new FormControl(this.clienteProveedor.telefono2),
-    //             correoElectronico: new FormControl(
-    //                 this.clienteProveedor.correoElectronico
-    //             ),
-    //         });
-
-    //         this.listaDirecciones = this.clienteProveedor.direcciones;
-    //     }
-    // }
-
     filtrarUbigeos(event: any) {
         this.ubigeoService.autocomplete(event.query).subscribe((result) => {
             this.ubigeosFiltrados = result;
@@ -171,25 +153,19 @@ export class ClienteProveedorFormComponent implements OnInit {
     }
 
     operateDireccionEdit() {
-        const clienteProveedorDireccion: ClienteProveedorDireccion =
-            new ClienteProveedorDireccion();
-        clienteProveedorDireccion.idClienteProveedorDireccion =
-            this.formDireccion.value['idClienteProveedorDireccion'];
+        const clienteProveedorDireccion: ClienteProveedorDireccion = new ClienteProveedorDireccion();
+        clienteProveedorDireccion.idClienteProveedorDireccion =this.formDireccion.value['idClienteProveedorDireccion'];
         clienteProveedorDireccion.clienteProveedor = this.clienteProveedor;
-        clienteProveedorDireccion.direccion =
-            this.formDireccion.value['direccion'];
+        clienteProveedorDireccion.direccion =this.formDireccion.value['direccion'];
         clienteProveedorDireccion.ubigeo = this.formDireccion.value['ubigeo'];
-        this.clienteProveedorService
-            .updateDireccion(
+        this.clienteProveedorService.updateDireccion(
                 clienteProveedorDireccion.idClienteProveedorDireccion,
                 clienteProveedorDireccion
             )
             .subscribe((data: ClienteProveedorDireccion) => {
                 this.formDireccion.reset();
-                this.isEdit = false;
-                this.loadClienteProveedor(
-                    this.clienteProveedor.idClienteProveedor
-                );
+                this.isEditDireccion = false;
+                this.loadClienteProveedor(this.clienteProveedor.idClienteProveedor);
             });
     }
 
@@ -206,7 +182,7 @@ export class ClienteProveedorFormComponent implements OnInit {
     }
 
     editDireccion(clienteProveedorDireccion: ClienteProveedorDireccion) {
-        this.isEdit = true;
+        this.isEditDireccion = true;
         this.formDireccion = new FormGroup({
             idClienteProveedorDireccion: new FormControl(
                 clienteProveedorDireccion.idClienteProveedorDireccion
@@ -281,6 +257,8 @@ export class ClienteProveedorFormComponent implements OnInit {
         clienteProveedorNew.nombreRazonSocial = this.form.value['nombreRazonSocial'];
         clienteProveedorNew.telefono = this.form.value['telefono'];
         clienteProveedorNew.correo = this.form.value['correo'];
+        clienteProveedorNew.tipoClienteProveedor = this.form.value['tipoClienteProveedor'];
+        clienteProveedorNew.activo = this.form.value['activo'];
 
         this.clienteProveedorService
             .update(

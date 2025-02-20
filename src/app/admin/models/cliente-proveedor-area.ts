@@ -1,5 +1,4 @@
 import { ClienteProveedor } from "./cliente-proveedor";
-import { TerceroDireccion } from "./tercero-direccion";
 
 export class ClienteProveedorArea{
   idClienteProveedorArea: number = 0;

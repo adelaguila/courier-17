@@ -26,6 +26,8 @@
                     </th>
                     <th pSortableColumn="telefono">Teléfono <p-sortIcon field="telefono"></p-sortIcon></th>
                     <th pSortableColumn="correo">Email <p-sortIcon field="correo"></p-sortIcon></th>
+                    <th pSortableColumn="nombreTipoClienteProveedor">Tipo <p-sortIcon field="nombreTipoClienteProveedor"></p-sortIcon></th>
+                    <th pSortableColumn="activo">Tipo <p-sortIcon field="activo"></p-sortIcon></th>
                     <th pFrozenColumn></th>
                 </tr>
                 <tr>
@@ -47,6 +49,13 @@
                     <th>
                         <!-- Correo Electronico -->
                     </th>
+                    <th>
+                        <p-columnFilter type="text" field="nombreTipoClienteProveedor" [matchModeOptions]="matchModeOptionsText"
+                            [matchMode]="'contains'"></p-columnFilter>
+                    </th>
+                    <th>
+                       <!-- Correo Electronico -->
+                    </th>
                     <th pFrozenColumn></th>
                 </tr>
             </ng-template>
@@ -62,7 +71,7 @@
                         {{row.numeroDocumentoIdentidad}}
                     </td>
 
-                    <td style="width:30%; min-width:10rem;">
+                    <td style="width:25%; min-width:10rem;">
                         <span class="p-column-title">Nombre Razón Social</span>
                         {{row.nombreRazonSocial}}
                     </td>
@@ -70,9 +79,18 @@
                         <span class="p-column-title">Telefono</span>
                         {{row.telefono}}
                     </td>
-                    <td style="width:20%; min-width:10rem;">
+                    <td style="width:15%; min-width:10rem;">
                         <span class="p-column-title">Email</span>
                         {{row.correo}}
+                    </td>
+                    <td style="width:15%; min-width:10rem;">
+                        <span class="p-column-title">Tipo</span>
+                        {{row.nombreTipoClienteProveedor}}
+                    </td>
+                    <td style="width:5%; min-width:7rem;" class="text-center">
+                        <span class="p-column-title">Activo</span>
+                        <i *ngIf="row.activo" class="pi pi-thumbs-up-fill text-green-500"></i>
+                        <i *ngIf="!row.activo" class="pi pi-thumbs-down-fill"></i>
                     </td>
                     <td style="width:10%; min-width:10rem;" pFrozenColumn>
                         <div class="flex justify-content-center">

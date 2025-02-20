@@ -12,7 +12,7 @@
                         *ngIf="f['idSunatTipoDocumentoIdentidad'].errors?.['minlength'] && f['idSunatTipoDocumentoIdentidad'].touched">Debe
                         ingresar mínimo 2 caracteres</small>
                 </div>
-                <div class="field col md:col-8">
+                <div class="field col md:col-6">
                     <label for="nombreSunatTipoDocumentoIdentidad">Nombre Tipo Orden</label>
                     <input type="text" pInputText formControlName="nombreSunatTipoDocumentoIdentidad"
                         [ngClass]="{'ng-invalid ng-dirty' : f['nombreSunatTipoDocumentoIdentidad'].touched && f['nombreSunatTipoDocumentoIdentidad'].errors}" />
@@ -22,6 +22,14 @@
                     <small class="ng-dirty ng-invalid"
                         *ngIf="f['nombreSunatTipoDocumentoIdentidad'].errors?.['minlength'] && f['nombreSunatTipoDocumentoIdentidad'].touched">Debe
                         ingresar mínimo 2 caracteres</small>
+                </div>
+                <div class="field col md:col-2">
+                    <label for="siglas">Siglas</label>
+                    <input type="text" pInputText formControlName="siglas"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['siglas'].touched && f['siglas'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['siglas'].errors?.['required'] && f['siglas'].touched">Es
+                        requerido</small>
                 </div>
                 <div class="field col md:col-2">
                     <label for="digitos">Digitos</label>

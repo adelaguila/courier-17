@@ -140,7 +140,7 @@ export class ClienteProveedorComponent implements OnInit {
     new() {
         this.ref = this.dialogService.open(ClienteProveedorFormComponent, {
             header: "Nuevo Cliente/Proveedor",
-            width: "550px",
+            width: "70%",
             contentStyle: { overflow: "auto" },
             baseZIndex: 10000,
             maximizable: true,
@@ -151,7 +151,7 @@ export class ClienteProveedorComponent implements OnInit {
         this.clienteProveedorService.findById(clienteProveedor.idClienteProveedor).subscribe((data) => {
             this.ref = this.dialogService.open(ClienteProveedorFormComponent, {
                 header: "Editar ClienteProveedor",
-                width: "650px",
+                width: "70%",
                 contentStyle: { overflow: "auto" },
                 baseZIndex: 10000,
                 maximizable: true,

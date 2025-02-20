@@ -62,6 +62,14 @@ export class TipoDocumentoIdentidadFormComponent implements OnInit {
             digitos: new FormControl(
                 this.tipoDocumentoIdentidad?.digitos
             ),
+            siglas: new FormControl(
+                this.tipoDocumentoIdentidad?.siglas,
+                [
+                    Validators.required,
+                    Validators.minLength(2),
+                    Validators.maxLength(5),
+                ]
+            ),
         });
     }
     get f() {
