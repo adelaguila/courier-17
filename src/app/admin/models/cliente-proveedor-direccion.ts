@@ -2,7 +2,7 @@ import { ClienteProveedor } from "./cliente-proveedor";
 import { Ubigeo } from "./ubigeo";
 
 export class ClienteProveedorDireccion{
-  idClienteProveedorDireccion: number = 0;
+  idClienteProveedorDireccion: number;
   clienteProveedor!: ClienteProveedor;
   direccion: string = '';
   ubigeo!: Ubigeo;

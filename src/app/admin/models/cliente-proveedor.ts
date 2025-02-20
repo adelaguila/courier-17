@@ -4,7 +4,7 @@ import { SunatTipoDocumentoIdentidad } from './sunat-tipo-documento-identidad';
 import { TipoClienteProveedor } from './tipo-cliente-proveedor';
 
 export class ClienteProveedor {
-    idClienteProveedor: number = 0;
+    idClienteProveedor: number;
     tipoDocumentoIdentidad!: SunatTipoDocumentoIdentidad;
     numeroDocumentoIdentidad: string = '';
     nombreRazonSocial: string = '';
@@ -12,7 +12,7 @@ export class ClienteProveedor {
     correo: string = '';
     tipoClienteProveedor!: TipoClienteProveedor;
     activo: boolean = true;
-    direcciones!: ClienteProveedorDireccion[];
-    areas!: ClienteProveedorArea[];
+    direcciones: ClienteProveedorDireccion[] = [];
+    areas: ClienteProveedorArea[] = [];
     doiNombreClienteProveedor: string = '';
 }

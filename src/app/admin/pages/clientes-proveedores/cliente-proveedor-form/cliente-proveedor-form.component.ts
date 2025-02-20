@@ -6,10 +6,12 @@ import {
     ReactiveFormsModule,
     Validators,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import { MessageService } from 'primeng/api';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { map } from 'rxjs';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import {
+    DialogService,
+    DynamicDialogConfig,
+    DynamicDialogRef,
+} from 'primeng/dynamicdialog';
 import { ClienteProveedor } from 'src/app/admin/models/cliente-proveedor';
 import { ClienteProveedorDireccion } from 'src/app/admin/models/cliente-proveedor-direccion';
 import { SunatTipoDocumentoIdentidad } from 'src/app/admin/models/sunat-tipo-documento-identidad';
@@ -43,10 +45,6 @@ export class ClienteProveedorFormComponent implements OnInit {
     tiposDocumentosIdentidad: SunatTipoDocumentoIdentidad[];
     tiposClientesProveedores: TipoClienteProveedor[];
     activeIndex: number = 0;
-
-    listaDirecciones: ClienteProveedorDireccion[];
-
-    deleteClienteProveedorDireccionDialog: boolean = false;
     clienteProveedorDireccion: ClienteProveedorDireccion;
 
     constructor(
@@ -57,6 +55,8 @@ export class ClienteProveedorFormComponent implements OnInit {
         public ref: DynamicDialogRef,
         public config: DynamicDialogConfig,
         private messageService: MessageService,
+        private confirmationService: ConfirmationService,
+        public dialogService: DialogService,
         private apimigoService: ApimigoService
     ) {
         if (this.config.data) {
@@ -64,7 +64,6 @@ export class ClienteProveedorFormComponent implements OnInit {
             this.clienteProveedor = this.config.data;
             this.readOnlyID = false;
             this.isEdit = true;
-            // this.agencia.ubigeo.nombreUbigeo = this.agencia.ubigeo.departamento + ' - ' + this.agencia.ubigeo.provincia + ' - ' + this.agencia.ubigeo.distrito;
         } else {
             this.title = 'NUEVO CLIENTE/PROVEEDOR';
             this.clienteProveedor = new ClienteProveedor();
@@ -73,7 +72,6 @@ export class ClienteProveedorFormComponent implements OnInit {
         }
     }
     ngOnInit(): void {
-
         this.sunatTipoDocumentoIdentidadService.findAll().subscribe((data) => {
             this.tiposDocumentosIdentidad = data;
         });
@@ -86,24 +84,38 @@ export class ClienteProveedorFormComponent implements OnInit {
             idClienteProveedor: new FormControl(
                 this.clienteProveedor.idClienteProveedor
             ),
-            tipoDocumentoIdentidad: new FormControl(this.clienteProveedor.tipoDocumentoIdentidad),
-            numeroDocumentoIdentidad: new FormControl(this.clienteProveedor.numeroDocumentoIdentidad, [
-                Validators.required,
-                Validators.minLength(8),
-                Validators.maxLength(11),
-            ]),
-            nombreRazonSocial: new FormControl(this.clienteProveedor.nombreRazonSocial, [
-                Validators.required,
-                Validators.minLength(2),
-                Validators.maxLength(100),
-            ]),
+            tipoDocumentoIdentidad: new FormControl(
+                this.clienteProveedor.tipoDocumentoIdentidad
+            ),
+            numeroDocumentoIdentidad: new FormControl(
+                this.clienteProveedor.numeroDocumentoIdentidad,
+                [
+                    Validators.required,
+                    Validators.minLength(8),
+                    Validators.maxLength(11),
+                ]
+            ),
+            nombreRazonSocial: new FormControl(
+                this.clienteProveedor.nombreRazonSocial,
+                [
+                    Validators.required,
+                    Validators.minLength(2),
+                    Validators.maxLength(100),
+                ]
+            ),
             telefono: new FormControl(this.clienteProveedor.telefono, [
                 Validators.required,
                 Validators.minLength(9),
             ]),
             correo: new FormControl(this.clienteProveedor.correo),
-            tipoClienteProveedor: new FormControl(this.clienteProveedor.tipoClienteProveedor, Validators.required),
-            activo: new FormControl(this.clienteProveedor.activo, Validators.required),
+            tipoClienteProveedor: new FormControl(
+                this.clienteProveedor.tipoClienteProveedor,
+                Validators.required
+            ),
+            activo: new FormControl(
+                this.clienteProveedor.activo,
+                Validators.required
+            ),
         });
 
         this.formDireccion = new FormGroup({
@@ -115,11 +127,8 @@ export class ClienteProveedorFormComponent implements OnInit {
             ]),
             ubigeo: new FormControl('', Validators.required),
         });
-
-        this.listaDirecciones = this.clienteProveedor.direcciones;
-
-
     }
+
     get f() {
         return this.form.controls;
     }
@@ -141,31 +150,40 @@ export class ClienteProveedorFormComponent implements OnInit {
             this.formDireccion.value['direccion'];
         clienteProveedorDireccion.ubigeo = this.formDireccion.value['ubigeo'];
         this.clienteProveedor.direcciones.push(clienteProveedorDireccion);
-        this.clienteProveedorService
-            .update(
-                this.clienteProveedor.idClienteProveedor,
-                this.clienteProveedor
-            )
-            .subscribe((data: ClienteProveedor) => {
-                this.formDireccion.reset();
-                this.listaDirecciones = data.direcciones;
-            });
+        if (this.isEdit) {
+            this.clienteProveedorService
+                .update(
+                    this.clienteProveedor.idClienteProveedor,
+                    this.clienteProveedor
+                )
+                .subscribe((data: ClienteProveedor) => {
+                    this.formDireccion.reset();
+                });
+        } else {
+            this.formDireccion.reset();
+        }
     }
 
     operateDireccionEdit() {
-        const clienteProveedorDireccion: ClienteProveedorDireccion = new ClienteProveedorDireccion();
-        clienteProveedorDireccion.idClienteProveedorDireccion =this.formDireccion.value['idClienteProveedorDireccion'];
+        const clienteProveedorDireccion: ClienteProveedorDireccion =
+            new ClienteProveedorDireccion();
+        clienteProveedorDireccion.idClienteProveedorDireccion =
+            this.formDireccion.value['idClienteProveedorDireccion'];
         clienteProveedorDireccion.clienteProveedor = this.clienteProveedor;
-        clienteProveedorDireccion.direccion =this.formDireccion.value['direccion'];
+        clienteProveedorDireccion.direccion =
+            this.formDireccion.value['direccion'];
         clienteProveedorDireccion.ubigeo = this.formDireccion.value['ubigeo'];
-        this.clienteProveedorService.updateDireccion(
+        this.clienteProveedorService
+            .updateDireccion(
                 clienteProveedorDireccion.idClienteProveedorDireccion,
                 clienteProveedorDireccion
             )
             .subscribe((data: ClienteProveedorDireccion) => {
                 this.formDireccion.reset();
                 this.isEditDireccion = false;
-                this.loadClienteProveedor(this.clienteProveedor.idClienteProveedor);
+                this.loadClienteProveedor(
+                    this.clienteProveedor.idClienteProveedor
+                );
             });
     }
 
@@ -177,11 +195,11 @@ export class ClienteProveedorFormComponent implements OnInit {
                 this.clienteProveedor.direcciones.map((d) => {
                     d.ubigeo.nombreUbigeo = `${d.ubigeo.distrito} - ${d.ubigeo.provincia} - ${d.ubigeo.departamento}`;
                 });
-                this.listaDirecciones = data.direcciones;
             });
     }
 
     editDireccion(clienteProveedorDireccion: ClienteProveedorDireccion) {
+        clienteProveedorDireccion.ubigeo.nombreUbigeo = `${clienteProveedorDireccion.ubigeo.distrito} - ${clienteProveedorDireccion.ubigeo.provincia} - ${clienteProveedorDireccion.ubigeo.departamento}`;
         this.isEditDireccion = true;
         this.formDireccion = new FormGroup({
             idClienteProveedorDireccion: new FormControl(
@@ -199,37 +217,43 @@ export class ClienteProveedorFormComponent implements OnInit {
         });
     }
 
-    deleteDireccion(clienteProveedorDireccion: ClienteProveedorDireccion) {
-        console.log(clienteProveedorDireccion);
-        this.deleteClienteProveedorDireccionDialog = true;
-        this.clienteProveedorDireccion = { ...clienteProveedorDireccion };
-    }
-
-    confirmDeleteDireccion() {
-        this.deleteClienteProveedorDireccionDialog = false;
-        this.clienteProveedor.direcciones =
-            this.clienteProveedor.direcciones.filter(
-                (el: ClienteProveedorDireccion) =>
-                    this.clienteProveedorDireccion
-                        .idClienteProveedorDireccion !==
-                    el.idClienteProveedorDireccion
-            );
-        this.clienteProveedorService
-            .deleteDireccion(
-                this.clienteProveedorDireccion.idClienteProveedorDireccion
-            )
-            .subscribe((resp) => {
-                this.messageService.add({
-                    key: 'tc',
-                    severity: 'success',
-                    summary: 'Successful',
-                    detail: 'Dirección eliminada con éxito',
-                    life: 3000,
-                });
-                this.loadClienteProveedor(
-                    this.clienteProveedor.idClienteProveedor
-                );
-            });
+    deleteDireccion(clienteProveedorDireccion: ClienteProveedorDireccion, index: number) {
+        this.confirmationService.confirm({
+            target: event.target as EventTarget,
+            message: '¿Está seguro que desea eliminar la dirección?',
+            header: 'Confirmar',
+            icon: 'pi pi-question',
+            acceptButtonStyleClass: 'p-button-danger p-button-text',
+            acceptIcon: 'none',
+            acceptLabel: 'SI, Eliminar',
+            rejectIcon: 'none',
+            rejectButtonStyleClass: 'p-button-text',
+            accept: () => {
+                if (this.isEdit) {
+                    this.clienteProveedorService
+                        .deleteDireccion(
+                            clienteProveedorDireccion.idClienteProveedorDireccion
+                        )
+                        .subscribe((resp) => {
+                            this.messageService.add({
+                                key: 'tc',
+                                severity: 'success',
+                                summary: 'Successful',
+                                detail: 'Dirección eliminada con éxito',
+                                life: 3000,
+                            });
+                            this.loadClienteProveedor(
+                                this.clienteProveedor.idClienteProveedor
+                            );
+                        });
+                } else {
+                    if (index !== -1) {
+                        this.clienteProveedor.direcciones.splice(index, 1);
+                    }
+                }
+            },
+            reject: () => {},
+        });
     }
 
     operate() {
@@ -245,36 +269,65 @@ export class ClienteProveedorFormComponent implements OnInit {
             return;
         }
 
-        const clienteProveedorNew: ClienteProveedor = new ClienteProveedor();
-
-        let direcciones: ClienteProveedorDireccion[] = [];
-        const clienteProveedorDireccion: ClienteProveedorDireccion =
-            new ClienteProveedorDireccion();
-
-        clienteProveedorNew.idClienteProveedor = this.form.value['idClienteProveedor'];
-        clienteProveedorNew.tipoDocumentoIdentidad = this.form.value['tipoDocumentoIdentidad'];
-        clienteProveedorNew.numeroDocumentoIdentidad = this.form.value['numeroDocumentoIdentidad'];
-        clienteProveedorNew.nombreRazonSocial = this.form.value['nombreRazonSocial'];
-        clienteProveedorNew.telefono = this.form.value['telefono'];
-        clienteProveedorNew.correo = this.form.value['correo'];
-        clienteProveedorNew.tipoClienteProveedor = this.form.value['tipoClienteProveedor'];
-        clienteProveedorNew.activo = this.form.value['activo'];
-
-        this.clienteProveedorService
-            .update(
-                this.clienteProveedor.idClienteProveedor,
-                clienteProveedorNew
-            )
-            .subscribe((data) => {
-                this.clienteProveedorService.setClienteProveedorChange(data);
-                this.clienteProveedorService.setMessageChange({
-                    key: 'tc',
-                    severity: 'success',
-                    summary: 'Success',
-                    detail: 'Datos actualizados correctamente',
-                    life: 3000,
-                });
+        if (this.clienteProveedor.direcciones.length == 0) {
+            this.messageService.add({
+                key: 'tc',
+                severity: 'error',
+                summary: 'Error',
+                detail: 'Falta registrar al menos una dirección',
+                life: 3000,
             });
+
+            return;
+        }
+
+        this.clienteProveedor.idClienteProveedor =
+            this.form.value['idClienteProveedor'];
+        this.clienteProveedor.tipoDocumentoIdentidad =
+            this.form.value['tipoDocumentoIdentidad'];
+        this.clienteProveedor.numeroDocumentoIdentidad =
+            this.form.value['numeroDocumentoIdentidad'];
+        this.clienteProveedor.nombreRazonSocial =
+            this.form.value['nombreRazonSocial'];
+        this.clienteProveedor.telefono = this.form.value['telefono'];
+        this.clienteProveedor.correo = this.form.value['correo'];
+        this.clienteProveedor.tipoClienteProveedor =
+            this.form.value['tipoClienteProveedor'];
+        this.clienteProveedor.activo = this.form.value['activo'];
+
+        if (this.isEdit) {
+            this.clienteProveedorService
+                .update(
+                    this.clienteProveedor.idClienteProveedor,
+                    this.clienteProveedor
+                )
+                .subscribe((data) => {
+                    this.clienteProveedorService.setClienteProveedorChange(
+                        data
+                    );
+                    this.clienteProveedorService.setMessageChange({
+
+                        severity: 'success',
+                        summary: 'Success',
+                        detail: 'Datos actualizados correctamente',
+                        life: 3000,
+                    });
+                });
+        } else {
+            this.clienteProveedorService
+                .save(this.clienteProveedor)
+                .subscribe((data) => {
+                    this.clienteProveedorService.setClienteProveedorChange(
+                        data
+                    );
+                    this.clienteProveedorService.setMessageChange({
+                        severity: 'success',
+                        summary: 'Success',
+                        detail: 'Datos guardados correctamente',
+                        life: 3000,
+                    });
+                });
+        }
 
         this.close();
     }
@@ -285,39 +338,79 @@ export class ClienteProveedorFormComponent implements OnInit {
 
     buscarMigo() {
         this.clienteProveedorService
-            .getByDniRuc(this.form.value['dniruc'])
+            .getByDniRuc(this.form.value['numeroDocumentoIdentidad'])
             .subscribe((resp: any) => {
+                console.log(
+                    this.form.value['tipoDocumentoIdentidad']
+                        .idSunatTipoDocumentoIdentidad
+                );
                 if (resp == null) {
-                    if (this.form.value['dniruc'].length == 8) {
+                    if (
+                        this.form.value['tipoDocumentoIdentidad']
+                            .idSunatTipoDocumentoIdentidad == 1
+                    ) {
                         this.apimigoService
-                            .consultarDNI(this.form.value['dniruc'])
-                            .then((resp) => {
-                                this.form.controls[
-                                    'nombreClienteProveedor'
-                                ].setValue(resp.nombre);
-                            });
-                    } else if (this.form.value['dniruc'].length == 11) {
-                        this.apimigoService
-                            .consultarRUC(this.form.value['dniruc'])
+                            .consultarDNI(
+                                this.form.value['numeroDocumentoIdentidad']
+                            )
                             .then((resp) => {
                                 console.log(resp);
+                                if (resp.success) {
+                                    this.form.controls[
+                                        'nombreRazonSocial'
+                                    ].setValue(resp.nombre);
+                                } else {
+                                    this.clienteProveedorService.setMessageChange(
+                                        {
+                                            key: 'tc',
+                                            severity: 'info',
+                                            summary: 'Atención',
+                                            detail: resp.message,
+                                            life: 3000,
+                                        }
+                                    );
+                                }
+                            });
+                    } else if (
+                        this.form.value['tipoDocumentoIdentidad']
+                            .idSunatTipoDocumentoIdentidad == 6
+                    ) {
+                        this.apimigoService
+                            .consultarRUC(
+                                this.form.value['numeroDocumentoIdentidad']
+                            )
+                            .then((resp) => {
+                                if (resp.success) {
+                                    this.form.controls[
+                                        'nombreRazonSocial'
+                                    ].setValue(resp.nombre_o_razon_social);
 
-                                this.form.controls[
-                                    'nombreClienteProveedor'
-                                ].setValue(resp.nombre_o_razon_social);
-                                this.form.controls['direccion'].setValue(
-                                    resp.direccion_simple
-                                );
-                                this.ubigeoService
-                                    .findById(resp.ubigeo)
-                                    .subscribe((ubigeo: Ubigeo) => {
-                                        ubigeo.nombreUbigeo = `${ubigeo.distrito} - ${ubigeo.provincia} - ${ubigeo.departamento}`;
-                                        this.form.controls['ubigeo'].setValue(
-                                            ubigeo
-                                        );
-                                        // this.ubigeosFiltrados.push(ubigeo);
-                                        // console.log(this.ubigeosFiltrados)
-                                    });
+                                    this.ubigeoService
+                                        .findCodigo(resp.ubigeo)
+                                        .subscribe((ubigeo: Ubigeo) => {
+                                            ubigeo.nombreUbigeo = `${ubigeo.distrito} - ${ubigeo.provincia} - ${ubigeo.departamento}`;
+
+                                            const clienteProveedorDireccion: ClienteProveedorDireccion =
+                                                new ClienteProveedorDireccion();
+                                            clienteProveedorDireccion.direccion =
+                                                resp.nombre_o_razon_social;
+                                            clienteProveedorDireccion.ubigeo =
+                                                ubigeo;
+                                            this.clienteProveedor.direcciones.push(
+                                                clienteProveedorDireccion
+                                            );
+                                        });
+                                } else {
+                                    this.clienteProveedorService.setMessageChange(
+                                        {
+                                            key: 'tc',
+                                            severity: 'info',
+                                            summary: 'Atención',
+                                            detail: resp.message,
+                                            life: 3000,
+                                        }
+                                    );
+                                }
                             });
                     } else {
                         this.clienteProveedorService.setMessageChange({

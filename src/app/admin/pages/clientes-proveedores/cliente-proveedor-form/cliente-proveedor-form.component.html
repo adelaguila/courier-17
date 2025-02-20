@@ -1,4 +1,5 @@
 <div class="card">
+    <p-toast position="top-center" key="tc"></p-toast>
     <form [formGroup]="form" (submit)="operate()" #formTercero="ngForm">
         <div class="p-fluid mb-1">
             <div class="formgrid grid">
@@ -114,7 +115,7 @@
     <p-tabView [(activeIndex)]="activeIndex">
 
         <p-tabPanel header="Direcciones">
-            <p-table [value]="listaDirecciones">
+            <p-table [value]="clienteProveedor.direcciones">
                 <ng-template pTemplate="caption">
                     <form [formGroup]="formDireccion" #formClienteProveedorDireccion="ngForm">
                         <div class="p-fluid">
@@ -134,8 +135,8 @@
 
 
                                 <div class="field col md:col-5">
-                                        <label for="ubigeo">Ubigeo</label>
-                                        <p-autoComplete formControlName="ubigeo" [suggestions]="ubigeosFiltrados"
+                                        <label for="ubigeo">Distrito - Provincia - Departamento</label>
+                                        <p-autoComplete formControlName="ubigeo" [suggestions]="ubigeosFiltrados" appendTo="body"
                                             (completeMethod)="filtrarUbigeos($event)" field="nombreUbigeo" [minLength]="3"
                                             [forceSelection]="true"
                                             [ngClass]="{'ng-invalid ng-dirty' : fd['ubigeo'].touched && fd['ubigeo'].errors}">
@@ -171,21 +172,21 @@
                     <tr>
                         <th>ID</th>
                         <th>Dirección</th>
-                        <th>Ubigeo</th>
+                        <th>Distrito - Provincia - Departamento</th>
                         <th></th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-row>
+                <ng-template pTemplate="body" let-row let-ri="rowIndex">
                     <tr>
                         <td>{{ row.idClienteProveedorDireccion }}</td>
                         <td>{{ row.direccion }}</td>
-                        <td>{{ row.ubigeo.distrito }}</td>
+                        <td>{{ row.ubigeo.distrito }} - {{ row.ubigeo.provincia }} - {{ row.ubigeo.departamento }}</td>
                         <td>
                             <div class="flex">
-                                <p-button icon="pi pi-pencil" styleClass="p-button-info p-button-text"
+                                <p-button *ngIf="isEdit" icon="pi pi-pencil" styleClass="p-button-info p-button-text"
                                     (click)="editDireccion(row)"></p-button>
                                 <p-button icon="pi pi-trash" styleClass="p-button-danger p-button-text"
-                                    (click)="deleteDireccion(row)"></p-button>
+                                    (click)="deleteDireccion(row, ri)"></p-button>
                             </div>
                         </td>
                     </tr>
@@ -193,17 +194,6 @@
             </p-table>
         </p-tabPanel>
     </p-tabView>
-
-    <p-dialog [(visible)]="deleteClienteProveedorDireccionDialog" header="Confirmar" [modal]="true" [style]="{width:'450px'}">
-        <div class="flex align-items-center justify-content-center">
-            <i class="pi pi-question-circle mr-3" style="font-size: 2rem"></i>
-            <span *ngIf="clienteProveedor">¿Está seguro que desea eliminar el registro?</span>
-        </div>
-        <ng-template pTemplate="footer">
-            <button pButton pRipple icon="pi pi-times" class="p-button-secondary" label="No"
-                (click)="deleteClienteProveedorDireccionDialog = false"></button>
-            <button pButton pRipple icon="pi pi-check" class="p-button-danger" label="Si, Eliminar"
-                (click)="confirmDeleteDireccion()"></button>
-        </ng-template>
-    </p-dialog>
 </div>
+
+<!-- <p-confirmDialog /> -->

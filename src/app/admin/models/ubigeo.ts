@@ -1,5 +1,5 @@
 export class Ubigeo {
-    idUbigeo: number = 0;
+    idUbigeo: number;
     codigo: string = '';
     departamento: string = '';
     provincia: string = '';

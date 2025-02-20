@@ -7,44 +7,47 @@ import { environment } from 'src/environments/environment';
 import { Ubigeo } from '../models/ubigeo';
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
 export class UbigeoService extends GenericService<Ubigeo> {
+    private ubigeoChange: Subject<Ubigeo[]> = new Subject<Ubigeo[]>();
+    private messageChange: Subject<any> = new Subject<any>();
 
-  private ubigeoChange: Subject<Ubigeo[]> = new Subject<Ubigeo[]>();
-  private messageChange: Subject<any> = new Subject<any>();
+    constructor(protected override http: HttpClient) {
+        super(http, `${environment.HOST}/ubigeos`);
+    }
 
-  constructor(
-    protected override http: HttpClient
-  ){
-    super(http, `${environment.HOST}/ubigeos`);
-  }
+    autocomplete(term: string): Observable<Ubigeo[]> {
+        return this.http
+            .get<Ubigeo[]>(`${environment.HOST}/ubigeos/autocomplete/${term}`)
+            .pipe(
+                map((response) => {
+                    return response.map((ubigeo) => {
+                        ubigeo.nombreUbigeo = `${ubigeo.distrito} - ${ubigeo.provincia} - ${ubigeo.departamento}`;
+                        return ubigeo;
+                    });
+                })
+            );
+    }
 
-  autocomplete(term: string): Observable<Ubigeo[]> {
-    return this.http.get<Ubigeo[]>(`${environment.HOST}/ubigeos/autocomplete/${term}`)
-    .pipe(
-        map(response => {
-            return response.map(ubigeo =>{
-                ubigeo.nombreUbigeo = `${ubigeo.distrito} - ${ubigeo.provincia} - ${ubigeo.departamento}`
-                return ubigeo;
-            });
-        })
-    );
-  }
+    findCodigo(codigo: string): Observable<Ubigeo> {
+        return this.http
+            .get<Ubigeo>(`${environment.HOST}/ubigeos/find/codigo/${codigo}`);
+    }
 
-  getUbigeoChange(){
-    return this.ubigeoChange.asObservable();
-  }
+    getUbigeoChange() {
+        return this.ubigeoChange.asObservable();
+    }
 
-  setUbigeoChange(data: any){
-    this.ubigeoChange.next(data);
-  }
+    setUbigeoChange(data: any) {
+        this.ubigeoChange.next(data);
+    }
 
-  getMessageChange(){
-    return this.messageChange.asObservable();
-  }
+    getMessageChange() {
+        return this.messageChange.asObservable();
+    }
 
-  setMessageChange(data: any){
-    this.messageChange.next(data);
-  }
+    setMessageChange(data: any) {
+        this.messageChange.next(data);
+    }
 }

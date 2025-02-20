@@ -161,30 +161,38 @@ export class ClienteProveedorComponent implements OnInit {
 
     }
 
-    delete(clienteProveedor: ClienteProveedor) {
-        this.deleteClienteProveedorDialog = true;
-        this.clienteProveedor = { ...clienteProveedor };
-    }
-
-    confirmDelete() {
-        this.deleteClienteProveedorDialog = false;
-        this.clienteProveedorService.delete(this.clienteProveedor.idClienteProveedor).subscribe((resp) => {
-            this.messageService.add({
-                severity: 'success',
-                summary: 'Successful',
-                detail: 'ClienteProveedor eliminado con éxito',
-                life: 3000,
+     delete(clienteProveedor: ClienteProveedor) {
+            this.confirmationService.confirm({
+                target: event.target as EventTarget,
+                message: '¿Está seguro que desea eliminar el Cliente/Proveedor?',
+                header: 'Confirmar',
+                icon: 'pi pi-question',
+                acceptButtonStyleClass: 'p-button-danger p-button-text',
+                acceptIcon: 'none',
+                acceptLabel: 'SI, Eliminar',
+                rejectIcon: 'none',
+                rejectButtonStyleClass: 'p-button-text',
+                accept: () => {
+                    this.clienteProveedorService.delete(clienteProveedor.idClienteProveedor).subscribe((resp) => {
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Successful',
+                            detail: 'ClienteProveedor eliminado con éxito',
+                            life: 3000,
+                        });
+                        this.clienteProveedor = new ClienteProveedor();
+                        this.getPage(
+                            this.currentPage,
+                            this.rows,
+                            this.sortField,
+                            this.sortOrder,
+                            this._filterPage
+                        );
+                    });
+                },
+                reject: () => {},
             });
-            this.clienteProveedor = new ClienteProveedor();
-            this.getPage(
-                this.currentPage,
-                this.rows,
-                this.sortField,
-                this.sortOrder,
-                this._filterPage
-            );
-        });
-    }
+        }
 
     onGlobalFilter(table: Table, event: Event) {
         table.filterGlobal(

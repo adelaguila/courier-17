@@ -19,7 +19,7 @@ export class ClienteProveedorService extends GenericService<ClienteProveedor> {
     }
 
     getByDniRuc(dniruc: string) {
-        return this.http.get<ClienteProveedor>(`${this.url}/checkDniruc/${dniruc}`);
+        return this.http.get<ClienteProveedor>(`${this.url}/numero-documento-identidad/${dniruc}`);
     }
 
     updateDireccion(id: number, clienteProveedorDireccion: ClienteProveedorDireccion) {

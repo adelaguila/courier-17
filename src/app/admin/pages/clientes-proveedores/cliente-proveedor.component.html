@@ -2,122 +2,113 @@
     <div class="col-12">
         <div class="card px-3 py-3">
             <p-toast></p-toast>
-            <p-table #dt [value]="clientesProveedores" [lazy]="true" (onLazyLoad)="loadClientesProveedores($event)" dataKey="id"
-            styleClass="p-datatable-sm p-datatable-gridlines" [tableStyle]="{ 'min-width': '75rem' }"
-            [paginator]="true" [rows]="rows" selectionMode="single"
-            [totalRecords]="totalRecords" [loading]="loading" [showCurrentPageReport]="true"
-            [rowsPerPageOptions]="rowsPerPageOptions" [scrollable]="true" scrollHeight="600px"
-            currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} registros">
-            <ng-template pTemplate="caption">
-                <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                    <h5 class="m-0">Mantenimiento de Clientes/Proveedores</h5>
-                    <div class="my-2">
-                        <button pButton pRipple label="Nuevo" icon="pi pi-plus"
-                            class="p-button-primary p-button-sm mr-2" (click)="new()"></button>
-                    </div>
-                </div>
-            </ng-template>
-            <ng-template pTemplate="header">
-                <tr>
-                    <th pSortableColumn="idClienteProveedor">ID <p-sortIcon field="idClienteProveedor"></p-sortIcon></th>
-                    <th pSortableColumn="numeroDocumentoIdentidad">DOI <p-sortIcon field="numeroDocumentoIdentidad"></p-sortIcon></th>
-                    <th pSortableColumn="nombreRazonSocial">Nombre Razón Social <p-sortIcon
-                            field="nombreRazonSocial"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="telefono">Teléfono <p-sortIcon field="telefono"></p-sortIcon></th>
-                    <th pSortableColumn="correo">Email <p-sortIcon field="correo"></p-sortIcon></th>
-                    <th pSortableColumn="nombreTipoClienteProveedor">Tipo <p-sortIcon field="nombreTipoClienteProveedor"></p-sortIcon></th>
-                    <th pSortableColumn="activo">Tipo <p-sortIcon field="activo"></p-sortIcon></th>
-                    <th pFrozenColumn></th>
-                </tr>
-                <tr>
-                    <th>
-                        <p-columnFilter type="text" field="idClienteProveedor" [matchModeOptions]="matchModeOptionsNumber"
-                            [matchMode]="'equals'"></p-columnFilter>
-                    </th>
-                    <th>
-                        <p-columnFilter type="text" field="numeroDocumentoIdentidad" [matchModeOptions]="matchModeOptionsText"
-                            [matchMode]="'contains'"></p-columnFilter>
-                    </th>
-                    <th>
-                        <p-columnFilter type="text" field="nombreRazonSocial" [matchModeOptions]="matchModeOptionsText"
-                            [matchMode]="'contains'"></p-columnFilter>
-                    </th>
-                    <th>
-                        <!-- Telefono -->
-                    </th>
-                    <th>
-                        <!-- Correo Electronico -->
-                    </th>
-                    <th>
-                        <p-columnFilter type="text" field="nombreTipoClienteProveedor" [matchModeOptions]="matchModeOptionsText"
-                            [matchMode]="'contains'"></p-columnFilter>
-                    </th>
-                    <th>
-                       <!-- Correo Electronico -->
-                    </th>
-                    <th pFrozenColumn></th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-row>
-                <tr>
-                    <td style="width:10%; min-width:10rem;">
-                        <span class="p-column-title">ID</span>
-                        {{row.idClienteProveedor}}
-                    </td>
-
-                    <td style="width:10%; min-width:10rem;">
-                        <span class="p-column-title">DOI</span>
-                        {{row.numeroDocumentoIdentidad}}
-                    </td>
-
-                    <td style="width:25%; min-width:10rem;">
-                        <span class="p-column-title">Nombre Razón Social</span>
-                        {{row.nombreRazonSocial}}
-                    </td>
-                    <td style="width:10%; min-width:10rem;">
-                        <span class="p-column-title">Telefono</span>
-                        {{row.telefono}}
-                    </td>
-                    <td style="width:15%; min-width:10rem;">
-                        <span class="p-column-title">Email</span>
-                        {{row.correo}}
-                    </td>
-                    <td style="width:15%; min-width:10rem;">
-                        <span class="p-column-title">Tipo</span>
-                        {{row.nombreTipoClienteProveedor}}
-                    </td>
-                    <td style="width:5%; min-width:7rem;" class="text-center">
-                        <span class="p-column-title">Activo</span>
-                        <i *ngIf="row.activo" class="pi pi-thumbs-up-fill text-green-500"></i>
-                        <i *ngIf="!row.activo" class="pi pi-thumbs-down-fill"></i>
-                    </td>
-                    <td style="width:10%; min-width:10rem;" pFrozenColumn>
-                        <div class="flex justify-content-center">
-                            <p-button icon="pi pi-pencil" styleClass="p-button-info p-button-text p-button-table"
-                                (click)="edit(row)"></p-button>
-                            <p-button icon="pi pi-trash" styleClass="p-button-danger p-button-text p-button-table"
-                                (click)="delete(row)"></p-button>
+            <p-table #dt [value]="clientesProveedores" [lazy]="true" (onLazyLoad)="loadClientesProveedores($event)"
+                dataKey="id" styleClass="p-datatable-sm p-datatable-gridlines" [tableStyle]="{ 'min-width': '75rem' }"
+                [paginator]="true" [rows]="rows" selectionMode="single" [totalRecords]="totalRecords"
+                [loading]="loading" [showCurrentPageReport]="true" [rowsPerPageOptions]="rowsPerPageOptions"
+                [scrollable]="true" scrollHeight="600px"
+                currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} registros">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h5 class="m-0">Mantenimiento de Clientes/Proveedores</h5>
+                        <div class="my-2">
+                            <button pButton pRipple label="Nuevo" icon="pi pi-plus"
+                                class="p-button-primary p-button-sm mr-2" (click)="new()"></button>
                         </div>
-                    </td>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="idClienteProveedor">ID <p-sortIcon field="idClienteProveedor"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="numeroDocumentoIdentidad">DOI <p-sortIcon
+                                field="numeroDocumentoIdentidad"></p-sortIcon></th>
+                        <th pSortableColumn="nombreRazonSocial">Nombre Razón Social <p-sortIcon
+                                field="nombreRazonSocial"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="telefono">Teléfono <p-sortIcon field="telefono"></p-sortIcon></th>
+                        <th pSortableColumn="correo">Email <p-sortIcon field="correo"></p-sortIcon></th>
+                        <th pSortableColumn="nombreTipoClienteProveedor">Tipo <p-sortIcon
+                                field="nombreTipoClienteProveedor"></p-sortIcon></th>
+                        <th pSortableColumn="activo">Tipo <p-sortIcon field="activo"></p-sortIcon></th>
+                        <th pFrozenColumn></th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <p-columnFilter type="text" field="idClienteProveedor"
+                                [matchModeOptions]="matchModeOptionsNumber" [matchMode]="'equals'"></p-columnFilter>
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="numeroDocumentoIdentidad"
+                                [matchModeOptions]="matchModeOptionsText" [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="nombreRazonSocial"
+                                [matchModeOptions]="matchModeOptionsText" [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+                        <th>
+                            <!-- Telefono -->
+                        </th>
+                        <th>
+                            <!-- Correo Electronico -->
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="nombreTipoClienteProveedor"
+                                [matchModeOptions]="matchModeOptionsText" [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+                        <th>
+                            <!-- Correo Electronico -->
+                        </th>
+                        <th pFrozenColumn></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-row>
+                    <tr>
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">ID</span>
+                            {{row.idClienteProveedor}}
+                        </td>
 
-                </tr>
-            </ng-template>
-        </p-table>
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">DOI</span>
+                            {{row.numeroDocumentoIdentidad}}
+                        </td>
+
+                        <td style="width:25%; min-width:10rem;">
+                            <span class="p-column-title">Nombre Razón Social</span>
+                            {{row.nombreRazonSocial}}
+                        </td>
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">Telefono</span>
+                            {{row.telefono}}
+                        </td>
+                        <td style="width:15%; min-width:10rem;">
+                            <span class="p-column-title">Email</span>
+                            {{row.correo}}
+                        </td>
+                        <td style="width:15%; min-width:10rem;">
+                            <span class="p-column-title">Tipo</span>
+                            {{row.nombreTipoClienteProveedor}}
+                        </td>
+                        <td style="width:5%; min-width:7rem;" class="text-center">
+                            <span class="p-column-title">Activo</span>
+                            <i *ngIf="row.activo" class="pi pi-thumbs-up-fill text-green-500"></i>
+                            <i *ngIf="!row.activo" class="pi pi-thumbs-down-fill"></i>
+                        </td>
+                        <td style="width:10%; min-width:10rem;" pFrozenColumn>
+                            <div class="flex justify-content-center">
+                                <p-button icon="pi pi-pencil" styleClass="p-button-info p-button-text p-button-table"
+                                    (click)="edit(row)"></p-button>
+                                <p-button icon="pi pi-trash" styleClass="p-button-danger p-button-text p-button-table"
+                                    (click)="delete(row)"></p-button>
+                            </div>
+                        </td>
+
+                    </tr>
+                </ng-template>
+            </p-table>
         </div>
-
-        <p-dialog [(visible)]="deleteClienteProveedorDialog" header="Confirmar" [modal]="true" [style]="{width:'450px'}">
-            <div class="flex align-items-center justify-content-center">
-                <i class="pi pi-question-circle mr-3" style="font-size: 2rem"></i>
-                <span *ngIf="clienteProveedor">¿Está seguro que desea eliminar el registro <b>{{clienteProveedor.nombreRazonSocial}}</b>?</span>
-            </div>
-            <ng-template pTemplate="footer">
-                <button pButton pRipple icon="pi pi-times" class="p-button-secondary" label="No"
-                    (click)="deleteClienteProveedorDialog = false"></button>
-                <button pButton pRipple icon="pi pi-check" class="p-button-danger" label="Si, Eliminar"
-                    (click)="confirmDelete()"></button>
-            </ng-template>
-        </p-dialog>
-
     </div>
 </div>
+
+<p-confirmDialog />
