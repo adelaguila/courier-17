@@ -1,0 +1,132 @@
+<div class="card">
+    <form [formGroup]="form" (submit)="operate()" #formulario="ngForm">
+        <div class="p-fluid mb-4">
+            <div class="formgrid grid">
+                <div class="field col md:col-2">
+                    <label for="idTarifario">ID</label>
+                    <input type="text" pInputText formControlName="idTarifario" readonly />
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label for="tipoServicio">Tipo Servicio</label>
+                    <p-dropdown appendTo="body" formControlName="tipoServicio" [options]="tiposServicios"
+                        optionLabel="nombreTipoServicio" placeholder="Seleccionar..." [virtualScroll]="true"
+                        [virtualScrollItemSize]="10" [filter]="true" filterBy="nombreTipoServcio" [showClear]="true"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['tipoServicio'].touched && f['tipoServicio'].errors}"></p-dropdown>
+                    <small class="ng-dirty ng-invalid" *ngIf="f['tipoServicio'].errors?.['required'] && f['tipoServicio'].touched"
+                        class="invalid">Es
+                        requerido</small>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label for="tipoEnvio">Tipo Envio</label>
+                    <p-dropdown appendTo="body" formControlName="tipoEnvio" [options]="tiposEnvios"
+                        optionLabel="nombreTipoEnvio" placeholder="Seleccionar..." [virtualScroll]="true"
+                        [virtualScrollItemSize]="10" [filter]="true" filterBy="nombreTipoEnvio" [showClear]="true"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['tipoEnvio'].touched && f['tipoEnvio'].errors}"></p-dropdown>
+                    <small class="ng-dirty ng-invalid" *ngIf="f['tipoEnvio'].errors?.['required'] && f['tipoEnvio'].touched"
+                        class="invalid">Es
+                        requerido</small>
+                </div>
+                <div class="field col-12 md:col-2">
+                    <label for="collect">Collect</label>
+                    <div>
+                        <p-inputSwitch formControlName="collect" />
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label for="origen">Origen</label>
+                <p-autoComplete formControlName="origen" [suggestions]="origenesFiltrados"
+                    (completeMethod)="filtrarOrigenes($event)" field="nombreUbigeo" [minLength]="3"
+                    [forceSelection]="true"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['origen'].touched && f['origen'].errors}">
+                    <ng-template let-origen pTemplate="item">
+                        <div>{{ origen.distrito }} - {{ origen.provincia }} - {{ origen.departamento }}</div>
+                    </ng-template>
+                </p-autoComplete>
+                <small class="ng-dirty ng-invalid" *ngIf="f['origen'].errors?.['required'] && f['origen'].touched">Es
+                    requerido</small>
+            </div>
+
+            <div class="field">
+                <label for="destino">Destino</label>
+                <p-autoComplete formControlName="destino" [suggestions]="destinosFiltrados"
+                    (completeMethod)="filtrarDestinos($event)" field="destino" [minLength]="3"
+                    [forceSelection]="true"
+                    [ngClass]="{'ng-invalid ng-dirty' : f['destino'].touched && f['destino'].errors}">
+                    <ng-template let-destino pTemplate="item">
+                        <div>{{ destino.destino }} - {{ destino.ubigeo.provincia }} - {{ destino.ubigeo.departamento }}</div>
+                    </ng-template>
+                </p-autoComplete>
+                <small class="ng-dirty ng-invalid" *ngIf="f['destino'].errors?.['required'] && f['destino'].touched">Es
+                    requerido</small>
+            </div>
+
+            <div class="field">
+                <label for="clienteProveedor">Cliente</label>
+                <p-autoComplete formControlName="clienteProveedor" [suggestions]="clientesFiltrados"
+                    (completeMethod)="filtrarClientes($event)" field="nombreRazonSocial" [minLength]="3"
+                    [forceSelection]="true" (onSelect)="onSelectCliente($event)">
+                    <!-- <ng-template let-clienteProveedor pTemplate="item">
+                        <div>{{ clienteProveedor.distrito }} - {{ clienteProveedor.provincia }} - {{ clienteProveedor.departamento }}</div>
+                    </ng-template> -->
+                </p-autoComplete>
+            </div>
+
+            <div class="field">
+                <label for="clienteProveedorArea">Cliente - Area</label>
+                <p-dropdown appendTo="body" formControlName="clienteProveedorArea" [options]="clientesProveedoresAreas"
+                    optionLabel="area" placeholder="Seleccionar..." [virtualScroll]="true"
+                    [virtualScrollItemSize]="10" [filter]="true" filterBy="area" [showClear]="true"
+                    ></p-dropdown>
+            </div>
+
+
+            <div class="formgrid grid">
+                <div class="field col md:col-3">
+                    <label for="pesoCondicional">Peso Condicional</label>
+                    <input type="number" pInputText formControlName="pesoCondicional"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['pesoCondicional'].touched && f['pesoCondicional'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['pesoCondicional'].errors?.['required'] && f['pesoCondicional'].touched">Es
+                        requerido</small>
+                </div>
+
+                <div class="field col md:col-3">
+                    <label for="pesoMinimo">Peso Mínimo</label>
+                    <input type="number" pInputText formControlName="pesoMinimo"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['pesoMinimo'].touched && f['pesoMinimo'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['pesoMinimo'].errors?.['required'] && f['pesoMinimo'].touched">Es
+                        requerido</small>
+                </div>
+
+                <div class="field col md:col-3">
+                    <label for="tarifaMinima">Tarifa Mínima</label>
+                    <input type="number" pInputText formControlName="tarifaMinima"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['tarifaMinima'].touched && f['tarifaMinima'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['tarifaMinima'].errors?.['required'] && f['tarifaMinima'].touched">Es
+                        requerido</small>
+                </div>
+
+                <div class="field col md:col-3">
+                    <label for="tarifaExeso">Tarifa Exeso</label>
+                    <input type="number" pInputText formControlName="tarifaExeso"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['tarifaExeso'].touched && f['tarifaExeso'].errors}" />
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['tarifaExeso'].errors?.['required'] && f['tarifaExeso'].touched">Es
+                        requerido</small>
+                </div>
+
+            </div>
+
+        </div>
+        <div>
+            <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
+                [disabled]="formulario.invalid"></button>
+            <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2"
+                (click)="close()"></button>
+        </div>
+
+    </form>
+</div>

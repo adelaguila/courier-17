@@ -1,0 +1,199 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-3 py-3">
+            <p-toast></p-toast>
+            <p-table #dt [value]="tarifarios" dataKey="id" styleClass="p-datatable-sm p-datatable-gridlines"
+                [tableStyle]="{ 'min-width': '75rem' }" [paginator]="true" [rows]="rows" selectionMode="single"
+                [totalRecords]="totalRecords" [loading]="loading" [showCurrentPageReport]="true"
+                [rowsPerPageOptions]="rowsPerPageOptions" [scrollable]="true" scrollHeight="600px"
+                currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} registros">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h5 class="m-0">Mantenimiento de Tarifas</h5>
+                        <div>
+                            <label for="opciones" class="mr-2">Filtrar: </label>
+                            <p-dropdown appendTo="body" [(ngModel)]="opcionSeleccionada" [options]="opciones"
+                                [virtualScroll]="true" [virtualScrollItemSize]="10" optionLabel="name"
+                                (onChange)="onOpcionChange($event)" placeholder="Seleccionar..."
+                                class="mr-2"></p-dropdown>
+
+                            <label *ngIf="showFiltroCliente" for="clienteProveedor" class="mr-2">Cliente:</label>
+                            <p-autoComplete *ngIf="showFiltroCliente" [(ngModel)]="clienteSeleccionado"
+                                [suggestions]="clientesFiltrados" class="mr-2"
+                                (completeMethod)="filtrarClientes($event)" field="nombreRazonSocial" [minLength]="3"
+                                [forceSelection]="true" (onSelect)="onClienteSelect($event)">
+                            </p-autoComplete>
+
+                            <button *ngIf="showFiltroCliente" pButton pRipple label="Cargar" icon="pi pi-search"
+                                class="p-button-secondary p-button-sm mr-4" (click)="cargar()"></button>
+                        </div>
+                        <div class="my-2">
+
+                            <button pButton pRipple label="Nuevo" icon="pi pi-plus"
+                                class="p-button-primary p-button-sm mr-2" (click)="new()"></button>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="idTarifario">ID <p-sortIcon field="idTarifario"></p-sortIcon></th>
+                        <th *ngIf="showFiltroCliente" pSortableColumn="clienteProveedor.nombreRazonSocial">Cliente <p-sortIcon
+                                field="clienteProveedor.nombreRazonSocial"></p-sortIcon>
+                        </th>
+                        <th *ngIf="showFiltroCliente" pSortableColumn="clienteProveedorArea.area">Cliente - Area <p-sortIcon
+                                field="clienteProveedorArea.area"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="origen.distrito">Origen <p-sortIcon field="origen.distrito"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="destino.destino">Destino <p-sortIcon field="destino.destino"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="tipoServicio.nombreTipoServicio">T.Servicio <p-sortIcon
+                                field="tipoServicio.nombreTipoServicio"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="tipoEnvio.nombreTipoEnvio">T.Envio <p-sortIcon
+                                field="tipoEnvio.nombreTipoEnvio"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="pesoCondicional">P.Cond. <p-sortIcon field="pesoCondicional"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="pesoMinimo">P.Min. <p-sortIcon field="pesoMinimo"></p-sortIcon></th>
+                        <th pSortableColumn="tarifaMinima">T.Min. <p-sortIcon field="tarifaMinima"></p-sortIcon></th>
+                        <th pSortableColumn="tarifaExeso">T.Exe. <p-sortIcon field="tarifaExeso"></p-sortIcon></th>
+                        <th pSortableColumn="collect">Collect <p-sortIcon field="collect"></p-sortIcon></th>
+                        <th alignFrozen="right" pFrozenColumn></th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <p-columnFilter type="text" field="idTarifario" [matchModeOptions]="matchModeOptionsNumber"
+                                [matchMode]="'equals'"></p-columnFilter>
+                        </th>
+                        <th *ngIf="showFiltroCliente">
+                            <p-columnFilter type="text" field="clienteProveedor.nombreRazonSocial"
+                                [matchModeOptions]="matchModeOptionsText" [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+                        <th *ngIf="showFiltroCliente">
+                            <p-columnFilter type="text" field="clienteProveedorArea.area"
+                                [matchModeOptions]="matchModeOptionsText" [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="origen.distrito"
+                                [matchModeOptions]="matchModeOptionsText" [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="destino.destino"
+                                [matchModeOptions]="matchModeOptionsText" [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="tipoServicio.nombreTipoServicio"
+                                [matchModeOptions]="matchModeOptionsText" [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+                        <th>
+                            <p-columnFilter type="text" field="tipoEnvio.nombreTipoEnvio"
+                                [matchModeOptions]="matchModeOptionsText" [matchMode]="'contains'"></p-columnFilter>
+                        </th>
+
+                        <th>
+                            <!-- Peso condicional -->
+                        </th>
+                        <th>
+                            <!-- Peso Minimo -->
+                        </th>
+                        <th><!-- Tarifa Minima --></th>
+                        <th><!-- Tarifa Exeso --></th>
+                        <th>
+                            <!-- Collect -->
+                        </th>
+
+                        <th alignFrozen="right" pFrozenColumn></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-row>
+                    <tr>
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">ID</span>
+                            {{row.idTarifario}}
+                        </td>
+
+                        <td *ngIf="showFiltroCliente" style="width:25%; min-width:20rem;">
+                            <span class="p-column-title">Cliente</span>
+                            <div *ngIf="row.clienteProveedor">
+                                {{row.clienteProveedor.nombreRazonSocial}}
+                            </div>
+
+                        </td>
+                        <td *ngIf="showFiltroCliente" style="width:25%; min-width:10rem;">
+                            <span class="p-column-title">Cliente - Area</span>
+                            <div *ngIf="row.clienteProveedorArea">
+                                {{row.clienteProveedorArea.area}}
+                            </div>
+
+                        </td>
+                        <td style="width:25%; min-width:10rem;">
+                            <span class="p-column-title">Origen</span>
+                            {{row.origen.distrito}}
+                        </td>
+
+                        <td style="width:30%; min-width:10rem;">
+                            <span class="p-column-title">Destino</span>
+                            {{row.destino.destino}}
+                        </td>
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">T.Servicio</span>
+                            {{row.tipoServicio.nombreTipoServicio}}
+                        </td>
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">T.Servicio</span>
+                            {{row.tipoEnvio.nombreTipoEnvio}}
+                        </td>
+                        <td style="width:10%; min-width:10rem;" class="text-right">
+                            <span class="p-column-title">P.Cond.</span>
+                            {{row.pesoCondicional}}
+                        </td>
+                        <td style="width:10%; min-width:10rem;" class="text-right">
+                            <span class="p-column-title">P.Min.</span>
+                            {{row.pesoMinimo}}
+                        </td>
+                        <td style="width:10%; min-width:10rem;" class="text-right">
+                            <span class="p-column-title">T.Min.</span>
+                            {{row.tarifaMinima | currency: ' '}}
+                        </td>
+                        <td style="width:10%; min-width:10rem;" class="text-right">
+                            <span class="p-column-title">T.Exe.</span>
+                            {{row.tarifaExeso | currency: ' '}}
+                        </td>
+
+                        <td style="width:5%; min-width:7rem;" class="text-center">
+                            <span class="p-column-title">Activo</span>
+                            <i *ngIf="row.collect" class="pi pi-thumbs-up-fill text-green-500"></i>
+                            <i *ngIf="!row.collect" class="pi pi-thumbs-down-fill"></i>
+                        </td>
+                        <td style="width:10%; min-width:5rem;" alignFrozen="right" pFrozenColumn>
+                            <div class="flex justify-content-center">
+                                <p-button icon="pi pi-pencil" styleClass="p-button-info p-button-text p-button-table"
+                                    (click)="edit(row)"></p-button>
+                                <p-button icon="pi pi-trash" styleClass="p-button-danger p-button-text p-button-table"
+                                    (click)="delete(row)"></p-button>
+                            </div>
+                        </td>
+
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <p-dialog [(visible)]="deleteTarifarioDialog" header="Confirmar" [modal]="true" [style]="{width:'450px'}">
+            <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-question-circle mr-3" style="font-size: 2rem"></i>
+                <span *ngIf="tarifario">¿Está seguro que desea eliminar el registro?</span>
+            </div>
+            <ng-template pTemplate="footer">
+                <button pButton pRipple icon="pi pi-times" class="p-button-secondary" label="No"
+                    (click)="deleteTarifarioDialog = false"></button>
+                <button pButton pRipple icon="pi pi-check" class="p-button-danger" label="Si, Eliminar"
+                    (click)="confirmDelete()"></button>
+            </ng-template>
+        </p-dialog>
+
+    </div>
+</div>
+
+<p-confirmDialog />

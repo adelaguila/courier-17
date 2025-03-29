@@ -1,0 +1,128 @@
+<div class="grid">
+    <div class="col-12">
+
+        <p-toast></p-toast>
+        <p-table [value]="ordenesServicios" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+            [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-gridlines p-datatable-sm"
+            currentPageReportTemplate="Mostrando {first} de {last} de {totalRecords} registros" [loading]="loading"
+            [rowsPerPageOptions]="rowsPerPageOptions" [scrollable]="true" scrollHeight="600px">
+            <ng-template pTemplate="caption">
+                <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                    <h5 class="m-0">Ordenes de Servicios registrados por fecha</h5>
+                    <div class="my-2">
+                        <form [formGroup]="form" #formulario="ngForm">
+                            <label for="dropdown" class="mr-2">Rango de Fechas: </label>
+                            <p-calendar [(ngModel)]="rangeDates" selectionMode="range" formControlName="rango" [readonlyInput]="true" class="mr-2" />
+                        <button pButton pRipple label="Cargar" icon="pi pi-sync"
+                            class="p-button-primary p-button-sm mr-1" (click)="cargar()" ></button>
+                            <button pButton pRipple label="Exportar" icon="pi pi-file-export"
+                            class="p-button-primary p-button-sm mr-1"  (click)="exportar()"></button>
+                        </form>
+                    </div>
+                </div>
+
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pFrozenColumn style="width:5%; min-width:5rem;"></th>
+                    <th pFrozenColumn pSortableColumn="idOrdenServicio">ID <p-sortIcon field="idOrdenServicio"></p-sortIcon></th>
+                    <th pFrozenColumn pSortableColumn="numero">Número <p-sortIcon field="numero"></p-sortIcon></th>
+                    <th pSortableColumn="fechaHoraRegistro">F.Registro <p-sortIcon field="fechaHoraRegistro"></p-sortIcon></th>
+                    <th pSortableColumn="cliente.nombreRazonSocial">Cliente <p-sortIcon field="cliente.nombreRazonSocial"></p-sortIcon></th>
+                    <th pSortableColumn="area">Área <p-sortIcon field="area"></p-sortIcon></th>
+                    <th pSortableColumn="origen.distrito">Origen <p-sortIcon field="origen.distrito"></p-sortIcon></th>
+                    <th pSortableColumn="destino.destino">Destino <p-sortIcon field="destino.destino"></p-sortIcon></th>
+                    <th pSortableColumn="consignatario">Consignatario <p-sortIcon field="consignatario"></p-sortIcon></th>
+                    <th pSortableColumn="piezas">Piezas <p-sortIcon field="piezas"></p-sortIcon></th>
+                    <th pSortableColumn="peso">Peso <p-sortIcon field="peso"></p-sortIcon></th>
+                    <th pSortableColumn="estadoOperacion">EO <p-sortIcon field="estadoOperacion"></p-sortIcon></th>
+
+                </tr>
+                <tr>
+                    <th pFrozenColumn style="width:5%; min-width:5rem;"></th>
+                    <th pFrozenColumn>
+                        <p-columnFilter type="text" field="idOrdenServicio" [matchModeOptions]="matchModeOptionsNumber" [matchMode]="'equals'"></p-columnFilter>
+                    </th>
+                    <th pFrozenColumn>
+                        <p-columnFilter type="text" field="numero" [matchModeOptions]="matchModeOptionsText" [matchMode]="'contains'"></p-columnFilter>
+                    </th>
+
+                    <th>
+                        <!-- <p-columnFilter type="date" field="fechaHoraRegistro" [matchModeOptions]="matchModeOptionsDate" [matchMode]="'dateIs'"></p-columnFilter> -->
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="cliente.nombreRazonSocial" [matchModeOptions]="matchModeOptionsText" [matchMode]="'contains'"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="area" [matchModeOptions]="matchModeOptionsText" [matchMode]="'contains'"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="origen.distrito" [matchModeOptions]="matchModeOptionsText" [matchMode]="'contains'"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="destino.destino" [matchModeOptions]="matchModeOptionsText" [matchMode]="'contains'"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="consignatario" [matchModeOptions]="matchModeOptionsText" [matchMode]="'contains'"></p-columnFilter>
+                    </th>
+                    <th>
+                        <!-- piezas -->
+                    </th>
+                    <th>
+                        <!-- peso -->
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="estadoOperacion" [matchModeOptions]="matchModeOptionsText" [matchMode]="'contains'"></p-columnFilter>
+                    </th>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-row>
+                <tr>
+                    <td style="width:5%; min-width:5rem;" pFrozenColumn>
+                        <div class="flex justify-content-center">
+                            <p-button icon="pi pi-pencil" styleClass="p-button-info p-button-text p-button-table"
+                                ></p-button>
+                            <p-button icon="pi pi-trash" styleClass="p-button-danger p-button-text p-button-table"
+                                ></p-button>
+                        </div>
+                    </td>
+                    <td pFrozenColumn style="width:5%; min-width:10rem;">{{ row.idOrdenServicio }}</td>
+                    <td pFrozenColumn style="width:5%; min-width:10rem;">{{ row.numero }}</td>
+                    <td style="width:5%; min-width:7rem;">{{ row.fechaHoraRegistro |date:"dd-MM-yyyy" }}</td>
+                    <td style="width:20%; min-width:20rem;">{{ row.cliente.nombreRazonSocial }}</td>
+                    <td style="width:5%; min-width:10rem;">{{ row.area }}</td>
+                    <td style="width:10%; min-width:15rem;">{{ row.origen.distrito }}</td>
+                    <td style="width:10%; min-width:20rem;">{{ row.destino.destino }}</td>
+                    <td style="width:15%; min-width:20rem;">{{ row.consignatario }}</td>
+                    <td style="width:5%; min-width:5rem;" class="text-right">{{ row.piezas }}</td>
+                    <td style="width:5%; min-width:5rem;" class="text-right">{{ row.peso | currency: ' ' }}</td>
+                    <td style="width:5%; min-width:10rem;">{{ row.estadoOperacion }}</td>
+
+                </tr>
+            </ng-template>
+            <!-- <ng-template pTemplate="footer">
+                <tr>
+                    <td colspan="6" class="text-right">Total General</td>
+                    <td class="text-right"xs>{{totalGeneral | currency: ' '}}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="6" class="text-right">Total Efectivo</td>
+                    <td class="text-right"xs>{{totalEfectivo | currency: ' '}}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="6" class="text-right">Total Transferencias</td>
+                    <td class="text-right"xs>{{totalTransferencia | currency: ' '}}</td>
+                    <td></td>
+                </tr>
+            </ng-template> -->
+
+        </p-table>
+
+
+    </div>
+
+</div>
+<p-confirmDialog />

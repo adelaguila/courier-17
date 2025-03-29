@@ -1,0 +1,240 @@
+<div class="grid">
+
+    <p-toast position="top-center" key="tc"></p-toast>
+    <div class="col-12 md:col-7">
+        <!-- <p-toolbar *ngIf="isEdit">
+            <div class="p-toolbar-group-left flex flex-wrap">
+                <button pButton type="button" label="Nuevo" icon="pi pi-page" class="p-button-sm mr-2"
+                    routerLink="/pages/abonados/detalles"></button>
+
+                <button pButton type="button" label="Imprimir CtaCte" icon="pi pi-print"
+                    class="p-button-secondary p-button-sm mr-2" (click)="imprimirCuentaCorriente()"></button>
+
+                <button pButton type="button" label="Aviso Cobranza" icon="pi pi-print"
+                    class="p-button-warning p-button-sm mr-2" (click)="imprimirAvisoCobranza()"></button>
+
+            </div>
+
+            <div class="p-toolbar-group-right">
+                <div class="caja-datos-deuda">
+                    <h6 *ngIf="deuda > 0" class="datos-deuda">DEUDA: {{deuda | currency:'S/ '}}</h6>
+                    <h6 *ngIf="saldoFavor > 0" class="datos-deuda">SALDO A FAVOR: {{saldoFavor | currency:'S/ '}}</h6>
+                </div>
+            </div>
+        </p-toolbar> -->
+        <div class="card p-fluid">
+
+            <form [formGroup]="form" (submit)="operate()" #formulario="ngForm">
+                <!-- <h5>Datos Abonado</h5> -->
+                <div class="p-formgrid grid">
+                    <div class="field col-12 md:col-3">
+                        <label for="idOrdenServicio">Número</label>
+                        <input pInputText id="idOrdenServicio" type="text" formControlName="idOrdenServicio" [ngClass]="{'ng-invalid ng-dirty' : f['idOrdenServicio'].touched && f['idOrdenServicio'].errors}" />
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['idOrdenServicio'].errors?.['required'] && f['idOrdenServicio'].touched">Es
+                            requerido</small>
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['idOrdenServicio'].errors?.['minlength'] && f['idOrdenServicio'].touched">Debe
+                            ingresar mínimo 2 caracteres</small>
+                        <!-- <input pInputText id="tercero" type="hidden" formControlName="tercero" readonly /> -->
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="fechaHoraRegistro">F.Registro</label>
+                        <input type="date" pInputText formControlName="fechaHoraRegistro" />
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="piezas">Piezas</label>
+                        <input type="text" pInputText formControlName="piezas"
+                            [ngClass]="{'ng-invalid ng-dirty' : f['piezas'].touched && f['piezas'].errors}" />
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['piezas'].errors?.['required'] && f['piezas'].touched">Es
+                            requerido</small>
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['piezas'].errors?.['minlength'] && f['piezas'].touched">Debe
+                            ingresar mínimo 2 caracteres</small>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="peso">Peso</label>
+                        <input type="text" pInputText formControlName="peso"
+                            [ngClass]="{'ng-invalid ng-dirty' : f['peso'].touched && f['peso'].errors}" />
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['peso'].errors?.['required'] && f['peso'].touched">Es
+                            requerido</small>
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['peso'].errors?.['minlength'] && f['peso'].touched">Debe
+                            ingresar mínimo 2 caracteres</small>
+                    </div>
+                </div>
+
+                <div class="p-formgrid grid">
+                    <div class="field col-12 md:col-5">
+                        <label for="cliente">Cliente</label>
+                        <p-autoComplete formControlName="cliente" [suggestions]="clientesFiltrados"
+                                        appendTo="body" (completeMethod)="filtrarClientes($event)" field="nombreRazonSocial"
+                                        [minLength]="3" [forceSelection]="true"
+                                        [ngClass]="{'ng-invalid ng-dirty' : f['cliente'].touched && f['cliente'].errors}">
+                                        <ng-template let-cliente pTemplate="item">
+                                            <div>{{ cliente.numeroDocumentoIdentidad }} - {{ cliente.nombreRazonSocial }}</div>
+                                        </ng-template>
+                                    </p-autoComplete>
+                                    <small class="ng-dirty ng-invalid"
+                                        *ngIf="f['cliente'].errors?.['required'] && f['cliente'].touched">Es requerido</small>
+                    </div>
+
+                    <div class="field col-12 md:col-3">
+                        <label for="area">Area</label>
+                        <p-dropdown appendTo="body" formControlName="area" [options]="areas" [filter]="true"
+                            filterBy="area" [showClear]="true" optionLabel="area"
+                            placeholder="Seleccionar..." [virtualScroll]="true" [virtualScrollItemSize]="10"
+                            [ngClass]="{'ng-invalid ng-dirty' : f['area'].touched && f['area'].errors}"></p-dropdown>
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['area'].errors?.['required'] && f['area'].touched" class="invalid">Es
+                            requerido</small>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="remitente">Remitente</label>
+                        <input type="text" pInputText formControlName="remitente" />
+                    </div>
+                </div>
+
+                <div class="p-formgrid grid">
+                    <div class="field col-12 md:col-3">
+                        <label for="tipoPago">T.Pago</label>
+                        <p-dropdown appendTo="body" formControlName="tipoPago" [options]="tiposPagos" optionLabel="nombreTipoPago"
+                        optionValue="nombreTipoPago" [filter]="true" filterBy="nombreTipoPago" [showClear]="true"
+                            placeholder="Seleccionar..." [virtualScroll]="true" [virtualScrollItemSize]="10"
+                            [ngClass]="{'ng-invalid ng-dirty' : f['tipoPago'].touched && f['tipoPago'].errors}"></p-dropdown>
+                        <small class="ng-dirty ng-invalid" *ngIf="f['tipoPago'].errors?.['required'] && f['tipoPago'].touched"
+                            class="invalid">Es
+                            requerido</small>
+                    </div>
+
+                    <div class="field col-12 md:col-3">
+                        <label for="tipoServicio">T.Servicio</label>
+                        <p-dropdown appendTo="body" formControlName="tipoServicio" [options]="tiposServicios" optionLabel="nombreTipoServicio"
+                            optionValue="nombreTipoServicio" placeholder="Seleccionar..."
+                            [virtualScroll]="true" [virtualScrollItemSize]="10" [filter]="true" filterBy="nombreTipoServicio" [showClear]="true"
+                            [ngClass]="{'ng-invalid ng-dirty' : f['tipoServicio'].touched && f['tipoServicio'].errors}"></p-dropdown>
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['tipoServicio'].errors?.['required'] && f['tipoServicio'].touched" class="invalid">Es
+                            requerido</small>
+                    </div>
+
+                    <div class="field col-12 md:col-3">
+                        <label for="tipoEnvio">T.Envío</label>
+                        <p-dropdown appendTo="body" formControlName="tipoEnvio" [options]="tiposEnvios" optionLabel="nombreTipoEnvio"
+                            optionValue="nombreTipoEnvio" placeholder="Seleccionar..."
+                            [virtualScroll]="true" [virtualScrollItemSize]="10" [filter]="true" filterBy="nombreTipoEnvio" [showClear]="true"
+                            [ngClass]="{'ng-invalid ng-dirty' : f['tipoEnvio'].touched && f['tipoEnvio'].errors}"></p-dropdown>
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['tipoEnvio'].errors?.['required'] && f['tipoEnvio'].touched" class="invalid">Es
+                            requerido</small>
+                    </div>
+
+                    <div class="field col-12 md:col-3">
+                        <label for="tipoOrdenServicio">T.Orden</label>
+                        <p-dropdown appendTo="body" formControlName="tipoOrdenServicio" [options]="tiposOrdenesServicios" optionLabel="nombreTipoOrdenServicio"
+                            optionValue="nombreTipoOrdenServicio" placeholder="Seleccionar..."
+                            [virtualScroll]="true" [virtualScrollItemSize]="10" [filter]="true" filterBy="nombreTipoOrdenServicio" [showClear]="true"
+                            [ngClass]="{'ng-invalid ng-dirty' : f['tipoOrdenServicio'].touched && f['tipoOrdenServicio'].errors}"></p-dropdown>
+                        <small class="ng-dirty ng-invalid"
+                            *ngIf="f['tipoOrdenServicio'].errors?.['required'] && f['tipoOrdenServicio'].touched" class="invalid">Es
+                            requerido</small>
+                    </div>
+                </div>
+
+                <div class="p-formgrid grid">
+                    <div class="field col-12 md:col-3">
+                        <label for="guia">Guia(s)</label>
+                        <input type="text" pInputText formControlName="guia" />
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="referencia1">Referencia 1</label>
+                        <input type="text" pInputText formControlName="referencia1" />
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="referencia2">Referencia 2</label>
+                        <input type="text" pInputText formControlName="referencia2" />
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="referencia3">Referencia 3</label>
+                        <input type="text" pInputText formControlName="referencia3" />
+                    </div>
+                </div>
+
+                <div class="p-formgrid grid">
+                    <div class="field col-12 md:col-3">
+                        <label for="idConsignatario">DOI</label>
+                        <input type="text" pInputText formControlName="idConsignatario" />
+                    </div>
+                    <div class="field col-12 md:col-9">
+                        <label for="consignatario">Consignatatio</label>
+                        <input type="text" pInputText formControlName="consignatario" />
+                    </div>
+                </div>
+                <div class="p-formgrid grid">
+                    <div class="field col-12 md:col-9">
+                        <label for="direccion">Dirección</label>
+                        <input type="text" pInputText formControlName="direccion" />
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="telefono">Teléfono</label>
+                        <input type="text" pInputText formControlName="telefono" />
+                    </div>
+                </div>
+                <div class="p-formgrid grid">
+                    <div class="field col-12 md:col-8">
+                        <label for="contenido">Contenido</label>
+                        <input type="text" pInputText formControlName="contenido" />
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="telefono">T.Embalaje</label>
+                        <p-dropdown appendTo="body" formControlName="tipoEmbalaje" [options]="tiposEmbalajes" optionLabel="nombreTipoEmbalaje"
+                        optionValue="nombreTipoEmbalaje" placeholder="Seleccionar..."
+                        [virtualScroll]="true" [virtualScrollItemSize]="10" [filter]="true" filterBy="nombreTipoEmbalaje" [showClear]="true"
+                        [ngClass]="{'ng-invalid ng-dirty' : f['tipoEmbalaje'].touched && f['tipoEmbalaje'].errors}"></p-dropdown>
+                    <small class="ng-dirty ng-invalid"
+                        *ngIf="f['tipoEmbalaje'].errors?.['required'] && f['tipoEmbalaje'].touched" class="invalid">Es
+                        requerido</small>
+                    </div>
+                </div>
+
+                <div class="p-formgrid grid">
+                    <div class="field col-12 md:col-4">
+                        <label for="tarifaMinima">T.Mínima</label>
+                        <input type="text" pInputText formControlName="tarifaMinima" />
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="tarifaExeso">T.Exeso</label>
+                        <input type="text" pInputText formControlName="tarifaExeso" />
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="adicionalPod">Adic.POD</label>
+                        <input type="text" pInputText formControlName="adicionalPod" />
+                    </div>
+                </div>
+                <div class="p-formgrid grid">
+                    <div class="field col-12 md:col-4">
+                        <label for="adicionalTransferencia">Adic.Transf.</label>
+                        <input type="text" pInputText formControlName="adicionalTransferencia" />
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="adicionalOtro">Adic. Otro</label>
+                        <input type="text" pInputText formControlName="adicionalOtro" />
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="total">Total</label>
+                        <input type="text" pInputText formControlName="total" />
+                    </div>
+                </div>
+                <div>
+                    <button pButton pRipple label="Guardar" class="p-button-sm mr-2 mb-2" type="submit"
+                        [disabled]="formulario.invalid"></button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
