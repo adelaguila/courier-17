@@ -10,4 +10,5 @@ export class AgenciaDestino{
   adicionalEntrega: number = 0;
   adicionalRecojo: number = 0;
   aceptaCollec: boolean = false;
+  nombreAgenciaDestino: string = '';
 }

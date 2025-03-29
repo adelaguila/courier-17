@@ -13,6 +13,7 @@ import {
     DynamicDialogRef,
 } from 'primeng/dynamicdialog';
 import { ClienteProveedor } from 'src/app/admin/models/cliente-proveedor';
+import { ClienteProveedorArea } from 'src/app/admin/models/cliente-proveedor-area';
 import { ClienteProveedorDireccion } from 'src/app/admin/models/cliente-proveedor-direccion';
 import { SunatTipoDocumentoIdentidad } from 'src/app/admin/models/sunat-tipo-documento-identidad';
 import { TipoClienteProveedor } from 'src/app/admin/models/tipo-cliente-proveedor';
@@ -36,16 +37,17 @@ export class ClienteProveedorFormComponent implements OnInit {
     clienteProveedor!: ClienteProveedor;
     form!: FormGroup;
     formDireccion!: FormGroup;
+    formArea!: FormGroup;
     title: string = 'Editar Cliente/Proveedor';
     isEdit: boolean = false;
     isEditDireccion: boolean = false;
+    isEditArea: boolean = false;
     submitted = false;
     readOnlyID: boolean = false;
     ubigeosFiltrados = [];
     tiposDocumentosIdentidad: SunatTipoDocumentoIdentidad[];
     tiposClientesProveedores: TipoClienteProveedor[];
     activeIndex: number = 0;
-    clienteProveedorDireccion: ClienteProveedorDireccion;
 
     constructor(
         private clienteProveedorService: ClienteProveedorService,
@@ -127,6 +129,18 @@ export class ClienteProveedorFormComponent implements OnInit {
             ]),
             ubigeo: new FormControl('', Validators.required),
         });
+
+        this.formArea = new FormGroup({
+            idClienteProveedorArea: new FormControl(0),
+            area: new FormControl('', [
+                Validators.required,
+                Validators.minLength(2),
+                Validators.maxLength(150),
+            ]),
+            contacto: new FormControl(''),
+            telefonoContacto: new FormControl(''),
+            emailContacto: new FormControl('')
+        });
     }
 
     get f() {
@@ -135,6 +149,10 @@ export class ClienteProveedorFormComponent implements OnInit {
 
     get fd() {
         return this.formDireccion.controls;
+    }
+
+    get fa() {
+        return this.formArea.controls;
     }
 
     filtrarUbigeos(event: any) {
@@ -157,6 +175,7 @@ export class ClienteProveedorFormComponent implements OnInit {
                     this.clienteProveedor
                 )
                 .subscribe((data: ClienteProveedor) => {
+                    this.clienteProveedor = data;
                     this.formDireccion.reset();
                 });
         } else {
@@ -181,6 +200,54 @@ export class ClienteProveedorFormComponent implements OnInit {
             .subscribe((data: ClienteProveedorDireccion) => {
                 this.formDireccion.reset();
                 this.isEditDireccion = false;
+                this.loadClienteProveedor(
+                    this.clienteProveedor.idClienteProveedor
+                );
+            });
+    }
+
+    operateArea() {
+        const clienteProveedorArea: ClienteProveedorArea =
+            new ClienteProveedorArea();
+        clienteProveedorArea.area =
+            this.formArea.value['area'];
+        clienteProveedorArea.contacto = this.formArea.value['contacto'];
+        clienteProveedorArea.telefonoContacto = this.formArea.value['telefonoContacto'];
+        clienteProveedorArea.emailContacto = this.formArea.value['emailContacto'];
+        this.clienteProveedor.areas.push(clienteProveedorArea);
+        if (this.isEdit) {
+            this.clienteProveedorService
+                .update(
+                    this.clienteProveedor.idClienteProveedor,
+                    this.clienteProveedor
+                )
+                .subscribe((data: ClienteProveedor) => {
+                    this.clienteProveedor = data;
+                    this.formArea.reset();
+                });
+        } else {
+            this.formArea.reset();
+        }
+    }
+
+    operateAreaEdit() {
+        const clienteProveedorArea: ClienteProveedorArea =
+            new ClienteProveedorArea();
+        clienteProveedorArea.idClienteProveedorArea =
+            this.formArea.value['idClienteProveedorArea'];
+        clienteProveedorArea.clienteProveedor = this.clienteProveedor;
+        clienteProveedorArea.area = this.formArea.value['area'];
+        clienteProveedorArea.contacto = this.formArea.value['contacto'];
+        clienteProveedorArea.telefonoContacto = this.formArea.value['telefonoContacto'];
+        clienteProveedorArea.emailContacto = this.formArea.value['emailContacto'];
+        this.clienteProveedorService
+            .updateArea(
+                clienteProveedorArea.idClienteProveedorArea,
+                clienteProveedorArea
+            )
+            .subscribe((data: ClienteProveedorArea) => {
+                this.formDireccion.reset();
+                this.isEditArea = false;
                 this.loadClienteProveedor(
                     this.clienteProveedor.idClienteProveedor
                 );
@@ -249,6 +316,66 @@ export class ClienteProveedorFormComponent implements OnInit {
                 } else {
                     if (index !== -1) {
                         this.clienteProveedor.direcciones.splice(index, 1);
+                    }
+                }
+            },
+            reject: () => {},
+        });
+    }
+
+    editArea(clienteProveedorArea: ClienteProveedorArea) {
+        this.isEditArea = true;
+        this.formArea = new FormGroup({
+            idClienteProveedorArea: new FormControl(
+                clienteProveedorArea.idClienteProveedorArea
+            ),
+            area: new FormControl(clienteProveedorArea.area, [
+                Validators.required,
+                Validators.minLength(2),
+                Validators.maxLength(150),
+            ]),
+            contacto: new FormControl(clienteProveedorArea.contacto, [
+            ]),
+            telefonoContacto: new FormControl(clienteProveedorArea.telefonoContacto, [
+            ]),
+            emailContacto: new FormControl(clienteProveedorArea.emailContacto, [
+            ]),
+
+        });
+    }
+
+    deleteArea(clienteProveedorArea: ClienteProveedorArea, index: number) {
+        this.confirmationService.confirm({
+            target: event.target as EventTarget,
+            message: '¿Está seguro que desea eliminar el área?',
+            header: 'Confirmar',
+            icon: 'pi pi-question',
+            acceptButtonStyleClass: 'p-button-danger p-button-text',
+            acceptIcon: 'none',
+            acceptLabel: 'SI, Eliminar',
+            rejectIcon: 'none',
+            rejectButtonStyleClass: 'p-button-text',
+            accept: () => {
+                if (this.isEdit) {
+                    this.clienteProveedorService
+                        .deleteArea(
+                            clienteProveedorArea.idClienteProveedorArea
+                        )
+                        .subscribe((resp) => {
+                            this.messageService.add({
+                                key: 'tc',
+                                severity: 'success',
+                                summary: 'Successful',
+                                detail: 'Área eliminada con éxito',
+                                life: 3000,
+                            });
+                            this.loadClienteProveedor(
+                                this.clienteProveedor.idClienteProveedor
+                            );
+                        });
+                } else {
+                    if (index !== -1) {
+                        this.clienteProveedor.areas.splice(index, 1);
                     }
                 }
             },

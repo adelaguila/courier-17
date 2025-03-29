@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GenericService } from './generic.service';
-import { Subject } from 'rxjs';
+import { map, Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { AgenciaDestino } from '../models/agencia-destino';
@@ -19,6 +19,20 @@ export class AgenciaDestinoService extends GenericService<AgenciaDestino>{
   ){
     super(http, `${environment.HOST}/agencias-destinos`);
   }
+
+
+  autocomplete(term: string): Observable<AgenciaDestino[]> {
+          return this.http
+              .get<AgenciaDestino[]>(`${environment.HOST}/agencias-destinos/autocomplete/${term}`)
+              .pipe(
+                  map((response) => {
+                      return response.map((destino) => {
+                          destino.nombreAgenciaDestino = `${destino.destino} - ${destino.ubigeo.provincia} - ${destino.ubigeo.departamento}`;
+                          return destino;
+                      });
+                  })
+              );
+      }
 
   getAgenciaDestinoChange(){
     return this.bancoChange.asObservable();

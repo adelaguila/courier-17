@@ -5,6 +5,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { ClienteProveedor } from "../models/cliente-proveedor";
 import { ClienteProveedorDireccion } from "../models/cliente-proveedor-direccion";
+import { ClienteProveedorArea } from "../models/cliente-proveedor-area";
 
 
 @Injectable({
@@ -28,6 +29,14 @@ export class ClienteProveedorService extends GenericService<ClienteProveedor> {
 
     deleteDireccion(id: number) {
         return this.http.delete(`${this.url}/direccion/${id}`);
+    }
+
+    updateArea(id: number, clienteProveedorArea: ClienteProveedorArea) {
+        return this.http.put(`${this.url}/area/${id}`, clienteProveedorArea);
+    }
+
+    deleteArea(id: number) {
+        return this.http.delete(`${this.url}/area/${id}`);
     }
 
     getClienteProveedorChange() {

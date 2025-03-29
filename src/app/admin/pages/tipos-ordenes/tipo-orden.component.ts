@@ -101,6 +101,9 @@ export class TipoOrdenComponent implements OnInit {
     }
 
     loadTipoOrdenes(event: any) {
+
+        console.log(event);
+
         this.rows = event.rows;
         this.sortField = event.sortField;
 

@@ -132,7 +132,7 @@ export class UtilsService {
                 oper = "";
                 break;
             case "dateIs":
-                oper = "";
+                oper = "=";
                 break;
             case "dateIsNot":
                 oper = "";

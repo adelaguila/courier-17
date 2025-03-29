@@ -10,9 +10,9 @@
                 <div class="field col-12 md:col-4">
                     <label for="tipoDocumentoIdentidad">Tipo Doc. Identidad</label>
                     <p-dropdown appendTo="body" formControlName="tipoDocumentoIdentidad"
-                        [options]="tiposDocumentosIdentidad" optionLabel="siglas"
-                        placeholder="Seleccionar..." [virtualScroll]="true" [virtualScrollItemSize]="10"
-                        [filter]="true" filterBy="siglas" [showClear]="true"
+                        [options]="tiposDocumentosIdentidad" optionLabel="siglas" placeholder="Seleccionar..."
+                        [virtualScroll]="true" [virtualScrollItemSize]="10" [filter]="true" filterBy="siglas"
+                        [showClear]="true"
                         [ngClass]="{'ng-invalid ng-dirty' : f['tipoDocumentoIdentidad'].touched && f['tipoDocumentoIdentidad'].errors}"></p-dropdown>
                     <small class="ng-dirty ng-invalid"
                         *ngIf="f['tipoDocumentoIdentidad'].errors?.['required'] && f['tipoDocumentoIdentidad'].touched"
@@ -82,8 +82,8 @@
                     <label for="tipoClienteProveedor">Tipo Cliente / Proveedor</label>
                     <p-dropdown appendTo="body" formControlName="tipoClienteProveedor"
                         [options]="tiposClientesProveedores" optionLabel="nombreTipoClienteProveedor"
-                        placeholder="Seleccionar..." [virtualScroll]="true" [virtualScrollItemSize]="10"
-                        [filter]="true" filterBy="nombreTipoClienteProveedor" [showClear]="true"
+                        placeholder="Seleccionar..." [virtualScroll]="true" [virtualScrollItemSize]="10" [filter]="true"
+                        filterBy="nombreTipoClienteProveedor" [showClear]="true"
                         [ngClass]="{'ng-invalid ng-dirty' : f['tipoClienteProveedor'].touched && f['tipoClienteProveedor'].errors}"></p-dropdown>
                     <small class="ng-dirty ng-invalid"
                         *ngIf="f['tipoClienteProveedor'].errors?.['required'] && f['tipoClienteProveedor'].touched"
@@ -102,11 +102,11 @@
             <div class="formgrid grid">
                 <div class="field col md:col-3">
                     <button pButton pRipple label="Guardar" class="mr-2 mb-2" type="submit"
-                    [disabled]="formTercero.invalid"></button>
+                        [disabled]="formTercero.invalid"></button>
                 </div>
                 <div class="field col md:col-3">
                     <button pButton pRipple label="Cancelar" type="button" class="p-button-secondary mr-2 mb-2"
-                    (click)="close()"></button>
+                        (click)="close()"></button>
                 </div>
 
             </div>
@@ -115,7 +115,7 @@
     <p-tabView [(activeIndex)]="activeIndex">
 
         <p-tabPanel header="Direcciones">
-            <p-table [value]="clienteProveedor.direcciones">
+            <p-table [value]="clienteProveedor.direcciones" styleClass="p-datatable-sm p-datatable-gridlines">
                 <ng-template pTemplate="caption">
                     <form [formGroup]="formDireccion" #formClienteProveedorDireccion="ngForm">
                         <div class="p-fluid">
@@ -135,31 +135,32 @@
 
 
                                 <div class="field col md:col-5">
-                                        <label for="ubigeo">Distrito - Provincia - Departamento</label>
-                                        <p-autoComplete formControlName="ubigeo" [suggestions]="ubigeosFiltrados" appendTo="body"
-                                            (completeMethod)="filtrarUbigeos($event)" field="nombreUbigeo" [minLength]="3"
-                                            [forceSelection]="true"
-                                            [ngClass]="{'ng-invalid ng-dirty' : fd['ubigeo'].touched && fd['ubigeo'].errors}">
-                                            <ng-template let-ubigeo pTemplate="item">
-                                                <div>{{ ubigeo.distrito }} - {{ ubigeo.provincia }} - {{ ubigeo.departamento
-                                                    }}
-                                                </div>
-                                            </ng-template>
-                                        </p-autoComplete>
-                                        <small class="ng-dirty ng-invalid"
-                                            *ngIf="fd['ubigeo'].errors?.['required'] && fd['ubigeo'].touched">Es
-                                            requerido</small>
-                                    </div>
+                                    <label for="ubigeo">Distrito - Provincia - Departamento</label>
+                                    <p-autoComplete formControlName="ubigeo" [suggestions]="ubigeosFiltrados"
+                                        appendTo="body" (completeMethod)="filtrarUbigeos($event)" field="nombreUbigeo"
+                                        [minLength]="3" [forceSelection]="true"
+                                        [ngClass]="{'ng-invalid ng-dirty' : fd['ubigeo'].touched && fd['ubigeo'].errors}">
+                                        <ng-template let-ubigeo pTemplate="item">
+                                            <div>{{ ubigeo.distrito }} - {{ ubigeo.provincia }} - {{ ubigeo.departamento
+                                                }}
+                                            </div>
+                                        </ng-template>
+                                    </p-autoComplete>
+                                    <small class="ng-dirty ng-invalid"
+                                        *ngIf="fd['ubigeo'].errors?.['required'] && fd['ubigeo'].touched">Es
+                                        requerido</small>
+                                </div>
 
-                                    <div class="field col md:col-2">
-                                        <label for="ubigeo"></label>
-                                        <button *ngIf="!isEditDireccion" pButton pRipple label="Agregar" class="mr-2 mb-2" type="button"
-                                        (click)="operateDireccion()" [disabled]="formClienteProveedorDireccion.invalid"></button>
+                                <div class="field col md:col-2">
+                                    <label for="ubigeo"></label>
+                                    <button *ngIf="!isEditDireccion" pButton pRipple label="Agregar" class="mr-2 mb-2"
+                                        type="button" (click)="operateDireccion()"
+                                        [disabled]="formClienteProveedorDireccion.invalid"></button>
 
-                                        <button *ngIf="isEditDireccion" pButton pRipple label="Actualizar" class="mr-2 mb-2"
-                                            type="button" (click)="operateDireccionEdit()"
-                                            [disabled]="formClienteProveedorDireccion.invalid"></button>
-                                        </div>
+                                    <button *ngIf="isEditDireccion" pButton pRipple label="Actualizar" class="mr-2 mb-2"
+                                        type="button" (click)="operateDireccionEdit()"
+                                        [disabled]="formClienteProveedorDireccion.invalid"></button>
+                                </div>
 
                             </div>
 
@@ -187,6 +188,93 @@
                                     (click)="editDireccion(row)"></p-button>
                                 <p-button icon="pi pi-trash" styleClass="p-button-danger p-button-text"
                                     (click)="deleteDireccion(row, ri)"></p-button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </p-tabPanel>
+
+        <p-tabPanel header="Áreas">
+            <p-table [value]="clienteProveedor.areas" styleClass="p-datatable-sm p-datatable-gridlines">
+                <ng-template pTemplate="caption">
+                    <form [formGroup]="formArea" #formClienteProveedorArea="ngForm">
+                        <div class="p-fluid">
+                            <div class="formgrid grid">
+                                <div class="field col md:col-6">
+                                    <input type="hidden" pInputText formControlName="idClienteProveedorArea" />
+                                    <label for="area">Área</label>
+                                    <input type="text" pInputText formControlName="area"
+                                        [ngClass]="{'ng-invalid ng-dirty' : fa['area'].touched && fa['area'].errors}" />
+                                    <small class="ng-dirty ng-invalid"
+                                        *ngIf="fa['area'].errors?.['required'] && fa['area'].touched">Es
+                                        requerido</small>
+                                    <small class="ng-dirty ng-invalid"
+                                        *ngIf="fa['area'].errors?.['minlength'] && fa['area'].touched">Debe
+                                        ingresar mínimo 2 caracteres</small>
+                                </div>
+
+
+                                <div class="field col md:col-6">
+                                    <label for="contacto">Área</label>
+                                    <input type="text" pInputText formControlName="contacto"
+                                        [ngClass]="{'ng-invalid ng-dirty' : fa['contacto'].touched && fa['contacto'].errors}" />
+                                </div>
+
+                            </div>
+
+                            <div class="formgrid grid">
+                                <div class="field col md:col-5">
+                                    <label for="telefonoContacto">Teléfono Contacto</label>
+                                    <input type="text" pInputText formControlName="telefonoContacto"
+                                        [ngClass]="{'ng-invalid ng-dirty' : fa['telefonoContacto'].touched && fa['telefonoContacto'].errors}" />
+                                </div>
+
+                                <div class="field col md:col-5">
+                                    <label for="emailContacto">Email Contacto</label>
+                                    <input type="text" pInputText formControlName="emailContacto"
+                                        [ngClass]="{'ng-invalid ng-dirty' : fa['emailContacto'].touched && fa['emailContacto'].errors}" />
+                                </div>
+
+                                <div class="field col md:col-2">
+                                    <label for=""></label>
+                                    <button *ngIf="!isEditArea" pButton pRipple label="Agregar" class="mr-2 mb-2"
+                                        type="button" (click)="operateArea()"
+                                        [disabled]="formClienteProveedorArea.invalid"></button>
+
+                                    <button *ngIf="isEditArea" pButton pRipple label="Actualizar" class="mr-2 mb-2"
+                                        type="button" (click)="operateAreaEdit()"
+                                        [disabled]="formClienteProveedorArea.invalid"></button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </form>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>ID</th>
+                        <th>Área</th>
+                        <th>Contacto</th>
+                        <th>Telefono</th>
+                        <th>Email</th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-row let-ri="rowIndex">
+                    <tr>
+                        <td>{{ row.idClienteProveedorArea }}</td>
+                        <td>{{ row.area }}</td>
+                        <td>{{ row.contacto }}</td>
+                        <td>{{ row.telefonoContacto }}</td>
+                        <td>{{ row.emailContacto }}</td>
+                        <td>
+                            <div class="flex">
+                                <p-button *ngIf="isEdit" icon="pi pi-pencil" styleClass="p-button-info p-button-text"
+                                    (click)="editArea(row)"></p-button>
+                                <p-button icon="pi pi-trash" styleClass="p-button-danger p-button-text"
+                                    (click)="deleteArea(row, ri)"></p-button>
                             </div>
                         </td>
                     </tr>

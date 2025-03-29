@@ -177,6 +177,16 @@ import { TipoEgresoModule } from './tipos-egresos/tipo-egreso.module';
             },
 
             {
+                path: 'tablas/tarifario',
+                data: { breadcrumb: 'Tipos Envios' },
+                loadChildren: () =>
+                    import('./tarifario/tarifario.module').then(
+                        (m) => m.TarifarioModule
+                    ),
+                // canActivate: [CertGuard],
+            },
+
+            {
                 path: 'tablas/tipos-clientes-proveedores',
                 data: { breadcrumb: 'Tipos Clientes / Proveedores' },
                 loadChildren: () =>
@@ -203,6 +213,66 @@ import { TipoEgresoModule } from './tipos-egresos/tipo-egreso.module';
                 loadChildren: () =>
                     import('./tipos-documentos-identidad/tipo-documento-identidad.module').then(
                         (m) => m.TipoDocumentoIdentidadModule
+                    ),
+                // canActivate: [CertGuard],
+            },
+
+            {
+                path: 'tablas/tipos-servicios',
+                data: { breadcrumb: 'Tipos Servicios' },
+                loadChildren: () =>
+                    import('./tipos-servicios/tipo-servicio.module').then(
+                        (m) => m.TipoServicioModule
+                    ),
+                // canActivate: [CertGuard],
+            },
+
+            {
+                path: 'tablas/tipos-envios',
+                data: { breadcrumb: 'Tipos Envios' },
+                loadChildren: () =>
+                    import('./tipos-envios/tipo-envio.module').then(
+                        (m) => m.TipoEnvioModule
+                    ),
+                // canActivate: [CertGuard],
+            },
+
+            {
+                path: 'tablas/tipos-pagos',
+                data: { breadcrumb: 'Tipos Pagos' },
+                loadChildren: () =>
+                    import('./tipos-pagos/tipo-pago.module').then(
+                        (m) => m.TipoPagoModule
+                    ),
+                // canActivate: [CertGuard],
+            },
+
+            {
+                path: 'tablas/tipos-ordenes-servicios',
+                data: { breadcrumb: 'Tipos Ordenes Servicio' },
+                loadChildren: () =>
+                    import('./tipos-ordenes-servicios/tipo-orden-servicio.module').then(
+                        (m) => m.TipoOrdenServicioModule
+                    ),
+                // canActivate: [CertGuard],
+            },
+
+            {
+                path: 'tablas/tipos-embalajes',
+                data: { breadcrumb: 'Tipos Embalajes' },
+                loadChildren: () =>
+                    import('./tipos-embalajes/tipo-embalaje.module').then(
+                        (m) => m.TipoEmbalajeModule
+                    ),
+                // canActivate: [CertGuard],
+            },
+
+            {
+                path: 'ordenes',
+                data: { breadcrumb: 'Ordenes' },
+                loadChildren: () =>
+                    import('./ordenes-servicios/orden-servicio.module').then(
+                        (m) => m.OrdenServicioModule
                     ),
                 // canActivate: [CertGuard],
             },

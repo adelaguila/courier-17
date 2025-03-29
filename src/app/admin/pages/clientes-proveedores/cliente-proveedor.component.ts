@@ -15,8 +15,6 @@ import { ClienteProveedor } from '../../models/cliente-proveedor';
 import { ClienteProveedorService } from '../../services/cliente-proveedor.service';
 import { ClienteProveedorFormComponent } from './cliente-proveedor-form/cliente-proveedor-form.component';
 
-
-
 @Component({
     templateUrl: './cliente-proveedor.component.html',
     providers: [MessageService, ConfirmationService, DialogService],
@@ -54,15 +52,17 @@ export class ClienteProveedorComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.clienteProveedorService.getClienteProveedorChange().subscribe((data) => {
-            this.getPage(
-                this.currentPage,
-                this.rows,
-                this.sortField,
-                this.sortOrder,
-                this._filterPage
-            );
-        });
+        this.clienteProveedorService
+            .getClienteProveedorChange()
+            .subscribe((data) => {
+                this.getPage(
+                    this.currentPage,
+                    this.rows,
+                    this.sortField,
+                    this.sortOrder,
+                    this._filterPage
+                );
+            });
 
         this.clienteProveedorService.getMessageChange().subscribe((data) => {
             this.messageService.add(data);
@@ -139,41 +139,47 @@ export class ClienteProveedorComponent implements OnInit {
     }
     new() {
         this.ref = this.dialogService.open(ClienteProveedorFormComponent, {
-            header: "Nuevo Cliente/Proveedor",
-            width: "70%",
-            contentStyle: { overflow: "auto" },
+            header: 'Nuevo Cliente/Proveedor',
+            width: '70%',
+            contentStyle: { overflow: 'auto' },
             baseZIndex: 10000,
             maximizable: true,
         });
     }
 
     edit(clienteProveedor: ClienteProveedor) {
-        this.clienteProveedorService.findById(clienteProveedor.idClienteProveedor).subscribe((data) => {
-            this.ref = this.dialogService.open(ClienteProveedorFormComponent, {
-                header: "Editar ClienteProveedor",
-                width: "70%",
-                contentStyle: { overflow: "auto" },
-                baseZIndex: 10000,
-                maximizable: true,
-                data: data,
+        this.clienteProveedorService
+            .findById(clienteProveedor.idClienteProveedor)
+            .subscribe((data) => {
+                this.ref = this.dialogService.open(
+                    ClienteProveedorFormComponent,
+                    {
+                        header: 'Editar ClienteProveedor',
+                        width: '70%',
+                        contentStyle: { overflow: 'auto' },
+                        baseZIndex: 10000,
+                        maximizable: true,
+                        data: data,
+                    }
+                );
             });
-        });
-
     }
 
-     delete(clienteProveedor: ClienteProveedor) {
-            this.confirmationService.confirm({
-                target: event.target as EventTarget,
-                message: '¿Está seguro que desea eliminar el Cliente/Proveedor?',
-                header: 'Confirmar',
-                icon: 'pi pi-question',
-                acceptButtonStyleClass: 'p-button-danger p-button-text',
-                acceptIcon: 'none',
-                acceptLabel: 'SI, Eliminar',
-                rejectIcon: 'none',
-                rejectButtonStyleClass: 'p-button-text',
-                accept: () => {
-                    this.clienteProveedorService.delete(clienteProveedor.idClienteProveedor).subscribe((resp) => {
+    delete(clienteProveedor: ClienteProveedor) {
+        this.confirmationService.confirm({
+            target: event.target as EventTarget,
+            message: '¿Está seguro que desea eliminar el Cliente/Proveedor?',
+            header: 'Confirmar',
+            icon: 'pi pi-question',
+            acceptButtonStyleClass: 'p-button-danger p-button-text',
+            acceptIcon: 'none',
+            acceptLabel: 'SI, Eliminar',
+            rejectIcon: 'none',
+            rejectButtonStyleClass: 'p-button-text',
+            accept: () => {
+                this.clienteProveedorService
+                    .delete(clienteProveedor.idClienteProveedor)
+                    .subscribe((resp) => {
                         this.messageService.add({
                             severity: 'success',
                             summary: 'Successful',
@@ -189,10 +195,10 @@ export class ClienteProveedorComponent implements OnInit {
                             this._filterPage
                         );
                     });
-                },
-                reject: () => {},
-            });
-        }
+            },
+            reject: () => {},
+        });
+    }
 
     onGlobalFilter(table: Table, event: Event) {
         table.filterGlobal(
